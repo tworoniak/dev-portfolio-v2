@@ -2,12 +2,12 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className='mx-auto max-w-7xl px-6 py-10 text-sm text-zinc-500 flex items-center gap-4 justify-center'>
+    <footer className='mx-auto max-w-7xl px-6 py-10 text-sm text-zinc-500  flex items-center gap-4 justify-center'>
       <a
         href='https://github.com/tworoniak'
         target='_blank'
         rel='noreferrer'
-        className='flex items-center gap-2'
+        className='flex items-center gap-2 hover:text-white/70 duration-300 transition'
       >
         <Github size={16} strokeWidth={1.5} />
         GitHub
@@ -16,7 +16,7 @@ const Footer = () => {
         href='https://www.linkedin.com/in/thomasworoniak/'
         target='_blank'
         rel='noreferrer'
-        className='flex items-center gap-2'
+        className='flex items-center gap-2 hover:text-white/70 duration-300 transition'
       >
         <Linkedin size={16} strokeWidth={1.5} />
         LinkedIn
@@ -25,7 +25,7 @@ const Footer = () => {
         href='mailto:thomasworoniak@gmail.com'
         target='_blank'
         rel='noreferrer'
-        className='flex items-center gap-2'
+        className='flex items-center gap-2 hover:text-white/70 duration-300 transition'
       >
         <Mail size={16} strokeWidth={1.5} />
         thomasworoniak@gmail.com
