@@ -1,10 +1,13 @@
 import { useEffect, useRef } from 'react';
 import type { MouseEvent as ReactMouseEvent } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { CodeXml, ExternalLink } from 'lucide-react';
 import { clampPercent, cursorToPastelRgb } from '../../utils/color';
 
 type Project = {
   id: string;
+  slug: string;
   title: string;
   description: string;
   tech: string[];
@@ -14,6 +17,8 @@ type Project = {
 };
 
 const ProjectCard = ({ project }: { project: Project }) => {
+  const location = useLocation();
+
   const cardRef = useRef<HTMLElement | null>(null);
   const hoveredRef = useRef(false);
   const frameRef = useRef<number | null>(null);
@@ -71,57 +76,80 @@ const ProjectCard = ({ project }: { project: Project }) => {
   };
 
   return (
-    <article
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className='project-card group cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-black/5 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:bg-black/20'
+    <Link
+      to={`/projects/${project.slug}`}
+      state={{ backgroundLocation: location }}
+      className='block'
     >
-      <div className='aspect-[16/10] overflow-hidden bg-zinc-900 m-3 rounded-md'>
-        <img
-          src={project.image}
-          alt={project.title}
-          className='h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]'
-        />
-      </div>
+      <motion.article
+        layoutId={`card-${project.slug}`}
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className='project-card group cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-black/5 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:bg-black/20'
+      >
+        <motion.div
+          layoutId={`image-wrap-${project.slug}`}
+          className='m-3 aspect-[16/10] overflow-hidden rounded-md bg-zinc-900'
+        >
+          <motion.img
+            layoutId={`image-${project.slug}`}
+            src={project.image}
+            alt={project.title}
+            className='h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]'
+          />
+        </motion.div>
 
-      <div className='p-5'>
-        <h3 className='text-2xl font-semibold text-white'>{project.title}</h3>
+        <div className='p-5'>
+          <motion.h3
+            layoutId={`title-${project.slug}`}
+            className='text-2xl font-semibold text-white'
+          >
+            {project.title}
+          </motion.h3>
 
-        <p className='mt-2 text-sm text-zinc-400'>{project.tech.join(', ')}</p>
+          <motion.p
+            layoutId={`tech-${project.slug}`}
+            className='mt-2 text-sm text-zinc-400'
+          >
+            {project.tech.join(', ')}
+          </motion.p>
 
-        <p className='mt-4 text-base leading-7 text-zinc-300'>
-          {project.description}
-        </p>
+          <p className='mt-4 text-base leading-7 text-zinc-300'>
+            {project.description}
+          </p>
 
-        <div className='mt-6 flex gap-3'>
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target='_blank'
-              rel='noreferrer'
-              className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10'
-            >
-              <ExternalLink size={16} strokeWidth={1.5} />
-              Open
-            </a>
-          )}
+          <div className='mt-6 flex gap-3'>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target='_blank'
+                rel='noreferrer'
+                onClick={(e) => e.stopPropagation()}
+                className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10'
+              >
+                <ExternalLink size={16} strokeWidth={1.5} />
+                Open
+              </a>
+            )}
 
-          {project.codeUrl && (
-            <a
-              href={project.codeUrl}
-              target='_blank'
-              rel='noreferrer'
-              className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10'
-            >
-              <CodeXml size={16} strokeWidth={1.5} />
-              View Code
-            </a>
-          )}
+            {project.codeUrl && (
+              <a
+                href={project.codeUrl}
+                target='_blank'
+                rel='noreferrer'
+                onClick={(e) => e.stopPropagation()}
+                className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10'
+              >
+                <CodeXml size={16} strokeWidth={1.5} />
+                View Code
+              </a>
+            )}
+          </div>
         </div>
-      </div>
-    </article>
+      </motion.article>
+    </Link>
   );
 };
 

@@ -19,6 +19,9 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 12);
 
@@ -27,10 +30,6 @@ const Header = () => {
 
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  //   useEffect(() => {
-  //     setIsMobileOpen(false);
-  //   }, [pathname]);
 
   useEffect(() => {
     if (!isMobileOpen) return;
@@ -67,16 +66,13 @@ const Header = () => {
     };
   }, [isMobileOpen]);
 
-  const panelRef = useRef<HTMLDivElement | null>(null);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
-
   const r = cv(xPc);
   const g = cv(yPc);
   const b = 255 - r;
 
   const accent = `rgb(${r} ${g} ${b})`;
   const accentSoft = `rgb(${r} ${g} ${b} / 0.72)`;
-  const logoColor = `rgb(${r} ${g} ${b} / 0.92)`;
+  const logoColor = `rgb(${r} ${g} ${b} / 0.82)`;
 
   const isItemActive = (to: string) =>
     to === '/'
@@ -86,7 +82,7 @@ const Header = () => {
   return (
     <header
       className={[
-        'sticky top-0 z-50 transition-[background-color,box-shadow,border-color] duration-300',
+        'relative sticky top-0 z-50 transition-[background-color,box-shadow,border-color] duration-300',
         isScrolled
           ? 'border-b border-white/10 bg-black/75 shadow-[0_10px_30px_rgba(0,0,0,0.28)] backdrop-blur-xl'
           : 'border-b border-white/10 bg-black/45 backdrop-blur',
@@ -167,64 +163,67 @@ const Header = () => {
       </div>
 
       <AnimatePresence>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className='fixed inset-0 z-[-1] bg-black/20 md:hidden'
-          aria-hidden='true'
-        />
         {isMobileOpen ? (
-          <motion.div
-            ref={panelRef}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className='border-t border-white/10 bg-black/90 backdrop-blur-xl md:hidden'
-          >
-            <nav className='mx-auto flex max-w-7xl flex-col px-6 py-4'>
-              {navItems.map((item) => {
-                const active = isItemActive(item.to);
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className='fixed inset-0 bg-black/20 md:hidden'
+              aria-hidden='true'
+            />
 
-                return (
-                  <NavLink
-                    key={item.to}
-                    to={item.to}
-                    end={item.end}
-                    onClick={() => setIsMobileOpen(false)}
-                    className={({ isActive }) =>
-                      [
-                        'relative rounded-md px-3 py-3 text-sm transition-colors duration-300',
-                        isActive
-                          ? 'text-white'
-                          : 'text-zinc-400 hover:bg-white/5 hover:text-white',
-                      ].join(' ')
-                    }
-                  >
-                    <span className='relative z-10'>{item.label}</span>
+            <motion.div
+              ref={panelRef}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className='border-t border-white/10 bg-black/90 backdrop-blur-xl md:hidden'
+            >
+              <nav className='mx-auto flex max-w-7xl flex-col px-6 py-4'>
+                {navItems.map((item) => {
+                  const active = isItemActive(item.to);
 
-                    {active ? (
-                      <motion.span
-                        layoutId='mobile-active-nav-indicator'
-                        className='absolute inset-0 rounded-md'
-                        style={{
-                          background: `linear-gradient(90deg, rgb(${r} ${g} ${b} / 0.14), transparent 85%)`,
-                          boxShadow: `inset 0 0 0 1px rgb(${r} ${g} ${b} / 0.24)`,
-                        }}
-                        transition={{
-                          type: 'spring',
-                          stiffness: 500,
-                          damping: 40,
-                        }}
-                        aria-hidden='true'
-                      />
-                    ) : null}
-                  </NavLink>
-                );
-              })}
-            </nav>
-          </motion.div>
+                  return (
+                    <NavLink
+                      key={item.to}
+                      to={item.to}
+                      end={item.end}
+                      onClick={() => setIsMobileOpen(false)}
+                      className={({ isActive }) =>
+                        [
+                          'relative rounded-md px-3 py-3 text-sm transition-colors duration-300',
+                          isActive
+                            ? 'text-white'
+                            : 'text-zinc-400 hover:bg-white/5 hover:text-white',
+                        ].join(' ')
+                      }
+                    >
+                      <span className='relative z-10'>{item.label}</span>
+
+                      {active ? (
+                        <motion.span
+                          layoutId='mobile-active-nav-indicator'
+                          className='absolute inset-0 rounded-md'
+                          style={{
+                            background: `linear-gradient(90deg, rgb(${r} ${g} ${b} / 0.14), transparent 85%)`,
+                            boxShadow: `inset 0 0 0 1px rgb(${r} ${g} ${b} / 0.24)`,
+                          }}
+                          transition={{
+                            type: 'spring',
+                            stiffness: 500,
+                            damping: 40,
+                          }}
+                          aria-hidden='true'
+                        />
+                      ) : null}
+                    </NavLink>
+                  );
+                })}
+              </nav>
+            </motion.div>
+          </>
         ) : null}
       </AnimatePresence>
     </header>
