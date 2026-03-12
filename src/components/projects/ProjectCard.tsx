@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { MouseEvent as ReactMouseEvent } from 'react';
 import { motion } from 'framer-motion';
 import { CodeXml, ExternalLink } from 'lucide-react';
@@ -17,6 +17,12 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
   const xPcRef = useRef(50);
   const yPcRef = useRef(50);
 
+  const [glowStyle, setGlowStyle] = useState({
+    opacity: 0,
+    background:
+      'radial-gradient(300px circle at 50% 50%, rgba(255,255,255,0.08), transparent 60%)',
+  });
+
   useEffect(() => {
     const animate = () => {
       if (cardRef.current && hoveredRef.current) {
@@ -32,7 +38,24 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
         const { r, g, b } = cursorToPastelRgb(animatedXPc, animatedYPc);
 
         cardRef.current.style.borderColor = `rgb(${r} ${g} ${b} / 70%)`;
-        cardRef.current.style.boxShadow = `0 0 0 1px rgb(${r} ${g} ${b} / 18%)`;
+        cardRef.current.style.boxShadow = `
+          0 0 0 1px rgb(${r} ${g} ${b} / 18%),
+          0 10px 30px rgb(${r} ${g} ${b} / 8%)
+        `;
+
+        setGlowStyle({
+          opacity: 1,
+          background: `radial-gradient(
+            260px circle at ${xPcRef.current}% ${yPcRef.current}%,
+            rgb(${r} ${g} ${b} / 0.16),
+            transparent 60%
+          )`,
+        });
+      } else {
+        setGlowStyle((prev) => ({
+          ...prev,
+          opacity: 0,
+        }));
       }
 
       frameRef.current = requestAnimationFrame(animate);
@@ -80,7 +103,13 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       className='project-card group cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-black/15 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:bg-black/30 flex flex-col h-full'
     >
-      <motion.div className='m-3 aspect-[16/10] overflow-hidden rounded-md bg-zinc-900'>
+      <div
+        className='pointer-events-none absolute inset-0 z-0 transition-opacity duration-300'
+        style={glowStyle}
+        aria-hidden='true'
+      />
+
+      <motion.div className='relative z-10 m-3 aspect-[16/10] overflow-hidden rounded-md bg-zinc-900'>
         <motion.img
           src={project.image}
           alt={project.title}
@@ -88,7 +117,7 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
         />
       </motion.div>
 
-      <div className='flex flex-col flex-1 p-5'>
+      <div className='relative z-10 flex flex-col flex-1 p-5'>
         <motion.h3
           layoutId={`title-${project.slug}`}
           className='text-2xl font-semibold text-white'
