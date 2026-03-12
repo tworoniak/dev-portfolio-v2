@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --hue: 280;
+  --chroma: 0.18;
+
+  --bg-950: oklch(8% 0.02 var(--hue));
+  --bg-900: oklch(12% 0.03 var(--hue));
+
+  --accent: oklch(65% var(--chroma) var(--hue));
+  --accent-soft: oklch(55% calc(var(--chroma) * 0.7) var(--hue));
+
+  --glow: oklch(70% calc(var(--chroma) * 1.1) var(--hue));
+}
+
+.project-card {
+  border: 1px solid oklch(70% 0.04 var(--hue) / 0.15);
+  /* background: oklch(12% 0.02 var(--hue)); */
+}
+
+.project-card:hover {
+  border-color: oklch(65% 0.15 var(--hue) / 0.5);
+  box-shadow:
+    0 0 0 1px oklch(65% 0.12 var(--hue) / 0.15),
+    0 20px 40px oklch(65% 0.12 var(--hue) / 0.25);
+}
