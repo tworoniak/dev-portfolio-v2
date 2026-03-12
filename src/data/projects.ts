@@ -2,6 +2,26 @@ import type { Project } from '../types/project';
 
 export const projects: Project[] = [
   {
+    id: 'react-weather-app',
+    slug: 'react-weather-app',
+    title: 'React Weather App',
+    description:
+      'Weather app with geolocation, animated backgrounds, 7-day charts, saved cities, and severe alerts.',
+    tech: [
+      'React',
+      'TypeScript',
+      'TanStack Query',
+      'Axios',
+      'Zod',
+      'Recharts',
+      'Tailwind CSS',
+    ],
+
+    image: '/images/projects/react-weather.png',
+    liveUrl: 'https://crypto-dash-hazel-kappa.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/crypto-dash',
+  },
+  {
     id: 'cryptodash',
     slug: 'crypto-dash',
     title: 'CryptoDash 2.0',
