@@ -1,4 +1,6 @@
-export const projects = [
+import type { Project } from '../types/project';
+
+export const projects: Project[] = [
   {
     id: 'cryptodash',
     slug: 'crypto-dash',
@@ -22,13 +24,14 @@ export const projects = [
     codeUrl: 'https://github.com/tworoniak/festival-planner',
   },
   {
-    id: 'test-project',
-    slug: 'test-project',
-    title: 'Test Project',
-    description: 'A simple test project for demonstration purposes.',
-    tech: ['React', 'TypeScript', 'SCSS', 'date-fns'],
-    image: '/images/projects/festival-planner.png',
-    liveUrl: 'https://festival-planner-kappa.vercel.app',
-    codeUrl: 'https://github.com/tworoniak/festival-planner',
+    id: 'photography-portfolio',
+    slug: 'photography-portfolio',
+    title: 'Photography Portfolio',
+    description:
+      'A modern photography portfolio website with responsive design and lightbox functionality.',
+    tech: ['React', 'TypeScript', 'React Router', 'Tailwind CSS'],
+    image: '/images/projects/photography-portfolio.png',
+    liveUrl: 'https://photography-portfolio-iota-eight.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/photography-portfolio',
   },
 ];
