@@ -26,3 +26,40 @@
     0 0 0 1px oklch(65% 0.12 var(--hue) / 0.15),
     0 20px 40px oklch(65% 0.12 var(--hue) / 0.25);
 }
+
+/* Scroll to top */
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid oklch(65% 0.15 var(--hue) / 0.5);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: oklch(65% 0.12 var(--hue) / 0.15);
+  color: white;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px) scale(0.95);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.scroll-to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-to-top {
+    transition: none;
+  }
+}
