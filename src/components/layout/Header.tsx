@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { cv } from '../../utils/color';
 import { useCursorGlow } from '../../hooks/useCursorGlow';
+import DesktopNav from './DesktopNav';
 
 const navItems = [
   { to: '/', label: 'Home', end: true },
@@ -66,6 +67,11 @@ const Header = () => {
     };
   }, [isMobileOpen]);
 
+  const isItemActive = (to: string) =>
+    to === '/'
+      ? pathname === '/'
+      : pathname === to || pathname.startsWith(`${to}/`);
+
   const r = cv(xPc);
   const g = cv(yPc);
   const b = 255 - r;
@@ -73,11 +79,6 @@ const Header = () => {
   const accent = `rgb(${r} ${g} ${b})`;
   const accentSoft = `rgb(${r} ${g} ${b} / 0.72)`;
   const logoColor = `rgb(${r} ${g} ${b} / 0.82)`;
-
-  const isItemActive = (to: string) =>
-    to === '/'
-      ? pathname === '/'
-      : pathname === to || pathname.startsWith(`${to}/`);
 
   return (
     <header
@@ -106,46 +107,12 @@ const Header = () => {
           Woroniak.dev
         </NavLink>
 
-        <nav className='hidden items-center gap-8 text-sm md:flex'>
-          {navItems.map((item) => {
-            const active = isItemActive(item.to);
-
-            return (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.end}
-                className={({ isActive }) =>
-                  [
-                    'group relative pb-1 transition-colors duration-300',
-                    isActive ? 'text-white' : 'text-zinc-400 hover:text-white',
-                  ].join(' ')
-                }
-              >
-                {item.label}
-
-                <span
-                  className='pointer-events-none absolute inset-x-0 -bottom-1 h-[2px] origin-left scale-x-0 rounded-full transition-transform duration-300 group-hover:scale-x-100'
-                  style={{ backgroundColor: accentSoft }}
-                  aria-hidden='true'
-                />
-
-                {active ? (
-                  <motion.span
-                    layoutId='active-nav-indicator'
-                    className='pointer-events-none absolute inset-x-0 -bottom-1 h-[2px] rounded-full'
-                    style={{
-                      background: `linear-gradient(90deg, transparent 0%, ${accent} 15%, ${accent} 85%, transparent 100%)`,
-                      boxShadow: `0 0 12px ${accentSoft}`,
-                    }}
-                    transition={{ type: 'spring', stiffness: 500, damping: 40 }}
-                    aria-hidden='true'
-                  />
-                ) : null}
-              </NavLink>
-            );
-          })}
-        </nav>
+        <DesktopNav
+          navItems={navItems}
+          pathname={pathname}
+          accent={accent}
+          accentSoft={accentSoft}
+        />
 
         <button
           ref={buttonRef}
@@ -204,16 +171,13 @@ const Header = () => {
 
                       {active ? (
                         <motion.span
-                          layoutId='mobile-active-nav-indicator'
                           className='absolute inset-0 rounded-md'
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
                           style={{
                             background: `linear-gradient(90deg, rgb(${r} ${g} ${b} / 0.14), transparent 85%)`,
                             boxShadow: `inset 0 0 0 1px rgb(${r} ${g} ${b} / 0.24)`,
-                          }}
-                          transition={{
-                            type: 'spring',
-                            stiffness: 500,
-                            damping: 40,
                           }}
                           aria-hidden='true'
                         />

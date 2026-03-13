@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { projects } from '../data/projects';
 import type { Project } from '../types/project';
-import IntroSection from '../components/layout/IntroSection';
+import IntroSection from '../components/pages/home/IntroSection';
 import ProjectsGrid from '../components/projects/ProjectsGrid';
 import ProjectModal from '../components/projects/ProjectModal';
 

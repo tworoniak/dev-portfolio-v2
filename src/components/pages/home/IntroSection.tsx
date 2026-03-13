@@ -1,9 +1,9 @@
 const IntroSection = () => {
   return (
     <section className='mx-auto max-w-7xl px-6 py-12'>
-      <p className='max-w-3xl text-4xl font-bold leading-tight'>
+      <h1 className='max-w-3xl text-4xl font-bold leading-tight'>
         Senior Front-End Developer. React builder.
-      </p>
+      </h1>
 
       <p className='mt-6 max-w-3xl text-lg leading-8 text-zinc-400'>
         I build polished, scalable web applications with React, TypeScript, and

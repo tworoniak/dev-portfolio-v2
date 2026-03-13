@@ -2,7 +2,7 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className='fixed bottom-0 left-0 right-0 mx-auto w-full px-6 py-4 text-sm text-zinc-500 flex items-center gap-4 justify-between bg-black/75 backdrop-blur-sm border-t border-white/10'>
+    <footer className='fixed bottom-0 left-0 right-0 mx-auto w-full z-10 px-6 py-4 text-sm text-zinc-500 flex items-center gap-4 justify-between bg-black/75 backdrop-blur-sm border-t border-white/10'>
       <div className='flex items-center gap-6'>
         <a
           href='https://github.com/tworoniak'
