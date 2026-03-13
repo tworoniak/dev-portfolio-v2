@@ -2,7 +2,7 @@ const IntroSection = () => {
   return (
     <section className='mx-auto max-w-7xl px-6 py-12'>
       <h1 className='max-w-3xl text-4xl font-bold leading-tight'>
-        Things I've Built.
+        Things I've Built. Lessons Learned.
       </h1>
 
       <p className='mt-6 max-w-3xl text-lg leading-8 text-zinc-400'>
