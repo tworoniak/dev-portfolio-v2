@@ -1,5 +1,11 @@
+import IntroSection from '../components/pages/about/IntroSection';
+
 const AboutPage = () => {
-  return <div>About Me</div>;
+  return (
+    <>
+      <IntroSection />
+    </>
+  );
 };
 
 export default AboutPage;

@@ -14,7 +14,7 @@ const ScrollToTopButton = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`scroll-to-top hover:-translate-y-1 hover:border hover:border-white/70 ${isVisible ? 'show' : ''}`}
+      className={`scroll-to-top z-10 hover:-translate-y-1 transition duration-300 hover:border hover:border-white/60 ${isVisible ? 'show' : ''}`}
       aria-label='Scroll to top'
     >
       <ArrowUp size={20} />

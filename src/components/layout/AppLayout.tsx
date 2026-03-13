@@ -1,20 +1,27 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
+import Main from './Main';
 import AmbientBackground from '../effects/AmbientBackground';
 import ScrollToTopButton from '../ui/ScrollToTopButton';
+import ScrollToTop from '../ui/ScrollToTop';
 // import CursorBloom from '../effects/CursorBloom';
 
 const AppLayout = () => {
   return (
-    <main className='relative min-h-screen text-white'>
+    <>
+      <ScrollToTop />
       <AmbientBackground />
       {/* <CursorBloom /> */}
       <Header />
-      <Outlet />
+
+      <Main>
+        <Outlet />
+      </Main>
+
       <Footer />
       <ScrollToTopButton />
-    </main>
+    </>
   );
 };
 

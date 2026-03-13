@@ -7,4 +7,8 @@ export type Project = {
   image: string;
   liveUrl?: string;
   codeUrl?: string;
+  problem?: string;
+  solution?: string;
+  features?: string[];
+  lessons?: string;
 };

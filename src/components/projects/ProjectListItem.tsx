@@ -1,27 +1,22 @@
 import { useEffect, useRef } from 'react';
 import type { MouseEvent as ReactMouseEvent } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { CodeXml, ExternalLink } from 'lucide-react';
+import { CodeXml, ExternalLink, BookOpen } from 'lucide-react';
 import { clampPercent, cursorToPastelRgb } from '../../utils/color';
 import type { Project } from '../../types/project';
 
-type ProjectCardProps = {
+type ProjectListItemProps = {
   project: Project;
   onOpen: (project: Project) => void;
 };
 
-const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
+const ProjectListItem = ({ project, onOpen }: ProjectListItemProps) => {
   const cardRef = useRef<HTMLElement | null>(null);
   const hoveredRef = useRef(false);
   const frameRef = useRef<number | null>(null);
   const xPcRef = useRef(50);
   const yPcRef = useRef(50);
-
-  // const [glowStyle, setGlowStyle] = useState({
-  //   opacity: 0,
-  //   background:
-  //     'radial-gradient(350px circle at 50% 50%, rgba(255,255,255,0.08), transparent 90%)',
-  // });
 
   useEffect(() => {
     const animate = () => {
@@ -42,20 +37,6 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
           0 0 0 1px rgb(${r} ${g} ${b} / 18%),
           0 10px 30px rgb(${r} ${g} ${b} / 8%)
         `;
-
-        //   setGlowStyle({
-        //     opacity: 1,
-        //     background: `radial-gradient(
-        //       260px circle at ${xPcRef.current}% ${yPcRef.current}%,
-        //       rgb(${r} ${g} ${b} / 0.16),
-        //       transparent 60%
-        //     )`,
-        //   });
-        // } else {
-        //   setGlowStyle((prev) => ({
-        //     ...prev,
-        //     opacity: 0,
-        //   }));
       }
 
       frameRef.current = requestAnimationFrame(animate);
@@ -98,15 +79,9 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className='project-card group cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-black/15 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1.5 hover:bg-black/30 flex flex-col h-full'
+      className='project-list-item group cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-black/15 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1.5 hover:bg-black/30 flex flex-col lg:flex-row h-full'
     >
-      {/* <div
-        className='pointer-events-none absolute inset-0 z-0 transition-opacity duration-300'
-        style={glowStyle}
-        aria-hidden='true'
-      /> */}
-
-      <motion.div className='relative z-10 m-3 aspect-[16/10] overflow-hidden rounded-md bg-zinc-900'>
+      <motion.div className='relative z-10 m-3 lg:max-w-[400px] aspect-[16/10] overflow-hidden rounded-md bg-zinc-900'>
         <img
           src={project.image}
           alt={project.title}
@@ -124,6 +99,14 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
         </p>
 
         <div className='flex items-center gap-3 mt-auto flex-shrink-0'>
+          <Link
+            to={`/projects/${project.slug}`}
+            className='inline-flex items-center justify-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10'
+          >
+            <BookOpen size={16} strokeWidth={1.5} />
+            Read case study
+          </Link>
+
           {project.liveUrl && (
             <a
               href={project.liveUrl}
@@ -155,4 +138,4 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
   );
 };
 
-export default ProjectCard;
+export default ProjectListItem;
