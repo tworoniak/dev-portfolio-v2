@@ -50,6 +50,119 @@ export const projects: Project[] = [
     //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
   },
   {
+    id: 'photo-storytelling',
+    slug: 'photo-storytelling',
+    title: 'Photo Storytelling',
+    description:
+      'A scroll-driven, digital magazine-style photo storytelling experience built with React + TypeScript, featuring cinematic parallax hero sections, animated chapter reveals, embedded audio moments, and an editorial chapter navigation system.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS',
+      'Framer Motion',
+      'Firebase',
+      'React Router',
+      'Cloudinary',
+    ],
+    image: '/images/projects/photo-storytelling.png',
+    liveUrl: 'https://photo-storytelling.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/photo-storytelling',
+
+    // problem:
+    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
+
+    // solution:
+    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+
+    // features: [
+    //   'Real-time crypto price tracking',
+    //   'Interactive charts',
+    //   'Search and sorting',
+    //   'Responsive dashboard UI',
+    // ],
+
+    // lessons:
+    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
+  },
+  {
+    id: 'voyage-planner',
+    slug: 'voyage-planner',
+    title: 'Voyage Planner',
+    description:
+      'A travel planning app for creating and managing trip itineraries with real-time updates and collaborative features.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'React Router',
+      'Tailwind CSS',
+      'Radix UI',
+      'Zod',
+      'date-fns',
+      'Lucide Icons',
+      // 'Framer Motion',
+    ],
+    image: '/images/projects/voyage-planner.png',
+    // liveUrl: 'https://voyage-planner.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/travel-itinerary-app',
+
+    // problem:
+    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
+
+    // solution:
+    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+
+    // features: [
+    //   'Real-time crypto price tracking',
+    //   'Interactive charts',
+    //   'Search and sorting',
+    //   'Responsive dashboard UI',
+    // ],
+
+    // lessons:
+    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
+  },
+  {
+    id: 'ui-design-systems',
+    slug: 'ui-design-systems',
+    title: 'UI Design Systems',
+    description:
+      'A hands-on React + TypeScript playground for learning and comparing modern UI/design system approaches.A comprehensive UI design system built with React + TypeScript, featuring reusable components, design tokens, and documentation.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'React Router',
+      'Tailwind CSS',
+      'Radix UI',
+      'MUI',
+      'shadcn/ui',
+      'Lucide Icons',
+      'Sonner',
+      'Framer Motion',
+    ],
+    image: '/images/projects/ui-design-systems.png',
+    liveUrl: 'https://ui-design-systems.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/ui-design-systems-lab',
+
+    // problem:
+    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
+
+    // solution:
+    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+
+    // features: [
+    //   'Real-time crypto price tracking',
+    //   'Interactive charts',
+    //   'Search and sorting',
+    //   'Responsive dashboard UI',
+    // ],
+
+    // lessons:
+    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
+  },
+  {
     id: 'use-popcorn',
     slug: 'use-popcorn',
     title: 'usePopcorn v2.0',
@@ -59,6 +172,41 @@ export const projects: Project[] = [
     image: '/images/projects/use-popcorn.png',
     liveUrl: 'https://use-popcorn-v2-ruby.vercel.app/',
     codeUrl: 'https://github.com/tworoniak/use-popcorn-v2',
+
+    // problem:
+    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
+
+    // solution:
+    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+
+    // features: [
+    //   'Real-time crypto price tracking',
+    //   'Interactive charts',
+    //   'Search and sorting',
+    //   'Responsive dashboard UI',
+    // ],
+
+    // lessons:
+    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
+  },
+  {
+    id: 'riff-finder',
+    slug: 'riff-finder',
+    title: 'Riff Finder',
+    description:
+      'Riff Finder is a music discovery web app built with React + TypeScript that allows users to search artists, explore artist details (top tracks, albums, related artists), and generate recommendations using a rules-based discovery algorithm.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'React Router',
+      'TanStack Query',
+      'Tailwind CSS',
+      'Spotify API',
+    ],
+    image: '/images/projects/riff-finder.png',
+    liveUrl: 'https://riff-finder.vercel.app/',
+    codeUrl: 'https://github.com/tworoniak/riff-finder',
 
     // problem:
     //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
