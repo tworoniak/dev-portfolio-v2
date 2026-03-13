@@ -98,7 +98,34 @@ const ProjectListItem = ({ project, onOpen }: ProjectListItemProps) => {
           {project.description}
         </p>
 
-        <div className='flex items-center gap-3 mt-auto flex-shrink-0'>
+        <div className='flex flex-col md:flex-row gap-3 mt-auto flex-shrink-0'>
+          <div className='flex gap-3'>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target='_blank'
+                rel='noreferrer'
+                onClick={(e) => e.stopPropagation()}
+                className='inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-1.5 sm:py-2 border border-black/20 dark:border-white/20 rounded hover:border-black/40 dark:hover:border-white/40 hover:bg-black/5 dark:hover:bg-white/5 transition-all text-xs sm:text-sm font-medium'
+              >
+                <ExternalLink size={16} strokeWidth={1.5} />
+                Open
+              </a>
+            )}
+
+            {project.codeUrl && (
+              <a
+                href={project.codeUrl}
+                target='_blank'
+                rel='noreferrer'
+                onClick={(e) => e.stopPropagation()}
+                className='inline-flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10'
+              >
+                <CodeXml size={16} strokeWidth={1.5} />
+                View Code
+              </a>
+            )}
+          </div>
           <Link
             to={`/projects/${project.slug}`}
             className='inline-flex items-center justify-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10'
@@ -106,32 +133,6 @@ const ProjectListItem = ({ project, onOpen }: ProjectListItemProps) => {
             <BookOpen size={16} strokeWidth={1.5} />
             Read case study
           </Link>
-
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target='_blank'
-              rel='noreferrer'
-              onClick={(e) => e.stopPropagation()}
-              className='inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-1.5 sm:py-2 border border-black/20 dark:border-white/20 rounded hover:border-black/40 dark:hover:border-white/40 hover:bg-black/5 dark:hover:bg-white/5 transition-all text-xs sm:text-sm font-medium'
-            >
-              <ExternalLink size={16} strokeWidth={1.5} />
-              Open
-            </a>
-          )}
-
-          {project.codeUrl && (
-            <a
-              href={project.codeUrl}
-              target='_blank'
-              rel='noreferrer'
-              onClick={(e) => e.stopPropagation()}
-              className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10'
-            >
-              <CodeXml size={16} strokeWidth={1.5} />
-              View Code
-            </a>
-          )}
         </div>
       </div>
     </motion.article>
