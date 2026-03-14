@@ -11,6 +11,22 @@ export const projects: Project[] = [
     image: '/images/projects/photography-portfolio.png',
     liveUrl: 'https://photography-portfolio-iota-eight.vercel.app',
     codeUrl: 'https://github.com/tworoniak/photography-portfolio',
+    featured: true,
+    // problem:
+    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
+
+    // solution:
+    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+
+    // features: [
+    //   'Real-time crypto price tracking',
+    //   'Interactive charts',
+    //   'Search and sorting',
+    //   'Responsive dashboard UI',
+    // ],
+
+    // lessons:
+    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
   },
   {
     id: 'press-portal',
@@ -32,7 +48,7 @@ export const projects: Project[] = [
     image: '/images/projects/press-portal.png',
     // liveUrl: 'https://press-portal.vercel.app/',
     codeUrl: 'https://github.com/tworoniak/press-portal',
-
+    featured: true,
     // problem:
     //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
 
@@ -106,6 +122,7 @@ export const projects: Project[] = [
     image: '/images/projects/voyage-planner.png',
     // liveUrl: 'https://voyage-planner.vercel.app',
     codeUrl: 'https://github.com/tworoniak/travel-itinerary-app',
+    featured: true,
 
     // problem:
     //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
@@ -145,6 +162,7 @@ export const projects: Project[] = [
     image: '/images/projects/ui-design-systems.png',
     liveUrl: 'https://ui-design-systems.vercel.app',
     codeUrl: 'https://github.com/tworoniak/ui-design-systems-lab',
+    experiment: true,
 
     // problem:
     //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
@@ -243,6 +261,21 @@ export const projects: Project[] = [
     image: '/images/projects/react-weather.png',
     liveUrl: 'https://crypto-dash-hazel-kappa.vercel.app',
     codeUrl: 'https://github.com/tworoniak/crypto-dash',
+    // problem:
+    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
+
+    // solution:
+    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+
+    // features: [
+    //   'Real-time crypto price tracking',
+    //   'Interactive charts',
+    //   'Search and sorting',
+    //   'Responsive dashboard UI',
+    // ],
+
+    // lessons:
+    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
   },
   {
     id: 'cryptodash',
@@ -281,5 +314,20 @@ export const projects: Project[] = [
     image: '/images/projects/festival-planner.png',
     liveUrl: 'https://festival-planner-kappa.vercel.app',
     codeUrl: 'https://github.com/tworoniak/festival-planner',
+    // problem:
+    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
+
+    // solution:
+    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+
+    // features: [
+    //   'Real-time crypto price tracking',
+    //   'Interactive charts',
+    //   'Search and sorting',
+    //   'Responsive dashboard UI',
+    // ],
+
+    // lessons:
+    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
   },
 ];

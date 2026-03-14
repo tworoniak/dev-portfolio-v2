@@ -1,3 +1,5 @@
+import { projects } from '../../../data/projects';
+
 const IntroSection = () => {
   return (
     <section className='mx-auto max-w-7xl px-6 py-12'>
@@ -11,11 +13,11 @@ const IntroSection = () => {
         decisions behind each build.
       </p>
 
-      {/* <div className='mt-8 flex gap-8 text-sm text-zinc-500'>
-        <span>12+ years experience</span>
-        <span>React + TypeScript</span>
-        <span>Portfolio projects</span>
-      </div> */}
+      <div className='mt-8 flex gap-8 text-sm text-zinc-500'>
+        <span>{projects.length} Projects</span>
+        {/* <span>React + TypeScript</span>
+        <span>Portfolio projects</span> */}
+      </div>
     </section>
   );
 };
