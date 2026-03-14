@@ -99,7 +99,7 @@ const TestimonialGrid = () => {
             </div>
 
             {/* Small Text */}
-            <p className='mt-6 opacity-50 '>
+            <p className='mt-6 opacity-50'>
               "I had the pleasure of working with Thomas Woroniak at Eversana
               Intouch, where he joined our team in August 2020 as a Front-End
               Developer. Thomas brought a strong work ethic to the group,
@@ -107,7 +107,9 @@ const TestimonialGrid = () => {
               expertise with Git, CSS, React, and other JavaScript libraries.
               His ability to take on complex assignments—often several at
               once—and consistently deliver high‑quality work made him an
-              invaluable contributor. <br />
+              invaluable contributor.
+            </p>
+            <p className='mt-6 opacity-50'>
               Thomas is the definition of dependable. He approaches every task
               with focus and precision, especially when the smallest details
               carry the greatest importance. His proactive communication,
@@ -116,11 +118,13 @@ const TestimonialGrid = () => {
               flexibility in his schedule, always willing to adjust to support
               critical project timelines and ensure our delivery efforts were
               successful.
-              <br /> Working with Thomas was truly a pleasure. He brings
-              technical talent, professionalism, and a collaborative spirit to
-              any team. I would absolutely recommend him as an asset to any
-              development organization, and I sincerely hope I have the
-              opportunity to work with him again in the future."
+            </p>
+            <p className='mt-6 opacity-50'>
+              Working with Thomas was truly a pleasure. He brings technical
+              talent, professionalism, and a collaborative spirit to any team. I
+              would absolutely recommend him as an asset to any development
+              organization, and I sincerely hope I have the opportunity to work
+              with him again in the future."
             </p>
           </TestimonialCard>
 
@@ -144,17 +148,19 @@ const TestimonialGrid = () => {
             </div>
 
             {/* Small Text */}
-            <p className='mt-6 opacity-50 '>
+            <p className='mt-6 opacity-50'>
               "At EVERSANA INTOUCH, Thomas was a key Front-End Developer on
               projects I led, and I had the chance to collaborate closely with
               him. He brings extensive experience in HTML, CSS, JavaScript, and
               React, consistently delivering scalable, high-performance web
               applications.
-              <br /> Thomas partnered effectively with designers, project
-              managers and backend engineers to create accessible, user-focused
-              digital experiences. He demonstrates strong ownership,
-              collaboration, and reliability, and I highly recommend him as a
-              valuable addition to any front-end team."
+            </p>
+            <p className='mt-6 opacity-50'>
+              Thomas partnered effectively with designers, project managers and
+              backend engineers to create accessible, user-focused digital
+              experiences. He demonstrates strong ownership, collaboration, and
+              reliability, and I highly recommend him as a valuable addition to
+              any front-end team."
             </p>
           </TestimonialCard>
 
@@ -176,7 +182,7 @@ const TestimonialGrid = () => {
             </div>
 
             {/* Small Text */}
-            <p className='mt-6 opacity-50 '>
+            <p className='mt-6 opacity-50'>
               "I had the pleasure of managing Thomas during his time as a
               Frontend Developer on our team, and he consistently proved himself
               to be a reliable and highly motivated contributor. From day one,
@@ -184,14 +190,17 @@ const TestimonialGrid = () => {
               grow his skill set, often seeking out feedback and asking
               thoughtful questions that elevated both his work and the team’s
               overall output.
-              <br /> What stood out most was his commitment to delivering
-              high‑quality code and meeting deadlines without sacrificing
-              attention to detail. He approached every project with
-              professionalism, curiosity, and a willingness to take on new
-              challenges. His reliability made him someone I could always count
-              on, and his proactive mindset helped streamline collaboration
-              across the team.
-              <br /> Thomas would be an asset to any organization looking for a
+            </p>
+            <p className='mt-6 opacity-50'>
+              What stood out most was his commitment to delivering high‑quality
+              code and meeting deadlines without sacrificing attention to
+              detail. He approached every project with professionalism,
+              curiosity, and a willingness to take on new challenges. His
+              reliability made him someone I could always count on, and his
+              proactive mindset helped streamline collaboration across the team.
+            </p>
+            <p className='mt-6 opacity-50'>
+              Thomas would be an asset to any organization looking for a
               frontend developer who is dedicated, growth‑oriented, and
               consistently delivers strong results. I’m confident he will
               continue to excel in his career, and I fully recommend him for any
