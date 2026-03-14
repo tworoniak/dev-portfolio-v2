@@ -17,12 +17,6 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
   const xPcRef = useRef(50);
   const yPcRef = useRef(50);
 
-  // const [glowStyle, setGlowStyle] = useState({
-  //   opacity: 0,
-  //   background:
-  //     'radial-gradient(350px circle at 50% 50%, rgba(255,255,255,0.08), transparent 90%)',
-  // });
-
   useEffect(() => {
     const animate = () => {
       if (cardRef.current && hoveredRef.current) {
@@ -42,20 +36,6 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
           0 0 0 1px rgb(${r} ${g} ${b} / 18%),
           0 10px 30px rgb(${r} ${g} ${b} / 8%)
         `;
-
-        //   setGlowStyle({
-        //     opacity: 1,
-        //     background: `radial-gradient(
-        //       260px circle at ${xPcRef.current}% ${yPcRef.current}%,
-        //       rgb(${r} ${g} ${b} / 0.16),
-        //       transparent 60%
-        //     )`,
-        //   });
-        // } else {
-        //   setGlowStyle((prev) => ({
-        //     ...prev,
-        //     opacity: 0,
-        //   }));
       }
 
       frameRef.current = requestAnimationFrame(animate);
