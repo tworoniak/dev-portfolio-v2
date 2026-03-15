@@ -160,7 +160,7 @@ export const projects: Project[] = [
       'Framer Motion',
     ],
     image: '/images/projects/ui-design-systems.png',
-    liveUrl: 'https://ui-design-systems.vercel.app',
+    liveUrl: 'https://ui-design-systems-lab.vercel.app',
     codeUrl: 'https://github.com/tworoniak/ui-design-systems-lab',
     experiment: true,
 
