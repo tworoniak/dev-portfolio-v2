@@ -259,8 +259,8 @@ export const projects: Project[] = [
     ],
 
     image: '/images/projects/react-weather.png',
-    liveUrl: 'https://crypto-dash-hazel-kappa.vercel.app',
-    codeUrl: 'https://github.com/tworoniak/crypto-dash',
+    liveUrl: 'https://weather-app-snowy-phi.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/weather-app',
     // problem:
     //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
 
