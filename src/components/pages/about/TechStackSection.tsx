@@ -12,6 +12,7 @@ const TechStackSection = () => {
         <StackIcon name='reactrouter' />
         <StackIcon name='redux' />
         <StackIcon name='typescript' />
+        <StackIcon name='tanstack' />
         <StackIcon name='adobe' />
         <StackIcon name='figma' />
         <StackIcon name='html5' />
