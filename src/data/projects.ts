@@ -31,7 +31,7 @@ export const projects: Project[] = [
   {
     id: 'press-portal',
     slug: 'press-portal',
-    title: 'Press Portal',
+    title: 'PressPilot v1.1',
     description:
       'A full-stack Press Contact Management Portal for tracking publicists, managers, labels, and media contacts for bands and festivals.',
     tech: [
@@ -45,7 +45,7 @@ export const projects: Project[] = [
       'PostgreSQL',
       'Prisma ORM',
     ],
-    image: '/images/projects/press-portal.png',
+    image: '/images/projects/press-pilot.png',
     // liveUrl: 'https://press-portal.vercel.app/',
     codeUrl: 'https://github.com/tworoniak/press-portal',
     featured: true,
@@ -84,6 +84,44 @@ export const projects: Project[] = [
     image: '/images/projects/photo-storytelling.png',
     liveUrl: 'https://photo-storytelling.vercel.app',
     codeUrl: 'https://github.com/tworoniak/photo-storytelling',
+
+    // problem:
+    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
+
+    // solution:
+    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+
+    // features: [
+    //   'Real-time crypto price tracking',
+    //   'Interactive charts',
+    //   'Search and sorting',
+    //   'Responsive dashboard UI',
+    // ],
+
+    // lessons:
+    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
+  },
+  {
+    id: 'dev-flow',
+    slug: 'dev-flow',
+    title: 'DevFlow Portal v1.0',
+    description:
+      'A scroll-driven, digital magazine-style photo storytelling experience built with React + TypeScript, featuring cinematic parallax hero sections, animated chapter reveals, embedded audio moments, and an editorial chapter navigation system.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS',
+      'Zuzstand',
+      'Zod',
+      'React Hook Form',
+      'React Router',
+      'Recharts',
+    ],
+    image: '/images/projects/dev-flow.png',
+    // liveUrl: 'https://photo-storytelling.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/team-management',
+    featured: true,
 
     // problem:
     //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
