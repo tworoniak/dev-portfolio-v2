@@ -165,7 +165,7 @@ export const projects: Project[] = [
       'TypeScript',
       'Vite',
       'Tailwind CSS',
-      'Zuzstand',
+      'Zustand',
       'Zod',
       'React Hook Form',
       'React Router',
@@ -176,21 +176,28 @@ export const projects: Project[] = [
     codeUrl: 'https://github.com/tworoniak/team-management',
     featured: true,
 
-    // problem:
-    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
+    problem:
+      'Development leads need visibility into team workload, task status, and delivery priorities, but that information is often scattered across disconnected tools or buried in ticket lists. It can be difficult to quickly understand who has capacity, which work is blocked or high priority, and who is the best fit to take on backlog tasks.',
 
-    // solution:
-    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+    solution:
+      'DevFlow provides a centralized engineering operations dashboard that combines task management, team workload tracking, interactive analytics, and a recommendation engine for skill-based task assignment. By bringing these views together into a single interface, the app helps development leads make faster, more informed decisions about planning, prioritization, and team capacity.',
 
-    // features: [
-    //   'Real-time crypto price tracking',
-    //   'Interactive charts',
-    //   'Search and sorting',
-    //   'Responsive dashboard UI',
-    // ],
+    features: [
+      'Interactive engineering dashboard with live task and workload metrics',
+      'Task CRUD with priority, status, assignee, tags, and required skills',
+      'Team member CRUD with availability, workload, role, and skill assessments',
+      'Task status distribution and priority overview charts built with Recharts',
+      'AI-style allocation engine that recommends the best assignee based on skill match, availability, workload, and role fit',
+      'Shared global state with Zustand so dashboard, tasks, team, and allocation views stay in sync',
+      'Reusable modal and form system powered by React Hook Form and Zod',
+      'Modern SaaS UI with sidebar navigation, dark theme styling, custom chart legends, and custom tooltips',
+    ],
 
-    // lessons:
-    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
+    architecture:
+      'DevFlow is a frontend-first single-page application built with Vite, React, and TypeScript, using React Router for client-side routing and a feature-based folder structure to keep domains like dashboard, tasks, team, and allocation isolated and scalable. Global application data is managed with Zustand stores so multiple routes can react to shared task and team state without prop drilling. Forms are implemented with React Hook Form and validated with Zod to provide typed, reusable modal workflows for creating and editing tasks and team members. Data visualization is handled with Recharts, with dashboard metrics derived through utility functions rather than hardcoded values. The UI is styled with Tailwind CSS using a dark SaaS-inspired design system, reusable cards, badges, buttons, and modal primitives. The allocation engine is implemented as a scoring utility that evaluates backlog tasks against team members using weighted factors such as skill alignment, availability, workload, and role relevance.',
+
+    lessons:
+      'This project reinforced the value of feature-based architecture and shared global state when building dashboard-style applications with multiple connected views. It also highlighted how much clarity derived analytics can add to a product when charts and KPI cards are driven by the same underlying store data as the rest of the app. Building the allocation engine was a good exercise in translating product thinking into scoring logic, while the chart and modal work strengthened patterns around reusable UI, form validation, and scalable TypeScript types.',
   },
   {
     id: 'voyage-planner',
