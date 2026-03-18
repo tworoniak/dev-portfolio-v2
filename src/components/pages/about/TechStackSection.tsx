@@ -13,7 +13,11 @@ const TechStackSection = () => {
         <StackIcon name='redux' />
         <StackIcon name='typescript' />
         <StackIcon name='tanstack' />
-        <StackIcon name='adobe' />
+        <StackIcon name='clerk' variant='dark' />
+        {/* <StackIcon name='adobe' />
+        <StackIcon name='photoshop' />
+        <StackIcon name='adobeillustrator' />
+        <StackIcon name='lightroom' /> */}
         <StackIcon name='figma' />
         <StackIcon name='html5' />
         <StackIcon name='css3' />
@@ -25,8 +29,8 @@ const TechStackSection = () => {
         <StackIcon name='radixui' variant='dark' />
         <StackIcon name='vscode' />
         <StackIcon name='claude' />
-        <StackIcon name='php' />
-        <StackIcon name='wordpress' />
+        {/* <StackIcon name='php' />
+        <StackIcon name='wordpress' /> */}
       </div>
     </section>
   );
