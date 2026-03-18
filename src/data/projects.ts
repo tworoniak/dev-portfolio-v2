@@ -114,6 +114,8 @@ export const projects: Project[] = [
       'Tailwind CSS v4',
       'shadcn/ui',
       'Clerk',
+      'Supabase',
+      'Cloudinary',
       'React Hook Form',
       'Zod',
       'React Router v6',
@@ -130,7 +132,7 @@ export const projects: Project[] = [
       'Photographers typically juggle four or five disconnected tools to run their business — a spreadsheet for clients, a calendar app for bookings, Google Drive for contracts, a separate invoicing tool, and email chains to share proofing galleries with clients. This fragmentation creates friction at every step of the workflow, makes it easy for things to fall through the cracks, and presents an unprofessional experience to clients.',
 
     solution:
-      'Aperture consolidates every part of the photography business workflow into a single, role-based web application. Photographers get a full admin dashboard covering client management, bookings, shoot planning, gear inventory, pricing, and proofing galleries. Clients receive a clean, password-free gallery link where they can approve, reject, favourite, and comment on photos. The app is built with a cool slate design system, supports full dark mode, and is fully responsive across desktop and mobile.',
+      'Aperture consolidates every part of the photography business workflow into a single, role-based web application. Photographers get a full admin dashboard covering client management, bookings, shoot planning, gear inventory, pricing, and proofing galleries — all backed by a Supabase Postgres database with Row Level Security. Clients receive a clean, password-free gallery link where they can approve, reject, favourite, comment on, and download photos uploaded directly to Cloudinary. The app is built with a cool slate design system, supports full dark mode, and is fully responsive across desktop and mobile.',
 
     features: [
       'Role-based auth via Clerk — admin (photographer) and client access levels with protected routes',
@@ -139,17 +141,18 @@ export const projects: Project[] = [
       'Shoot planner — per-shoot detail pages with interactive shot list, mood board, location notes, gear kit selector, and weather placeholder',
       'Gear inventory — grouped and flat views with condition badges, insurance values, and one-click mark as needs repair',
       'Pricing calculator — package cards with add-ons, custom line items, discount codes, and downloadable HTML quote',
-      'Client proofing gallery — masonry grid with lightbox, slideshow mode, keyboard shortcuts, per-photo approve/reject/favourite/comment, and download approved photos',
+      'Client proofing gallery — masonry grid with lightbox, slideshow mode, keyboard shortcuts, per-photo approve/reject/favourite/comment, and individual photo downloads via Cloudinary',
+      'Cloudinary photo uploads — drag and drop or URL input with per-gallery subfolders and automatic thumbnail generation',
       'Business dashboard — revenue stats, 6-month area chart, upcoming bookings, and recent clients',
       'Full dark mode with a cool slate palette and DM Sans typography',
       'Responsive mobile layout with slide-in drawer navigation and card-based list views',
     ],
 
     architecture:
-      'Aperture is a single-page application built with Vite and React 18, using React Router v6 for client-side routing with a role-based protected route system powered by Clerk. The app is structured around a feature-based folder architecture — each business domain (CRM, bookings, gear, shoots, pricing, galleries) owns its components, schemas, and mock data independently. Shared types are centralized in a single types/index.ts file consumed across all features. Forms are built with React Hook Form and validated with Zod schemas. Styling uses Tailwind CSS v4 with a custom CSS variable theme system bridged via @theme inline, shadcn/ui for accessible component primitives, and SCSS for complex layout patterns like masonry grids. The app ships two distinct layouts — an admin shell with a persistent sidebar and a client-facing shell — both with responsive mobile variants featuring a slide-in drawer navigation. Mock data is currently used in place of a live database, with Supabase integration planned as the next phase.',
+      "Aperture is a single-page application built with Vite and React 18, using React Router v6 for client-side routing with a role-based protected route system powered by Clerk. The app is structured around a feature-based folder architecture — each business domain (CRM, bookings, gear, shoots, pricing, galleries) owns its components, schemas, and data access layer independently. Shared types are centralized in a single types/index.ts file consumed across all features. The data layer uses a thin repository pattern — each feature has a dedicated db/ module that maps between the app's camelCase types and Supabase's snake_case columns. Supabase Postgres stores all business data across six tables protected by Row Level Security, with Clerk JWTs verified via the third-party auth integration. Photos are uploaded directly from the browser to Cloudinary using an unsigned upload preset, with per-gallery subfolders and automatic URL-based transformations for thumbnails. Forms are built with React Hook Form and validated with Zod schemas. Styling uses Tailwind CSS v4 with a custom CSS variable theme system bridged via @theme inline, shadcn/ui for accessible component primitives, and SCSS for complex layout patterns like masonry grids. A Supabase Edge Function handles server-side Cloudinary API calls for zip archive generation.",
 
     lessons:
-      "Building Aperture end-to-end as a solo project highlighted how quickly dependency version mismatches compound in a modern React stack — particularly the incompatibility between Zod v4, @hookform/resolvers, and Tailwind v4's new CSS variable system. Each required a different resolution strategy: downgrading Zod to v3 for form validation compatibility, replacing @apply with raw hsl(var(--)) values for Tailwind v4, and registering shadcn's CSS variables via @theme inline to make utility classes like border-border respond to theme changes. The project also reinforced the value of building a shared type system early — having a single src/types/index.ts that all six features referenced made refactoring the Booking and Shoot interfaces significantly less painful than it would have been otherwise.",
+      "Building Aperture end-to-end highlighted how quickly dependency version mismatches compound in a modern React stack — Zod v4 was incompatible with @hookform/resolvers and required a downgrade to v3, Tailwind v4 required replacing @apply with raw hsl(var(--)) values in base styles, and shadcn's CSS variables needed registering via @theme inline to respond to theme changes. The Clerk and Supabase integration also evolved significantly — the original JWT template approach was deprecated in favour of Supabase's native third-party auth, and the Cloudinary zip archive endpoint required a Supabase Edge Function since signed API calls cannot be made from the browser. These challenges reinforced the value of checking integration compatibility before committing to a stack, building a shared type system early, and isolating data access concerns in a dedicated layer so schema changes don't ripple through every component.",
   },
   {
     id: 'dev-flow',
