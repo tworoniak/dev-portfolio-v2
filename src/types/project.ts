@@ -12,5 +12,6 @@ export type Project = {
   features?: string[];
   lessons?: string;
   featured?: boolean;
+  architecture?: string;
   experiment?: boolean;
 };

@@ -99,17 +99,23 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                   {project.description}
                 </p>
 
-                <div className='mt-8 border-t border-white/10 pt-6'>
-                  <h3 className='text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500'>
-                    Preview
-                  </h3>
+                {project.features && (
+                  <div className='mt-8 border-t border-white/10 pt-6'>
+                    <h3 className='text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500'>
+                      Preview
+                    </h3>
 
-                  <ul className='mt-4 space-y-3 text-zinc-300'>
-                    <li>— Add 2–4 quick highlights here</li>
-                    <li>— Key features, challenges, or design decisions</li>
-                    <li>— Enough to tease the full case study</li>
-                  </ul>
-                </div>
+                    <ul className='mt-4 space-y-3 text-zinc-300 list-disc list-outside'>
+                      {(project.features ?? [])
+                        .slice(0, 3)
+                        .map((feature, index) => (
+                          <li key={index} className='ml-8'>
+                            {feature}
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                )}
 
                 <div className='mt-8 flex flex-wrap gap-3'>
                   <Link

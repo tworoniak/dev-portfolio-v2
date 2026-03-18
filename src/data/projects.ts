@@ -102,6 +102,56 @@ export const projects: Project[] = [
     //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
   },
   {
+    id: 'aperture',
+    slug: 'aperture',
+    title: 'Aperture v1.0',
+    description:
+      'A full-stack photography business management application built with React, TypeScript, and Tailwind CSS. Designed as a private, role-based web app for photographers to manage clients, bookings, shoots, gear, pricing, and client proofing galleries — all in one place.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS v4',
+      'shadcn/ui',
+      'Clerk',
+      'React Hook Form',
+      'Zod',
+      'React Router v6',
+      'Recharts',
+      'Lucide React',
+      'date-fns',
+    ],
+    image: '/images/projects/aperture.png',
+    liveUrl: 'https://your-aperture-deployment.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/aperture-photo-os',
+    featured: true,
+
+    problem:
+      'Photographers typically juggle four or five disconnected tools to run their business — a spreadsheet for clients, a calendar app for bookings, Google Drive for contracts, a separate invoicing tool, and email chains to share proofing galleries with clients. This fragmentation creates friction at every step of the workflow, makes it easy for things to fall through the cracks, and presents an unprofessional experience to clients.',
+
+    solution:
+      'Aperture consolidates every part of the photography business workflow into a single, role-based web application. Photographers get a full admin dashboard covering client management, bookings, shoot planning, gear inventory, pricing, and proofing galleries. Clients receive a clean, password-free gallery link where they can approve, reject, favourite, and comment on photos. The app is built with a cool slate design system, supports full dark mode, and is fully responsive across desktop and mobile.',
+
+    features: [
+      'Role-based auth via Clerk — admin (photographer) and client access levels with protected routes',
+      'CRM — searchable, filterable client list with lead/active/past status, revenue tracking, and slide-out profile panel',
+      'Bookings — list and calendar views with session types, deposit tracking, contract status, and shoot linking',
+      'Shoot planner — per-shoot detail pages with interactive shot list, mood board, location notes, gear kit selector, and weather placeholder',
+      'Gear inventory — grouped and flat views with condition badges, insurance values, and one-click mark as needs repair',
+      'Pricing calculator — package cards with add-ons, custom line items, discount codes, and downloadable HTML quote',
+      'Client proofing gallery — masonry grid with lightbox, slideshow mode, keyboard shortcuts, per-photo approve/reject/favourite/comment, and download approved photos',
+      'Business dashboard — revenue stats, 6-month area chart, upcoming bookings, and recent clients',
+      'Full dark mode with a cool slate palette and DM Sans typography',
+      'Responsive mobile layout with slide-in drawer navigation and card-based list views',
+    ],
+
+    architecture:
+      'Aperture is a single-page application built with Vite and React 18, using React Router v6 for client-side routing with a role-based protected route system powered by Clerk. The app is structured around a feature-based folder architecture — each business domain (CRM, bookings, gear, shoots, pricing, galleries) owns its components, schemas, and mock data independently. Shared types are centralized in a single types/index.ts file consumed across all features. Forms are built with React Hook Form and validated with Zod schemas. Styling uses Tailwind CSS v4 with a custom CSS variable theme system bridged via @theme inline, shadcn/ui for accessible component primitives, and SCSS for complex layout patterns like masonry grids. The app ships two distinct layouts — an admin shell with a persistent sidebar and a client-facing shell — both with responsive mobile variants featuring a slide-in drawer navigation. Mock data is currently used in place of a live database, with Supabase integration planned as the next phase.',
+
+    lessons:
+      "Building Aperture end-to-end as a solo project highlighted how quickly dependency version mismatches compound in a modern React stack — particularly the incompatibility between Zod v4, @hookform/resolvers, and Tailwind v4's new CSS variable system. Each required a different resolution strategy: downgrading Zod to v3 for form validation compatibility, replacing @apply with raw hsl(var(--)) values for Tailwind v4, and registering shadcn's CSS variables via @theme inline to make utility classes like border-border respond to theme changes. The project also reinforced the value of building a shared type system early — having a single src/types/index.ts that all six features referenced made refactoring the Booking and Shoot interfaces significantly less painful than it would have been otherwise.",
+  },
+  {
     id: 'dev-flow',
     slug: 'dev-flow',
     title: 'DevFlow Portal v1.0',

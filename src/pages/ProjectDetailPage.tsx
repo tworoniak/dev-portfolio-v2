@@ -72,68 +72,73 @@ const ProjectDetailPage = () => {
       <hr className='my-16 border-white/10' />
 
       {/* PROBLEM */}
+      {project.problem && (
+        <>
+          <section className='space-y-6'>
+            <h2 className='text-2xl font-semibold'>The Problem</h2>
 
-      <section className='space-y-6'>
-        <h2 className='text-2xl font-semibold'>The Problem</h2>
+            <p className='text-zinc-300 leading-7'>{project.problem}</p>
+          </section>
 
-        <p className='text-zinc-300 leading-7'>
-          Describe the problem the project solves. Explain why the problem
-          matters and what limitations existed before building this solution.
-        </p>
-      </section>
-
-      <hr className='my-16 border-white/10' />
+          <hr className='my-16 border-white/10' />
+        </>
+      )}
 
       {/* SOLUTION */}
+      {project.solution && (
+        <>
+          <section className='space-y-6'>
+            <h2 className='text-2xl font-semibold'>The Solution</h2>
 
-      <section className='space-y-6'>
-        <h2 className='text-2xl font-semibold'>The Solution</h2>
+            <p className='text-zinc-300 leading-7'>{project.solution}</p>
+          </section>
 
-        <p className='text-zinc-300 leading-7'>
-          Describe your solution approach and the design decisions that guided
-          the implementation.
-        </p>
-      </section>
-
-      <hr className='my-16 border-white/10' />
+          <hr className='my-16 border-white/10' />
+        </>
+      )}
 
       {/* FEATURES */}
+      {project.features && (
+        <>
+          <section className='space-y-6'>
+            <h2 className='text-2xl font-semibold'>Key Features</h2>
 
-      <section className='space-y-6'>
-        <h2 className='text-2xl font-semibold'>Key Features</h2>
+            <ul className='space-y-3 text-zinc-300 list-disc list-outside'>
+              {(project.features ?? []).map((feature, index) => (
+                <li key={index} className='ml-8'>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </section>
 
-        <ul className='space-y-3 text-zinc-300'>
-          <li>• Feature one</li>
-          <li>• Feature two</li>
-          <li>• Feature three</li>
-        </ul>
-      </section>
-
-      <hr className='my-16 border-white/10' />
+          <hr className='my-16 border-white/10' />
+        </>
+      )}
 
       {/* ARCHITECTURE */}
+      {project.architecture && (
+        <>
+          <section className='space-y-6'>
+            <h2 className='text-2xl font-semibold'>Architecture Decisions</h2>
 
-      <section className='space-y-6'>
-        <h2 className='text-2xl font-semibold'>Architecture Decisions</h2>
+            <p className='text-zinc-300 leading-7'>{project.architecture}</p>
+          </section>
 
-        <p className='text-zinc-300 leading-7'>
-          Explain technical decisions such as state management, API structure,
-          component architecture, or performance considerations.
-        </p>
-      </section>
-
-      <hr className='my-16 border-white/10' />
+          <hr className='my-16 border-white/10' />
+        </>
+      )}
 
       {/* LESSONS */}
+      {project.lessons && (
+        <>
+          <section className='space-y-6'>
+            <h2 className='text-2xl font-semibold'>Lessons Learned</h2>
 
-      <section className='space-y-6'>
-        <h2 className='text-2xl font-semibold'>Lessons Learned</h2>
-
-        <p className='text-zinc-300 leading-7'>
-          Reflect on what you learned building the project and what you might do
-          differently in the future.
-        </p>
-      </section>
+            <p className='text-zinc-300 leading-7'>{project.lessons}</p>
+          </section>
+        </>
+      )}
     </main>
   );
 };
