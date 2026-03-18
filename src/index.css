@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #000;
+}
+
 :root {
   --hue: 280;
   --chroma: 0.18;
