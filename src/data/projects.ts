@@ -159,7 +159,7 @@ export const projects: Project[] = [
     slug: 'dev-flow',
     title: 'DevFlow Portal v1.0',
     description:
-      'A scroll-driven, digital magazine-style photo storytelling experience built with React + TypeScript, featuring cinematic parallax hero sections, animated chapter reveals, embedded audio moments, and an editorial chapter navigation system.',
+      'DevFlow is a modern SaaS-style engineering dashboard built with React, TypeScript, and Vite. It is designed for development leads and engineering teams to manage tasks, monitor team workload, visualize sprint-related metrics, and generate skill-based task assignment recommendations. This project showcases a scalable frontend architecture with shared global state, reusable UI components, interactive data visualization, and an AI-style allocation engine.',
     tech: [
       'React',
       'TypeScript',
