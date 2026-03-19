@@ -14,10 +14,6 @@ const TechStackSection = () => {
         <StackIcon name='typescript' />
         <StackIcon name='tanstack' />
         <StackIcon name='clerk' variant='dark' />
-        {/* <StackIcon name='adobe' />
-        <StackIcon name='photoshop' />
-        <StackIcon name='adobeillustrator' />
-        <StackIcon name='lightroom' /> */}
         <StackIcon name='figma' />
         <StackIcon name='html5' />
         <StackIcon name='css3' />
@@ -25,6 +21,7 @@ const TechStackSection = () => {
         <StackIcon name='nextjs' variant='dark' />
         <StackIcon name='nodejs' />
         <StackIcon name='vitejs' />
+        <StackIcon name='vercel' variant='dark' />
         <StackIcon name='materialui' />
         <StackIcon name='radixui' variant='dark' />
         <StackIcon name='vscode' />
