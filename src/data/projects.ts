@@ -279,6 +279,50 @@ export const projects: Project[] = [
     //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
   },
   {
+    id: 'state-management-comparison',
+    slug: 'state-management-comparison',
+    title: 'State Management Comparison',
+    description:
+      'A frontend experiment comparing Zustand, Jotai, and Redux Toolkit using an identical shopping cart application — same UI, same data, three different state engines. Built to surface the real tradeoffs between modern React state management libraries through live interaction rather than theory.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS v4',
+      'Zustand',
+      'Jotai',
+      'Redux Toolkit',
+      'React Redux',
+      'rollup-plugin-visualizer',
+    ],
+    image: '/images/projects/state-management-comparison.png',
+    liveUrl: 'https://state-management-comparison.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/state-management-comparison',
+    experiment: true,
+
+    problem:
+      "Most state management comparisons live in blog posts — abstract code snippets with no shared context, no measurable output, and no way to feel the difference between libraries. Developers are left making architectural decisions based on other people's opinions rather than direct observation.",
+
+    solution:
+      'Build the same shopping cart application three times — once in Zustand, once in Jotai, once in Redux Toolkit — sharing a single library-agnostic UI layer. A tab bar switches between implementations at runtime, while a persistent metrics panel, live action log, and store code drawer make the differences between libraries observable and tangible without leaving the app.',
+
+    features: [
+      'Three fully independent store implementations — Zustand, Jotai, Redux Toolkit — powering an identical cart UI via thin adapter components',
+      'Per-component render counters displayed inline on every component, making re-render behaviour visible without DevTools',
+      'Live action log — a real-time feed showing every dispatched action across all three libraries with timestamps, library badges, and payloads, powered by a framework-agnostic pub/sub event bus',
+      "Store code drawer — a slide-in panel showing the full syntax-highlighted source for the active library's store, with copy-to-clipboard support",
+      'Metrics panel comparing bundle size, boilerplate line count, and developer experience notes side-by-side for all three libraries',
+      "Vite bundle analyzer integration — running npm run build auto-generates a bundle-analysis.html showing each library's size contribution",
+      "Redux action logger implemented as custom RTK middleware, while Zustand and Jotai dispatch directly — demonstrating each library's extensibility model",
+    ],
+
+    architecture:
+      'The app is structured around a strict separation between the UI layer and the state layer. All cart components — ProductGrid, ProductCard, CartSidebar, CartItemRow — accept plain props and have no knowledge of any state library. Three implementation files (ZustandCart, JotaiCart, ReduxCart) act as adapters, each connecting its respective store to the shared UI. This makes the comparison genuinely apples-to-apples. The action log is implemented as a tiny pub/sub event bus in src/lib/actionLog.ts that lives entirely outside React — Zustand and Jotai call it directly inside their action functions, while Redux hooks into it via a custom middleware. This neutral observer pattern means none of the three stores know about each other. The store code drawer reads from src/data/storeSource.ts, a static map of library-to-source-string, and applies lightweight regex-based syntax highlighting with no external dependency.',
+
+    lessons:
+      "The most instructive moment was discovering that JavaScript getters defined on a Zustand store object do not trigger reactivity — the getter is evaluated once at store creation and never again, so derived values like cart totals silently returned stale data. The fix was to compute those values in the component from the reactive items array, which also turned out to be the idiomatic Zustand pattern. Jotai's atomic model proved the most compositionally elegant — derived atoms via atom(get => ...) handled computed state cleanly without any of the boilerplate Redux selectors require. Redux Toolkit's middleware system was the standout for extensibility; wiring the action logger into all three stores with a single configureStore call demonstrated why RTK remains the right choice for large teams who need auditability and tooling depth over simplicity.",
+  },
+  {
     id: 'use-popcorn',
     slug: 'use-popcorn',
     title: 'usePopcorn v2.0',
@@ -412,6 +456,7 @@ export const projects: Project[] = [
     image: '/images/projects/festival-planner.png',
     liveUrl: 'https://festival-planner-kappa.vercel.app',
     codeUrl: 'https://github.com/tworoniak/festival-planner',
+    featured: true,
     // problem:
     //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
 
