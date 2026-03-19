@@ -78,7 +78,7 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className='project-card group cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-black/15 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1.5 hover:bg-black/30 flex flex-col h-full'
+      className='project-card group cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-black/15 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-3 hover:bg-black/30 flex flex-col h-full'
     >
       {/* <div
         className='pointer-events-none absolute inset-0 z-0 transition-opacity duration-300'
