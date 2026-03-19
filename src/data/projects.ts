@@ -382,6 +382,41 @@ export const projects: Project[] = [
       "React's strict linting rules around ref access during render required rethinking the engine's data flow multiple times. Storing the offset cache in a ref — the natural performance instinct — is exactly what React's rules prohibit in useMemo and the render path. Storing offsets and totalHeight together as LayoutState in proper React state resolved this cleanly. The Web Worker debounce pattern went through similar iterations before landing on creating the debounced function inside useEffect alongside the worker, capturing the worker directly. The benchmark panel delivered the most surprising result: the measured numbers — 87.9× faster render, 1,190× fewer DOM nodes — were far more dramatic than intuition suggested, reinforcing that performance claims only become credible when backed by actual measurement.",
   },
   {
+    id: 'design-token-pipeline',
+    slug: 'design-token-pipeline',
+    title: 'Design Token Pipeline',
+    description:
+      'A browser-based design token transformation pipeline that converts W3C DTCG format JSON into four production-ready output formats — CSS custom properties, SCSS variables, TypeScript constants, and a Tailwind CSS config — with live alias resolution, type-aware value transformation, and a visual token preview strip.',
+    tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS v4'],
+    image: '/images/projects/design-token-pipeline.png',
+    // liveUrl: 'https://your-design-token-pipeline.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/design-token-pipeline',
+    experiment: true,
+
+    problem:
+      'Design tokens are the single source of truth for a design system — colours, spacing, typography, shadows — but they only become useful when transformed into formats that code can actually consume. Teams either reach for heavy tools like Style Dictionary without understanding what they do, or maintain four separate token files by hand and watch them drift out of sync.',
+
+    solution:
+      'Build the transformation pipeline from scratch in a live browser playground. Edit W3C DTCG format JSON on the left and watch CSS custom properties, SCSS variables, TypeScript constants, and a Tailwind config update instantly on the right. The pipeline core is framework-agnostic — a pure resolver, transformer, and set of generators that could be extracted as a CLI or npm package.',
+
+    features: [
+      'Live JSON editor — edit W3C DTCG format tokens and all four output formats update instantly with parse error indication',
+      'Alias resolution — {dot.path.notation} references resolve recursively before output generation, with circular reference detection that throws a descriptive error rather than hanging',
+      'Type-aware transformation — dimensions and font sizes convert px to rem, shadow objects flatten to CSS box-shadow strings, border objects flatten to CSS border shorthand',
+      'Four output formats — CSS custom properties (:root block), SCSS variables, TypeScript as const object with TokenKey type export, and a typed Tailwind Config with tokens sorted into the correct theme.extend buckets by type',
+      'Copy to clipboard and file download per output format with correct file extensions (.css, .scss, .ts, .config.ts)',
+      'Token preview strip — live colour swatches with resolved values, proportional spacing bars, font size specimens rendered at actual size, and shadow cards on a light background',
+      'Stats bar showing total token count, resolved alias count, and per-format error reporting',
+      'Zero external transformation dependencies — resolver, transformer, and all four generators implemented from scratch',
+    ],
+
+    architecture:
+      'The pipeline core lives in src/pipeline/ as four independent modules. resolve.ts flattens the nested token tree into a flat array of { path, token, resolvedValue, isAlias } entries, resolving {alias} references recursively with a visited Set for circular detection. transform.ts applies type-aware value transformations — pxToRem for dimensions and font sizes, object serialization for shadows and borders. generators.ts contains four independent output functions that each consume the flat resolved list and produce their format; the Tailwind generator additionally sorts tokens into theme.extend buckets by $type and group name. pipeline/index.ts orchestrates everything, running each generator in its own try/catch so a failure in one format never blocks the others. The UI layer in usePipeline uses a lazy useState initializer to run the pipeline on mount without a useEffect, keeping the data flow synchronous and predictable.',
+
+    lessons:
+      'The most interesting problem was alias resolution for chained references — where a semantic token aliases a brand token which aliases a primitive value. A single-pass resolver breaks on these chains; the solution was recursive resolution following the chain to its primitive, with a visited Set preventing infinite loops on circular references. The Tailwind generator required the most design judgment: tokens need to land in the correct theme.extend key by both $type and group name, since dimension tokens in a spacing group belong in theme.extend.spacing while the same type in a borderRadius group belongs in theme.extend.borderRadius. The px-to-rem transformation also surfaced a real edge case — 9999px used for fully-rounded elements becomes 624.9375rem, which is technically correct but semantically unusual, a tradeoff worth documenting.',
+  },
+  {
     id: 'use-popcorn',
     slug: 'use-popcorn',
     title: 'usePopcorn v2.0',
