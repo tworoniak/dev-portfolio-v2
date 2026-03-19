@@ -3,16 +3,16 @@ const IntroSection = () => {
     <section className='flex flex-col md:flex-row gap-6 md:gap-12 mx-auto max-w-7xl px-6 py-12'>
       <div>
         <h1 className='max-w-3xl text-4xl font-bold leading-tight'>
-          Senior Front-End Developer.
+          Front-End Engineer.
           <br /> React builder.
         </h1>
 
         <p className='mt-6 max-w-3xl text-lg leading-8 text-zinc-400'>
-          I’m a Senior Front-End Developer specializing in building fast,
-          accessible, and visually polished web applications using React and
-          TypeScript. I enjoy creating clean UI systems, performance-optimized
-          experiences, and intuitive user flows that feel modern and responsive.
-          I’m currently targeting Senior Frontend Developer / Senior Frontend
+          I’m a Front-End Developer specializing in building fast, accessible,
+          and visually polished web applications using React and TypeScript. I
+          enjoy creating clean UI systems, performance-optimized experiences,
+          and intuitive user flows that feel modern and responsive. I’m
+          currently targeting Senior Frontend Developer / Senior Frontend
           Engineer roles where I can contribute to high-impact products and
           collaborate closely with design and product teams.
         </p>
