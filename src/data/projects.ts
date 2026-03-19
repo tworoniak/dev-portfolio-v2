@@ -342,7 +342,7 @@ export const projects: Project[] = [
     slug: 'virtual-list-renderer',
     title: 'Virtual List Renderer',
     description:
-      'A from-scratch implementation of virtual list rendering in React — no react-window, no react-virtualized. Renders 100,000 rows smoothly at 60fps with variable row heights, binary search scroll, Web Worker data generation, live search, column sorting, and a real-time FPS overlay.',
+      'A from-scratch implementation of virtual list rendering in React — no react-window, no react-virtualized. Renders 100,000 rows smoothly at 60fps with variable row heights, binary search scroll, Web Worker data generation, live search, column sorting, and a benchmark panel that proves the performance difference with real measured numbers.',
     tech: [
       'React',
       'TypeScript',
@@ -358,30 +358,29 @@ export const projects: Project[] = [
     experiment: true,
 
     problem:
-      'Most React developers reach for react-window or react-virtualized without understanding what virtual rendering actually does or why it matters. Libraries abstract away the core insight — that rendering 100,000 DOM nodes simultaneously is what kills performance, not the data itself — leaving developers unable to debug, extend, or reason about the behaviour when something goes wrong.',
+      'Most React developers reach for react-window or react-virtualized without understanding what virtual rendering actually does or why it matters. Libraries abstract away the core insight — that rendering 100,000 DOM nodes simultaneously is what kills performance, not the data itself — leaving developers unable to debug, extend, or reason about the behaviour when something goes wrong. And without measured evidence, performance claims remain theoretical.',
 
     solution:
-      'Build the entire virtual list engine from scratch: an offset cache, a binary search scroll algorithm, ResizeObserver-based variable height measurement, and a Web Worker pipeline for data generation and filtering. The result is a log viewer that renders 100,000 entries while keeping ~15 DOM nodes in the document at any time, demonstrating the technique through direct interaction rather than documentation.',
+      'Build the entire virtual list engine from scratch — offset cache, binary search scroll, ResizeObserver variable height measurement, Web Worker data pipeline — and pair it with a live benchmark panel that runs naïve rendering and virtual rendering side by side, measuring render time, DOM node count, scroll FPS, and memory. The result makes the performance argument concrete: 87.9× faster render time, 1,190× fewer DOM nodes, measurably higher scroll FPS.',
 
     features: [
-      'Core virtual list engine built from scratch — no react-window or react-virtualized — rendering only the visible rows plus a small overscan buffer',
+      'Core virtual list engine built from scratch — no react-window or react-virtualized — rendering only the ~15–20 visible rows plus a small overscan buffer regardless of dataset size',
       'Variable row heights via ResizeObserver — each row measures its own rendered height and reports back to the engine, which recomputes downstream offsets from the changed index forward',
-      'Binary search scroll — finding the first visible row on each scroll event is O(log n) against the offset cache, not O(n) linear scan',
+      'Binary search scroll — finding the first visible row on each scroll event is O(log n) against the offset cache, not a O(n) linear scan',
       '100,000 log entries generated in a Web Worker on mount so the main thread never blocks during initialisation',
-      'Debounced search and filter also run in the Worker, scanning the full 100k dataset off-thread with per-query timing reported back to the UI',
-      'Column sorting by timestamp, level, and duration with asc/desc toggle and directional indicators',
-      'Real-time FPS overlay measured via requestAnimationFrame loop, colour-coded green/yellow/red by performance tier',
-      'Stats bar showing total rows, filtered rows, and live DOM node count — the last number is the core demonstration of what virtual rendering achieves',
-      'Zero runtime dependencies beyond React — debounce utility, FPS counter, offset engine, and worker are all implemented from scratch',
+      'Debounced search and filter run in the Worker, scanning the full 100k dataset off-thread with per-query timing reported back to the UI',
+      'Column sorting by timestamp, level, and duration with asc/desc toggle',
+      'Real-time FPS overlay measured via requestAnimationFrame loop, colour-coded by performance tier',
+      'Benchmark drawer — select 1k / 5k / 10k / 25k rows, run sequential naïve vs. virtual tests, and see side-by-side metric cards for render time, DOM nodes, scroll FPS, and JS heap with winner highlighting and multiplier callouts',
+      'Zero runtime dependencies beyond React — debounce utility, FPS counter, offset engine, benchmark runner, and worker all implemented from scratch',
     ],
 
     architecture:
-      'The core engine lives in useVirtualList, which maintains a LayoutState object containing an offsets array and totalHeight in React state. On mount and on row count changes, it builds the offset array by summing heights from a measurement cache, defaulting to 56px for unmeasured rows. Each scroll event updates a scrollTop state value, which triggers a useMemo recalculation that binary-searches for the first visible index and walks forward to fill the viewport, padding with OVERSCAN = 5 rows on each side. Variable height measurement is handled by ResizeObserver inside each LogRow — when a measured height differs from the cache, onMeasure triggers a setLayout call that rebuilds offsets from the changed index forward. The Web Worker handles two message types: GENERATE builds the full dataset once on startup, and FILTER scans it against a query string, both returning a timing field measured with performance.now() inside the worker. The debounced search function is created inside useEffect alongside the worker, capturing the worker instance directly to avoid ref access outside effects.',
+      'The core engine lives in useVirtualList, which maintains a LayoutState object — an offsets array and totalHeight — in React state. On mount and on row count changes it builds the offset array by summing heights from a measurement cache. Each scroll event updates scrollTop state, triggering a useMemo that binary-searches for the first visible index and walks forward to fill the viewport with OVERSCAN = 5 rows on each side. Variable height measurement uses ResizeObserver inside each LogRow — when a measured height differs from the cache, onMeasure triggers setLayout which rebuilds offsets from the changed index forward. The Web Worker handles GENERATE (builds 100k rows once) and FILTER (scans against a query) message types, retaining the full dataset in memory between calls. The debounced search function is created inside useEffect alongside the worker, capturing the worker instance directly. The benchmark runner in useBenchmark uses vanilla DOM construction — no React — to isolate rendering strategy as the only variable, measuring render time with a double requestAnimationFrame wrapper to capture actual paint cost, and scroll FPS via a programmatic animation loop.',
 
     lessons:
-      "React's strict linting rules around ref access during render required rethinking the engine's data flow multiple times. The natural instinct — storing the offset cache in a ref to avoid re-renders — is exactly what React's rules prohibit in useMemo and the render path. The solution was storing offsets and totalHeight together as LayoutState in proper React state, which means measurements trigger re-renders but the virtual window recalculation via useMemo keeps the cost minimal. The Web Worker debounce pattern went through similar iterations — useRef().current, useMemo, and useCallback with an external debounce all hit the same linting rules until landing on creating the debounced function inside useEffect alongside the worker itself, capturing the worker instance directly. These constraints, while initially frustrating, produced a cleaner architecture than the first instinct would have.",
+      "React's strict linting rules around ref access during render required rethinking the engine's data flow multiple times. Storing the offset cache in a ref — the natural performance instinct — is exactly what React's rules prohibit in useMemo and the render path. Storing offsets and totalHeight together as LayoutState in proper React state resolved this cleanly. The Web Worker debounce pattern went through similar iterations before landing on creating the debounced function inside useEffect alongside the worker, capturing the worker directly. The benchmark panel delivered the most surprising result: the measured numbers — 87.9× faster render, 1,190× fewer DOM nodes — were far more dramatic than intuition suggested, reinforcing that performance claims only become credible when backed by actual measurement.",
   },
-
   {
     id: 'use-popcorn',
     slug: 'use-popcorn',
