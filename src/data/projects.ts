@@ -338,8 +338,8 @@ export const projects: Project[] = [
       'requestAnimationFrame',
     ],
     image: '/images/projects/virtual-list-renderer.png',
-    liveUrl: 'https://your-virtual-list-renderer.vercel.app',
-    codeUrl: 'https://github.com/your-username/virtual-list-renderer',
+    liveUrl: 'https://virtual-list-renderer.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/virtual-list-renderer',
     experiment: true,
 
     problem:
