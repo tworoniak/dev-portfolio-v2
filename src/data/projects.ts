@@ -389,7 +389,7 @@ export const projects: Project[] = [
       'A browser-based design token transformation pipeline that converts W3C DTCG format JSON into four production-ready output formats — CSS custom properties, SCSS variables, TypeScript constants, and a Tailwind CSS config — with live alias resolution, type-aware value transformation, and a visual token preview strip.',
     tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS v4'],
     image: '/images/projects/design-token-pipeline.png',
-    // liveUrl: 'https://your-design-token-pipeline.vercel.app',
+    liveUrl: 'https://design-token-pipeline.vercel.app',
     codeUrl: 'https://github.com/tworoniak/design-token-pipeline',
     experiment: true,
 
