@@ -56,16 +56,72 @@ export const projects: Project[] = [
       "Building Aperture end-to-end highlighted how quickly dependency version mismatches compound in a modern React stack — Zod v4 was incompatible with @hookform/resolvers and required a downgrade to v3, Tailwind v4 required replacing @apply with raw hsl(var(--)) values in base styles, and shadcn's CSS variables needed registering via @theme inline to respond to theme changes. The Clerk and Supabase integration also evolved significantly — the original JWT template approach was deprecated in favour of Supabase's native third-party auth, and the Cloudinary zip archive endpoint required a Supabase Edge Function since signed API calls cannot be made from the browser. These challenges reinforced the value of checking integration compatibility before committing to a stack, building a shared type system early, and isolating data access concerns in a dedicated layer so schema changes don't ripple through every component.",
   },
   {
-    id: 'photography-portfolio',
-    slug: 'photography-portfolio',
-    title: 'Photography Portfolio',
+    id: 'chromatic',
+    slug: 'chromatic',
+    title: 'Chromatic v1.0',
     description:
-      'A modern photography portfolio website with responsive design and lightbox functionality.',
-    tech: ['React', 'TypeScript', 'React Router', 'Tailwind CSS'],
-    image: '/images/projects/photography-portfolio.png',
-    liveUrl: 'https://photography-portfolio-iota-eight.vercel.app',
-    codeUrl: 'https://github.com/tworoniak/photography-portfolio',
+      'A visual theme builder that generates fully WCAG-compliant design token sets for light and dark mode. Pick a brand color, choose a color harmony type, tune typography and spacing, verify contrast compliance with built-in WCAG 2.1 checking and one-click fixes — then export to CSS, SCSS, TypeScript, or Tailwind.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS v4',
+      'Google Fonts API',
+      'Web Crypto API',
+    ],
+    image: '/images/projects/chromatic.png',
+    liveUrl: 'https://chromatic-sepia.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/chromatic',
     featured: true,
+
+    problem:
+      'Most theme builders stop at color pickers and leave developers to manually derive scales, map semantic roles, verify contrast compliance, and maintain separate token sets for light and dark mode. A single semantic color that passes WCAG on a white background will almost always fail on a dark one — and fixing it in one mode breaks the other. Teams either skip accessibility validation entirely or maintain four separate token files by hand.',
+
+    solution:
+      'Build a theme builder that treats a theme as a structured token system from the start — auto-generated color scales, harmony-derived accent colors, semantic role mappings, and separate light and dark semantic sets maintained independently. A WCAG 2.1 contrast checker audits all 14 semantic color pairs in each mode, suggests luminance-correct fixes, and scopes them to the right set so fixing dark mode never touches light mode tokens. The shared pipeline engine from the Design Token Pipeline project generates all four output formats without modification.',
+
+    features: [
+      'Brand color picker with auto-generated 50–900 scales for brand, accent, and neutral using HSL lightness stepping with saturation modulation',
+      'Four color harmony types — complementary, analogous, triadic, split-complementary — derived via HSL rotation to generate the accent scale',
+      'Separate semanticLight and semanticDark token sets maintained independently — fixes in one mode never affect the other',
+      'Google Fonts picker for sans and mono families with dynamic <link> injection and debounced search',
+      'Spacing base unit slider that generates the full scale, border radius per level, and shadow controls (offsetY, blur, opacity) per elevation',
+      'Live component preview driven by CSS custom properties injected into the document — re-themes via a single data-dark attribute toggle with no React re-renders',
+      'WCAG 2.1 contrast checker with luminance-based algorithm checking 14 semantic pairs per mode, with light/dark toggle to audit each set independently',
+      'Suggest Fix per failing pair — walks HSL lightness until 4.5:1 is achieved, shows before/after swatches and new ratio, applies to the correct mode with one click',
+      'Luminance-based getContrastColor using the mathematically correct 0.179 threshold — correctly handles yellow-green and other high-chroma colors that fool HSL-based approaches',
+      'Undo/redo history via useReducer, named theme save/load via localStorage, four export formats via the shared pipeline engine',
+    ],
+
+    architecture:
+      'ChromaticTheme stores semanticLight and semanticDark as independent SemanticColors objects. deriveSemanticColors seeds both on mount and on brand color change. The SET_SEMANTIC_COLOR action accepts a mode parameter and writes only to the corresponding set. injectThemeCSS writes a single <style> tag with light vars in .chromatic-preview and dark vars in .chromatic-preview[data-dark="true"] — the preview re-themes via attribute toggle with no React re-renders. The WCAG fix algorithm walks HSL lightness in 1° steps toward the correct direction (determined by the other color\'s lightness) until getContrastRatio returns ≥4.5. getContrastColor uses relative luminance with the 0.179 crossover threshold rather than HSL lightness to correctly handle high-chroma hues. themeToTokens converts the live theme to a W3C DTCG TokenSet passed directly to the shared pipeline\'s runPipeline — the four generators run unchanged.',
+
+    lessons:
+      'The hardest problem was maintaining WCAG compliance across both modes simultaneously. The naive single-semantic-set approach means any contrast fix for light mode breaks dark mode. Separating semanticLight and semanticDark and scoping SET_SEMANTIC_COLOR to a mode parameter solved this cleanly. The most instructive debugging session was discovering that HSL lightness is wrong for determining text color on high-chroma backgrounds — #c5c112 (yellow-green) reads as "dark" at 42% HSL lightness but has a relative luminance of ~0.45, well above the 0.179 crossover where dark text becomes the correct choice. The WCAG spec uses luminance for exactly this reason. Reusing the pipeline module validated the decision to build it as a standalone module — dropping src/pipeline/ into Chromatic required zero modifications.',
+  },
+  {
+    id: 'voyage-planner',
+    slug: 'voyage-planner',
+    title: 'Voyage Planner',
+    description:
+      'A travel planning app for creating and managing trip itineraries with real-time updates and collaborative features.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'React Router',
+      'Tailwind CSS',
+      'Radix UI',
+      'Zod',
+      'date-fns',
+      'Lucide Icons',
+      // 'Framer Motion',
+    ],
+    image: '/images/projects/voyage-planner.png',
+    // liveUrl: 'https://voyage-planner.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/travel-itinerary-app',
+    featured: true,
+
     // problem:
     //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
 
@@ -171,28 +227,16 @@ export const projects: Project[] = [
       'This project reinforced the value of feature-based architecture and shared global state when building dashboard-style applications with multiple connected views. It also highlighted how much clarity derived analytics can add to a product when charts and KPI cards are driven by the same underlying store data as the rest of the app. Building the allocation engine was a good exercise in translating product thinking into scoring logic, while the chart and modal work strengthened patterns around reusable UI, form validation, and scalable TypeScript types.',
   },
   {
-    id: 'voyage-planner',
-    slug: 'voyage-planner',
-    title: 'Voyage Planner',
+    id: 'photography-portfolio',
+    slug: 'photography-portfolio',
+    title: 'Photography Portfolio',
     description:
-      'A travel planning app for creating and managing trip itineraries with real-time updates and collaborative features.',
-    tech: [
-      'React',
-      'TypeScript',
-      'Vite',
-      'React Router',
-      'Tailwind CSS',
-      'Radix UI',
-      'Zod',
-      'date-fns',
-      'Lucide Icons',
-      // 'Framer Motion',
-    ],
-    image: '/images/projects/voyage-planner.png',
-    // liveUrl: 'https://voyage-planner.vercel.app',
-    codeUrl: 'https://github.com/tworoniak/travel-itinerary-app',
+      'A modern photography portfolio website with responsive design and lightbox functionality.',
+    tech: ['React', 'TypeScript', 'React Router', 'Tailwind CSS'],
+    image: '/images/projects/photography-portfolio.png',
+    liveUrl: 'https://photography-portfolio-iota-eight.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/photography-portfolio',
     featured: true,
-
     // problem:
     //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
 
@@ -251,7 +295,6 @@ export const projects: Project[] = [
     // lessons:
     //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
   },
-
   {
     id: 'ui-design-systems',
     slug: 'ui-design-systems',
@@ -296,48 +339,39 @@ export const projects: Project[] = [
     //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
   },
   {
-    id: 'state-management-comparison',
-    slug: 'state-management-comparison',
-    title: 'State Management Comparison',
+    id: 'design-token-pipeline',
+    slug: 'design-token-pipeline',
+    title: 'Design Token Pipeline',
     description:
-      'A frontend experiment comparing Zustand, Jotai, and Redux Toolkit using an identical shopping cart application — same UI, same data, three different state engines. Built to surface the real tradeoffs between modern React state management libraries through live interaction rather than theory.',
-    tech: [
-      'React',
-      'TypeScript',
-      'Vite',
-      'Tailwind CSS v4',
-      'Zustand',
-      'Jotai',
-      'Redux Toolkit',
-      'React Redux',
-      'rollup-plugin-visualizer',
-    ],
-    image: '/images/projects/state-management-comparison.png',
-    liveUrl: 'https://state-management-comparison.vercel.app',
-    codeUrl: 'https://github.com/tworoniak/state-management-comparison',
+      'A browser-based design token transformation pipeline that converts W3C DTCG format JSON into four production-ready output formats — CSS custom properties, SCSS variables, TypeScript constants, and a Tailwind CSS config — with live alias resolution, type-aware value transformation, and a visual token preview strip.',
+    tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS v4'],
+    image: '/images/projects/design-token-pipeline.png',
+    liveUrl: 'https://design-token-pipeline.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/design-token-pipeline',
     experiment: true,
 
     problem:
-      "Most state management comparisons live in blog posts — abstract code snippets with no shared context, no measurable output, and no way to feel the difference between libraries. Developers are left making architectural decisions based on other people's opinions rather than direct observation.",
+      'Design tokens are the single source of truth for a design system — colours, spacing, typography, shadows — but they only become useful when transformed into formats that code can actually consume. Teams either reach for heavy tools like Style Dictionary without understanding what they do, or maintain four separate token files by hand and watch them drift out of sync.',
 
     solution:
-      'Build the same shopping cart application three times — once in Zustand, once in Jotai, once in Redux Toolkit — sharing a single library-agnostic UI layer. A tab bar switches between implementations at runtime, while a persistent metrics panel, live action log, and store code drawer make the differences between libraries observable and tangible without leaving the app.',
+      'Build the transformation pipeline from scratch in a live browser playground. Edit W3C DTCG format JSON on the left and watch CSS custom properties, SCSS variables, TypeScript constants, and a Tailwind config update instantly on the right. The pipeline core is framework-agnostic — a pure resolver, transformer, and set of generators that could be extracted as a CLI or npm package.',
 
     features: [
-      'Three fully independent store implementations — Zustand, Jotai, Redux Toolkit — powering an identical cart UI via thin adapter components',
-      'Per-component render counters displayed inline on every component, making re-render behaviour visible without DevTools',
-      'Live action log — a real-time feed showing every dispatched action across all three libraries with timestamps, library badges, and payloads, powered by a framework-agnostic pub/sub event bus',
-      "Store code drawer — a slide-in panel showing the full syntax-highlighted source for the active library's store, with copy-to-clipboard support",
-      'Metrics panel comparing bundle size, boilerplate line count, and developer experience notes side-by-side for all three libraries',
-      "Vite bundle analyzer integration — running npm run build auto-generates a bundle-analysis.html showing each library's size contribution",
-      "Redux action logger implemented as custom RTK middleware, while Zustand and Jotai dispatch directly — demonstrating each library's extensibility model",
+      'Live JSON editor — edit W3C DTCG format tokens and all four output formats update instantly with parse error indication',
+      'Alias resolution — {dot.path.notation} references resolve recursively before output generation, with circular reference detection that throws a descriptive error rather than hanging',
+      'Type-aware transformation — dimensions and font sizes convert px to rem, shadow objects flatten to CSS box-shadow strings, border objects flatten to CSS border shorthand',
+      'Four output formats — CSS custom properties (:root block), SCSS variables, TypeScript as const object with TokenKey type export, and a typed Tailwind Config with tokens sorted into the correct theme.extend buckets by type',
+      'Copy to clipboard and file download per output format with correct file extensions (.css, .scss, .ts, .config.ts)',
+      'Token preview strip — live colour swatches with resolved values, proportional spacing bars, font size specimens rendered at actual size, and shadow cards on a light background',
+      'Stats bar showing total token count, resolved alias count, and per-format error reporting',
+      'Zero external transformation dependencies — resolver, transformer, and all four generators implemented from scratch',
     ],
 
     architecture:
-      'The app is structured around a strict separation between the UI layer and the state layer. All cart components — ProductGrid, ProductCard, CartSidebar, CartItemRow — accept plain props and have no knowledge of any state library. Three implementation files (ZustandCart, JotaiCart, ReduxCart) act as adapters, each connecting its respective store to the shared UI. This makes the comparison genuinely apples-to-apples. The action log is implemented as a tiny pub/sub event bus in src/lib/actionLog.ts that lives entirely outside React — Zustand and Jotai call it directly inside their action functions, while Redux hooks into it via a custom middleware. This neutral observer pattern means none of the three stores know about each other. The store code drawer reads from src/data/storeSource.ts, a static map of library-to-source-string, and applies lightweight regex-based syntax highlighting with no external dependency.',
+      'The pipeline core lives in src/pipeline/ as four independent modules. resolve.ts flattens the nested token tree into a flat array of { path, token, resolvedValue, isAlias } entries, resolving {alias} references recursively with a visited Set for circular detection. transform.ts applies type-aware value transformations — pxToRem for dimensions and font sizes, object serialization for shadows and borders. generators.ts contains four independent output functions that each consume the flat resolved list and produce their format; the Tailwind generator additionally sorts tokens into theme.extend buckets by $type and group name. pipeline/index.ts orchestrates everything, running each generator in its own try/catch so a failure in one format never blocks the others. The UI layer in usePipeline uses a lazy useState initializer to run the pipeline on mount without a useEffect, keeping the data flow synchronous and predictable.',
 
     lessons:
-      "The most instructive moment was discovering that JavaScript getters defined on a Zustand store object do not trigger reactivity — the getter is evaluated once at store creation and never again, so derived values like cart totals silently returned stale data. The fix was to compute those values in the component from the reactive items array, which also turned out to be the idiomatic Zustand pattern. Jotai's atomic model proved the most compositionally elegant — derived atoms via atom(get => ...) handled computed state cleanly without any of the boilerplate Redux selectors require. Redux Toolkit's middleware system was the standout for extensibility; wiring the action logger into all three stores with a single configureStore call demonstrated why RTK remains the right choice for large teams who need auditability and tooling depth over simplicity.",
+      'The most interesting problem was alias resolution for chained references — where a semantic token aliases a brand token which aliases a primitive value. A single-pass resolver breaks on these chains; the solution was recursive resolution following the chain to its primitive, with a visited Set preventing infinite loops on circular references. The Tailwind generator required the most design judgment: tokens need to land in the correct theme.extend key by both $type and group name, since dimension tokens in a spacing group belong in theme.extend.spacing while the same type in a borderRadius group belongs in theme.extend.borderRadius. The px-to-rem transformation also surfaced a real edge case — 9999px used for fully-rounded elements becomes 624.9375rem, which is technically correct but semantically unusual, a tradeoff worth documenting.',
   },
   {
     id: 'virtual-list-renderer',
@@ -384,83 +418,48 @@ export const projects: Project[] = [
       "React's strict linting rules around ref access during render required rethinking the engine's data flow multiple times. Storing the offset cache in a ref — the natural performance instinct — is exactly what React's rules prohibit in useMemo and the render path. Storing offsets and totalHeight together as LayoutState in proper React state resolved this cleanly. The Web Worker debounce pattern went through similar iterations before landing on creating the debounced function inside useEffect alongside the worker, capturing the worker directly. The benchmark panel delivered the most surprising result: the measured numbers — 87.9× faster render, 1,190× fewer DOM nodes — were far more dramatic than intuition suggested, reinforcing that performance claims only become credible when backed by actual measurement.",
   },
   {
-    id: 'design-token-pipeline',
-    slug: 'design-token-pipeline',
-    title: 'Design Token Pipeline',
+    id: 'state-management-comparison',
+    slug: 'state-management-comparison',
+    title: 'State Management Comparison',
     description:
-      'A browser-based design token transformation pipeline that converts W3C DTCG format JSON into four production-ready output formats — CSS custom properties, SCSS variables, TypeScript constants, and a Tailwind CSS config — with live alias resolution, type-aware value transformation, and a visual token preview strip.',
-    tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS v4'],
-    image: '/images/projects/design-token-pipeline.png',
-    liveUrl: 'https://design-token-pipeline.vercel.app',
-    codeUrl: 'https://github.com/tworoniak/design-token-pipeline',
-    experiment: true,
-
-    problem:
-      'Design tokens are the single source of truth for a design system — colours, spacing, typography, shadows — but they only become useful when transformed into formats that code can actually consume. Teams either reach for heavy tools like Style Dictionary without understanding what they do, or maintain four separate token files by hand and watch them drift out of sync.',
-
-    solution:
-      'Build the transformation pipeline from scratch in a live browser playground. Edit W3C DTCG format JSON on the left and watch CSS custom properties, SCSS variables, TypeScript constants, and a Tailwind config update instantly on the right. The pipeline core is framework-agnostic — a pure resolver, transformer, and set of generators that could be extracted as a CLI or npm package.',
-
-    features: [
-      'Live JSON editor — edit W3C DTCG format tokens and all four output formats update instantly with parse error indication',
-      'Alias resolution — {dot.path.notation} references resolve recursively before output generation, with circular reference detection that throws a descriptive error rather than hanging',
-      'Type-aware transformation — dimensions and font sizes convert px to rem, shadow objects flatten to CSS box-shadow strings, border objects flatten to CSS border shorthand',
-      'Four output formats — CSS custom properties (:root block), SCSS variables, TypeScript as const object with TokenKey type export, and a typed Tailwind Config with tokens sorted into the correct theme.extend buckets by type',
-      'Copy to clipboard and file download per output format with correct file extensions (.css, .scss, .ts, .config.ts)',
-      'Token preview strip — live colour swatches with resolved values, proportional spacing bars, font size specimens rendered at actual size, and shadow cards on a light background',
-      'Stats bar showing total token count, resolved alias count, and per-format error reporting',
-      'Zero external transformation dependencies — resolver, transformer, and all four generators implemented from scratch',
-    ],
-
-    architecture:
-      'The pipeline core lives in src/pipeline/ as four independent modules. resolve.ts flattens the nested token tree into a flat array of { path, token, resolvedValue, isAlias } entries, resolving {alias} references recursively with a visited Set for circular detection. transform.ts applies type-aware value transformations — pxToRem for dimensions and font sizes, object serialization for shadows and borders. generators.ts contains four independent output functions that each consume the flat resolved list and produce their format; the Tailwind generator additionally sorts tokens into theme.extend buckets by $type and group name. pipeline/index.ts orchestrates everything, running each generator in its own try/catch so a failure in one format never blocks the others. The UI layer in usePipeline uses a lazy useState initializer to run the pipeline on mount without a useEffect, keeping the data flow synchronous and predictable.',
-
-    lessons:
-      'The most interesting problem was alias resolution for chained references — where a semantic token aliases a brand token which aliases a primitive value. A single-pass resolver breaks on these chains; the solution was recursive resolution following the chain to its primitive, with a visited Set preventing infinite loops on circular references. The Tailwind generator required the most design judgment: tokens need to land in the correct theme.extend key by both $type and group name, since dimension tokens in a spacing group belong in theme.extend.spacing while the same type in a borderRadius group belongs in theme.extend.borderRadius. The px-to-rem transformation also surfaced a real edge case — 9999px used for fully-rounded elements becomes 624.9375rem, which is technically correct but semantically unusual, a tradeoff worth documenting.',
-  },
-  {
-    id: 'chromatic',
-    slug: 'chromatic',
-    title: 'Chromatic',
-    description:
-      'A visual theme builder that generates fully WCAG-compliant design token sets for light and dark mode. Pick a brand color, choose a color harmony type, tune typography and spacing, verify contrast compliance with built-in WCAG 2.1 checking and one-click fixes — then export to CSS, SCSS, TypeScript, or Tailwind.',
+      'A frontend experiment comparing Zustand, Jotai, and Redux Toolkit using an identical shopping cart application — same UI, same data, three different state engines. Built to surface the real tradeoffs between modern React state management libraries through live interaction rather than theory.',
     tech: [
       'React',
       'TypeScript',
       'Vite',
       'Tailwind CSS v4',
-      'Google Fonts API',
-      'Web Crypto API',
+      'Zustand',
+      'Jotai',
+      'Redux Toolkit',
+      'React Redux',
+      'rollup-plugin-visualizer',
     ],
-    image: '/images/projects/chromatic.png',
-    liveUrl: 'https://chromatic-sepia.vercel.app',
-    codeUrl: 'https://github.com/tworoniak/chromatic',
+    image: '/images/projects/state-management-comparison.png',
+    liveUrl: 'https://state-management-comparison.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/state-management-comparison',
     experiment: true,
 
     problem:
-      'Most theme builders stop at color pickers and leave developers to manually derive scales, map semantic roles, verify contrast compliance, and maintain separate token sets for light and dark mode. A single semantic color that passes WCAG on a white background will almost always fail on a dark one — and fixing it in one mode breaks the other. Teams either skip accessibility validation entirely or maintain four separate token files by hand.',
+      "Most state management comparisons live in blog posts — abstract code snippets with no shared context, no measurable output, and no way to feel the difference between libraries. Developers are left making architectural decisions based on other people's opinions rather than direct observation.",
 
     solution:
-      'Build a theme builder that treats a theme as a structured token system from the start — auto-generated color scales, harmony-derived accent colors, semantic role mappings, and separate light and dark semantic sets maintained independently. A WCAG 2.1 contrast checker audits all 14 semantic color pairs in each mode, suggests luminance-correct fixes, and scopes them to the right set so fixing dark mode never touches light mode tokens. The shared pipeline engine from the Design Token Pipeline project generates all four output formats without modification.',
+      'Build the same shopping cart application three times — once in Zustand, once in Jotai, once in Redux Toolkit — sharing a single library-agnostic UI layer. A tab bar switches between implementations at runtime, while a persistent metrics panel, live action log, and store code drawer make the differences between libraries observable and tangible without leaving the app.',
 
     features: [
-      'Brand color picker with auto-generated 50–900 scales for brand, accent, and neutral using HSL lightness stepping with saturation modulation',
-      'Four color harmony types — complementary, analogous, triadic, split-complementary — derived via HSL rotation to generate the accent scale',
-      'Separate semanticLight and semanticDark token sets maintained independently — fixes in one mode never affect the other',
-      'Google Fonts picker for sans and mono families with dynamic <link> injection and debounced search',
-      'Spacing base unit slider that generates the full scale, border radius per level, and shadow controls (offsetY, blur, opacity) per elevation',
-      'Live component preview driven by CSS custom properties injected into the document — re-themes via a single data-dark attribute toggle with no React re-renders',
-      'WCAG 2.1 contrast checker with luminance-based algorithm checking 14 semantic pairs per mode, with light/dark toggle to audit each set independently',
-      'Suggest Fix per failing pair — walks HSL lightness until 4.5:1 is achieved, shows before/after swatches and new ratio, applies to the correct mode with one click',
-      'Luminance-based getContrastColor using the mathematically correct 0.179 threshold — correctly handles yellow-green and other high-chroma colors that fool HSL-based approaches',
-      'Undo/redo history via useReducer, named theme save/load via localStorage, four export formats via the shared pipeline engine',
+      'Three fully independent store implementations — Zustand, Jotai, Redux Toolkit — powering an identical cart UI via thin adapter components',
+      'Per-component render counters displayed inline on every component, making re-render behaviour visible without DevTools',
+      'Live action log — a real-time feed showing every dispatched action across all three libraries with timestamps, library badges, and payloads, powered by a framework-agnostic pub/sub event bus',
+      "Store code drawer — a slide-in panel showing the full syntax-highlighted source for the active library's store, with copy-to-clipboard support",
+      'Metrics panel comparing bundle size, boilerplate line count, and developer experience notes side-by-side for all three libraries',
+      "Vite bundle analyzer integration — running npm run build auto-generates a bundle-analysis.html showing each library's size contribution",
+      "Redux action logger implemented as custom RTK middleware, while Zustand and Jotai dispatch directly — demonstrating each library's extensibility model",
     ],
 
     architecture:
-      'ChromaticTheme stores semanticLight and semanticDark as independent SemanticColors objects. deriveSemanticColors seeds both on mount and on brand color change. The SET_SEMANTIC_COLOR action accepts a mode parameter and writes only to the corresponding set. injectThemeCSS writes a single <style> tag with light vars in .chromatic-preview and dark vars in .chromatic-preview[data-dark="true"] — the preview re-themes via attribute toggle with no React re-renders. The WCAG fix algorithm walks HSL lightness in 1° steps toward the correct direction (determined by the other color\'s lightness) until getContrastRatio returns ≥4.5. getContrastColor uses relative luminance with the 0.179 crossover threshold rather than HSL lightness to correctly handle high-chroma hues. themeToTokens converts the live theme to a W3C DTCG TokenSet passed directly to the shared pipeline\'s runPipeline — the four generators run unchanged.',
+      'The app is structured around a strict separation between the UI layer and the state layer. All cart components — ProductGrid, ProductCard, CartSidebar, CartItemRow — accept plain props and have no knowledge of any state library. Three implementation files (ZustandCart, JotaiCart, ReduxCart) act as adapters, each connecting its respective store to the shared UI. This makes the comparison genuinely apples-to-apples. The action log is implemented as a tiny pub/sub event bus in src/lib/actionLog.ts that lives entirely outside React — Zustand and Jotai call it directly inside their action functions, while Redux hooks into it via a custom middleware. This neutral observer pattern means none of the three stores know about each other. The store code drawer reads from src/data/storeSource.ts, a static map of library-to-source-string, and applies lightweight regex-based syntax highlighting with no external dependency.',
 
     lessons:
-      'The hardest problem was maintaining WCAG compliance across both modes simultaneously. The naive single-semantic-set approach means any contrast fix for light mode breaks dark mode. Separating semanticLight and semanticDark and scoping SET_SEMANTIC_COLOR to a mode parameter solved this cleanly. The most instructive debugging session was discovering that HSL lightness is wrong for determining text color on high-chroma backgrounds — #c5c112 (yellow-green) reads as "dark" at 42% HSL lightness but has a relative luminance of ~0.45, well above the 0.179 crossover where dark text becomes the correct choice. The WCAG spec uses luminance for exactly this reason. Reusing the pipeline module validated the decision to build it as a standalone module — dropping src/pipeline/ into Chromatic required zero modifications.',
+      "The most instructive moment was discovering that JavaScript getters defined on a Zustand store object do not trigger reactivity — the getter is evaluated once at store creation and never again, so derived values like cart totals silently returned stale data. The fix was to compute those values in the component from the reactive items array, which also turned out to be the idiomatic Zustand pattern. Jotai's atomic model proved the most compositionally elegant — derived atoms via atom(get => ...) handled computed state cleanly without any of the boilerplate Redux selectors require. Redux Toolkit's middleware system was the standout for extensibility; wiring the action logger into all three stores with a single configureStore call demonstrated why RTK remains the right choice for large teams who need auditability and tooling depth over simplicity.",
   },
   {
     id: 'festival-planner',
