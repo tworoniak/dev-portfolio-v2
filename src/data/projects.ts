@@ -477,7 +477,7 @@ export const projects: Project[] = [
       'requestAnimationFrame',
     ],
     image: '/images/projects/physica.png',
-    // liveUrl: 'https://your-physica.vercel.app',
+    liveUrl: 'https://your-physica.vercel.app',
     codeUrl: 'https://github.com/tworoniak/physica',
     experiment: true,
 
@@ -504,6 +504,40 @@ export const projects: Project[] = [
 
     lessons:
       'The dragConstraints ref bug was the most instructive error — Motion tries to measure the constraint container before it mounts, causing a null getBoundingClientRect. Removing the ref and using onDragEnd to reset motion values to zero was cleaner anyway, because it decouples the drag gesture from the return animation and lets the spring config control the snap-back feel independently. The particle system reinforced why Canvas is the right tool for high-frequency graphics — 80 particles with connection lines at 60fps in React DOM would mean 80+ component re-renders per frame. On Canvas it is a clearRect and a set of draw calls with no component tree involvement. useTransform was the most powerful Framer Motion primitive — mapping drag position to 3D rotation and glare without any render cycle between gesture and visual response made the interactions feel instant in a way that setState-driven animations cannot match.',
+  },
+  {
+    id: 'chatgpt-archive-viewer',
+    slug: 'chatgpt-archive-viewer',
+    title: 'ChatGPT Archive Viewer',
+    description:
+      'A privacy-first utility for browsing exported ChatGPT conversation history entirely in the browser. Drop in a conversations.json file and get a clean, searchable interface with full-text search, inline term highlighting, fenced code block rendering, and one-click export to Markdown or plain text. No server, no uploads, no tracking.',
+    tech: ['React', 'TypeScript', 'Vite', 'SCSS Modules'],
+    image: '/images/projects/chatgpt-archive-viewer.png',
+    // liveUrl: 'https://your-chatgpt-archive-viewer.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/chatgpt-archive-viewer',
+    experiment: true,
+
+    problem:
+      "ChatGPT's data export is a single JSON file — technically complete, but completely unusable. The mapping format stores messages as a non-linear graph of nodes with parent and children references, not a readable array. There is no built-in way to search across conversations, jump to a specific thread, or extract a conversation into a portable format. The data exists but is effectively inaccessible without tooling.",
+
+    solution:
+      'Build a lightweight client-side viewer that parses the raw export format into a navigable interface. The core challenge is the mapping traversal — finding the root node, following children recursively, and filtering out system messages and null content to produce a clean flat thread. On top of that: a controlled search input that filters the list and highlights matches inline, a code block renderer that detects fenced blocks in assistant messages and wraps them with a language label and clipboard copy, and a Blob-based export that produces clean Markdown or plain text with no extra dependencies.',
+
+    features: [
+      'Drag-and-drop file input with FileReader — conversations.json is parsed client-side with no upload or network request',
+      'Recursive mapping traversal — finds the root node, walks children depth-first, and filters null messages and system turns to produce a clean flat thread per conversation',
+      'Full-text search across conversation titles and all message content — results update on every keystroke via useMemo',
+      'Inline search term highlighting — regex splits message content around matches and wraps them in <mark> without re-rendering the full message list',
+      'Fenced code block detection — assistant message content is split into prose and code segments, with code rendered as <pre><code> with a language label and one-click clipboard copy',
+      'Export to .md and .txt via Blob and object URL — no server, no library, generates a download directly from the parsed conversation',
+      'localStorage persistence via a generic useLocalStorage<T> hook — restores the last-opened conversation on reload, with graceful fallback if the ID no longer exists in the loaded file',
+    ],
+
+    architecture:
+      'The parser lives in src/utils/parseConversations.ts and is entirely decoupled from React — pure functions that take the raw ChatGPTConversation[] and return a flat ParsedConversation[]. The mapping traversal finds the root node by looking for parent: null, then walks children recursively, skipping null messages and system-role turns. useConversations owns all runtime state — raw conversations, search query, and selected ID — and derives the filtered list and selected conversation via useMemo so no filtering logic leaks into components. The code block renderer in parseMessageContent.tsx splits raw content with a fenced block regex, maps segments to either a plain text span (with optional highlight wrapping) or a CodeBlock component, and returns a ReactNode — keeping MessageBubble responsible only for layout. The useLocalStorage hook is fully generic and reusable across the portfolio. Export utilities are pure functions that build a string from a ParsedConversation and trigger a download via Blob + URL.createObjectURL with no side effects beyond the anchor click.',
+
+    lessons:
+      "The most instructive part was the mapping format. ChatGPT's export stores conversations as a graph to support branching — a user can edit a message and fork the thread, producing multiple children from one node. The current traversal always follows children[0], which reconstructs the canonical thread but silently drops branches. That limitation is worth documenting and is the natural next feature — detecting multi-child nodes and offering a branch selector. The code block renderer surfaced a subtle HTML constraint: a <p> element cannot contain block-level children like <pre>, so the MessageBubble content wrapper had to change from <p> to <div>. Small fix, but the kind of thing that only shows up when you stop treating the DOM as abstract and start reading what the browser actually enforces.",
   },
 
   {
