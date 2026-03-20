@@ -513,7 +513,7 @@ export const projects: Project[] = [
       'A privacy-first utility for browsing exported ChatGPT conversation history entirely in the browser. Drop in a conversations.json file and get a clean, searchable interface with full-text search, inline term highlighting, fenced code block rendering, and one-click export to Markdown or plain text. No server, no uploads, no tracking.',
     tech: ['React', 'TypeScript', 'Vite', 'SCSS Modules'],
     image: '/images/projects/chatgpt-archive-viewer.png',
-    // liveUrl: 'https://your-chatgpt-archive-viewer.vercel.app',
+    liveUrl: 'https://chatgpt-archive-viewer.vercel.app',
     codeUrl: 'https://github.com/tworoniak/chatgpt-archive-viewer',
     experiment: true,
 
