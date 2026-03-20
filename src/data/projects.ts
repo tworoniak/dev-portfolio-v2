@@ -1,6 +1,60 @@
 import type { Project } from '../types/project';
 
 export const projects: Project[] = [
+  // Featured Projects //
+  {
+    id: 'aperture',
+    slug: 'aperture',
+    title: 'Aperture v1.0',
+    description:
+      'A full-stack photography business management application built with React, TypeScript, and Tailwind CSS. Designed as a private, role-based web app for photographers to manage clients, bookings, shoots, gear, pricing, and client proofing galleries — all in one place.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS v4',
+      'shadcn/ui',
+      'Clerk',
+      'Supabase',
+      'Cloudinary',
+      'React Hook Form',
+      'Zod',
+      'React Router v6',
+      'Recharts',
+      'Lucide React',
+      'date-fns',
+    ],
+    image: '/images/projects/aperture.png',
+    liveUrl: 'https://your-aperture-deployment.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/aperture-photo-os',
+    featured: true,
+
+    problem:
+      'Photographers typically juggle four or five disconnected tools to run their business — a spreadsheet for clients, a calendar app for bookings, Google Drive for contracts, a separate invoicing tool, and email chains to share proofing galleries with clients. This fragmentation creates friction at every step of the workflow, makes it easy for things to fall through the cracks, and presents an unprofessional experience to clients.',
+
+    solution:
+      'Aperture consolidates every part of the photography business workflow into a single, role-based web application. Photographers get a full admin dashboard covering client management, bookings, shoot planning, gear inventory, pricing, and proofing galleries — all backed by a Supabase Postgres database with Row Level Security. Clients receive a clean, password-free gallery link where they can approve, reject, favourite, comment on, and download photos uploaded directly to Cloudinary. The app is built with a cool slate design system, supports full dark mode, and is fully responsive across desktop and mobile.',
+
+    features: [
+      'Role-based auth via Clerk — admin (photographer) and client access levels with protected routes',
+      'CRM — searchable, filterable client list with lead/active/past status, revenue tracking, and slide-out profile panel',
+      'Bookings — list and calendar views with session types, deposit tracking, contract status, and shoot linking',
+      'Shoot planner — per-shoot detail pages with interactive shot list, mood board, location notes, gear kit selector, and weather placeholder',
+      'Gear inventory — grouped and flat views with condition badges, insurance values, and one-click mark as needs repair',
+      'Pricing calculator — package cards with add-ons, custom line items, discount codes, and downloadable HTML quote',
+      'Client proofing gallery — masonry grid with lightbox, slideshow mode, keyboard shortcuts, per-photo approve/reject/favourite/comment, and individual photo downloads via Cloudinary',
+      'Cloudinary photo uploads — drag and drop or URL input with per-gallery subfolders and automatic thumbnail generation',
+      'Business dashboard — revenue stats, 6-month area chart, upcoming bookings, and recent clients',
+      'Full dark mode with a cool slate palette and DM Sans typography',
+      'Responsive mobile layout with slide-in drawer navigation and card-based list views',
+    ],
+
+    architecture:
+      "Aperture is a single-page application built with Vite and React 18, using React Router v6 for client-side routing with a role-based protected route system powered by Clerk. The app is structured around a feature-based folder architecture — each business domain (CRM, bookings, gear, shoots, pricing, galleries) owns its components, schemas, and data access layer independently. Shared types are centralized in a single types/index.ts file consumed across all features. The data layer uses a thin repository pattern — each feature has a dedicated db/ module that maps between the app's camelCase types and Supabase's snake_case columns. Supabase Postgres stores all business data across six tables protected by Row Level Security, with Clerk JWTs verified via the third-party auth integration. Photos are uploaded directly from the browser to Cloudinary using an unsigned upload preset, with per-gallery subfolders and automatic URL-based transformations for thumbnails. Forms are built with React Hook Form and validated with Zod schemas. Styling uses Tailwind CSS v4 with a custom CSS variable theme system bridged via @theme inline, shadcn/ui for accessible component primitives, and SCSS for complex layout patterns like masonry grids. A Supabase Edge Function handles server-side Cloudinary API calls for zip archive generation.",
+
+    lessons:
+      "Building Aperture end-to-end highlighted how quickly dependency version mismatches compound in a modern React stack — Zod v4 was incompatible with @hookform/resolvers and required a downgrade to v3, Tailwind v4 required replacing @apply with raw hsl(var(--)) values in base styles, and shadcn's CSS variables needed registering via @theme inline to respond to theme changes. The Clerk and Supabase integration also evolved significantly — the original JWT template approach was deprecated in favour of Supabase's native third-party auth, and the Cloudinary zip archive endpoint required a Supabase Edge Function since signed API calls cannot be made from the browser. These challenges reinforced the value of checking integration compatibility before committing to a stack, building a shared type system early, and isolating data access concerns in a dedicated layer so schema changes don't ripple through every component.",
+  },
   {
     id: 'photography-portfolio',
     slug: 'photography-portfolio',
@@ -70,98 +124,6 @@ export const projects: Project[] = [
 
     // lessons:
     //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
-  },
-  {
-    id: 'photo-storytelling',
-    slug: 'photo-storytelling',
-    title: 'Photo Storytelling',
-    description:
-      'A scroll-driven, digital magazine-style photo storytelling experience built with React + TypeScript, featuring cinematic parallax hero sections, animated chapter reveals, embedded audio moments, and an editorial chapter navigation system.',
-    tech: [
-      'React',
-      'TypeScript',
-      'Vite',
-      'Tailwind CSS',
-      'Framer Motion',
-      'Firebase',
-      'React Router',
-      'Cloudinary',
-    ],
-    image: '/images/projects/photo-storytelling.png',
-    liveUrl: 'https://photo-storytelling.vercel.app',
-    codeUrl: 'https://github.com/tworoniak/photo-storytelling',
-
-    // problem:
-    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
-
-    // solution:
-    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
-
-    // features: [
-    //   'Real-time crypto price tracking',
-    //   'Interactive charts',
-    //   'Search and sorting',
-    //   'Responsive dashboard UI',
-    // ],
-
-    // architecture:
-    //   'The app is structured around a strict separation between the UI layer and the state layer. All cart components — ProductGrid, ProductCard, CartSidebar, CartItemRow — accept plain props and have no knowledge of any state library. Three implementation files (ZustandCart, JotaiCart, ReduxCart) act as adapters, each connecting its respective store to the shared UI. This makes the comparison genuinely apples-to-apples. The action log is implemented as a tiny pub/sub event bus in src/lib/actionLog.ts that lives entirely outside React — Zustand and Jotai call it directly inside their action functions, while Redux hooks into it via a custom middleware. This neutral observer pattern means none of the three stores know about each other. The store code drawer reads from src/data/storeSource.ts, a static map of library-to-source-string, and applies lightweight regex-based syntax highlighting with no external dependency.',
-
-    // lessons:
-    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
-  },
-  {
-    id: 'aperture',
-    slug: 'aperture',
-    title: 'Aperture v1.0',
-    description:
-      'A full-stack photography business management application built with React, TypeScript, and Tailwind CSS. Designed as a private, role-based web app for photographers to manage clients, bookings, shoots, gear, pricing, and client proofing galleries — all in one place.',
-    tech: [
-      'React',
-      'TypeScript',
-      'Vite',
-      'Tailwind CSS v4',
-      'shadcn/ui',
-      'Clerk',
-      'Supabase',
-      'Cloudinary',
-      'React Hook Form',
-      'Zod',
-      'React Router v6',
-      'Recharts',
-      'Lucide React',
-      'date-fns',
-    ],
-    image: '/images/projects/aperture.png',
-    liveUrl: 'https://your-aperture-deployment.vercel.app',
-    codeUrl: 'https://github.com/tworoniak/aperture-photo-os',
-    featured: true,
-
-    problem:
-      'Photographers typically juggle four or five disconnected tools to run their business — a spreadsheet for clients, a calendar app for bookings, Google Drive for contracts, a separate invoicing tool, and email chains to share proofing galleries with clients. This fragmentation creates friction at every step of the workflow, makes it easy for things to fall through the cracks, and presents an unprofessional experience to clients.',
-
-    solution:
-      'Aperture consolidates every part of the photography business workflow into a single, role-based web application. Photographers get a full admin dashboard covering client management, bookings, shoot planning, gear inventory, pricing, and proofing galleries — all backed by a Supabase Postgres database with Row Level Security. Clients receive a clean, password-free gallery link where they can approve, reject, favourite, comment on, and download photos uploaded directly to Cloudinary. The app is built with a cool slate design system, supports full dark mode, and is fully responsive across desktop and mobile.',
-
-    features: [
-      'Role-based auth via Clerk — admin (photographer) and client access levels with protected routes',
-      'CRM — searchable, filterable client list with lead/active/past status, revenue tracking, and slide-out profile panel',
-      'Bookings — list and calendar views with session types, deposit tracking, contract status, and shoot linking',
-      'Shoot planner — per-shoot detail pages with interactive shot list, mood board, location notes, gear kit selector, and weather placeholder',
-      'Gear inventory — grouped and flat views with condition badges, insurance values, and one-click mark as needs repair',
-      'Pricing calculator — package cards with add-ons, custom line items, discount codes, and downloadable HTML quote',
-      'Client proofing gallery — masonry grid with lightbox, slideshow mode, keyboard shortcuts, per-photo approve/reject/favourite/comment, and individual photo downloads via Cloudinary',
-      'Cloudinary photo uploads — drag and drop or URL input with per-gallery subfolders and automatic thumbnail generation',
-      'Business dashboard — revenue stats, 6-month area chart, upcoming bookings, and recent clients',
-      'Full dark mode with a cool slate palette and DM Sans typography',
-      'Responsive mobile layout with slide-in drawer navigation and card-based list views',
-    ],
-
-    architecture:
-      "Aperture is a single-page application built with Vite and React 18, using React Router v6 for client-side routing with a role-based protected route system powered by Clerk. The app is structured around a feature-based folder architecture — each business domain (CRM, bookings, gear, shoots, pricing, galleries) owns its components, schemas, and data access layer independently. Shared types are centralized in a single types/index.ts file consumed across all features. The data layer uses a thin repository pattern — each feature has a dedicated db/ module that maps between the app's camelCase types and Supabase's snake_case columns. Supabase Postgres stores all business data across six tables protected by Row Level Security, with Clerk JWTs verified via the third-party auth integration. Photos are uploaded directly from the browser to Cloudinary using an unsigned upload preset, with per-gallery subfolders and automatic URL-based transformations for thumbnails. Forms are built with React Hook Form and validated with Zod schemas. Styling uses Tailwind CSS v4 with a custom CSS variable theme system bridged via @theme inline, shadcn/ui for accessible component primitives, and SCSS for complex layout patterns like masonry grids. A Supabase Edge Function handles server-side Cloudinary API calls for zip archive generation.",
-
-    lessons:
-      "Building Aperture end-to-end highlighted how quickly dependency version mismatches compound in a modern React stack — Zod v4 was incompatible with @hookform/resolvers and required a downgrade to v3, Tailwind v4 required replacing @apply with raw hsl(var(--)) values in base styles, and shadcn's CSS variables needed registering via @theme inline to respond to theme changes. The Clerk and Supabase integration also evolved significantly — the original JWT template approach was deprecated in favour of Supabase's native third-party auth, and the Cloudinary zip archive endpoint required a Supabase Edge Function since signed API calls cannot be made from the browser. These challenges reinforced the value of checking integration compatibility before committing to a stack, building a shared type system early, and isolating data access concerns in a dedicated layer so schema changes don't ripple through every component.",
   },
   {
     id: 'dev-flow',
@@ -250,6 +212,46 @@ export const projects: Project[] = [
     // lessons:
     //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
   },
+  {
+    id: 'photo-storytelling',
+    slug: 'photo-storytelling',
+    title: 'Photo Storytelling',
+    description:
+      'A scroll-driven, digital magazine-style photo storytelling experience built with React + TypeScript, featuring cinematic parallax hero sections, animated chapter reveals, embedded audio moments, and an editorial chapter navigation system.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS',
+      'Framer Motion',
+      'Firebase',
+      'React Router',
+      'Cloudinary',
+    ],
+    image: '/images/projects/photo-storytelling.png',
+    liveUrl: 'https://photo-storytelling.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/photo-storytelling',
+
+    // problem:
+    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
+
+    // solution:
+    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+
+    // features: [
+    //   'Real-time crypto price tracking',
+    //   'Interactive charts',
+    //   'Search and sorting',
+    //   'Responsive dashboard UI',
+    // ],
+
+    // architecture:
+    //   'The app is structured around a strict separation between the UI layer and the state layer. All cart components — ProductGrid, ProductCard, CartSidebar, CartItemRow — accept plain props and have no knowledge of any state library. Three implementation files (ZustandCart, JotaiCart, ReduxCart) act as adapters, each connecting its respective store to the shared UI. This makes the comparison genuinely apples-to-apples. The action log is implemented as a tiny pub/sub event bus in src/lib/actionLog.ts that lives entirely outside React — Zustand and Jotai call it directly inside their action functions, while Redux hooks into it via a custom middleware. This neutral observer pattern means none of the three stores know about each other. The store code drawer reads from src/data/storeSource.ts, a static map of library-to-source-string, and applies lightweight regex-based syntax highlighting with no external dependency.',
+
+    // lessons:
+    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
+  },
+
   {
     id: 'ui-design-systems',
     slug: 'ui-design-systems',
@@ -417,6 +419,80 @@ export const projects: Project[] = [
       'The most interesting problem was alias resolution for chained references — where a semantic token aliases a brand token which aliases a primitive value. A single-pass resolver breaks on these chains; the solution was recursive resolution following the chain to its primitive, with a visited Set preventing infinite loops on circular references. The Tailwind generator required the most design judgment: tokens need to land in the correct theme.extend key by both $type and group name, since dimension tokens in a spacing group belong in theme.extend.spacing while the same type in a borderRadius group belongs in theme.extend.borderRadius. The px-to-rem transformation also surfaced a real edge case — 9999px used for fully-rounded elements becomes 624.9375rem, which is technically correct but semantically unusual, a tradeoff worth documenting.',
   },
   {
+    id: 'chromatic',
+    slug: 'chromatic',
+    title: 'Chromatic',
+    description:
+      'A visual theme builder that generates fully WCAG-compliant design token sets for light and dark mode. Pick a brand color, choose a color harmony type, tune typography and spacing, verify contrast compliance with built-in WCAG 2.1 checking and one-click fixes — then export to CSS, SCSS, TypeScript, or Tailwind.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS v4',
+      'Google Fonts API',
+      'Web Crypto API',
+    ],
+    image: '/images/projects/chromatic.png',
+    liveUrl: 'https://chromatic-sepia.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/chromatic',
+    experiment: true,
+
+    problem:
+      'Most theme builders stop at color pickers and leave developers to manually derive scales, map semantic roles, verify contrast compliance, and maintain separate token sets for light and dark mode. A single semantic color that passes WCAG on a white background will almost always fail on a dark one — and fixing it in one mode breaks the other. Teams either skip accessibility validation entirely or maintain four separate token files by hand.',
+
+    solution:
+      'Build a theme builder that treats a theme as a structured token system from the start — auto-generated color scales, harmony-derived accent colors, semantic role mappings, and separate light and dark semantic sets maintained independently. A WCAG 2.1 contrast checker audits all 14 semantic color pairs in each mode, suggests luminance-correct fixes, and scopes them to the right set so fixing dark mode never touches light mode tokens. The shared pipeline engine from the Design Token Pipeline project generates all four output formats without modification.',
+
+    features: [
+      'Brand color picker with auto-generated 50–900 scales for brand, accent, and neutral using HSL lightness stepping with saturation modulation',
+      'Four color harmony types — complementary, analogous, triadic, split-complementary — derived via HSL rotation to generate the accent scale',
+      'Separate semanticLight and semanticDark token sets maintained independently — fixes in one mode never affect the other',
+      'Google Fonts picker for sans and mono families with dynamic <link> injection and debounced search',
+      'Spacing base unit slider that generates the full scale, border radius per level, and shadow controls (offsetY, blur, opacity) per elevation',
+      'Live component preview driven by CSS custom properties injected into the document — re-themes via a single data-dark attribute toggle with no React re-renders',
+      'WCAG 2.1 contrast checker with luminance-based algorithm checking 14 semantic pairs per mode, with light/dark toggle to audit each set independently',
+      'Suggest Fix per failing pair — walks HSL lightness until 4.5:1 is achieved, shows before/after swatches and new ratio, applies to the correct mode with one click',
+      'Luminance-based getContrastColor using the mathematically correct 0.179 threshold — correctly handles yellow-green and other high-chroma colors that fool HSL-based approaches',
+      'Undo/redo history via useReducer, named theme save/load via localStorage, four export formats via the shared pipeline engine',
+    ],
+
+    architecture:
+      'ChromaticTheme stores semanticLight and semanticDark as independent SemanticColors objects. deriveSemanticColors seeds both on mount and on brand color change. The SET_SEMANTIC_COLOR action accepts a mode parameter and writes only to the corresponding set. injectThemeCSS writes a single <style> tag with light vars in .chromatic-preview and dark vars in .chromatic-preview[data-dark="true"] — the preview re-themes via attribute toggle with no React re-renders. The WCAG fix algorithm walks HSL lightness in 1° steps toward the correct direction (determined by the other color\'s lightness) until getContrastRatio returns ≥4.5. getContrastColor uses relative luminance with the 0.179 crossover threshold rather than HSL lightness to correctly handle high-chroma hues. themeToTokens converts the live theme to a W3C DTCG TokenSet passed directly to the shared pipeline\'s runPipeline — the four generators run unchanged.',
+
+    lessons:
+      'The hardest problem was maintaining WCAG compliance across both modes simultaneously. The naive single-semantic-set approach means any contrast fix for light mode breaks dark mode. Separating semanticLight and semanticDark and scoping SET_SEMANTIC_COLOR to a mode parameter solved this cleanly. The most instructive debugging session was discovering that HSL lightness is wrong for determining text color on high-chroma backgrounds — #c5c112 (yellow-green) reads as "dark" at 42% HSL lightness but has a relative luminance of ~0.45, well above the 0.179 crossover where dark text becomes the correct choice. The WCAG spec uses luminance for exactly this reason. Reusing the pipeline module validated the decision to build it as a standalone module — dropping src/pipeline/ into Chromatic required zero modifications.',
+  },
+  {
+    id: 'festival-planner',
+    slug: 'festival-planner',
+    title: 'Festival Planner',
+    description:
+      'A planning tool for comparing set times, building schedules, and managing lineup conflicts.',
+    tech: ['React', 'TypeScript', 'SCSS', 'date-fns'],
+    image: '/images/projects/festival-planner.png',
+    liveUrl: 'https://festival-planner-kappa.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/festival-planner',
+    featured: true,
+    // problem:
+    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
+
+    // solution:
+    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+
+    // features: [
+    //   'Real-time crypto price tracking',
+    //   'Interactive charts',
+    //   'Search and sorting',
+    //   'Responsive dashboard UI',
+    // ],
+
+    // architecture:
+    //   'The app is structured around a strict separation between the UI layer and the state layer. All cart components — ProductGrid, ProductCard, CartSidebar, CartItemRow — accept plain props and have no knowledge of any state library. Three implementation files (ZustandCart, JotaiCart, ReduxCart) act as adapters, each connecting its respective store to the shared UI. This makes the comparison genuinely apples-to-apples. The action log is implemented as a tiny pub/sub event bus in src/lib/actionLog.ts that lives entirely outside React — Zustand and Jotai call it directly inside their action functions, while Redux hooks into it via a custom middleware. This neutral observer pattern means none of the three stores know about each other. The store code drawer reads from src/data/storeSource.ts, a static map of library-to-source-string, and applies lightweight regex-based syntax highlighting with no external dependency.',
+
+    // lessons:
+    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
+  },
+  {
     id: 'use-popcorn',
     slug: 'use-popcorn',
     title: 'usePopcorn v2.0',
@@ -549,34 +625,6 @@ export const projects: Project[] = [
     lessons:
       'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
   },
-  {
-    id: 'festival-planner',
-    slug: 'festival-planner',
-    title: 'Festival Planner',
-    description:
-      'A planning tool for comparing set times, building schedules, and managing lineup conflicts.',
-    tech: ['React', 'TypeScript', 'SCSS', 'date-fns'],
-    image: '/images/projects/festival-planner.png',
-    liveUrl: 'https://festival-planner-kappa.vercel.app',
-    codeUrl: 'https://github.com/tworoniak/festival-planner',
-    featured: true,
-    // problem:
-    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
 
-    // solution:
-    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
-
-    // features: [
-    //   'Real-time crypto price tracking',
-    //   'Interactive charts',
-    //   'Search and sorting',
-    //   'Responsive dashboard UI',
-    // ],
-
-    // architecture:
-    //   'The app is structured around a strict separation between the UI layer and the state layer. All cart components — ProductGrid, ProductCard, CartSidebar, CartItemRow — accept plain props and have no knowledge of any state library. Three implementation files (ZustandCart, JotaiCart, ReduxCart) act as adapters, each connecting its respective store to the shared UI. This makes the comparison genuinely apples-to-apples. The action log is implemented as a tiny pub/sub event bus in src/lib/actionLog.ts that lives entirely outside React — Zustand and Jotai call it directly inside their action functions, while Redux hooks into it via a custom middleware. This neutral observer pattern means none of the three stores know about each other. The store code drawer reads from src/data/storeSource.ts, a static map of library-to-source-string, and applies lightweight regex-based syntax highlighting with no external dependency.',
-
-    // lessons:
-    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
-  },
+  // Experiment Projects //
 ];
