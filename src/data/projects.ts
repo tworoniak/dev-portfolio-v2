@@ -118,7 +118,7 @@ export const projects: Project[] = [
       // 'Framer Motion',
     ],
     image: '/images/projects/voyage-planner.png',
-    // liveUrl: 'https://voyage-planner.vercel.app',
+    liveUrl: 'https://travel-itinerary-app-alpha.vercel.app',
     codeUrl: 'https://github.com/tworoniak/travel-itinerary-app',
     featured: true,
 
