@@ -462,6 +462,87 @@ export const projects: Project[] = [
       "The most instructive moment was discovering that JavaScript getters defined on a Zustand store object do not trigger reactivity — the getter is evaluated once at store creation and never again, so derived values like cart totals silently returned stale data. The fix was to compute those values in the component from the reactive items array, which also turned out to be the idiomatic Zustand pattern. Jotai's atomic model proved the most compositionally elegant — derived atoms via atom(get => ...) handled computed state cleanly without any of the boilerplate Redux selectors require. Redux Toolkit's middleware system was the standout for extensibility; wiring the action logger into all three stores with a single configureStore call demonstrated why RTK remains the right choice for large teams who need auditability and tooling depth over simplicity.",
   },
   {
+    id: 'cartograph',
+    slug: 'cartograph',
+    title: 'Cartograph',
+    description:
+      "A US states choropleth map renderer built entirely in pure SVG — no Mapbox, no Google Maps, no Leaflet. Converts TopoJSON to SVG paths using D3's Albers USA projection, with zoom and pan, click-to-focus animation, hover tooltips, animated metric transitions, state abbreviation labels, and a Top 5 / Bottom 5 rank panel.",
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS v4',
+      'd3-geo',
+      'd3-scale',
+      'd3-zoom',
+      'd3-transition',
+      'topojson-client',
+    ],
+    image: '/images/projects/cartograph.png',
+    liveUrl: 'https://cartograph-ten.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/cartograph',
+    experiment: true,
+
+    problem:
+      'Most developers treat maps as a black box — drop in a Mapbox token and render tiles. This abstracts away everything interesting: geographic projections, coordinate systems, path generation, and color scales that meaningfully represent data. The result is developers who can use map libraries but cannot reason about what they are doing.',
+
+    solution:
+      'Build every layer from scratch using individual D3 packages. TopoJSON is fetched from the us-atlas CDN and converted to GeoJSON client-side. The Albers USA projection maps lat/lng to SVG x/y coordinates. geoPath generates SVG path d attributes from GeoJSON polygons. A square root color scale maps population and unemployment data to D3 color interpolators. D3 zoom handles pan and zoom with React state tracking the transform. The result is a fully interactive choropleth with zero map tile dependencies.',
+
+    features: [
+      'Pure SVG choropleth — all 50 states rendered as <path> elements from GeoJSON polygons, no map tiles or external map APIs',
+      'Albers USA projection — geoAlbersUsa() maps geographic coordinates to SVG x/y, correctly repositioning Alaska and Hawaii',
+      'Square root color scale — scaleSequentialSqrt compresses the population range so mid-range states are visible rather than washed out by California and Texas',
+      'Two metrics — Population (blue scale) and Unemployment Rate (orange scale) with animated fill transitions between them',
+      'Zoom and pan — D3 zoom behavior applied to SVG, scale extent 0.8–8×, border stroke widths divide by zoom scale to stay visually consistent',
+      'Click to focus — geoPath.bounds() computes feature bounding box, calculates scale and translation to center it, animates over 750ms via d3-transition',
+      'State abbreviation labels — SVG <text> at geoPath.centroid(), zoom-aware font size, luminance-based contrast color, small states hidden below 2× zoom',
+      'Hover tooltips and state detail panel showing rank, vs-average comparison, and all metrics',
+      'Top 5 / Bottom 5 rank list with proportional bar indicators, updates instantly on metric switch, clicking a row focuses the map',
+    ],
+
+    architecture:
+      'The geographic pipeline runs fetch → topojson-client feature() → geoAlbersUsa projection → geoPath path generation → scaleSequentialSqrt coloring. D3 zoom behavior fires on scroll/drag and updates a ZoomTransform { x, y, k } in React state, applied to a single <g> group transform attribute so all paths move together without individual re-renders. Click-to-focus uses geoPath.bounds() to get SVG-space bounding box coordinates, computes the required scale as 0.9 / max((x1-x0)/WIDTH, (y1-y0)/HEIGHT), and builds a zoomIdentity transform that is applied via d3-transition. Label contrast uses the same luminance-based algorithm as the Chromatic project — getLuminance(fill) > 0.179 selects dark or light text, correctly handling mid-range hues. Individual D3 packages are used rather than the full bundle to minimize bundle size.',
+
+    lessons:
+      'The D3/TypeScript integration was the most frustrating part — D3 zoom types use Selection<Element> internally but select(svgRef.current) returns Selection<SVGSVGElement>, which are incompatible in TypeScript despite working at runtime. The as never cast on the transition call is the accepted workaround for this known D3 typing limitation. The FIPS matching issue revealed that us-atlas includes US territories (FIPS 60, 66, 69, 72, 78) without state data equivalents — rendering them in default gray is the correct cartographic treatment. The square root scale decision came from observing the linear scale in practice: with a linear scale every state except California and Texas renders near-white because the population range is too extreme. Square root compression is the standard cartographic solution and was the right call here.',
+  },
+
+  {
+    id: 'chatgpt-archive-viewer',
+    slug: 'chatgpt-archive-viewer',
+    title: 'ChatGPT Archive Viewer',
+    description:
+      'A privacy-first utility for browsing exported ChatGPT conversation history entirely in the browser. Drop in a conversations.json file and get a clean, searchable interface with full-text search, inline term highlighting, fenced code block rendering, and one-click export to Markdown or plain text. No server, no uploads, no tracking.',
+    tech: ['React', 'TypeScript', 'Vite', 'SCSS Modules'],
+    image: '/images/projects/chatgpt-archive-viewer.png',
+    liveUrl: 'https://your-chatgpt-archive-viewer.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/chatgpt-archive-viewer',
+    experiment: true,
+
+    problem:
+      "ChatGPT's data export is a single JSON file — technically complete, but completely unusable. The mapping format stores messages as a non-linear graph of nodes with parent and children references, not a readable array. There is no built-in way to search across conversations, jump to a specific thread, or extract a conversation into a portable format. The data exists but is effectively inaccessible without tooling.",
+
+    solution:
+      'Build a lightweight client-side viewer that parses the raw export format into a navigable interface. The core challenge is the mapping traversal — finding the root node, following children recursively, and filtering out system messages and null content to produce a clean flat thread. On top of that: a controlled search input that filters the list and highlights matches inline, a code block renderer that detects fenced blocks in assistant messages and wraps them with a language label and clipboard copy, and a Blob-based export that produces clean Markdown or plain text with no extra dependencies.',
+
+    features: [
+      'Drag-and-drop file input with FileReader — conversations.json is parsed client-side with no upload or network request',
+      'Recursive mapping traversal — finds the root node, walks children depth-first, and filters null messages and system turns to produce a clean flat thread per conversation',
+      'Full-text search across conversation titles and all message content — results update on every keystroke via useMemo',
+      'Inline search term highlighting — regex splits message content around matches and wraps them in <mark> without re-rendering the full message list',
+      'Fenced code block detection — assistant message content is split into prose and code segments, with code rendered as <pre><code> with a language label and one-click clipboard copy',
+      'Export to .md and .txt via Blob and object URL — no server, no library, generates a download directly from the parsed conversation',
+      'localStorage persistence via a generic useLocalStorage<T> hook — restores the last-opened conversation on reload, with graceful fallback if the ID no longer exists in the loaded file',
+    ],
+
+    architecture:
+      'The parser lives in src/utils/parseConversations.ts and is entirely decoupled from React — pure functions that take the raw ChatGPTConversation[] and return a flat ParsedConversation[]. The mapping traversal finds the root node by looking for parent: null, then walks children recursively, skipping null messages and system-role turns. useConversations owns all runtime state — raw conversations, search query, and selected ID — and derives the filtered list and selected conversation via useMemo so no filtering logic leaks into components. The code block renderer in parseMessageContent.tsx splits raw content with a fenced block regex, maps segments to either a plain text span (with optional highlight wrapping) or a CodeBlock component, and returns a ReactNode — keeping MessageBubble responsible only for layout. The useLocalStorage hook is fully generic and reusable across the portfolio. Export utilities are pure functions that build a string from a ParsedConversation and trigger a download via Blob + URL.createObjectURL with no side effects beyond the anchor click.',
+
+    lessons:
+      "The most instructive part was the mapping format. ChatGPT's export stores conversations as a graph to support branching — a user can edit a message and fork the thread, producing multiple children from one node. The current traversal always follows children[0], which reconstructs the canonical thread but silently drops branches. That limitation is worth documenting and is the natural next feature — detecting multi-child nodes and offering a branch selector. The code block renderer surfaced a subtle HTML constraint: a <p> element cannot contain block-level children like <pre>, so the MessageBubble content wrapper had to change from <p> to <div>. Small fix, but the kind of thing that only shows up when you stop treating the DOM as abstract and start reading what the browser actually enforces.",
+  },
+  {
     id: 'physica',
     slug: 'physica',
     title: 'Physica',
@@ -505,41 +586,6 @@ export const projects: Project[] = [
     lessons:
       'The dragConstraints ref bug was the most instructive error — Motion tries to measure the constraint container before it mounts, causing a null getBoundingClientRect. Removing the ref and using onDragEnd to reset motion values to zero was cleaner anyway, because it decouples the drag gesture from the return animation and lets the spring config control the snap-back feel independently. The particle system reinforced why Canvas is the right tool for high-frequency graphics — 80 particles with connection lines at 60fps in React DOM would mean 80+ component re-renders per frame. On Canvas it is a clearRect and a set of draw calls with no component tree involvement. useTransform was the most powerful Framer Motion primitive — mapping drag position to 3D rotation and glare without any render cycle between gesture and visual response made the interactions feel instant in a way that setState-driven animations cannot match.',
   },
-  {
-    id: 'chatgpt-archive-viewer',
-    slug: 'chatgpt-archive-viewer',
-    title: 'ChatGPT Archive Viewer',
-    description:
-      'A privacy-first utility for browsing exported ChatGPT conversation history entirely in the browser. Drop in a conversations.json file and get a clean, searchable interface with full-text search, inline term highlighting, fenced code block rendering, and one-click export to Markdown or plain text. No server, no uploads, no tracking.',
-    tech: ['React', 'TypeScript', 'Vite', 'SCSS Modules'],
-    image: '/images/projects/chatgpt-archive-viewer.png',
-    liveUrl: 'https://chatgpt-archive-viewer.vercel.app',
-    codeUrl: 'https://github.com/tworoniak/chatgpt-archive-viewer',
-    experiment: true,
-
-    problem:
-      "ChatGPT's data export is a single JSON file — technically complete, but completely unusable. The mapping format stores messages as a non-linear graph of nodes with parent and children references, not a readable array. There is no built-in way to search across conversations, jump to a specific thread, or extract a conversation into a portable format. The data exists but is effectively inaccessible without tooling.",
-
-    solution:
-      'Build a lightweight client-side viewer that parses the raw export format into a navigable interface. The core challenge is the mapping traversal — finding the root node, following children recursively, and filtering out system messages and null content to produce a clean flat thread. On top of that: a controlled search input that filters the list and highlights matches inline, a code block renderer that detects fenced blocks in assistant messages and wraps them with a language label and clipboard copy, and a Blob-based export that produces clean Markdown or plain text with no extra dependencies.',
-
-    features: [
-      'Drag-and-drop file input with FileReader — conversations.json is parsed client-side with no upload or network request',
-      'Recursive mapping traversal — finds the root node, walks children depth-first, and filters null messages and system turns to produce a clean flat thread per conversation',
-      'Full-text search across conversation titles and all message content — results update on every keystroke via useMemo',
-      'Inline search term highlighting — regex splits message content around matches and wraps them in <mark> without re-rendering the full message list',
-      'Fenced code block detection — assistant message content is split into prose and code segments, with code rendered as <pre><code> with a language label and one-click clipboard copy',
-      'Export to .md and .txt via Blob and object URL — no server, no library, generates a download directly from the parsed conversation',
-      'localStorage persistence via a generic useLocalStorage<T> hook — restores the last-opened conversation on reload, with graceful fallback if the ID no longer exists in the loaded file',
-    ],
-
-    architecture:
-      'The parser lives in src/utils/parseConversations.ts and is entirely decoupled from React — pure functions that take the raw ChatGPTConversation[] and return a flat ParsedConversation[]. The mapping traversal finds the root node by looking for parent: null, then walks children recursively, skipping null messages and system-role turns. useConversations owns all runtime state — raw conversations, search query, and selected ID — and derives the filtered list and selected conversation via useMemo so no filtering logic leaks into components. The code block renderer in parseMessageContent.tsx splits raw content with a fenced block regex, maps segments to either a plain text span (with optional highlight wrapping) or a CodeBlock component, and returns a ReactNode — keeping MessageBubble responsible only for layout. The useLocalStorage hook is fully generic and reusable across the portfolio. Export utilities are pure functions that build a string from a ParsedConversation and trigger a download via Blob + URL.createObjectURL with no side effects beyond the anchor click.',
-
-    lessons:
-      "The most instructive part was the mapping format. ChatGPT's export stores conversations as a graph to support branching — a user can edit a message and fork the thread, producing multiple children from one node. The current traversal always follows children[0], which reconstructs the canonical thread but silently drops branches. That limitation is worth documenting and is the natural next feature — detecting multi-child nodes and offering a branch selector. The code block renderer surfaced a subtle HTML constraint: a <p> element cannot contain block-level children like <pre>, so the MessageBubble content wrapper had to change from <p> to <div>. Small fix, but the kind of thing that only shows up when you stop treating the DOM as abstract and start reading what the browser actually enforces.",
-  },
-
   {
     id: 'festival-planner',
     slug: 'festival-planner',
