@@ -210,11 +210,11 @@ export default function GitHubHeatmap({
           --cell-4:  #39d353;
           --radius:  10px;
           font-family: 'Berkeley Mono', monospace;
-          background: var(--bg);
+          // background: var(--bg);
           color: var(--text);
           padding: 28px;
-          border-radius: 16px;
-          border: 1px solid var(--border);
+          // border-radius: 16px;
+          // border: 1px solid var(--border);
           max-width: 100%;
           width: 100%;
           margin: 0 auto;
@@ -401,7 +401,10 @@ export default function GitHubHeatmap({
       `}</style>
 
       <section className='flex flex-col md:flex-row gap-6 md:gap-12 mx-auto max-w-5xl px-6 py-12'>
-        <div className='gh-heatmap-root' ref={containerRef}>
+        <div
+          className='gh-heatmap-root border border-white/10 bg-black/15 rounded-lg'
+          ref={containerRef}
+        >
           {/* Header */}
           <div className='gh-header'>
             <img
