@@ -543,6 +543,50 @@ export const projects: Project[] = [
       "The most instructive part was the mapping format. ChatGPT's export stores conversations as a graph to support branching — a user can edit a message and fork the thread, producing multiple children from one node. The current traversal always follows children[0], which reconstructs the canonical thread but silently drops branches. That limitation is worth documenting and is the natural next feature — detecting multi-child nodes and offering a branch selector. The code block renderer surfaced a subtle HTML constraint: a <p> element cannot contain block-level children like <pre>, so the MessageBubble content wrapper had to change from <p> to <div>. Small fix, but the kind of thing that only shows up when you stop treating the DOM as abstract and start reading what the browser actually enforces.",
   },
   {
+    id: 'palette-forge',
+    slug: 'palette-forge',
+    title: 'PaletteForge v1.0',
+    description:
+      'PaletteForge is a Coolors-inspired color palette generator built with React and TypeScript, featuring harmony-based palette generation, color locking, accessibility checks, and export tools for modern design workflows.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'Sass (SCSS)',
+      'Chroma JS',
+      'Zustand',
+      'Lucid React',
+    ],
+    image: '/images/projects/palette-forge.png',
+    // liveUrl: 'https://your-physica.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/palette-forge',
+    experiment: true,
+
+    // problem:
+    //   'Most UI animations use static easing curves — ease-in, ease-out, cubic-bezier — which feel mechanical because they specify duration and shape rather than physical properties. Physics-based animation is fundamentally different: you define mass, stiffness, and damping, and the motion emerges from those values. The difference is immediately perceptible but rarely demonstrated in a way that makes the underlying mechanics tangible.',
+
+    // solution:
+    //   'Build a two-section playground and demo app where every interaction is driven by real physics parameters. Three draggable cards with meaningfully different spring configurations make the mass/stiffness/damping tradeoffs immediately tangible. A magnetic button, gravity field, spring menu, liquid button, wobbly tilt card, and ripple stack each isolate a different physics primitive. The particle background — 80 particles with connection lines and mouse repulsion — is built entirely from scratch on Canvas to contrast with the Framer Motion spring layer.',
+
+    // features: [
+    //   'Three draggable card variants with distinct spring configs — free throw (low mass, full momentum), elastic tether (low damping, snaps to origin), and heavy mass (mass=4, slow overshoot) — making stiffness/damping/mass differences immediately tangible',
+    //   'Magnetic buttons with cursor attraction — mouse position relative to button center drives independent spring offsets on container and label, creating a parallax pull effect',
+    //   'Gravity field — five spring balls with mass-weighted fall speeds, toggle on to drop, toggle off to spring back to resting positions',
+    //   'Spring stagger menu with AnimatePresence — items enter with staggered spring delays and exit in reverse order',
+    //   'Liquid button — coordinated useSpring values for scaleX, scaleY, and borderRadius produce a squish-and-stretch sequence on press',
+    //   'Wobbly 3D tilt card — useTransform maps drag position to rotateX/rotateY and glare position with no React re-renders between gesture and visual response',
+    //   'Ripple fan stack — four cards spring-fan on hover using motion variants with staggered delays',
+    //   '80-particle Canvas system built from scratch — connection lines within 120px, mouse repulsion within 100px, wrapping at viewport edges, 60fps via requestAnimationFrame',
+    //   'Custom cursor trail — spring-following ring and 12-dot fading trail using AnimatePresence opacity/scale exit animations',
+    // ],
+
+    // architecture:
+    //   'The particle system lives entirely outside React in src/lib/particles.ts — pure functions for createParticle, updateParticle, and drawParticles. The useParticles hook owns the Canvas context, rAF loop, and mouse tracking via refs, never touching React state during the animation loop. The spring layer uses Framer Motion useMotionValue and useSpring as the reactive primitive — useTransform derives rotateX, rotateY, and glare position from drag values without any setState or useEffect. The three DraggableCard variants share a single component with a variant prop that selects from a SPRING_CONFIGS map, keeping the physics parameters explicit and comparable. The elastic return is handled by resetting motion values to zero in onDragEnd and letting the spring animate back — removing the need for dragConstraints refs which caused getBoundingClientRect errors on null elements.',
+
+    // lessons:
+    //   'The dragConstraints ref bug was the most instructive error — Motion tries to measure the constraint container before it mounts, causing a null getBoundingClientRect. Removing the ref and using onDragEnd to reset motion values to zero was cleaner anyway, because it decouples the drag gesture from the return animation and lets the spring config control the snap-back feel independently. The particle system reinforced why Canvas is the right tool for high-frequency graphics — 80 particles with connection lines at 60fps in React DOM would mean 80+ component re-renders per frame. On Canvas it is a clearRect and a set of draw calls with no component tree involvement. useTransform was the most powerful Framer Motion primitive — mapping drag position to 3D rotation and glare without any render cycle between gesture and visual response made the interactions feel instant in a way that setState-driven animations cannot match.',
+  },
+  {
     id: 'physica',
     slug: 'physica',
     title: 'Physica',
