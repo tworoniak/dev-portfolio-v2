@@ -34,9 +34,6 @@ const TechStackSection = () => {
         <figure role='img' aria-label='Clerk logo' title='Clerk'>
           <StackIcon name='clerk' variant='dark' />
         </figure>
-        <figure role='img' aria-label='Figma logo' title='Figma'>
-          <StackIcon name='figma' />
-        </figure>
         <figure role='img' aria-label='HTML5 logo' title='HTML5'>
           <StackIcon name='html5' />
         </figure>
@@ -66,6 +63,9 @@ const TechStackSection = () => {
         </figure>
         <figure role='img' aria-label='VS Code logo' title='VS Code'>
           <StackIcon name='vscode' />
+        </figure>
+        <figure role='img' aria-label='Figma logo' title='Figma'>
+          <StackIcon name='figma' />
         </figure>
         <figure role='img' aria-label='Claude AI logo' title='Claude AI'>
           <StackIcon name='claude' />
