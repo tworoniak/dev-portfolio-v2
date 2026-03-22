@@ -102,7 +102,7 @@ export const projects: Project[] = [
   {
     id: 'voyage-planner',
     slug: 'voyage-planner',
-    title: 'Voyage Planner',
+    title: 'Horizons v1.2',
     description:
       'A travel planning app for creating and managing trip itineraries with real-time updates and collaborative features.',
     tech: [
@@ -117,7 +117,7 @@ export const projects: Project[] = [
       'Lucide Icons',
       // 'Framer Motion',
     ],
-    image: '/images/projects/voyage-planner.png',
+    image: '/images/projects/horizons.png',
     liveUrl: 'https://travel-itinerary-app-alpha.vercel.app',
     codeUrl: 'https://github.com/tworoniak/travel-itinerary-app',
     featured: true,
