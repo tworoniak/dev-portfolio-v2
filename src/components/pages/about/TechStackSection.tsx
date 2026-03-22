@@ -13,6 +13,7 @@ const TechStackSection = () => {
         <StackIcon name='redux' />
         <StackIcon name='typescript' />
         <StackIcon name='tanstack' />
+        <StackIcon name='supabase' />
         <StackIcon name='clerk' variant='dark' />
         <StackIcon name='figma' />
         <StackIcon name='html5' />
