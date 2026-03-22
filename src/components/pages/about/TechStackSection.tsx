@@ -14,7 +14,7 @@ const TechStackSection = () => {
           <StackIcon name='reactquery' />
         </figure>
         <figure role='img' aria-label='React Router logo' title='React Router'>
-          <StackIcon name='reactrouter' />
+          <StackIcon name='reactrouter' variant='dark' />
         </figure>
         <figure role='img' aria-label='Redux logo' title='Redux'>
           <StackIcon name='redux' />
