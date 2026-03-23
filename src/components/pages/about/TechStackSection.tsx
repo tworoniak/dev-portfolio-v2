@@ -1,80 +1,60 @@
 import StackIcon from 'tech-stack-icons';
 
+type TechItem = {
+  name: string;
+  label: string;
+  variant?: 'dark';
+};
+
+const techStack: TechItem[] = [
+  { name: 'react', label: 'React' },
+  { name: 'reactquery', label: 'React Query' },
+  { name: 'reactrouter', label: 'React Router', variant: 'dark' },
+  // { name: 'redux', label: 'Redux' },
+  { name: 'typescript', label: 'TypeScript' },
+  { name: 'tailwindcss', label: 'Tailwind CSS' },
+  { name: 'tanstack', label: 'TanStack' },
+  { name: 'supabase', label: 'Supabase' },
+  { name: 'clerk', label: 'Clerk', variant: 'dark' },
+  { name: 'html5', label: 'HTML5' },
+  { name: 'css3', label: 'CSS3' },
+  { name: 'json', label: 'JSON' },
+  { name: 'nextjs', label: 'Next.js', variant: 'dark' },
+  { name: 'nodejs', label: 'Node.js' },
+  { name: 'vitejs', label: 'Vite' },
+  { name: 'vercel', label: 'Vercel', variant: 'dark' },
+  { name: 'materialui', label: 'Material UI' },
+  { name: 'radixui', label: 'Radix UI', variant: 'dark' },
+  { name: 'vscode', label: 'VS Code' },
+  { name: 'figma', label: 'Figma' },
+  { name: 'claude', label: 'Claude AI' },
+  { name: 'cursor', label: 'Cursor AI', variant: 'dark' },
+] as const;
+
 const TechStackSection = () => {
   return (
-    <section className='flex flex-col gap-2 mx-auto max-w-7xl px-6 py-12'>
+    <section className='mx-auto flex max-w-7xl flex-col gap-2 px-6 py-12'>
       <p className='text-xs uppercase tracking-[0.3em] text-zinc-500'>
         Tech Stack
       </p>
-      <div className='grid grid-cols-3 md:grid-cols-6 lg:flex gap-8 mt-4 rounded-lg border border-white/10 p-4 bg-black/15'>
-        <figure role='img' aria-label='React logo' title='React'>
-          <StackIcon name='react' />
-        </figure>
-        <figure role='img' aria-label='React Query logo' title='React Query'>
-          <StackIcon name='reactquery' />
-        </figure>
-        <figure role='img' aria-label='React Router logo' title='React Router'>
-          <StackIcon name='reactrouter' variant='dark' />
-        </figure>
-        <figure role='img' aria-label='Redux logo' title='Redux'>
-          <StackIcon name='redux' />
-        </figure>
-        <figure role='img' aria-label='TypeScript logo' title='TypeScript'>
-          <StackIcon name='typescript' />
-        </figure>
-        <figure role='img' aria-label='Tailwind CSS logo' title='Tailwind CSS'>
-          <StackIcon name='tailwindcss' />
-        </figure>
-        <figure role='img' aria-label='Tanstack logo' title='Tanstack'>
-          <StackIcon name='tanstack' />
-        </figure>
-        <figure role='img' aria-label='Supabase logo' title='Supabase'>
-          <StackIcon name='supabase' />
-        </figure>
-        <figure role='img' aria-label='Clerk logo' title='Clerk'>
-          <StackIcon name='clerk' variant='dark' />
-        </figure>
-        <figure role='img' aria-label='HTML5 logo' title='HTML5'>
-          <StackIcon name='html5' />
-        </figure>
-        <figure role='img' aria-label='CSS3 logo' title='CSS3'>
-          <StackIcon name='css3' />
-        </figure>
-        <figure role='img' aria-label='JSON logo' title='JSON'>
-          <StackIcon name='json' />
-        </figure>
-        <figure role='img' aria-label='NextJS logo' title='NextJS'>
-          <StackIcon name='nextjs' variant='dark' />
-        </figure>
-        <figure role='img' aria-label='NodeJS logo' title='NodeJS'>
-          <StackIcon name='nodejs' />
-        </figure>
-        <figure role='img' aria-label='Vite logo' title='Vite'>
-          <StackIcon name='vitejs' />
-        </figure>
-        <figure role='img' aria-label='Vercel logo' title='Vercel'>
-          <StackIcon name='vercel' variant='dark' />
-        </figure>
-        <figure role='img' aria-label='Material UI logo' title='Material UI'>
-          <StackIcon name='materialui' />
-        </figure>
-        <figure role='img' aria-label='Radix UI logo' title='Radix UI'>
-          <StackIcon name='radixui' variant='dark' />
-        </figure>
-        <figure role='img' aria-label='VS Code logo' title='VS Code'>
-          <StackIcon name='vscode' />
-        </figure>
-        <figure role='img' aria-label='Figma logo' title='Figma'>
-          <StackIcon name='figma' />
-        </figure>
-        <figure role='img' aria-label='Claude AI logo' title='Claude AI'>
-          <StackIcon name='claude' />
-        </figure>
-        <figure role='img' aria-label='Cursor AI logo' title='Cursor AI'>
-          <StackIcon name='cursor' variant='dark' />
-        </figure>
-        {/* <StackIcon name='php' />
-        <StackIcon name='wordpress' /> */}
+
+      <div className='mt-4 grid grid-cols-3 gap-8 rounded-lg border border-white/10 bg-black/15 p-4 md:grid-cols-6 lg:flex lg:flex-wrap'>
+        {techStack.map((tech) => (
+          <figure
+            key={tech.name}
+            role='img'
+            aria-label={`${tech.label} logo`}
+            className='group relative flex h-12 w-12 items-center justify-center'
+          >
+            <div className='transition-transform duration-200 group-hover:scale-110'>
+              <StackIcon name={tech.name} variant={tech.variant} />
+            </div>
+
+            <figcaption className='pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-white/10 bg-zinc-950 px-2 py-1 text-xs text-zinc-100 opacity-0 shadow-lg transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100'>
+              {tech.label}
+            </figcaption>
+          </figure>
+        ))}
       </div>
     </section>
   );
