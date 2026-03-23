@@ -102,9 +102,9 @@ export const projects: Project[] = [
   {
     id: 'voyage-planner',
     slug: 'voyage-planner',
-    title: 'Horizons v1.2',
+    title: 'Horizons v1.3',
     description:
-      'A travel planning app for creating and managing trip itineraries with real-time updates and collaborative features.',
+      'A full-stack travel itinerary planner with auth, day-by-day trip planning, drag-and-drop activity reordering, budget tracking, and AI-powered activity suggestions.',
     tech: [
       'React',
       'TypeScript',
@@ -112,34 +112,46 @@ export const projects: Project[] = [
       'React Router',
       'Tailwind CSS',
       'Radix UI',
+      'shadcn/ui',
+      'Supabase',
+      'PostgreSQL',
+      'Row Level Security',
+      'Supabase Edge Functions',
+      'dnd-kit',
+      'React Hook Form',
       'Zod',
       'date-fns',
       'Lucide Icons',
-      // 'Framer Motion',
+      'Recharts',
+      'Anthropic Claude API',
     ],
     image: '/images/projects/horizons.png',
     liveUrl: 'https://travel-itinerary-app-alpha.vercel.app',
     codeUrl: 'https://github.com/tworoniak/travel-itinerary-app',
     featured: true,
 
-    // problem:
-    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
+    problem:
+      'Planning a multi-day trip across multiple tools — notes apps, spreadsheets, booking emails — leaves itineraries fragmented and hard to share or update.',
 
-    // solution:
-    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+    solution:
+      'Horizons centralizes trip planning into a single structured app with day-by-day timelines, cost tracking, and AI-generated activity suggestions tailored to each destination.',
 
-    // features: [
-    //   'Real-time crypto price tracking',
-    //   'Interactive charts',
-    //   'Search and sorting',
-    //   'Responsive dashboard UI',
-    // ],
+    features: [
+      'Auth with protected routes via Supabase',
+      'Create, edit, and delete itineraries',
+      'Day-by-day activity timeline',
+      'Drag-and-drop activity reordering (dnd-kit)',
+      'Budget tracking with cost breakdown chart',
+      'AI activity suggestions via Supabase Edge Function + Claude API',
+      'Loading skeletons and confirmation dialogs',
+      'Responsive layout with mobile nav',
+    ],
 
-    // architecture:
-    //   'The app is structured around a strict separation between the UI layer and the state layer. All cart components — ProductGrid, ProductCard, CartSidebar, CartItemRow — accept plain props and have no knowledge of any state library. Three implementation files (ZustandCart, JotaiCart, ReduxCart) act as adapters, each connecting its respective store to the shared UI. This makes the comparison genuinely apples-to-apples. The action log is implemented as a tiny pub/sub event bus in src/lib/actionLog.ts that lives entirely outside React — Zustand and Jotai call it directly inside their action functions, while Redux hooks into it via a custom middleware. This neutral observer pattern means none of the three stores know about each other. The store code drawer reads from src/data/storeSource.ts, a static map of library-to-source-string, and applies lightweight regex-based syntax highlighting with no external dependency.',
+    architecture:
+      'The frontend is a React + TypeScript SPA built with Vite and structured around a feature-first folder layout. All Supabase calls are centralized in a single API module with camelCase/snake_case mappers keeping the app layer decoupled from the database schema. Auth state is managed via a useAuth hook that subscribes to Supabase session changes. Row Level Security policies enforce that users can only read and write their own data. AI suggestions are proxied through a Supabase Edge Function to keep the Anthropic API key server-side, with the function receiving the destination and existing activity titles to generate context-aware recommendations.',
 
-    // lessons:
-    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
+    lessons:
+      'Migrating from a self-hosted Express + MongoDB backend to Supabase mid-project reinforced how much architecture decisions early on affect flexibility later. RLS policies replace an entire auth middleware layer, and Edge Functions make it straightforward to add server-side AI calls without maintaining a separate backend service.',
   },
   {
     id: 'press-portal',
@@ -201,7 +213,7 @@ export const projects: Project[] = [
     image: '/images/projects/dev-flow.png',
     // liveUrl: 'https://photo-storytelling.vercel.app',
     codeUrl: 'https://github.com/tworoniak/team-management',
-    featured: true,
+    featured: false,
 
     problem:
       'Development leads need visibility into team workload, task status, and delivery priorities, but that information is often scattered across disconnected tools or buried in ticket lists. It can be difficult to quickly understand who has capacity, which work is blocked or high priority, and who is the best fit to take on backlog tasks.',
