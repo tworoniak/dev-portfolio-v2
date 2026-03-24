@@ -110,6 +110,66 @@ export const projects: Project[] = [
       'Migrating from a self-hosted Express + MongoDB backend to Supabase mid-project reinforced how much architecture decisions early on affect flexibility later. RLS policies replace an entire auth middleware layer, and Edge Functions make it straightforward to add server-side AI calls without maintaining a separate backend service.',
   },
   {
+    id: 'setlist',
+    slug: 'setlist',
+    title: 'SetList v1.0',
+    description:
+      'A full-stack music festival planner with auth, festival discovery, per-stage schedule browsing, favorites, personal set-time planning, and real-time conflict detection.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'React Router',
+      'Tailwind CSS v4',
+      'Radix UI',
+      'shadcn/ui',
+      'Framer Motion',
+      'Hono',
+      'Neon (PostgreSQL)',
+      'Drizzle ORM',
+      'Better Auth',
+      'TanStack Query',
+      'TanStack Table',
+      'React Hook Form',
+      'Zod',
+      'Zustand',
+      'date-fns',
+      'Lucide Icons',
+      'Sonner',
+    ],
+    image: '/images/projects/setlist.png',
+    // liveUrl: 'https://setlist.app',
+    codeUrl: 'https://github.com/tworoniak/new-festival-planner',
+    featured: true,
+
+    problem:
+      'Festival-goers juggling multi-stage lineups across multiple days have no dedicated tool to browse schedules, track favorite artists, and build a personal plan — leaving them relying on PDFs, screenshots, and memory.',
+
+    solution:
+      'SetList centralizes festival discovery and schedule planning into a single app. Users browse festivals, explore per-stage set times by day, star favorite artists, and build a personal plan with automatic conflict detection when two sets overlap.',
+
+    features: [
+      'Auth with protected routes via Better Auth (email/password)',
+      'Festival discovery grid with year filtering',
+      'Full-bleed hero detail page per festival',
+      'Per-stage schedule tabs with day selector for multi-day festivals',
+      'Favorite artists persisted per user',
+      'Personal plan builder with add/remove set times',
+      'Real-time conflict detection when sets overlap across stages',
+      'Plan sidebar — right panel on desktop, bottom drawer on mobile',
+      'Light/dark mode with persisted preference',
+      'Loading skeletons and toast notifications',
+      'Admin CRUD panel for festivals, stages, artists, and sets',
+      'Fully responsive mobile-first layout',
+    ],
+
+    architecture:
+      'The frontend is a React + TypeScript SPA built with Vite, structured around a feature-first folder layout with pages, hooks, components, and stores separated by concern. Server state (festivals, plan, favorites) is managed via TanStack Query hooks with credentials-based session cookies. Client-only state (theme, optimistic UI) lives in Zustand stores persisted to localStorage. The backend is a Hono API server running on Node with route-level auth middleware powered by Better Auth sessions. All database access goes through Drizzle ORM against a Neon serverless PostgreSQL instance. The monorepo is organized as a pnpm workspace with a shared package exporting Zod schemas and TypeScript types consumed by both the frontend and API, keeping validation logic in sync across the stack.',
+
+    lessons:
+      "Building a monorepo from scratch with pnpm workspaces clarified how much friction shared types eliminate when the frontend and backend evolve together. Conflict detection as a pure function over plan items — comparing ISO time intervals — turned out to be the simplest and most testable part of the whole feature. Better Auth's drizzle adapter made session management feel native to the ORM layer rather than bolted on, though coordinating its required Zod v4 internals against the app's Zod v3 dependency required a targeted pnpm override to keep both working without interference.",
+  },
+  {
     id: 'chromatic',
     slug: 'chromatic',
     title: 'Chromatic v1.0',
@@ -242,7 +302,7 @@ export const projects: Project[] = [
   {
     id: 'photography-portfolio',
     slug: 'photography-portfolio',
-    title: 'Photography Portfolio',
+    title: 'Photography Portfolio v1.0',
     description:
       'A modern photography portfolio website with responsive design and lightbox functionality.',
     tech: ['React', 'TypeScript', 'React Router', 'Tailwind CSS'],
@@ -646,14 +706,14 @@ export const projects: Project[] = [
   {
     id: 'festival-planner',
     slug: 'festival-planner',
-    title: 'Festival Planner',
+    title: 'Festival Planner (Deprecated)',
     description:
       'A planning tool for comparing set times, building schedules, and managing lineup conflicts.',
     tech: ['React', 'TypeScript', 'SCSS', 'date-fns'],
     image: '/images/projects/festival-planner.png',
     liveUrl: 'https://festival-planner-kappa.vercel.app',
     codeUrl: 'https://github.com/tworoniak/festival-planner',
-    featured: true,
+    featured: false,
     // problem:
     //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
 
