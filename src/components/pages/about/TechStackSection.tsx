@@ -29,6 +29,8 @@ const techStack: TechItem[] = [
   { name: 'figma', label: 'Figma' },
   { name: 'claude', label: 'Claude AI' },
   { name: 'cursor', label: 'Cursor AI', variant: 'dark' },
+  { name: 'copilotgithub', label: 'GitHub Copilot', variant: 'dark' },
+  { name: 'copilotms', label: 'Microsoft Copilot', variant: 'dark' },
 ] as const;
 
 const TechStackSection = () => {
