@@ -35,7 +35,7 @@ const techStack: TechItem[] = [
 
 const TechStackSection = () => {
   return (
-    <section className='mx-auto flex max-w-7xl flex-col gap-2 px-6 py-12'>
+    <section className='mx-auto flex max-w-7xl flex-col gap-2 px-2 sm:px-6 py-12'>
       <p className='text-xs uppercase tracking-[0.3em] text-zinc-500'>
         Tech Stack
       </p>

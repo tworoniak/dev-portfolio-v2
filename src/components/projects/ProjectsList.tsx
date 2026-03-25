@@ -8,7 +8,7 @@ type ProjectsListProps = {
 
 const ProjectsList = ({ projects, onOpenProject }: ProjectsListProps) => {
   return (
-    <section className='mx-auto max-w-7xl px-6 py-16'>
+    <section className='mx-auto max-w-7xl px-2 sm:px-6 py-16'>
       <div className='mb-4'>
         <p className='text-xs uppercase tracking-[0.3em] text-zinc-500'>
           Projects
