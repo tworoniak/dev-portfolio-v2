@@ -1,6 +1,6 @@
 const IntroSection = () => {
   return (
-    <section className='flex flex-col md:flex-row gap-6 md:gap-12 mx-auto max-w-7xl px-6 py-12'>
+    <section className='flex flex-col md:flex-row gap-6 md:gap-12 mx-auto max-w-7xl px-2 sm:px-6 py-12'>
       <div>
         <h1 className='max-w-3xl text-4xl font-bold leading-tight'>
           Front-End Engineer.

@@ -3,7 +3,7 @@ import TestimonialCard from './TestimonialCard';
 
 const TestimonialGrid = () => {
   return (
-    <section className='mx-auto max-w-7xl px-6 py-12 md:px-6 md:py-10'>
+    <section className='mx-auto max-w-7xl px-2 sm:px-6 py-12 md:px-6 md:py-10'>
       {/* Global Container */}
       <div className='mx-auto p-2'>
         {/* Heading Container */}
