@@ -214,6 +214,54 @@ export const projects: Project[] = [
       'The hardest problem was maintaining WCAG compliance across both modes simultaneously. The naive single-semantic-set approach means any contrast fix for light mode breaks dark mode. Separating semanticLight and semanticDark and scoping SET_SEMANTIC_COLOR to a mode parameter solved this cleanly. The most instructive debugging session was discovering that HSL lightness is wrong for determining text color on high-chroma backgrounds — #c5c112 (yellow-green) reads as "dark" at 42% HSL lightness but has a relative luminance of ~0.45, well above the 0.179 crossover where dark text becomes the correct choice. The WCAG spec uses luminance for exactly this reason. Reusing the pipeline module validated the decision to build it as a standalone module — dropping src/pipeline/ into Chromatic required zero modifications.',
   },
   {
+    id: 'dashtrack',
+    slug: 'dashtrack',
+    title: 'DashTrack v1.0',
+    description:
+      'A personal finance tracker built for DoorDash drivers. Manages the full lifecycle of gig earnings and deductible expenses — from per-dash income logging to IRS mileage calculations — with a live dashboard, monthly reports, and quarterly self-employment tax estimates.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'SCSS Modules',
+      'Supabase',
+      'React Query',
+      'React Hook Form',
+      'Zod',
+      'React Router v6',
+      'Recharts',
+    ],
+    image: '/images/projects/dashtrack.png',
+    // liveUrl: 'https://your-dashtrack-deployment.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/dashtrack',
+    featured: true,
+
+    problem:
+      'Gig economy drivers have no clear picture of what they actually earn after costs. DoorDash surfaces gross pay, but the real number — net profit after gas, mileage, maintenance, and phone expenses — lives across fuel receipts, the Dasher app, and a mental running total. At tax time, drivers scramble to reconstruct months of mileage logs and expense records, often missing deductions they were entitled to.',
+
+    solution:
+      'DashTrack gives DoorDash drivers a single place to log earnings and expenses as they happen, with the calculations done automatically. Gas fill-ups auto-compute total cost from gallons and price per gallon. Mileage entries apply the current IRS standard rate ($0.70/mi for 2025) on the spot and store the deductible amount directly. The dashboard surfaces the four numbers that matter most — gross earnings, total expenses, net profit, and effective hourly rate — across any time window. A monthly reports view breaks the year down into a Schedule C-ready table with CSV export, and a tax estimate page computes quarterly SE tax payments from actual YTD data.',
+
+    features: [
+      'Log entry forms for five expense types — earnings, gas (auto-calculates total from gallons × price), mileage (live IRS deduction preview), maintenance, and other — all with React Hook Form + Zod validation',
+      'Dashboard KPI strip: gross earnings, total expenses, net profit, and effective $/hr across Day / Week / Month / YTD periods',
+      'Earnings vs expenses bar chart by day powered by Recharts, filtered per selected period via React Query cache keys',
+      'Expense breakdown panel with proportional bars per category — gas, mileage deduction, maintenance, other',
+      'Recent entries table with type-coded badges, signed amounts, and timestamps across all entry types',
+      'Full earnings history page with paginated table (20/page), inline edit rows, and delete with confirmation dialog',
+      'Monthly reports page — YTD summary strip, full monthly breakdown table with per-category expense columns, totals row, and one-click CSV export for both earnings and expenses (Schedule C ready)',
+      'Tax estimate calculator — pulls live YTD net profit, accepts other income and filing status, computes SE tax base at 92.35%, 15.3% SE tax, 50% SE deduction, federal bracket tax, and quarterly payment breakdown with IRS due dates',
+      'Magic link (passwordless) authentication via Supabase Auth OTP',
+      'Row Level Security on all tables — every user sees only their own data, enforced at the database level',
+    ],
+
+    architecture:
+      'DashTrack is a single-page application built with Vite and React 18, using React Router v6 for client-side routing and a session-aware AuthGuard in App.tsx that redirects unauthenticated users to the login page. The app follows a feature-based folder structure — dashboard, log, and UI components are independently scoped with co-located SCSS modules. Server state is managed entirely with TanStack React Query v5; dedicated hooks per domain (useDashboard, useReports, useLogEntry, useEntryActions) wrap Supabase queries and expose typed mutation functions. The useDashboard hook accepts a Period parameter and computes all KPIs — gross earnings, net profit, effective hourly rate, expense breakdown, and daily chart series — from raw Supabase rows client-side using pure utility functions, keeping query keys cache-isolated per period. useLogEntry exposes five separate mutation hooks, each responsible for transforming its form schema into the correct Supabase insert shape — the gas hook computes total cost, the mileage hook applies IRS_MILEAGE_RATE_2025 and stores the deductible amount. Edit and delete mutations live in useEntryActions and invalidate shared query keys on success. Supabase Postgres stores data in two tables — earnings and expenses — with a custom expense_type enum and Row Level Security policies scoped to auth.uid(). Styling uses modular SCSS with a CSS custom property token layer (_tokens.scss) that handles both light and dark mode via prefers-color-scheme, keeping all color references out of component files.',
+
+    lessons:
+      'DashTrack reinforced that computed values belong as close to the data source as possible. Early on, KPI calculations were scattered across components; consolidating them into pure utility functions (computeKpis, computeExpenseBreakdown, buildDailySeries) that take raw Supabase rows as input made both testing and reuse across the dashboard and reports views trivial. The mileage entry pattern — storing both the raw miles and the computed deductible_amount at write time rather than deriving it at read time — turned out to be the right call: the IRS rate can change year to year, and historical entries should reflect the rate that was active when they were logged, not the current one. The tax estimate page highlighted a meaningful design constraint: the calculator pulls live YTD net profit from the same useReports hook used by the reports page, which meant its accuracy is directly tied to how diligently the driver logs expenses throughout the year — a useful prompt to surface in the UI.',
+  },
+  {
     id: 'accreditor',
     slug: 'accreditor',
     title: 'Accreditor v1.0',
