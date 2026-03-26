@@ -25,7 +25,7 @@ export const projects: Project[] = [
       'date-fns',
     ],
     image: '/images/projects/aperture.png',
-    liveUrl: 'https://your-aperture-deployment.vercel.app',
+    // liveUrl: 'https://your-aperture-deployment.vercel.app',
     codeUrl: 'https://github.com/tworoniak/aperture-photo-os',
     featured: true,
 
