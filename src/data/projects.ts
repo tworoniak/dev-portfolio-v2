@@ -213,7 +213,54 @@ export const projects: Project[] = [
     lessons:
       'The hardest problem was maintaining WCAG compliance across both modes simultaneously. The naive single-semantic-set approach means any contrast fix for light mode breaks dark mode. Separating semanticLight and semanticDark and scoping SET_SEMANTIC_COLOR to a mode parameter solved this cleanly. The most instructive debugging session was discovering that HSL lightness is wrong for determining text color on high-chroma backgrounds — #c5c112 (yellow-green) reads as "dark" at 42% HSL lightness but has a relative luminance of ~0.45, well above the 0.179 crossover where dark text becomes the correct choice. The WCAG spec uses luminance for exactly this reason. Reusing the pipeline module validated the decision to build it as a standalone module — dropping src/pipeline/ into Chromatic required zero modifications.',
   },
+  {
+    id: 'accreditor',
+    slug: 'accreditor',
+    title: 'Accreditor v1.0',
+    description:
+      'A multi-user concert photography accreditation tracker built for Antihero Magazine. Manages the full lifecycle of photo pit requests — from initial PR outreach to post-shoot gallery delivery — across a shared team of photographers.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS v4',
+      'Supabase',
+      'React Query',
+      'React Hook Form',
+      'Zod',
+      'React Router v6',
+      'Lucide React',
+    ],
+    image: '/images/projects/accreditor.png',
+    // liveUrl: 'https://your-accreditor-deployment.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/accreditor',
+    featured: true,
 
+    problem:
+      'Concert photographers at editorial publications manage accreditation entirely through email threads, browser bookmarks, and memory — tracking which shows have been requested, which PR contacts to follow up with, what the pit restrictions are, and whether galleries have been delivered. With multiple photographers working across dozens of shows a month, things get missed: deadlines pass, contacts get duplicated, and there is no shared visibility across the team.',
+
+    solution:
+      'Accreditor gives the full Antihero Magazine photography team a shared, org-scoped accreditation CRM. Shows, PR contacts, and request templates are shared resources across the team. Each show has its own accreditation pipeline — photographers can log requests, track status across nine stages, record pit restrictions after approval, and attach Cloudinary or Dropbox gallery links once images are delivered. A dashboard surfaces approval rates, upcoming deadlines, and recent activity at a glance. All data is isolated per organisation via Supabase Row Level Security, making the app multi-tenant ready.',
+
+    features: [
+      'Kanban-style accreditation pipeline with drag-and-drop status updates across 9 stages — Upcoming, Drafted, Submitted, Awaiting Response, Granted, Rejected, Waitlisted, Shot, No Show',
+      'Show management with upcoming/past split, per-show detail pages, and direct accreditation request creation from each show',
+      'PR contact book — shared org-wide directory with search, email/phone/company fields, and response rate tracking',
+      'Request templates with {{token}} interpolation for artist, venue, city, show date, and publication — preview modal included',
+      'Deadline tracking with urgency indicators — amber at 3 days out, red at deadline — surfaced on both pipeline cards and the dashboard',
+      'Post-approval fields — pit restrictions (first 3 songs, no flash, etc.) and gallery URL stored per request',
+      'Dashboard with approval rate stat, 6-month stacked bar chart, status breakdown, upcoming deadlines panel, recent activity feed, and top PR contacts by approval rate',
+      'Multi-user org-scoped access — all data isolated by organisation_id via Supabase RLS, photographers share shows/contacts/templates',
+      'Magic link (passwordless) authentication via Supabase Auth OTP',
+      'Auto-assignment of organization_id on all inserts via Postgres trigger — client never needs to pass it explicitly',
+    ],
+
+    architecture:
+      "Accreditor is a single-page application built with Vite and React 18, using React Router v6 for client-side routing and a custom AuthGuard for protected routes. The app follows a feature-based folder structure — each domain (shows, requests, contacts, templates, dashboard) owns its components and forms independently. Server state is managed entirely with TanStack React Query v5, with dedicated hooks per resource (useShows, useRequests, useContacts, useTemplates) that wrap Supabase queries and expose typed mutation functions. Auth is split across three files to satisfy React Fast Refresh rules — AuthContext.ts for the context object, AuthProvider.tsx for the component, and useAuth.ts for the hook. Supabase Postgres stores all data across six tables, with Row Level Security policies scoped to organization_id via a get_my_org_id() helper function. A before-insert trigger auto-populates organization_id on every table from the authenticated user's profile, keeping the client-side code clean. Styling uses Tailwind CSS v4 with a custom @theme block in index.css replacing the v3 config file. Forms use React Hook Form with Zod schemas for validation throughout.",
+
+    lessons:
+      'Accreditor surfaced several version-specific integration issues in quick succession. Tailwind v4 ships with a fundamentally different configuration model — the tailwind.config.ts is replaced by an @theme block in CSS, and the PostCSS plugin moved to @tailwindcss/postcss. Supabase\'s auth trigger system runs in the auth schema context, which cannot resolve public schema tables without explicit public. prefixes — a subtle issue that produced a generic "Database error saving new user" with no clear indication of the cause. React Fast Refresh enforces strict file-level purity rules that required splitting the auth layer into three separate files (context, provider, hook) and extracting status constants from utils.ts into a dedicated constants.ts. These were all solvable but reinforced the importance of checking schema search paths in Postgres triggers, reading Tailwind v4 migration notes before assuming v3 patterns apply, and understanding Fast Refresh constraints when mixing hooks and components in the same file.',
+  },
   {
     id: 'press-portal',
     slug: 'press-portal',
