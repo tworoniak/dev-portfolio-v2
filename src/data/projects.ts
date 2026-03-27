@@ -170,6 +170,48 @@ export const projects: Project[] = [
       "Building a monorepo from scratch with pnpm workspaces clarified how much friction shared types eliminate when the frontend and backend evolve together. Conflict detection as a pure function over plan items — comparing ISO time intervals — turned out to be the simplest and most testable part of the whole feature. Better Auth's drizzle adapter made session management feel native to the ORM layer rather than bolted on, though coordinating its required Zod v4 internals against the app's Zod v3 dependency required a targeted pnpm override to keep both working without interference.",
   },
   {
+    id: 'neurostack',
+    slug: 'neurostack',
+    title: 'NeuroStack v1.0',
+    description:
+      'A self-managing memory dashboard for Claude Code. Solves the blank-slate problem in agentic AI workflows by giving every session — and every parallel agent — shared, structured context. Reads and writes a directory of markdown memory files directly from the browser via the File System Access API, with a live file editor, multi-agent Kanban board, decisions timeline, and fuzzy full-text search.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'SCSS',
+      'File System Access API',
+      'Fuse.js',
+      'date-fns',
+    ],
+    image: '/images/projects/neurostack.png',
+    // liveUrl: 'https://your-neurostack-deployment.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/neurostack',
+    featured: true,
+
+    problem:
+      "Every Claude Code session starts with zero context. There is no memory of which branches are active, which bugs were solved yesterday, which architecture decisions were already made, or what the other agents running in parallel are currently touching. The built-in MEMORY.md system has a 200-line cap, no structure, and no way to coordinate across multiple simultaneous agents — which meant constantly re-explaining context, re-solving known problems, and occasionally having parallel agents silently overwrite each other's work.",
+
+    solution:
+      'NeuroStack replaces the flat MEMORY.md file with a structured directory of purpose-built markdown files — a routing index, a live agent coordination file, per-project state files, a decisions log, a gotchas registry, and a rolling worklog. A Claude Code protocol enforces continuous writes during sessions rather than batch writes at the end, so parallel agents always see current state. The companion dashboard — a local Vite app using the File System Access API — surfaces all of this as a live UI: a file editor with save-on-⌘S, a Kanban board parsed directly from active-work.md, a chronological timeline of decisions and session history, and a fuzzy search across every memory file. No server, no database, no sync service — just markdown files on disk and a browser reading them.',
+
+    features: [
+      'File Editor — recursive file tree of all .md files in the memory directory, live textarea editor with dirty-state tracking, ⌘S to save, and line count display',
+      'Agent Tracker — Kanban board with Working / Blocked / Done columns parsed live from active-work.md; expandable cards show task, current action, files touched, and start time; quick-add form writes new agent entries directly to the file',
+      'Timeline — tabbed view of decisions.md and worklog.md rendered as a chronological feed with date markers; inline forms to append new decisions and session entries without leaving the dashboard',
+      'Global Search — Fuse.js fuzzy search across every loaded memory file, grouped results by file with matched line and line number, highlight of matched text, click-to-open in File Editor',
+      'File System Access API integration — directory picker with readwrite access, recursive .md file loading, 4-second polling interval for live updates from active Claude Code sessions',
+      'Memory template library — ready-to-copy MEMORY.md, active-work.md, decisions.md, gotchas.md, worklog.md, stack.md, infra.md, and a project file template pre-filled for a React/TypeScript workflow',
+      'CLAUDE.md template — drop-in file for each project root that instructs Claude Code to load the context layer on session start and follow the continuous-write protocol',
+    ],
+
+    architecture:
+      'NeuroStack is a zero-backend single-page application built with Vite and React 18. The core primitive is the useMemoryFS hook, which wraps the File System Access API to open a directory with readwrite permissions, recursively load all .md files into a Map keyed by relative path, and expose typed read and write operations. A useFileWatcher hook runs a setInterval at 4-second intervals to call refreshAll, keeping the in-memory file map current as Claude Code agents write to disk during active sessions. The useSearch hook wraps Fuse.js with a useMemo-based index built from all loaded file lines, returning grouped fuzzy matches with line numbers on each keystroke. Three parser modules — parseActiveWork, parseDecisions, and parseWorklog — transform raw markdown strings into typed arrays using regex-based section splitting, feeding the AgentTracker and Timeline views with structured data rather than raw text. Views are independently scoped functional components with no shared state beyond the directory object passed from App.tsx. Styling uses a single global CSS file with custom property tokens for the full dark-mode color system, with no CSS-in-JS or component-level style modules — keeping the bundle minimal and the token layer easy to theme. The Search view passes selected file paths back up to App.tsx, which injects them as a jumpToPath prop into FileEditor, enabling cross-view navigation without a router.',
+
+    lessons:
+      "The most important design decision was making the markdown format the source of truth rather than any internal state. Because parseActiveWork, parseDecisions, and parseWorklog operate on raw file strings, the dashboard degrades gracefully when files are hand-edited, malformed, or missing — it just shows less data rather than breaking. The polling approach for file watching turned out to be the right call over a more complex FileSystemObserver integration: Claude Code sessions write to disk frequently and in bursts, and a 4-second interval catches updates quickly enough to feel live without hammering the API. Building the CLAUDE.md protocol document alongside the code was unexpectedly clarifying — writing down the exact session-start and session-end steps for an AI agent forced precision about which files matter in which order, which fed back directly into the dashboard's information hierarchy.",
+  },
+  {
     id: 'chromatic',
     slug: 'chromatic',
     title: 'Chromatic v1.0',
