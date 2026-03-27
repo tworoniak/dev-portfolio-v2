@@ -23,13 +23,11 @@ const Footer = () => {
           <span className='hidden lg:block'>LinkedIn</span>
         </a>
         <a
-          href='mailto:thomasworoniak@gmail.com'
-          target='_blank'
-          rel='noreferrer'
+          href={`mailto:${'thomasworoniak'}@${'gmail'}.com`}
           className='flex items-center gap-2 hover:text-white/70 duration-300 transition'
         >
           <Mail size={16} strokeWidth={1.5} />
-          <span className='hidden lg:block'>thomasworoniak@gmail.com</span>
+          <span className='hidden lg:block'>Email</span>
         </a>
       </div>
       <div>

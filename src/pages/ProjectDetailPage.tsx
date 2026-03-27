@@ -104,8 +104,8 @@ const ProjectDetailPage = () => {
             <h2 className='text-2xl font-semibold'>Key Features</h2>
 
             <ul className='space-y-3 text-zinc-300 list-disc list-outside'>
-              {(project.features ?? []).map((feature, index) => (
-                <li key={index} className='ml-8'>
+              {(project.features ?? []).map((feature) => (
+                <li key={feature} className='ml-8'>
                   {feature}
                 </li>
               ))}

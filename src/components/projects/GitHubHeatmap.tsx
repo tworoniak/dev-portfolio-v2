@@ -193,8 +193,6 @@ export default function GitHubHeatmap({
     <>
       {/* ── Scoped styles ─────────────────────────────────────────────────── */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Berkeley+Mono:ital,wght@0,100..700;1,100..700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-
         .gh-heatmap-root {
           --bg:      #0d1117;
           --surface: #161b22;
