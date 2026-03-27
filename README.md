@@ -1,4 +1,4 @@
-# 🌌 Dev Portfolio v2
+# 🌌 Dev Portfolio v2.1
 
 A modern **React + TypeScript + Vite** developer portfolio featuring animated project cards, ambient cursor-reactive backgrounds, modal project previews, and dedicated case study pages.
 
