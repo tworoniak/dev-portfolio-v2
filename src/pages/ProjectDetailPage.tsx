@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { projects } from '../data/projects';
 import { ExternalLink, CodeXml } from 'lucide-react';
+import PageTitle from '../components/ui/PageTitle';
 
 const ProjectDetailPage = () => {
   const { slug } = useParams();
@@ -19,6 +20,7 @@ const ProjectDetailPage = () => {
 
   return (
     <main className='mx-auto max-w-6xl px-6 py-20 text-white'>
+      <PageTitle title={project.title} />
       {/* HERO IMAGE */}
 
       <div className='mb-12 max-h-96 overflow-hidden rounded-xl border border-white/10'>

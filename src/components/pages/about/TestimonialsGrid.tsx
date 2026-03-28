@@ -24,19 +24,19 @@ const TestimonialGrid = () => {
             <div className='flex z-10 space-x-4'>
               <img
                 src='images/testimonials/image-jessica.jpg'
-                alt=''
+                alt='Jessica Ralston'
                 className='w-10 h-10 rounded-full ring-2 ring-subtle'
               />
               <div className='text-sm'>
-                <h4 className='opacity-90'>Jessica Ralston, PMP</h4>
-                <p className='opacity-50'>
+                <h4 className='text-zinc-100'>Jessica Ralston, PMP</h4>
+                <p className='text-zinc-400'>
                   Sr. Director, Development at EVERSANA INTOUCH
                 </p>
               </div>
             </div>
 
             {/* Small Text */}
-            <p className='mt-6 opacity-50 '>
+            <p className='mt-6 text-zinc-300'>
               "As Thomas Woroniak’s Director at Eversana Intouch, I had the
               opportunity to oversee his work as a Front-End Developer starting
               in 2020. Thomas consistently delivered high-quality results across
@@ -59,18 +59,18 @@ const TestimonialGrid = () => {
             <div className='flex space-x-4'>
               <img
                 src='images/testimonials/image-kevin.jpg'
-                alt=''
+                alt='Kevin Wagner'
                 className='w-10 h-10 rounded-full ring-2 ring-faint'
               />
               <div className='text-sm'>
-                <h4 className='opacity-90'>Kevin Wagner</h4>
-                <p className='opacity-50'>
+                <h4 className='text-zinc-100'>Kevin Wagner</h4>
+                <p className='text-zinc-400'>
                   Delivery Manager for Eversana Intouch
                 </p>
               </div>
             </div>
             {/* Small Text */}
-            <p className='mt-6 opacity-50 '>
+            <p className='mt-6 text-zinc-300'>
               "Thomas and I worked together as Front-End Developers at Eversana
               Intouch. Thomas brought a calm demeanor along with his dependable
               and capable skills to our team. By modeling his pressionalism
@@ -87,19 +87,19 @@ const TestimonialGrid = () => {
             <div className='flex space-x-4'>
               <img
                 src='images/testimonials/image-michael.jpg'
-                alt=''
+                alt='Michael Blake'
                 className='w-10 h-10 rounded-full ring-2 ring-subtle'
               />
               <div className='text-sm'>
-                <h4 className='opacity-90'>Michael Blake</h4>
-                <p className='opacity-50'>
+                <h4 className='text-zinc-100'>Michael Blake</h4>
+                <p className='text-zinc-400'>
                   SVP, Development and Quality Services
                 </p>
               </div>
             </div>
 
             {/* Small Text */}
-            <p className='mt-6 opacity-50'>
+            <p className='mt-6 text-zinc-300'>
               "I had the pleasure of working with Thomas Woroniak at Eversana
               Intouch, where he joined our team in August 2020 as a Front-End
               Developer. Thomas brought a strong work ethic to the group,
@@ -109,7 +109,7 @@ const TestimonialGrid = () => {
               once—and consistently deliver high‑quality work made him an
               invaluable contributor.
             </p>
-            <p className='mt-6 opacity-50'>
+            <p className='mt-6 text-zinc-300'>
               Thomas is the definition of dependable. He approaches every task
               with focus and precision, especially when the smallest details
               carry the greatest importance. His proactive communication,
@@ -119,7 +119,7 @@ const TestimonialGrid = () => {
               critical project timelines and ensure our delivery efforts were
               successful.
             </p>
-            <p className='mt-6 opacity-50'>
+            <p className='mt-6 text-zinc-300'>
               Working with Thomas was truly a pleasure. He brings technical
               talent, professionalism, and a collaborative spirit to any team. I
               would absolutely recommend him as an asset to any development
@@ -134,12 +134,12 @@ const TestimonialGrid = () => {
             <div className='flex space-x-4'>
               <img
                 src='images/testimonials/image-shefali.jpg'
-                alt=''
+                alt='Shefali Shrungarpawar'
                 className='w-10 h-10 rounded-full ring-2 ring-subtle'
               />
               <div className='text-sm'>
-                <h4 className='opacity-90'>Shefali Shrungarpawar</h4>
-                <p className='opacity-50'>
+                <h4 className='text-zinc-100'>Shefali Shrungarpawar</h4>
+                <p className='text-zinc-400'>
                   Engineering Manager with 10+ years of experience | Experienced
                   in Agile and Scrum Methodologies | Delivering High-Quality
                   Products | AWS AI Certified
@@ -148,14 +148,14 @@ const TestimonialGrid = () => {
             </div>
 
             {/* Small Text */}
-            <p className='mt-6 opacity-50'>
+            <p className='mt-6 text-zinc-300'>
               "At EVERSANA INTOUCH, Thomas was a key Front-End Developer on
               projects I led, and I had the chance to collaborate closely with
               him. He brings extensive experience in HTML, CSS, JavaScript, and
               React, consistently delivering scalable, high-performance web
               applications.
             </p>
-            <p className='mt-6 opacity-50'>
+            <p className='mt-6 text-zinc-300'>
               Thomas partnered effectively with designers, project managers and
               backend engineers to create accessible, user-focused digital
               experiences. He demonstrates strong ownership, collaboration, and
@@ -170,19 +170,19 @@ const TestimonialGrid = () => {
             <div className='flex space-x-4'>
               <img
                 src='images/testimonials/image-owen.jpg'
-                alt=''
+                alt='Owen Oliver'
                 className='w-10 h-10 rounded-full ring-2 ring-subtle'
               />
               <div className='text-sm'>
-                <h4 className='opacity-90'>Owen Oliver</h4>
-                <p className='opacity-50'>
+                <h4 className='text-zinc-100'>Owen Oliver</h4>
+                <p className='text-zinc-400'>
                   Development Team Lead at EVERSANA INTOUCH
                 </p>
               </div>
             </div>
 
             {/* Small Text */}
-            <p className='mt-6 opacity-50'>
+            <p className='mt-6 text-zinc-300'>
               "I had the pleasure of managing Thomas during his time as a
               Frontend Developer on our team, and he consistently proved himself
               to be a reliable and highly motivated contributor. From day one,
@@ -191,7 +191,7 @@ const TestimonialGrid = () => {
               thoughtful questions that elevated both his work and the team’s
               overall output.
             </p>
-            <p className='mt-6 opacity-50'>
+            <p className='mt-6 text-zinc-300'>
               What stood out most was his commitment to delivering high‑quality
               code and meeting deadlines without sacrificing attention to
               detail. He approached every project with professionalism,
@@ -199,7 +199,7 @@ const TestimonialGrid = () => {
               reliability made him someone I could always count on, and his
               proactive mindset helped streamline collaboration across the team.
             </p>
-            <p className='mt-6 opacity-50'>
+            <p className='mt-6 text-zinc-300'>
               Thomas would be an asset to any organization looking for a
               frontend developer who is dedicated, growth‑oriented, and
               consistently delivers strong results. I’m confident he will
