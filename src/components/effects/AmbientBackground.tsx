@@ -1,42 +1,13 @@
-import { useMemo, useEffect, useRef } from 'react';
-import { useCursorGlow } from '../../hooks/useCursorGlow';
-import { useScrollGradient } from '../../hooks/useScrollGradient';
+import { useMemo } from 'react';
+import { useGradientCoords } from '../../hooks/useGradientCoords';
 import { createAmbientBackground } from '../../utils/gradient';
 
-// How long after scrolling stops before the cursor retakes control (ms)
-const SCROLL_TIMEOUT_MS = 1500;
-
 const AmbientBackground = () => {
-  const cursor = useCursorGlow();
-  const scroll = useScrollGradient();
-
-  const isScrollingRef = useRef(false);
-  const lastScrollTimeRef = useRef(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      isScrollingRef.current = true;
-      lastScrollTimeRef.current = Date.now();
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const isScrollActive =
-    isScrollingRef.current &&
-    Date.now() - lastScrollTimeRef.current < SCROLL_TIMEOUT_MS;
-
-  if (!isScrollActive) {
-    isScrollingRef.current = false;
-  }
-
-  const xPc = isScrollActive ? scroll.xPc : cursor.xPc;
-  const yPc = isScrollActive ? scroll.yPc : cursor.yPc;
+  const { xPc, yPc, time } = useGradientCoords();
 
   const animatedBackground = useMemo(() => {
-    return createAmbientBackground(xPc, yPc, cursor.time);
-  }, [xPc, yPc, cursor.time]);
+    return createAmbientBackground(xPc, yPc, time);
+  }, [xPc, yPc, time]);
 
   return (
     <>
