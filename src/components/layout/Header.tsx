@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { cv } from '../../utils/color';
-import { useCursorGlow } from '../../hooks/useCursorGlow';
+import { useGradientCoords } from '../../hooks/useGradientCoords';
 import DesktopNav from './DesktopNav';
 
 const navItems = [
@@ -14,7 +14,7 @@ const navItems = [
 ];
 
 const Header = () => {
-  const { xPc, yPc } = useCursorGlow();
+  const { xPc, yPc } = useGradientCoords();
   const { pathname } = useLocation();
 
   const [isScrolled, setIsScrolled] = useState(false);
