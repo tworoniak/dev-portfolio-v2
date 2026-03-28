@@ -439,32 +439,45 @@ export const projects: Project[] = [
   {
     id: 'photography-portfolio',
     slug: 'photography-portfolio',
-    title: 'Photography Portfolio v1.0',
+    title: 'Photography Portfolio v1.2',
     description:
-      'A modern photography portfolio website with responsive design and lightbox functionality.',
-    tech: ['React', 'TypeScript', 'React Router', 'Tailwind CSS'],
+      'A concert photography portfolio featuring masonry galleries, lightbox viewing, Cloudinary-optimized image delivery, and an animated header navigation.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'React Router',
+      'Tailwind CSS',
+      'Framer Motion',
+      'Cloudinary',
+    ],
     image: '/images/projects/photography-portfolio.png',
     liveUrl: 'https://photography-portfolio-iota-eight.vercel.app',
     codeUrl: 'https://github.com/tworoniak/photography-portfolio',
     featured: true,
-    // problem:
-    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
 
-    // solution:
-    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+    problem:
+      'Concert photographers need a portfolio that loads high-resolution images fast, presents them in a visually compelling layout, and works well on both desktop and mobile — without the overhead of a CMS or backend.',
 
-    // features: [
-    //   'Real-time crypto price tracking',
-    //   'Interactive charts',
-    //   'Search and sorting',
-    //   'Responsive dashboard UI',
-    // ],
+    solution:
+      'Built a React SPA backed by static TypeScript data files and Cloudinary for optimized image delivery. All gallery content lives in typed data files, making it straightforward to add new shoots. React Photo Album handles masonry layout with known aspect ratios, and Yet Another React Lightbox provides full-screen viewing with keyboard navigation.',
 
-    // architecture:
-    //   'The app is structured around a strict separation between the UI layer and the state layer. All cart components — ProductGrid, ProductCard, CartSidebar, CartItemRow — accept plain props and have no knowledge of any state library. Three implementation files (ZustandCart, JotaiCart, ReduxCart) act as adapters, each connecting its respective store to the shared UI. This makes the comparison genuinely apples-to-apples. The action log is implemented as a tiny pub/sub event bus in src/lib/actionLog.ts that lives entirely outside React — Zustand and Jotai call it directly inside their action functions, while Redux hooks into it via a custom middleware. This neutral observer pattern means none of the three stores know about each other. The store code drawer reads from src/data/storeSource.ts, a static map of library-to-source-string, and applies lightweight regex-based syntax highlighting with no external dependency.',
+    features: [
+      'Masonry gallery grid with per-image shimmer skeletons and fade-in on load',
+      'Full-screen lightbox with caption display and keyboard navigation',
+      'Animated header nav — Framer Motion spring indicator tracks the active route via DOM measurement',
+      'Concert galleries filterable by band name and sorted newest-first by date',
+      'Featured images and magazine tear sheets pages',
+      'Contact / booking form via Formspree with success and error states',
+      'Open Graph and Twitter Card meta tags with per-route og:title and canonical URL sync',
+      'Responsive mobile design with animated slide-in nav panel',
+    ],
 
-    // lessons:
-    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
+    architecture:
+      "The site is a client-side SPA deployed on Vercel with a single rewrite rule routing all paths to index.html. All photo data is static TypeScript in src/data/ — galleries are keyed by band slug, making dynamic routes trivial. Images are served from Cloudinary via a cldImage() utility that constructs optimized URLs with auto quality and format. The header nav indicator uses a DOM measurement pattern: a single motion.span sits outside all NavLinks and animates its x position and width to match the active item's getBoundingClientRect(), with a ResizeObserver ensuring accuracy after layout changes. A class-based ErrorBoundary wraps the app root to catch render errors gracefully.",
+
+    lessons:
+      "Separating content from presentation through static data files paid off immediately — adding a new gallery is a single data file edit with zero component changes. The DOM measurement approach for the nav indicator is more reliable than layoutId for elements with variable spacing, since it works off actual rendered positions rather than React's reconciler. Cloudinary's on-the-fly transforms (auto quality, format, and crop) removed the need for any manual image processing pipeline.",
   },
   {
     id: 'photo-storytelling',
