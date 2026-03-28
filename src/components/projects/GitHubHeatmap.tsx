@@ -245,8 +245,10 @@ export default function GitHubHeatmap({
         .gh-username a {
           color: inherit;
           text-decoration: none;
+          border-bottom: 1px solid currentColor;
         }
-        .gh-username a:hover { color: var(--accent); }
+        .gh-username a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+        .gh-username a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-bottom: none; }
 
         .gh-sub {
           font-size: 12px;
@@ -480,6 +482,7 @@ export default function GitHubHeatmap({
                           ry={2}
                           fill={LEVEL_VARS[day.level]}
                           opacity={hovered && hovered !== day.date ? 0.55 : 1}
+                          aria-label={`${day.count} contribution${day.count !== 1 ? 's' : ''} on ${day.date}`}
                           onMouseEnter={(e) => handleCellEnter(e, day)}
                           onMouseLeave={handleCellLeave}
                         />

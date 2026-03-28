@@ -1,5 +1,12 @@
+import PageTitle from '../components/ui/PageTitle';
+
 const ContactPage = () => {
-  return <div>Contact Me - coming soon</div>;
+  return (
+    <>
+      <PageTitle title='Contact' />
+      <div>Contact Me - coming soon</div>
+    </>
+  );
 };
 
 export default ContactPage;

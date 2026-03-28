@@ -5,9 +5,10 @@ const ScrollToTopButton = () => {
   const isVisible = useScrollPosition(300);
 
   const scrollToTop = () => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: reducedMotion ? 'auto' : 'smooth',
     });
   };
 

@@ -4,6 +4,7 @@ import type { Project } from '../types/project';
 import IntroSection from '../components/pages/home/IntroSection';
 import ProjectsGrid from '../components/projects/ProjectsGrid';
 import ProjectModal from '../components/projects/ProjectModal';
+import PageTitle from '../components/ui/PageTitle';
 
 const HomePage = () => {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
@@ -13,6 +14,7 @@ const HomePage = () => {
 
   return (
     <>
+      <PageTitle />
       <IntroSection />
       <ProjectsGrid
         title='Featured Projects'

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { CodeXml, ExternalLink } from 'lucide-react';
+import type React from 'react';
 import type { Project } from '../../types/project';
 
 type FeaturedPrimaryCardProps = {
@@ -8,13 +9,25 @@ type FeaturedPrimaryCardProps = {
 };
 
 const FeaturedPrimaryCard = ({ project, onOpen }: FeaturedPrimaryCardProps) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+    if (e.target !== e.currentTarget) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onOpen(project);
+    }
+  };
+
   return (
     <motion.article
       onClick={() => onOpen(project)}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role='button'
+      aria-label={`View details for ${project.title}`}
       whileHover={{ y: -4 }}
       whileTap={{ scale: 0.99 }}
       transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-      className='group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 bg-black/10 transition-[border-color,box-shadow,background-color] duration-300 hover:bg-black/20'
+      className='group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 bg-black/10 transition-[border-color,box-shadow,background-color] duration-300 hover:bg-black/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
     >
       <div className='relative aspect-[16/10] overflow-hidden bg-zinc-900'>
         <img
@@ -48,7 +61,7 @@ const FeaturedPrimaryCard = ({ project, onOpen }: FeaturedPrimaryCardProps) => {
               target='_blank'
               rel='noreferrer'
               onClick={(e) => e.stopPropagation()}
-              className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10'
+              className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
             >
               <ExternalLink size={16} strokeWidth={1.5} />
               Open
@@ -61,7 +74,7 @@ const FeaturedPrimaryCard = ({ project, onOpen }: FeaturedPrimaryCardProps) => {
               target='_blank'
               rel='noreferrer'
               onClick={(e) => e.stopPropagation()}
-              className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10'
+              className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
             >
               <CodeXml size={16} strokeWidth={1.5} />
               View Code

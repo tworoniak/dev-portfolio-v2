@@ -8,7 +8,7 @@ const Footer = () => {
           href='https://github.com/tworoniak'
           target='_blank'
           rel='noreferrer'
-          className='flex items-center gap-2 hover:text-white/70 duration-300 transition'
+          className='flex items-center gap-2 rounded p-2 hover:text-white/70 duration-300 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
         >
           <Github size={16} strokeWidth={1.5} />
           <span className='hidden lg:block'>GitHub</span>
@@ -17,14 +17,14 @@ const Footer = () => {
           href='https://www.linkedin.com/in/thomasworoniak/'
           target='_blank'
           rel='noreferrer'
-          className='flex items-center gap-2 hover:text-white/70 duration-300 transition'
+          className='flex items-center gap-2 rounded p-2 hover:text-white/70 duration-300 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
         >
           <Linkedin size={16} strokeWidth={1.5} />
           <span className='hidden lg:block'>LinkedIn</span>
         </a>
         <a
           href={`mailto:${'thomasworoniak'}@${'gmail'}.com`}
-          className='flex items-center gap-2 hover:text-white/70 duration-300 transition'
+          className='flex items-center gap-2 rounded p-2 hover:text-white/70 duration-300 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
         >
           <Mail size={16} strokeWidth={1.5} />
           <span className='hidden lg:block'>Email</span>

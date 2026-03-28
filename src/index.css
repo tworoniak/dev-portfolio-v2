@@ -87,8 +87,8 @@ body {
 .modal-scroll::-webkit-scrollbar-thumb {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.18),
-    rgba(255, 255, 255, 0.08)
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 255, 255, 0.22)
   );
   border-radius: 999px;
   border: 2px solid transparent;

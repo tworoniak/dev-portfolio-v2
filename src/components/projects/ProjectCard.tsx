@@ -70,15 +70,27 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+    if (e.target !== e.currentTarget) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onOpen(project);
+    }
+  };
+
   return (
     <motion.article
       layoutId={`card-${project.slug}`}
       ref={cardRef}
       onClick={() => onOpen(project)}
+      onKeyDown={handleKeyDown}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className='project-card group cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-black/15 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-3 hover:bg-black/30 flex flex-col h-full'
+      tabIndex={0}
+      role='button'
+      aria-label={`View details for ${project.title}`}
+      className='project-card group cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-black/15 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-3 hover:bg-black/30 flex flex-col h-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
     >
       {/* <div
         className='pointer-events-none absolute inset-0 z-0 transition-opacity duration-300'
@@ -110,7 +122,7 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
               target='_blank'
               rel='noreferrer'
               onClick={(e) => e.stopPropagation()}
-              className='inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-1.5 sm:py-2 border border-black/20 dark:border-white/20 rounded hover:border-black/40 dark:hover:border-white/40 hover:bg-black/5 dark:hover:bg-white/5 transition-all text-xs sm:text-sm font-medium'
+              className='inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-1.5 sm:py-2 border border-black/20 dark:border-white/20 rounded hover:border-black/40 dark:hover:border-white/40 hover:bg-black/5 dark:hover:bg-white/5 transition-all text-xs sm:text-sm font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
             >
               <ExternalLink size={16} strokeWidth={1.5} />
               Open
@@ -123,7 +135,7 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
               target='_blank'
               rel='noreferrer'
               onClick={(e) => e.stopPropagation()}
-              className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10'
+              className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
             >
               <CodeXml size={16} strokeWidth={1.5} />
               View Code

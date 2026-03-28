@@ -49,7 +49,7 @@ const TechStackSection = () => {
             className='group relative flex h-12 w-12 items-center justify-center'
           >
             <div className='transition-transform duration-200 group-hover:scale-110'>
-              <StackIcon name={tech.name} variant={tech.variant} />
+              <StackIcon name={tech.name} variant={tech.variant} aria-hidden='true' />
             </div>
 
             <figcaption className='pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-white/10 bg-zinc-950 px-2 py-1 text-xs text-zinc-100 opacity-0 shadow-lg transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100'>

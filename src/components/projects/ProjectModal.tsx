@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CodeXml, ExternalLink, BookOpen, X } from 'lucide-react';
@@ -9,27 +9,62 @@ type ProjectModalProps = {
   onClose: () => void;
 };
 
+const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+
+  // Capture trigger, move focus into modal on open; return focus on close
   useEffect(() => {
     if (!project) return;
+    triggerRef.current = document.activeElement as HTMLElement;
+    const id = setTimeout(() => closeButtonRef.current?.focus(), 50);
+    return () => {
+      clearTimeout(id);
+      triggerRef.current?.focus();
+    };
+  }, [project]);
 
+  // Escape key
+  useEffect(() => {
+    if (!project) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
-
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [project, onClose]);
 
+  // Focus trap
   useEffect(() => {
     if (!project) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+      const focusables = modalRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE);
+      if (!focusables?.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [project]);
 
+  // Scroll lock
+  useEffect(() => {
+    if (!project) return;
     const originalOverflow = document.body.style.overflow;
     const originalTouch = document.body.style.touchAction;
-
     document.body.style.overflow = 'hidden';
     document.body.style.touchAction = 'none';
-
     return () => {
       document.body.style.overflow = originalOverflow;
       document.body.style.touchAction = originalTouch;
@@ -52,6 +87,10 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
           />
 
           <motion.div
+            ref={modalRef}
+            role='dialog'
+            aria-modal='true'
+            aria-label={project.title}
             initial={{ opacity: 0, scale: 0.96, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: 10 }}
@@ -63,9 +102,10 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             className='relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl border border-white/10 bg-black/90 shadow-[0_20px_80px_rgba(0,0,0,0.65)]'
           >
             <button
+              ref={closeButtonRef}
               type='button'
               onClick={onClose}
-              className='absolute right-4 top-4 z-20 flex h-8 w-8 items-center justify-center rounded-lg border border-white/20 bg-black/60 text-white transition hover:bg-black/80 hover:border-white/40'
+              className='absolute right-4 top-4 z-20 flex h-8 w-8 items-center justify-center rounded-lg border border-white/20 bg-black/60 text-white transition hover:bg-black/80 hover:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
               aria-label='Close modal'
             >
               <X size={22} />
@@ -108,8 +148,8 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                     <ul className='mt-4 space-y-3 text-zinc-300 list-disc list-outside'>
                       {(project.features ?? [])
                         .slice(0, 3)
-                        .map((feature, index) => (
-                          <li key={index} className='ml-8'>
+                        .map((feature) => (
+                          <li key={feature} className='ml-8'>
                             {feature}
                           </li>
                         ))}
