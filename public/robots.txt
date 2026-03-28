@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://woroniak.dev/sitemap.xml
