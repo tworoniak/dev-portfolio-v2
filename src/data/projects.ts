@@ -112,7 +112,7 @@ export const projects: Project[] = [
   {
     id: 'setlist',
     slug: 'setlist',
-    title: 'SetList v1.0',
+    title: 'SetList v1.1',
     description:
       'A full-stack music festival planner with auth, festival discovery, per-stage schedule browsing, favorites, personal set-time planning, and real-time conflict detection.',
     tech: [
@@ -172,7 +172,7 @@ export const projects: Project[] = [
   {
     id: 'neurostack',
     slug: 'neurostack',
-    title: 'NeuroStack v1.0',
+    title: 'NeuroStack v1.1',
     description:
       'A self-managing memory dashboard for Claude Code. Solves the blank-slate problem in agentic AI workflows by giving every session — and every parallel agent — shared, structured context. Reads and writes a directory of markdown memory files directly from the browser via the File System Access API, with a live file editor, multi-agent Kanban board, decisions timeline, and fuzzy full-text search.',
     tech: [
