@@ -5,7 +5,7 @@ export const projects: Project[] = [
   {
     id: 'aperture',
     slug: 'aperture',
-    title: 'Aperture v1.0',
+    title: 'Aperture',
     description:
       'A full-stack photography business management application built with React, TypeScript, and Tailwind CSS. Designed as a private, role-based web app for photographers to manage clients, bookings, shoots, gear, pricing, and client proofing galleries — all in one place.',
     tech: [
@@ -58,7 +58,7 @@ export const projects: Project[] = [
   {
     id: 'voyage-planner',
     slug: 'voyage-planner',
-    title: 'Horizons v1.3',
+    title: 'Horizons',
     description:
       'A full-stack travel itinerary planner with auth, day-by-day trip planning, drag-and-drop activity reordering, budget tracking, and AI-powered activity suggestions.',
     tech: [
@@ -112,7 +112,7 @@ export const projects: Project[] = [
   {
     id: 'setlist',
     slug: 'setlist',
-    title: 'SetList v1.1',
+    title: 'SetList',
     description:
       'A full-stack music festival planner with auth, festival discovery, per-stage schedule browsing, favorites, personal set-time planning, and real-time conflict detection.',
     tech: [
@@ -172,7 +172,7 @@ export const projects: Project[] = [
   {
     id: 'neurostack',
     slug: 'neurostack',
-    title: 'NeuroStack v1.1',
+    title: 'NeuroStack',
     description:
       'A self-managing memory dashboard for Claude Code. Solves the blank-slate problem in agentic AI workflows by giving every session — and every parallel agent — shared, structured context. Reads and writes a directory of markdown memory files directly from the browser via the File System Access API, with a live file editor, multi-agent Kanban board, decisions timeline, and fuzzy full-text search.',
     tech: [
@@ -214,7 +214,7 @@ export const projects: Project[] = [
   {
     id: 'chromatic',
     slug: 'chromatic',
-    title: 'Chromatic v1.0',
+    title: 'Chromatic',
     description:
       'A visual theme builder that generates fully WCAG-compliant design token sets for light and dark mode. Pick a brand color, choose a color harmony type, tune typography and spacing, verify contrast compliance with built-in WCAG 2.1 checking and one-click fixes — then export to CSS, SCSS, TypeScript, or Tailwind.',
     tech: [
@@ -258,7 +258,7 @@ export const projects: Project[] = [
   {
     id: 'dashtrack',
     slug: 'dashtrack',
-    title: 'DashTrack v1.0',
+    title: 'DashTrack',
     description:
       'A personal finance tracker built for DoorDash drivers. Manages the full lifecycle of gig earnings and deductible expenses — from per-dash income logging to IRS mileage calculations — with a live dashboard, monthly reports, and quarterly self-employment tax estimates.',
     tech: [
@@ -306,7 +306,7 @@ export const projects: Project[] = [
   {
     id: 'accreditor',
     slug: 'accreditor',
-    title: 'Accreditor v1.0',
+    title: 'Accreditor',
     description:
       'A multi-user concert photography accreditation tracker built for Antihero Magazine. Manages the full lifecycle of photo pit requests — from initial PR outreach to post-shoot gallery delivery — across a shared team of photographers.',
     tech: [
@@ -354,7 +354,7 @@ export const projects: Project[] = [
   {
     id: 'press-portal',
     slug: 'press-portal',
-    title: 'PressPilot v1.1',
+    title: 'PressPilot',
     description:
       'A full-stack Press Contact Management Portal for tracking publicists, managers, labels, and media contacts for bands and festivals.',
     tech: [
@@ -394,7 +394,7 @@ export const projects: Project[] = [
   {
     id: 'dev-flow',
     slug: 'dev-flow',
-    title: 'DevFlow Portal v1.0',
+    title: 'DevFlow Portal',
     description:
       'DevFlow is a modern SaaS-style engineering dashboard built with React, TypeScript, and Vite. It is designed for development leads and engineering teams to manage tasks, monitor team workload, visualize sprint-related metrics, and generate skill-based task assignment recommendations. This project showcases a scalable frontend architecture with shared global state, reusable UI components, interactive data visualization, and an AI-style allocation engine.',
     tech: [
@@ -439,7 +439,7 @@ export const projects: Project[] = [
   {
     id: 'photography-portfolio',
     slug: 'photography-portfolio',
-    title: 'Photography Portfolio v1.2',
+    title: 'Photography Portfolio',
     description:
       'A concert photography portfolio featuring masonry galleries, lightbox viewing, Cloudinary-optimized image delivery, and an animated header navigation.',
     tech: [
@@ -768,7 +768,7 @@ export const projects: Project[] = [
   {
     id: 'palette-forge',
     slug: 'palette-forge',
-    title: 'PaletteForge v1.0',
+    title: 'PaletteForge',
     description:
       'PaletteForge is a Coolors-inspired color palette generator built with React and TypeScript, featuring harmony-based palette generation, color locking, accessibility checks, and export tools for modern design workflows.',
     tech: [
