@@ -185,7 +185,7 @@ export const projects: Project[] = [
       'date-fns',
     ],
     image: '/images/projects/neurostack.png',
-    // liveUrl: 'https://your-neurostack-deployment.vercel.app',
+    liveUrl: 'https://neurostack-gamma.vercel.app',
     codeUrl: 'https://github.com/tworoniak/neurostack',
     featured: true,
 
