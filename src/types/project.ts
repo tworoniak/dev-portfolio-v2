@@ -14,4 +14,5 @@ export type Project = {
   featured?: boolean;
   architecture?: string;
   experiment?: boolean;
+  screenshots?: { src: string; alt: string }[];
 };

@@ -54,6 +54,11 @@ export const projects: Project[] = [
 
     lessons:
       "Building Aperture end-to-end highlighted how quickly dependency version mismatches compound in a modern React stack — Zod v4 was incompatible with @hookform/resolvers and required a downgrade to v3, Tailwind v4 required replacing @apply with raw hsl(var(--)) values in base styles, and shadcn's CSS variables needed registering via @theme inline to respond to theme changes. The Clerk and Supabase integration also evolved significantly — the original JWT template approach was deprecated in favour of Supabase's native third-party auth, and the Cloudinary zip archive endpoint required a Supabase Edge Function since signed API calls cannot be made from the browser. These challenges reinforced the value of checking integration compatibility before committing to a stack, building a shared type system early, and isolating data access concerns in a dedicated layer so schema changes don't ripple through every component.",
+
+    // Placeholder screenshots — swap in real images at /images/projects/aperture-*.png
+    screenshots: [
+      { src: '/images/projects/aperture.png', alt: 'Aperture dashboard overview' },
+    ],
   },
   {
     id: 'voyage-planner',

@@ -1,10 +1,16 @@
+import { useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { projects } from '../data/projects';
 import { ExternalLink, CodeXml } from 'lucide-react';
 import PageTitle from '../components/ui/PageTitle';
+import ScreenshotGallery from '../components/projects/ScreenshotGallery';
+import LightboxModal from '../components/projects/LightboxModal';
 
 const ProjectDetailPage = () => {
   const { slug } = useParams();
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const project = projects.find((p) => p.slug === slug);
 
@@ -30,6 +36,18 @@ const ProjectDetailPage = () => {
           className='w-full object-cover object-center'
         />
       </div>
+
+      {/* SCREENSHOTS GALLERY */}
+      {project.screenshots && project.screenshots.length > 0 && (
+        <>
+          <ScreenshotGallery
+            screenshots={project.screenshots}
+            onOpen={(i) => setLightboxIndex(i)}
+            thumbnailRefs={thumbnailRefs}
+          />
+          <hr className='my-16 border-white/10' />
+        </>
+      )}
 
       {/* TITLE */}
 
@@ -141,6 +159,18 @@ const ProjectDetailPage = () => {
           </section>
         </>
       )}
+
+      {/* LIGHTBOX */}
+      <AnimatePresence>
+        {lightboxIndex !== null && project.screenshots && (
+          <LightboxModal
+            screenshots={project.screenshots}
+            initialIndex={lightboxIndex}
+            onClose={() => setLightboxIndex(null)}
+            triggerRef={{ current: thumbnailRefs.current[lightboxIndex] }}
+          />
+        )}
+      </AnimatePresence>
     </main>
   );
 };
