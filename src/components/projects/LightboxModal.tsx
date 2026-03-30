@@ -8,7 +8,8 @@ type LightboxModalProps = {
   screenshots: Screenshot[];
   initialIndex: number;
   onClose: () => void;
-  triggerRef: React.RefObject<HTMLButtonElement | null>;
+  thumbnailRefs: React.MutableRefObject<(HTMLButtonElement | null)[]>;
+  triggerIndex: number;
 };
 
 const FOCUSABLE = 'button:not([disabled])';
@@ -17,7 +18,8 @@ const LightboxModal = ({
   screenshots,
   initialIndex,
   onClose,
-  triggerRef,
+  thumbnailRefs,
+  triggerIndex,
 }: LightboxModalProps) => {
   const [index, setIndex] = useState(initialIndex);
   const [direction, setDirection] = useState(0);
@@ -46,9 +48,10 @@ const LightboxModal = ({
     const id = setTimeout(() => closeButtonRef.current?.focus(), 50);
     return () => {
       clearTimeout(id);
-      triggerRef.current?.focus();
+      thumbnailRefs.current[triggerIndex]?.focus();
     };
-  }, [triggerRef]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Escape + arrow keys
   useEffect(() => {
