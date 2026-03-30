@@ -37,18 +37,6 @@ const ProjectDetailPage = () => {
         />
       </div>
 
-      {/* SCREENSHOTS GALLERY */}
-      {project.screenshots && project.screenshots.length > 0 && (
-        <>
-          <ScreenshotGallery
-            screenshots={project.screenshots}
-            onOpen={(i) => setLightboxIndex(i)}
-            thumbnailRefs={thumbnailRefs}
-          />
-          <hr className='my-16 border-white/10' />
-        </>
-      )}
-
       {/* TITLE */}
 
       <h1 className='text-4xl font-bold'>{project.title}</h1>
@@ -90,6 +78,18 @@ const ProjectDetailPage = () => {
       {/* SECTION DIVIDER */}
 
       <hr className='my-16 border-white/10' />
+
+      {/* SCREENSHOTS GALLERY */}
+      {project.screenshots && project.screenshots.length > 0 && (
+        <>
+          <ScreenshotGallery
+            screenshots={project.screenshots}
+            onOpen={(i) => setLightboxIndex(i)}
+            thumbnailRefs={thumbnailRefs}
+          />
+          <hr className='my-16 border-white/10' />
+        </>
+      )}
 
       {/* PROBLEM */}
       {project.problem && (
@@ -167,7 +167,8 @@ const ProjectDetailPage = () => {
             screenshots={project.screenshots}
             initialIndex={lightboxIndex}
             onClose={() => setLightboxIndex(null)}
-            triggerRef={{ current: thumbnailRefs.current[lightboxIndex] }}
+            thumbnailRefs={thumbnailRefs}
+            triggerIndex={lightboxIndex}
           />
         )}
       </AnimatePresence>
