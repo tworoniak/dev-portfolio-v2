@@ -293,6 +293,68 @@ export const projects: Project[] = [
       "The most important design decision was making the markdown format the source of truth rather than any internal state. Because parseActiveWork, parseDecisions, and parseWorklog operate on raw file strings, the dashboard degrades gracefully when files are hand-edited, malformed, or missing — it just shows less data rather than breaking. The polling approach for file watching turned out to be the right call over a more complex FileSystemObserver integration: Claude Code sessions write to disk frequently and in bursts, and a 4-second interval catches updates quickly enough to feel live without hammering the API. Building the CLAUDE.md protocol document alongside the code was unexpectedly clarifying — writing down the exact session-start and session-end steps for an AI agent forced precision about which files matter in which order, which fed back directly into the dashboard's information hierarchy.",
   },
   {
+    id: 'lumina',
+    slug: 'lumina',
+    title: 'Lumina',
+    description:
+      'A long-form editorial photography platform built for immersive photo essays. Each story combines cinematic parallax heroes, scroll-driven chapter reveals, embedded audio, and behind-the-shot callouts — dark-themed, digital magazine energy.',
+    tech: [
+      'React 19',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS v4',
+      'Framer Motion',
+      'React Router',
+      'Cloudinary',
+    ],
+    image: '/images/projects/lumina.png',
+    liveUrl: 'https://photo-storytelling.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/photo-storytelling',
+    featured: true,
+
+    problem:
+      'Most photography portfolios are static grids — they display images but strip away context, atmosphere, and the story behind the shot. There was no lightweight, editorial-grade format for publishing long-form photo essays with motion and depth.',
+
+    solution:
+      'Lumina is a scroll-driven story reader built around a composable block system. Each story is authored as a sequence of typed blocks — prose, single images, split-sticky chapters, horizontal galleries, audio, and behind-the-shot callouts — rendered into a cinematic, magazine-quality reading experience.',
+
+    features: [
+      'Full-viewport parallax hero with responsive Cloudinary srcset',
+      'Six story block types: text, image, behind-the-shot, audio, split-sticky, horizontal gallery',
+      'Desktop TOC sidebar with IntersectionObserver active-section tracking',
+      'Story index with search and URL-based tag / year / location filters',
+      '3D tilt image cards with Framer Motion spring physics',
+      'Lightbox with focus trap and preloaded adjacent images',
+      'Scroll-aware site header that transitions from transparent to solid',
+      'Estimated read time computed from story word count',
+    ],
+
+    architecture:
+      "Stories are authored as plain TypeScript objects in src/data/stories.ts — a typed CMS with no backend. Each story's blocks array drives the reader: StoryPage maps over blocks and delegates to the appropriate component (StoryImage, StorySplitSticky, StoryHorizontalGallery, etc.), keeping the renderer stateless and each block component fully self-contained. Images are served via a thin Cloudinary URL helper (cldImage / cldSrcSet) that builds transformation URLs at build time — no SDK, no runtime dependency. Scroll animations are driven by Framer Motion's useScroll + useTransform hooks, scoped to individual section refs so parallax layers are independent and composable. The lightbox is a React context with a focus trap implemented using refs — no external library.",
+
+    lessons:
+      "Designing a block-based content model up front made every new feature — read time, TOC, accessibility labels — straightforward to add without touching the reader logic. The biggest gotcha was CSS Grid's min-width: auto default: a 1fr column containing a wide child (sticky image, horizontal gallery) would overflow the page; adding min-w-0 to the grid item was the fix.",
+
+    screenshots: [
+      {
+        src: '/images/projects/lumina/screen-01.png',
+        alt: 'Lumina homepage with cinematic hero section',
+      },
+      {
+        src: '/images/projects/lumina/screen-02.png',
+        alt: 'Lumina stories index with image cards and filters',
+      },
+      {
+        src: '/images/projects/lumina/screen-03.png',
+        alt: 'Lumina story reader with split-sticky chapter layout',
+      },
+      {
+        src: '/images/projects/lumina/screen-04.png',
+        alt: 'Lumina story reader with split-sticky chapter layout',
+      },
+    ],
+  },
+  {
     id: 'chromatic',
     slug: 'chromatic',
     title: 'Chromatic',
@@ -560,45 +622,7 @@ export const projects: Project[] = [
     lessons:
       "Separating content from presentation through static data files paid off immediately — adding a new gallery is a single data file edit with zero component changes. The DOM measurement approach for the nav indicator is more reliable than layoutId for elements with variable spacing, since it works off actual rendered positions rather than React's reconciler. Cloudinary's on-the-fly transforms (auto quality, format, and crop) removed the need for any manual image processing pipeline.",
   },
-  {
-    id: 'photo-storytelling',
-    slug: 'photo-storytelling',
-    title: 'Photo Storytelling',
-    description:
-      'A scroll-driven, digital magazine-style photo storytelling experience built with React + TypeScript, featuring cinematic parallax hero sections, animated chapter reveals, embedded audio moments, and an editorial chapter navigation system.',
-    tech: [
-      'React',
-      'TypeScript',
-      'Vite',
-      'Tailwind CSS',
-      'Framer Motion',
-      'Firebase',
-      'React Router',
-      'Cloudinary',
-    ],
-    image: '/images/projects/photo-storytelling.png',
-    liveUrl: 'https://photo-storytelling.vercel.app',
-    codeUrl: 'https://github.com/tworoniak/photo-storytelling',
 
-    // problem:
-    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
-
-    // solution:
-    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
-
-    // features: [
-    //   'Real-time crypto price tracking',
-    //   'Interactive charts',
-    //   'Search and sorting',
-    //   'Responsive dashboard UI',
-    // ],
-
-    // architecture:
-    //   'The app is structured around a strict separation between the UI layer and the state layer. All cart components — ProductGrid, ProductCard, CartSidebar, CartItemRow — accept plain props and have no knowledge of any state library. Three implementation files (ZustandCart, JotaiCart, ReduxCart) act as adapters, each connecting its respective store to the shared UI. This makes the comparison genuinely apples-to-apples. The action log is implemented as a tiny pub/sub event bus in src/lib/actionLog.ts that lives entirely outside React — Zustand and Jotai call it directly inside their action functions, while Redux hooks into it via a custom middleware. This neutral observer pattern means none of the three stores know about each other. The store code drawer reads from src/data/storeSource.ts, a static map of library-to-source-string, and applies lightweight regex-based syntax highlighting with no external dependency.',
-
-    // lessons:
-    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
-  },
   {
     id: 'ui-design-systems',
     slug: 'ui-design-systems',
