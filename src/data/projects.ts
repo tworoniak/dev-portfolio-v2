@@ -291,6 +291,21 @@ export const projects: Project[] = [
 
     lessons:
       "The most important design decision was making the markdown format the source of truth rather than any internal state. Because parseActiveWork, parseDecisions, and parseWorklog operate on raw file strings, the dashboard degrades gracefully when files are hand-edited, malformed, or missing — it just shows less data rather than breaking. The polling approach for file watching turned out to be the right call over a more complex FileSystemObserver integration: Claude Code sessions write to disk frequently and in bursts, and a 4-second interval catches updates quickly enough to feel live without hammering the API. Building the CLAUDE.md protocol document alongside the code was unexpectedly clarifying — writing down the exact session-start and session-end steps for an AI agent forced precision about which files matter in which order, which fed back directly into the dashboard's information hierarchy.",
+
+    screenshots: [
+      {
+        src: '/images/projects/neurostack/screen-01.png',
+        alt: 'NeuroStack screenshot',
+      },
+      {
+        src: '/images/projects/neurostack/screen-02.png',
+        alt: 'NeuroStack screenshot',
+      },
+      {
+        src: '/images/projects/neurostack/screen-03.png',
+        alt: 'NeuroStack screenshot',
+      },
+    ],
   },
   {
     id: 'lumina',
@@ -621,8 +636,26 @@ export const projects: Project[] = [
 
     lessons:
       "Separating content from presentation through static data files paid off immediately — adding a new gallery is a single data file edit with zero component changes. The DOM measurement approach for the nav indicator is more reliable than layoutId for elements with variable spacing, since it works off actual rendered positions rather than React's reconciler. Cloudinary's on-the-fly transforms (auto quality, format, and crop) removed the need for any manual image processing pipeline.",
-  },
 
+    screenshots: [
+      {
+        src: '/images/projects/photo-portfolio/screen-01.png',
+        alt: 'Photography Portfolio screenshot',
+      },
+      {
+        src: '/images/projects/photo-portfolio/screen-02.png',
+        alt: 'Photography Portfolio screenshot',
+      },
+      {
+        src: '/images/projects/photo-portfolio/screen-03.png',
+        alt: 'Photography Portfolio screenshot',
+      },
+      {
+        src: '/images/projects/photo-portfolio/screen-04.png',
+        alt: 'Photography Portfolio screenshot',
+      },
+    ],
+  },
   {
     id: 'ui-design-systems',
     slug: 'ui-design-systems',
