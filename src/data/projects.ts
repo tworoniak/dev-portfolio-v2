@@ -3,9 +3,9 @@ import type { Project } from '../types/project';
 export const projects: Project[] = [
   // Featured Projects //
   {
-    id: 'aperture',
-    slug: 'aperture',
-    title: 'Aperture',
+    id: 'apertur',
+    slug: 'apertur',
+    title: 'Apertur',
     description:
       'A full-stack photography business management application built with React, TypeScript, and Tailwind CSS. Designed as a private, role-based web app for photographers to manage clients, bookings, shoots, gear, pricing, and client proofing galleries — all in one place.',
     tech: [
@@ -25,7 +25,7 @@ export const projects: Project[] = [
       'date-fns',
     ],
     image: '/images/projects/aperture.png',
-    // liveUrl: 'https://your-aperture-deployment.vercel.app',
+    liveUrl: 'https://www.apertur.pro',
     codeUrl: 'https://github.com/tworoniak/aperture-photo-os',
     featured: true,
 
@@ -55,9 +55,43 @@ export const projects: Project[] = [
     lessons:
       "Building Aperture end-to-end highlighted how quickly dependency version mismatches compound in a modern React stack — Zod v4 was incompatible with @hookform/resolvers and required a downgrade to v3, Tailwind v4 required replacing @apply with raw hsl(var(--)) values in base styles, and shadcn's CSS variables needed registering via @theme inline to respond to theme changes. The Clerk and Supabase integration also evolved significantly — the original JWT template approach was deprecated in favour of Supabase's native third-party auth, and the Cloudinary zip archive endpoint required a Supabase Edge Function since signed API calls cannot be made from the browser. These challenges reinforced the value of checking integration compatibility before committing to a stack, building a shared type system early, and isolating data access concerns in a dedicated layer so schema changes don't ripple through every component.",
 
-    // Placeholder screenshots — swap in real images at /images/projects/aperture-*.png
     screenshots: [
-      { src: '/images/projects/aperture.png', alt: 'Aperture dashboard overview' },
+      {
+        src: '/images/projects/aperture.png',
+        alt: 'Aperture dashboard overview',
+      },
+      {
+        src: '/images/projects/apertur/screen-00.png',
+        alt: 'Aperture dashboard overview',
+      },
+      {
+        src: '/images/projects/apertur/screen-01.png',
+        alt: 'Aperture dashboard overview',
+      },
+      {
+        src: '/images/projects/apertur/screen-02.png',
+        alt: 'Aperture dashboard overview',
+      },
+      {
+        src: '/images/projects/apertur/screen-03.png',
+        alt: 'Aperture dashboard overview',
+      },
+      {
+        src: '/images/projects/apertur/screen-04.png',
+        alt: 'Aperture dashboard overview',
+      },
+      {
+        src: '/images/projects/apertur/screen-05.png',
+        alt: 'Aperture dashboard overview',
+      },
+      {
+        src: '/images/projects/apertur/screen-06.png',
+        alt: 'Aperture dashboard overview',
+      },
+      {
+        src: '/images/projects/apertur/screen-07.png',
+        alt: 'Aperture dashboard overview',
+      },
     ],
   },
   {
@@ -113,6 +147,33 @@ export const projects: Project[] = [
 
     lessons:
       'Migrating from a self-hosted Express + MongoDB backend to Supabase mid-project reinforced how much architecture decisions early on affect flexibility later. RLS policies replace an entire auth middleware layer, and Edge Functions make it straightforward to add server-side AI calls without maintaining a separate backend service.',
+
+    screenshots: [
+      {
+        src: '/images/projects/horizons/screen-01.png',
+        alt: 'Horizons dashboard overview',
+      },
+      {
+        src: '/images/projects/horizons/screen-02.png',
+        alt: 'Horizons dashboard overview',
+      },
+      {
+        src: '/images/projects/horizons/screen-03.png',
+        alt: 'Horizons dashboard overview',
+      },
+      {
+        src: '/images/projects/horizons/screen-04.png',
+        alt: 'Horizons dashboard overview',
+      },
+      {
+        src: '/images/projects/horizons/screen-05.png',
+        alt: 'Horizons dashboard overview',
+      },
+      {
+        src: '/images/projects/horizons/screen-06.png',
+        alt: 'Horizons dashboard overview',
+      },
+    ],
   },
   {
     id: 'setlist',
