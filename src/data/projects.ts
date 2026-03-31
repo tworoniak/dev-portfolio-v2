@@ -234,6 +234,21 @@ export const projects: Project[] = [
 
     lessons:
       "Building a monorepo from scratch with pnpm workspaces clarified how much friction shared types eliminate when the frontend and backend evolve together. Conflict detection as a pure function over plan items — comparing ISO time intervals — turned out to be the simplest and most testable part of the whole feature. Better Auth's drizzle adapter made session management feel native to the ORM layer rather than bolted on, though coordinating its required Zod v4 internals against the app's Zod v3 dependency required a targeted pnpm override to keep both working without interference.",
+
+    screenshots: [
+      {
+        src: '/images/projects/setlist/screen-01.png',
+        alt: 'SetList dashboard overview',
+      },
+      {
+        src: '/images/projects/setlist/screen-02.png',
+        alt: 'SetList dashboard overview',
+      },
+      {
+        src: '/images/projects/setlist/screen-03.png',
+        alt: 'SetList dashboard overview',
+      },
+    ],
   },
   {
     id: 'neurostack',
