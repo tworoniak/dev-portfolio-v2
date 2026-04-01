@@ -25,7 +25,7 @@ export const projects: Project[] = [
       'date-fns',
     ],
     image: '/images/projects/aperture.png',
-    liveUrl: 'https://www.apertur.pro',
+    // liveUrl: 'https://www.apertur.pro',
     codeUrl: 'https://github.com/tworoniak/aperture-photo-os',
     featured: true,
 
@@ -266,7 +266,7 @@ export const projects: Project[] = [
       'date-fns',
     ],
     image: '/images/projects/neurostack.png',
-    liveUrl: 'https://neurostack-gamma.vercel.app',
+    // liveUrl: 'https://neurostack-gamma.vercel.app',
     codeUrl: 'https://github.com/tworoniak/neurostack',
     featured: true,
 
@@ -323,7 +323,7 @@ export const projects: Project[] = [
       'Cloudinary',
     ],
     image: '/images/projects/lumina.png',
-    liveUrl: 'https://photo-storytelling.vercel.app',
+    // liveUrl: 'https://photo-storytelling.vercel.app',
     codeUrl: 'https://github.com/tworoniak/photo-storytelling',
     featured: true,
 
@@ -508,6 +508,21 @@ export const projects: Project[] = [
 
     lessons:
       'Accreditor surfaced several version-specific integration issues in quick succession. Tailwind v4 ships with a fundamentally different configuration model — the tailwind.config.ts is replaced by an @theme block in CSS, and the PostCSS plugin moved to @tailwindcss/postcss. Supabase\'s auth trigger system runs in the auth schema context, which cannot resolve public schema tables without explicit public. prefixes — a subtle issue that produced a generic "Database error saving new user" with no clear indication of the cause. React Fast Refresh enforces strict file-level purity rules that required splitting the auth layer into three separate files (context, provider, hook) and extracting status constants from utils.ts into a dedicated constants.ts. These were all solvable but reinforced the importance of checking schema search paths in Postgres triggers, reading Tailwind v4 migration notes before assuming v3 patterns apply, and understanding Fast Refresh constraints when mixing hooks and components in the same file.',
+
+    screenshots: [
+      {
+        src: '/images/projects/accreditor/screen-01.png',
+        alt: 'Accreditor screenshot',
+      },
+      {
+        src: '/images/projects/accreditor/screen-02.png',
+        alt: 'Accreditor screenshot',
+      },
+      {
+        src: '/images/projects/accreditor/screen-03.png',
+        alt: 'Accreditor screenshot',
+      },
+    ],
   },
   {
     id: 'press-portal',
