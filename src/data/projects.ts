@@ -545,24 +545,65 @@ export const projects: Project[] = [
     // liveUrl: 'https://press-portal.vercel.app/',
     codeUrl: 'https://github.com/tworoniak/press-portal',
     featured: true,
-    // problem:
-    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
+    problem:
+      'Managing press contacts, outreach, and follow-ups across emails, notes, and spreadsheets leads to fragmented workflows and missed opportunities.',
 
-    // solution:
-    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+    solution:
+      'PressPilot provides a centralized CRM for managing media contacts, tracking interactions, and organizing relationships with bands and festivals in one streamlined interface.',
 
-    // features: [
-    //   'Real-time crypto price tracking',
-    //   'Interactive charts',
-    //   'Search and sorting',
-    //   'Responsive dashboard UI',
-    // ],
+    features: [
+      'Contact management with detailed profiles (role, company, location, tags)',
+      'Interaction timeline for emails, calls, DMs, and notes',
+      'Band and festival relationship tracking',
+      'Follow-up scheduling and outreach status tracking',
+      'Searchable, scalable contact database',
+      'Responsive UI optimized for desktop and mobile workflows',
+    ],
 
-    // architecture:
-    //   'The app is structured around a strict separation between the UI layer and the state layer. All cart components — ProductGrid, ProductCard, CartSidebar, CartItemRow — accept plain props and have no knowledge of any state library. Three implementation files (ZustandCart, JotaiCart, ReduxCart) act as adapters, each connecting its respective store to the shared UI. This makes the comparison genuinely apples-to-apples. The action log is implemented as a tiny pub/sub event bus in src/lib/actionLog.ts that lives entirely outside React — Zustand and Jotai call it directly inside their action functions, while Redux hooks into it via a custom middleware. This neutral observer pattern means none of the three stores know about each other. The store code drawer reads from src/data/storeSource.ts, a static map of library-to-source-string, and applies lightweight regex-based syntax highlighting with no external dependency.',
+    architecture:
+      'The application is built as a full-stack TypeScript monorepo using React + Vite on the frontend and NestJS with Prisma on the backend. The frontend follows a modular, component-driven architecture with reusable UI primitives (Button, Modal, Avatar, Chip) and feature-based organization for scalability. Server state is managed with React Query, enabling efficient caching, optimistic updates, and mutation handling. The backend exposes a REST API backed by PostgreSQL, with Prisma providing type-safe database access and schema migrations. Relationships between contacts, bands, festivals, and interactions are modeled relationally, allowing flexible querying and future analytics. The system is designed to evolve toward a GraphQL layer and richer data insights over time.',
 
-    // lessons:
-    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
+    lessons:
+      'This project reinforced the importance of designing flexible data models for relationship-driven systems, as well as building reusable UI components to maintain consistency and scalability across a growing application. It also highlighted the value of separating concerns between data fetching, state management, and presentation layers in a modern React architecture.',
+
+    screenshots: [
+      {
+        src: '/images/projects/press-pilot/screen-01.png',
+        alt: 'PressPilot screenshot',
+      },
+      {
+        src: '/images/projects/press-pilot/screen-02.png',
+        alt: 'PressPilot screenshot',
+      },
+      {
+        src: '/images/projects/press-pilot/screen-03.png',
+        alt: 'PressPilot screenshot',
+      },
+      {
+        src: '/images/projects/press-pilot/screen-04.png',
+        alt: 'PressPilot screenshot',
+      },
+      {
+        src: '/images/projects/press-pilot/screen-05.png',
+        alt: 'PressPilot screenshot',
+      },
+      {
+        src: '/images/projects/press-pilot/screen-06.png',
+        alt: 'PressPilot screenshot',
+      },
+      {
+        src: '/images/projects/press-pilot/screen-07.png',
+        alt: 'PressPilot screenshot',
+      },
+      {
+        src: '/images/projects/press-pilot/screen-08.png',
+        alt: 'PressPilot screenshot',
+      },
+      {
+        src: '/images/projects/press-pilot/screen-09.png',
+        alt: 'PressPilot screenshot',
+      },
+    ],
   },
   {
     id: 'dev-flow',
