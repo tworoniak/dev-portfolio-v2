@@ -19,6 +19,11 @@ body {
   --glow: oklch(70% calc(var(--chroma) * 1.1) var(--hue));
 }
 
+button,
+a {
+  cursor: pointer;
+}
+
 .project-card,
 .project-list-item {
   border: 1px solid oklch(70% 0.04 var(--hue) / 0.15);
