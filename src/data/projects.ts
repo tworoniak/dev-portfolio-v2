@@ -121,7 +121,7 @@ export const projects: Project[] = [
       'Anthropic Claude API',
     ],
     image: '/images/projects/horizons.png',
-    liveUrl: 'https://travel-itinerary-app-alpha.vercel.app',
+    // liveUrl: 'https://travel-itinerary-app-alpha.vercel.app',
     codeUrl: 'https://github.com/tworoniak/travel-itinerary-app',
     featured: true,
 
