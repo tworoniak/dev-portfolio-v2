@@ -1231,10 +1231,11 @@ export const projects: Project[] = [
     slug: 'job-tracker',
     title: 'JobTrack',
     description:
-      'A job tracking app built with React, GraphQL, and Nest.js. Keep track of your job applications, interviews, and follow-ups in one place.',
+      'A job tracking app built with React, GraphQL, and NestJS. Keep track of your job applications, interviews, and follow-ups in one place.',
+
     tech: [
       'React',
-      'Hookform',
+      'React Hook Form',
       'TypeScript',
       'Apollo Client',
       'Apollo Server',
@@ -1243,31 +1244,38 @@ export const projects: Project[] = [
       'GraphQL',
       'Recharts',
       'Zod',
-      'Tanstack Query',
+      'TanStack Query',
       'Tailwind CSS',
       'Jest',
     ],
+
     image: '/images/projects/job-tracker.png',
     codeUrl: 'https://github.com/tworoniak/job-application-tracker',
     featured: true,
-    // problem:
-    //   "Keeping track of movies you want to watch — and ones you've already seen — is scattered across streaming apps, notes, and memory. There's no lightweight, offline-first mobile tool that just does the job.",
-    // solution:
-    //   'PocketWatch is a focused React Native app that lets you search any movie, save it to a watchlist, and mark it watched — with the watched date logged automatically. Everything lives on-device via AsyncStorage, so it works without an account or internet after the initial search.',
-    // features: [
-    //   'Debounced movie search with infinite scroll pagination via OMDb API',
-    //   'Full movie detail screen: plot, cast, rating, runtime, and genre',
-    //   'Watchlist and Watched tabs with persistent local storage',
-    //   '"Saved" and "Watched" badges on search results for at-a-glance library status',
-    //   'Watched date displayed per movie ("Watched Mar 31, 2026")',
-    //   'Light/dark mode toggle that persists across sessions and overrides system setting',
-    //   'Full accessibility: accessibilityRole and accessibilityLabel on all interactive elements',
-    //   '32 unit tests covering storage logic, API layer, and debounce hook',
-    // ],
-    // architecture:
-    //   'The app uses Expo Router v6 for file-based navigation — three tabs (Search, Watchlist, Watched) plus a stack-based movie detail screen. All state is managed through a single canonical AsyncStorage store (`library.ts`) with a clean action API: `addToWatchlist`, `markWatched`, `unwatch`, and a one-time migration from a legacy key. Theme preference is handled by a `ThemeContext` that wraps the root layout and overrides the `useColorScheme` hook, so all screens respond to the manual toggle without any prop drilling. The `MovieList` component is shared between the Watchlist and Watched screens, accepting a `getSubtitle` prop to surface per-item metadata like the watched date.',
-    // lessons:
-    //   'Building around a single canonical store with an explicit migration path paid off — swapping the old key format was safe and invisible to users. Wiring theme persistence through context rather than relying on the OS setting made the manual toggle straightforward to implement consistently across all screens.',
+
+    problem:
+      'Tracking a job search across spreadsheets, browser tabs, and memory is fragmented and lossy. There’s no lightweight tool purpose-built for developers that provides structured tracking, filtering, and visibility into your pipeline without requiring a paid subscription or a bloated ATS.',
+
+    solution:
+      'JobTrack is a full-stack GraphQL application that centralizes every application in one place — with a filterable table, outcome tracking across 9 statuses, salary range logging, interview scheduling, and a live dashboard showing your pipeline health at a glance.',
+
+    features: [
+      'Filterable, sortable applications table powered by TanStack Table v8 with server-side GraphQL queries',
+      'Relay-style cursor pagination — stable under concurrent inserts, with Apollo fetchMore integration',
+      'Dashboard with outcome breakdown (Recharts donut), weekly application volume chart, and upcoming interviews widget',
+      'Create/edit forms with React Hook Form + Zod validation and localStorage draft auto-save on blur',
+      'Optimistic UI for outcome changes — Apollo InMemoryCache updates instantly and rolls back on error',
+      'Keyboard shortcuts: Cmd+K command palette, N to create, E to edit focused row, Delete with confirmation',
+      'Bulk select with multi-delete and bulk status update',
+      'NestJS code-first GraphQL backend with Prisma ORM and PostgreSQL via Supabase',
+    ],
+
+    architecture:
+      'The backend is a NestJS monolith using code-first GraphQL via @nestjs/graphql — resolver classes decorated with @ObjectType and @Resolver define the schema, eliminating SDL sync overhead. Prisma handles all database access with a PostgreSQL instance hosted on Supabase. The frontend is a Vite + React 19 app in a pnpm monorepo alongside the API. Apollo Client 3 powers the data layer: queries use cache-and-network for the applications list and cache-first for detail pages, while mutations leverage optimisticResponse for instant updates with automatic rollback on error. Types flow end-to-end via graphql-codegen — .graphql operation files generate fully typed useQuery/useMutation hooks, so no GraphQL types are written manually. The application form lives on a dedicated route rather than a modal because the 10+ field form requires full vertical space and proper browser back-button navigation.',
+
+    lessons:
+      'Code-first GraphQL with NestJS decorators eliminated the SDL maintenance problem entirely — the TypeScript class is the schema, so drift is impossible. Investing in Apollo’s normalized InMemoryCache paid off immediately: updates feel instant without loading states, and rollback on error comes for free. Cursor-based pagination proved superior to offset — inserting new applications mid-browse never causes rows to shift or duplicate. The biggest friction point was initial codegen setup, but once configured, the generated typed hooks made every frontend query feel as safe as a REST client.',
+
     screenshots: [
       {
         src: '/images/projects/job-tracker/screen-01.png',
