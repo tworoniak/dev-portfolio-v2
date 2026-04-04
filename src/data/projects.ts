@@ -1227,6 +1227,63 @@ export const projects: Project[] = [
       'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
   },
   {
+    id: 'job-tracker',
+    slug: 'job-tracker',
+    title: 'JobTrack',
+    description:
+      'A job tracking app built with React, GraphQL, and Nest.js. Keep track of your job applications, interviews, and follow-ups in one place.',
+    tech: [
+      'React',
+      'Hookform',
+      'TypeScript',
+      'Apollo Client',
+      'Apollo Server',
+      'NestJS',
+      'Prisma',
+      'GraphQL',
+      'Recharts',
+      'Zod',
+      'Tanstack Query',
+      'Tailwind CSS',
+      'Jest',
+    ],
+    image: '/images/projects/job-tracker.png',
+    codeUrl: 'https://github.com/tworoniak/job-application-tracker',
+    featured: true,
+    // problem:
+    //   "Keeping track of movies you want to watch — and ones you've already seen — is scattered across streaming apps, notes, and memory. There's no lightweight, offline-first mobile tool that just does the job.",
+    // solution:
+    //   'PocketWatch is a focused React Native app that lets you search any movie, save it to a watchlist, and mark it watched — with the watched date logged automatically. Everything lives on-device via AsyncStorage, so it works without an account or internet after the initial search.',
+    // features: [
+    //   'Debounced movie search with infinite scroll pagination via OMDb API',
+    //   'Full movie detail screen: plot, cast, rating, runtime, and genre',
+    //   'Watchlist and Watched tabs with persistent local storage',
+    //   '"Saved" and "Watched" badges on search results for at-a-glance library status',
+    //   'Watched date displayed per movie ("Watched Mar 31, 2026")',
+    //   'Light/dark mode toggle that persists across sessions and overrides system setting',
+    //   'Full accessibility: accessibilityRole and accessibilityLabel on all interactive elements',
+    //   '32 unit tests covering storage logic, API layer, and debounce hook',
+    // ],
+    // architecture:
+    //   'The app uses Expo Router v6 for file-based navigation — three tabs (Search, Watchlist, Watched) plus a stack-based movie detail screen. All state is managed through a single canonical AsyncStorage store (`library.ts`) with a clean action API: `addToWatchlist`, `markWatched`, `unwatch`, and a one-time migration from a legacy key. Theme preference is handled by a `ThemeContext` that wraps the root layout and overrides the `useColorScheme` hook, so all screens respond to the manual toggle without any prop drilling. The `MovieList` component is shared between the Watchlist and Watched screens, accepting a `getSubtitle` prop to surface per-item metadata like the watched date.',
+    // lessons:
+    //   'Building around a single canonical store with an explicit migration path paid off — swapping the old key format was safe and invisible to users. Wiring theme persistence through context rather than relying on the OS setting made the manual toggle straightforward to implement consistently across all screens.',
+    screenshots: [
+      {
+        src: '/images/projects/job-tracker/screen-01.png',
+        alt: 'Job Tracker screenshot',
+      },
+      {
+        src: '/images/projects/job-tracker/screen-02.png',
+        alt: 'Job Tracker screenshot',
+      },
+      {
+        src: '/images/projects/job-tracker/screen-03.png',
+        alt: 'Job Tracker screenshot',
+      },
+    ],
+  },
+  {
     id: 'pocket-watch',
     slug: 'pocket-watch',
     title: 'PocketWatch',
@@ -1243,7 +1300,7 @@ export const projects: Project[] = [
     ],
     image: '/images/projects/pocket-watch.png',
     codeUrl: 'https://github.com/tworoniak/pocket-watchlist',
-    featured: true,
+    experiment: true,
     problem:
       "Keeping track of movies you want to watch — and ones you've already seen — is scattered across streaming apps, notes, and memory. There's no lightweight, offline-first mobile tool that just does the job.",
     solution:
