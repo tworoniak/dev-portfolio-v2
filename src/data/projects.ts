@@ -308,6 +308,71 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: 'job-tracker',
+    slug: 'job-tracker',
+    title: 'JobTrack',
+    description:
+      'A job tracking app built with React, GraphQL, and NestJS. Keep track of your job applications, interviews, and follow-ups in one place.',
+
+    tech: [
+      'React',
+      'React Hook Form',
+      'TypeScript',
+      'Apollo Client',
+      'Apollo Server',
+      'NestJS',
+      'Prisma',
+      'GraphQL',
+      'Recharts',
+      'Zod',
+      'TanStack Query',
+      'Tailwind CSS',
+      'Jest',
+    ],
+
+    image: '/images/projects/job-tracker.png',
+    codeUrl: 'https://github.com/tworoniak/job-application-tracker',
+    featured: true,
+
+    problem:
+      'Tracking a job search across spreadsheets, browser tabs, and memory is fragmented and lossy. There’s no lightweight tool purpose-built for developers that provides structured tracking, filtering, and visibility into your pipeline without requiring a paid subscription or a bloated ATS.',
+
+    solution:
+      'JobTrack is a full-stack GraphQL application that centralizes every application in one place — with a filterable table, outcome tracking across 9 statuses, salary range logging, interview scheduling, and a live dashboard showing your pipeline health at a glance.',
+
+    features: [
+      'Filterable, sortable applications table powered by TanStack Table v8 with server-side GraphQL queries',
+      'Relay-style cursor pagination — stable under concurrent inserts, with Apollo fetchMore integration',
+      'Dashboard with outcome breakdown (Recharts donut), weekly application volume chart, and upcoming interviews widget',
+      'Create/edit forms with React Hook Form + Zod validation and localStorage draft auto-save on blur',
+      'Optimistic UI for outcome changes — Apollo InMemoryCache updates instantly and rolls back on error',
+      'Keyboard shortcuts: Cmd+K command palette, N to create, E to edit focused row, Delete with confirmation',
+      'Bulk select with multi-delete and bulk status update',
+      'NestJS code-first GraphQL backend with Prisma ORM and PostgreSQL via Supabase',
+    ],
+
+    architecture:
+      'The backend is a NestJS monolith using code-first GraphQL via @nestjs/graphql — resolver classes decorated with @ObjectType and @Resolver define the schema, eliminating SDL sync overhead. Prisma handles all database access with a PostgreSQL instance hosted on Supabase. The frontend is a Vite + React 19 app in a pnpm monorepo alongside the API. Apollo Client 3 powers the data layer: queries use cache-and-network for the applications list and cache-first for detail pages, while mutations leverage optimisticResponse for instant updates with automatic rollback on error. Types flow end-to-end via graphql-codegen — .graphql operation files generate fully typed useQuery/useMutation hooks, so no GraphQL types are written manually. The application form lives on a dedicated route rather than a modal because the 10+ field form requires full vertical space and proper browser back-button navigation.',
+
+    lessons:
+      'Code-first GraphQL with NestJS decorators eliminated the SDL maintenance problem entirely — the TypeScript class is the schema, so drift is impossible. Investing in Apollo’s normalized InMemoryCache paid off immediately: updates feel instant without loading states, and rollback on error comes for free. Cursor-based pagination proved superior to offset — inserting new applications mid-browse never causes rows to shift or duplicate. The biggest friction point was initial codegen setup, but once configured, the generated typed hooks made every frontend query feel as safe as a REST client.',
+
+    screenshots: [
+      {
+        src: '/images/projects/job-tracker/screen-01.png',
+        alt: 'Job Tracker screenshot',
+      },
+      {
+        src: '/images/projects/job-tracker/screen-02.png',
+        alt: 'Job Tracker screenshot',
+      },
+      {
+        src: '/images/projects/job-tracker/screen-03.png',
+        alt: 'Job Tracker screenshot',
+      },
+    ],
+  },
+  {
     id: 'lumina',
     slug: 'lumina',
     title: 'Lumina',
@@ -369,50 +434,7 @@ export const projects: Project[] = [
       },
     ],
   },
-  {
-    id: 'chromatic',
-    slug: 'chromatic',
-    title: 'Chromatic',
-    description:
-      'A visual theme builder that generates fully WCAG-compliant design token sets for light and dark mode. Pick a brand color, choose a color harmony type, tune typography and spacing, verify contrast compliance with built-in WCAG 2.1 checking and one-click fixes — then export to CSS, SCSS, TypeScript, or Tailwind.',
-    tech: [
-      'React',
-      'TypeScript',
-      'Vite',
-      'Tailwind CSS v4',
-      'Google Fonts API',
-      'Web Crypto API',
-    ],
-    image: '/images/projects/chromatic.png',
-    liveUrl: 'https://chromatic-sepia.vercel.app',
-    codeUrl: 'https://github.com/tworoniak/chromatic',
-    featured: true,
 
-    problem:
-      'Most theme builders stop at color pickers and leave developers to manually derive scales, map semantic roles, verify contrast compliance, and maintain separate token sets for light and dark mode. A single semantic color that passes WCAG on a white background will almost always fail on a dark one — and fixing it in one mode breaks the other. Teams either skip accessibility validation entirely or maintain four separate token files by hand.',
-
-    solution:
-      'Build a theme builder that treats a theme as a structured token system from the start — auto-generated color scales, harmony-derived accent colors, semantic role mappings, and separate light and dark semantic sets maintained independently. A WCAG 2.1 contrast checker audits all 14 semantic color pairs in each mode, suggests luminance-correct fixes, and scopes them to the right set so fixing dark mode never touches light mode tokens. The shared pipeline engine from the Design Token Pipeline project generates all four output formats without modification.',
-
-    features: [
-      'Brand color picker with auto-generated 50–900 scales for brand, accent, and neutral using HSL lightness stepping with saturation modulation',
-      'Four color harmony types — complementary, analogous, triadic, split-complementary — derived via HSL rotation to generate the accent scale',
-      'Separate semanticLight and semanticDark token sets maintained independently — fixes in one mode never affect the other',
-      'Google Fonts picker for sans and mono families with dynamic <link> injection and debounced search',
-      'Spacing base unit slider that generates the full scale, border radius per level, and shadow controls (offsetY, blur, opacity) per elevation',
-      'Live component preview driven by CSS custom properties injected into the document — re-themes via a single data-dark attribute toggle with no React re-renders',
-      'WCAG 2.1 contrast checker with luminance-based algorithm checking 14 semantic pairs per mode, with light/dark toggle to audit each set independently',
-      'Suggest Fix per failing pair — walks HSL lightness until 4.5:1 is achieved, shows before/after swatches and new ratio, applies to the correct mode with one click',
-      'Luminance-based getContrastColor using the mathematically correct 0.179 threshold — correctly handles yellow-green and other high-chroma colors that fool HSL-based approaches',
-      'Undo/redo history via useReducer, named theme save/load via localStorage, four export formats via the shared pipeline engine',
-    ],
-
-    architecture:
-      'ChromaticTheme stores semanticLight and semanticDark as independent SemanticColors objects. deriveSemanticColors seeds both on mount and on brand color change. The SET_SEMANTIC_COLOR action accepts a mode parameter and writes only to the corresponding set. injectThemeCSS writes a single <style> tag with light vars in .chromatic-preview and dark vars in .chromatic-preview[data-dark="true"] — the preview re-themes via attribute toggle with no React re-renders. The WCAG fix algorithm walks HSL lightness in 1° steps toward the correct direction (determined by the other color\'s lightness) until getContrastRatio returns ≥4.5. getContrastColor uses relative luminance with the 0.179 crossover threshold rather than HSL lightness to correctly handle high-chroma hues. themeToTokens converts the live theme to a W3C DTCG TokenSet passed directly to the shared pipeline\'s runPipeline — the four generators run unchanged.',
-
-    lessons:
-      'The hardest problem was maintaining WCAG compliance across both modes simultaneously. The naive single-semantic-set approach means any contrast fix for light mode breaks dark mode. Separating semanticLight and semanticDark and scoping SET_SEMANTIC_COLOR to a mode parameter solved this cleanly. The most instructive debugging session was discovering that HSL lightness is wrong for determining text color on high-chroma backgrounds — #c5c112 (yellow-green) reads as "dark" at 42% HSL lightness but has a relative luminance of ~0.45, well above the 0.179 crossover where dark text becomes the correct choice. The WCAG spec uses luminance for exactly this reason. Reusing the pipeline module validated the decision to build it as a standalone module — dropping src/pipeline/ into Chromatic required zero modifications.',
-  },
   {
     id: 'dashtrack',
     slug: 'dashtrack',
@@ -1227,70 +1249,50 @@ export const projects: Project[] = [
       'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
   },
   {
-    id: 'job-tracker',
-    slug: 'job-tracker',
-    title: 'JobTrack',
+    id: 'chromatic',
+    slug: 'chromatic',
+    title: 'Chromatic',
     description:
-      'A job tracking app built with React, GraphQL, and NestJS. Keep track of your job applications, interviews, and follow-ups in one place.',
-
+      'A visual theme builder that generates fully WCAG-compliant design token sets for light and dark mode. Pick a brand color, choose a color harmony type, tune typography and spacing, verify contrast compliance with built-in WCAG 2.1 checking and one-click fixes — then export to CSS, SCSS, TypeScript, or Tailwind.',
     tech: [
       'React',
-      'React Hook Form',
       'TypeScript',
-      'Apollo Client',
-      'Apollo Server',
-      'NestJS',
-      'Prisma',
-      'GraphQL',
-      'Recharts',
-      'Zod',
-      'TanStack Query',
-      'Tailwind CSS',
-      'Jest',
+      'Vite',
+      'Tailwind CSS v4',
+      'Google Fonts API',
+      'Web Crypto API',
     ],
-
-    image: '/images/projects/job-tracker.png',
-    codeUrl: 'https://github.com/tworoniak/job-application-tracker',
+    image: '/images/projects/chromatic.png',
+    liveUrl: 'https://chromatic-sepia.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/chromatic',
     featured: true,
 
     problem:
-      'Tracking a job search across spreadsheets, browser tabs, and memory is fragmented and lossy. There’s no lightweight tool purpose-built for developers that provides structured tracking, filtering, and visibility into your pipeline without requiring a paid subscription or a bloated ATS.',
+      'Most theme builders stop at color pickers and leave developers to manually derive scales, map semantic roles, verify contrast compliance, and maintain separate token sets for light and dark mode. A single semantic color that passes WCAG on a white background will almost always fail on a dark one — and fixing it in one mode breaks the other. Teams either skip accessibility validation entirely or maintain four separate token files by hand.',
 
     solution:
-      'JobTrack is a full-stack GraphQL application that centralizes every application in one place — with a filterable table, outcome tracking across 9 statuses, salary range logging, interview scheduling, and a live dashboard showing your pipeline health at a glance.',
+      'Build a theme builder that treats a theme as a structured token system from the start — auto-generated color scales, harmony-derived accent colors, semantic role mappings, and separate light and dark semantic sets maintained independently. A WCAG 2.1 contrast checker audits all 14 semantic color pairs in each mode, suggests luminance-correct fixes, and scopes them to the right set so fixing dark mode never touches light mode tokens. The shared pipeline engine from the Design Token Pipeline project generates all four output formats without modification.',
 
     features: [
-      'Filterable, sortable applications table powered by TanStack Table v8 with server-side GraphQL queries',
-      'Relay-style cursor pagination — stable under concurrent inserts, with Apollo fetchMore integration',
-      'Dashboard with outcome breakdown (Recharts donut), weekly application volume chart, and upcoming interviews widget',
-      'Create/edit forms with React Hook Form + Zod validation and localStorage draft auto-save on blur',
-      'Optimistic UI for outcome changes — Apollo InMemoryCache updates instantly and rolls back on error',
-      'Keyboard shortcuts: Cmd+K command palette, N to create, E to edit focused row, Delete with confirmation',
-      'Bulk select with multi-delete and bulk status update',
-      'NestJS code-first GraphQL backend with Prisma ORM and PostgreSQL via Supabase',
+      'Brand color picker with auto-generated 50–900 scales for brand, accent, and neutral using HSL lightness stepping with saturation modulation',
+      'Four color harmony types — complementary, analogous, triadic, split-complementary — derived via HSL rotation to generate the accent scale',
+      'Separate semanticLight and semanticDark token sets maintained independently — fixes in one mode never affect the other',
+      'Google Fonts picker for sans and mono families with dynamic <link> injection and debounced search',
+      'Spacing base unit slider that generates the full scale, border radius per level, and shadow controls (offsetY, blur, opacity) per elevation',
+      'Live component preview driven by CSS custom properties injected into the document — re-themes via a single data-dark attribute toggle with no React re-renders',
+      'WCAG 2.1 contrast checker with luminance-based algorithm checking 14 semantic pairs per mode, with light/dark toggle to audit each set independently',
+      'Suggest Fix per failing pair — walks HSL lightness until 4.5:1 is achieved, shows before/after swatches and new ratio, applies to the correct mode with one click',
+      'Luminance-based getContrastColor using the mathematically correct 0.179 threshold — correctly handles yellow-green and other high-chroma colors that fool HSL-based approaches',
+      'Undo/redo history via useReducer, named theme save/load via localStorage, four export formats via the shared pipeline engine',
     ],
 
     architecture:
-      'The backend is a NestJS monolith using code-first GraphQL via @nestjs/graphql — resolver classes decorated with @ObjectType and @Resolver define the schema, eliminating SDL sync overhead. Prisma handles all database access with a PostgreSQL instance hosted on Supabase. The frontend is a Vite + React 19 app in a pnpm monorepo alongside the API. Apollo Client 3 powers the data layer: queries use cache-and-network for the applications list and cache-first for detail pages, while mutations leverage optimisticResponse for instant updates with automatic rollback on error. Types flow end-to-end via graphql-codegen — .graphql operation files generate fully typed useQuery/useMutation hooks, so no GraphQL types are written manually. The application form lives on a dedicated route rather than a modal because the 10+ field form requires full vertical space and proper browser back-button navigation.',
+      'ChromaticTheme stores semanticLight and semanticDark as independent SemanticColors objects. deriveSemanticColors seeds both on mount and on brand color change. The SET_SEMANTIC_COLOR action accepts a mode parameter and writes only to the corresponding set. injectThemeCSS writes a single <style> tag with light vars in .chromatic-preview and dark vars in .chromatic-preview[data-dark="true"] — the preview re-themes via attribute toggle with no React re-renders. The WCAG fix algorithm walks HSL lightness in 1° steps toward the correct direction (determined by the other color\'s lightness) until getContrastRatio returns ≥4.5. getContrastColor uses relative luminance with the 0.179 crossover threshold rather than HSL lightness to correctly handle high-chroma hues. themeToTokens converts the live theme to a W3C DTCG TokenSet passed directly to the shared pipeline\'s runPipeline — the four generators run unchanged.',
 
     lessons:
-      'Code-first GraphQL with NestJS decorators eliminated the SDL maintenance problem entirely — the TypeScript class is the schema, so drift is impossible. Investing in Apollo’s normalized InMemoryCache paid off immediately: updates feel instant without loading states, and rollback on error comes for free. Cursor-based pagination proved superior to offset — inserting new applications mid-browse never causes rows to shift or duplicate. The biggest friction point was initial codegen setup, but once configured, the generated typed hooks made every frontend query feel as safe as a REST client.',
-
-    screenshots: [
-      {
-        src: '/images/projects/job-tracker/screen-01.png',
-        alt: 'Job Tracker screenshot',
-      },
-      {
-        src: '/images/projects/job-tracker/screen-02.png',
-        alt: 'Job Tracker screenshot',
-      },
-      {
-        src: '/images/projects/job-tracker/screen-03.png',
-        alt: 'Job Tracker screenshot',
-      },
-    ],
+      'The hardest problem was maintaining WCAG compliance across both modes simultaneously. The naive single-semantic-set approach means any contrast fix for light mode breaks dark mode. Separating semanticLight and semanticDark and scoping SET_SEMANTIC_COLOR to a mode parameter solved this cleanly. The most instructive debugging session was discovering that HSL lightness is wrong for determining text color on high-chroma backgrounds — #c5c112 (yellow-green) reads as "dark" at 42% HSL lightness but has a relative luminance of ~0.45, well above the 0.179 crossover where dark text becomes the correct choice. The WCAG spec uses luminance for exactly this reason. Reusing the pipeline module validated the decision to build it as a standalone module — dropping src/pipeline/ into Chromatic required zero modifications.',
   },
+
   {
     id: 'pocket-watch',
     slug: 'pocket-watch',
