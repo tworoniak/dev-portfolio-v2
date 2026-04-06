@@ -254,43 +254,59 @@ export const projects: Project[] = [
     id: 'neurostack',
     slug: 'neurostack',
     title: 'NeuroStack',
+
     description:
-      'A self-managing memory dashboard for Claude Code. Solves the blank-slate problem in agentic AI workflows by giving every session — and every parallel agent — shared, structured context. Reads and writes a directory of markdown memory files directly from the browser via the File System Access API, with a live file editor, multi-agent Kanban board, decisions timeline, and fuzzy full-text search.',
+      'A self-managing memory dashboard for Claude Code. Solves the blank-slate problem in agentic AI workflows by giving every session — and every parallel agent — shared, structured context. Reads and writes a directory of markdown memory files directly from the browser via the File System Access API, with a live file editor, multi-agent Kanban board, Overview dashboard, decisions timeline, gotchas registry, fuzzy full-text search, and a companion local MCP server that gives Claude agents schema-enforced memory tools instead of raw markdown writes.',
+
     tech: [
       'React',
       'TypeScript',
       'Vite',
-      'SCSS',
+      'CSS Custom Properties',
       'File System Access API',
+      'Recharts',
+      'react-markdown',
       'Fuse.js',
       'date-fns',
+      'Node.js',
+      'MCP SDK',
     ],
+
     image: '/images/projects/neurostack.png',
     // liveUrl: 'https://neurostack-gamma.vercel.app',
     codeUrl: 'https://github.com/tworoniak/neurostack',
     featured: true,
 
     problem:
-      "Every Claude Code session starts with zero context. There is no memory of which branches are active, which bugs were solved yesterday, which architecture decisions were already made, or what the other agents running in parallel are currently touching. The built-in MEMORY.md system has a 200-line cap, no structure, and no way to coordinate across multiple simultaneous agents — which meant constantly re-explaining context, re-solving known problems, and occasionally having parallel agents silently overwrite each other's work.",
+      'Every Claude Code session starts with zero context. There is no memory of which branches are active, which bugs were solved yesterday, which architecture decisions were already made, or what other agents running in parallel are currently touching. The built-in MEMORY.md system has a 200-line cap, no structure, and no way to coordinate across multiple simultaneous agents — leading to constant re-explaining, re-solving known problems, and occasional silent overwrites between agents. Even with a structured memory directory, agents writing raw markdown frequently break formatting, produce malformed entries, or skip writes when crashing mid-session.',
 
     solution:
-      'NeuroStack replaces the flat MEMORY.md file with a structured directory of purpose-built markdown files — a routing index, a live agent coordination file, per-project state files, a decisions log, a gotchas registry, and a rolling worklog. A Claude Code protocol enforces continuous writes during sessions rather than batch writes at the end, so parallel agents always see current state. The companion dashboard — a local Vite app using the File System Access API — surfaces all of this as a live UI: a file editor with save-on-⌘S, a Kanban board parsed directly from active-work.md, a chronological timeline of decisions and session history, and a fuzzy search across every memory file. No server, no database, no sync service — just markdown files on disk and a browser reading them.',
+      'NeuroStack replaces the flat MEMORY.md file with a structured directory of purpose-built markdown files — a routing index, a live agent coordination file, per-project state files, a decisions log, a gotchas registry, and a rolling worklog. A Claude Code protocol enforces continuous writes during sessions rather than batch writes at the end, so parallel agents always see current state. The companion dashboard — a local Vite app using the File System Access API — surfaces this as a live UI with ten purpose-built views: an Overview dashboard with Recharts visualizations, a file editor, a multi-agent Kanban board, a decisions timeline, a gotchas registry, a project status board, an activity feed, an infrastructure view, a metrics display, and fuzzy full-text search. A local Node.js MCP server completes the system by exposing schema-enforced, atomic tools (e.g., append_worklog, add_decision) instead of raw markdown writes — eliminating formatting errors and providing graceful error handling. No cloud service, no database — just markdown files on disk, a browser reading them, and a sidecar process ensuring clean writes.',
 
     features: [
-      'File Editor — recursive file tree of all .md files in the memory directory, live textarea editor with dirty-state tracking, ⌘S to save, and line count display',
-      'Agent Tracker — Kanban board with Working / Blocked / Done columns parsed live from active-work.md; expandable cards show task, current action, files touched, and start time; quick-add form writes new agent entries directly to the file',
-      'Timeline — tabbed view of decisions.md and worklog.md rendered as a chronological feed with date markers; inline forms to append new decisions and session entries without leaving the dashboard',
-      'Global Search — Fuse.js fuzzy search across every loaded memory file, grouped results by file with matched line and line number, highlight of matched text, click-to-open in File Editor',
-      'File System Access API integration — directory picker with readwrite access, recursive .md file loading, 4-second polling interval for live updates from active Claude Code sessions',
-      'Memory template library — ready-to-copy MEMORY.md, active-work.md, decisions.md, gotchas.md, worklog.md, stack.md, infra.md, and a project file template pre-filled for a React/TypeScript workflow',
-      'CLAUDE.md template — drop-in file for each project root that instructs Claude Code to load the context layer on session start and follow the continuous-write protocol',
+      'Overview Dashboard — Recharts visualizations: KPI strip (sessions, decisions, active agents), GitHub-style activity heatmap with drill-down, project activity bar chart, agent status donut, and decision velocity line chart',
+      'File Editor — recursive file tree, dirty-state tracking, ⌘S to save, inline search with match cycling, file CRUD, navigation history, and MEMORY.md health badge',
+      'Agent Tracker — Kanban board (Working / Blocked / Done), stale agent detection (>24h), protocol compliance checks, conflict detection, and worklog auto-drafting',
+      'Timeline — chronological decisions/worklog feed with quick-add forms and worklog compaction for entries older than 30 days',
+      'Gotchas View — searchable cards with symptoms, fixes, and resolution status plus quick-add form',
+      'Decisions View — tag extraction, filter chips, deprecated status badges, and expandable card grid',
+      'Project Board — parses project markdown files into Kanban columns with blockers and branch visibility',
+      'Activity Feed — last 200 file changes with timestamps, line deltas, and click-to-open behavior',
+      'Infra & Metrics Views — structured read-only infra + editable metrics with copy-to-clipboard support',
+      'Global Search — Fuse.js fuzzy search across all memory files with contextual results',
+      'Cross-project browser — fast switching between multiple memory directories',
+      'MCP Server — local Node.js sidecar exposing schema-enforced tools with atomic writes and Zod validation',
+      'Directory bootstrap — one-click creation of pre-filled memory templates',
+      'MEMORY.md compaction tool — indexed entry management with rewrite support',
+      'Configurable refresh interval — 2s / 4s / 10s / 30s / manual with localStorage persistence',
+      'Session Guide — collapsible protocol walkthrough, re-triggerable from the UI',
     ],
 
     architecture:
-      'NeuroStack is a zero-backend single-page application built with Vite and React 18. The core primitive is the useMemoryFS hook, which wraps the File System Access API to open a directory with readwrite permissions, recursively load all .md files into a Map keyed by relative path, and expose typed read and write operations. A useFileWatcher hook runs a setInterval at 4-second intervals to call refreshAll, keeping the in-memory file map current as Claude Code agents write to disk during active sessions. The useSearch hook wraps Fuse.js with a useMemo-based index built from all loaded file lines, returning grouped fuzzy matches with line numbers on each keystroke. Three parser modules — parseActiveWork, parseDecisions, and parseWorklog — transform raw markdown strings into typed arrays using regex-based section splitting, feeding the AgentTracker and Timeline views with structured data rather than raw text. Views are independently scoped functional components with no shared state beyond the directory object passed from App.tsx. Styling uses a single global CSS file with custom property tokens for the full dark-mode color system, with no CSS-in-JS or component-level style modules — keeping the bundle minimal and the token layer easy to theme. The Search view passes selected file paths back up to App.tsx, which injects them as a jumpToPath prop into FileEditor, enabling cross-view navigation without a router.',
+      'NeuroStack is a zero-backend SPA built with Vite and React 18. The core primitive is the useMemoryFS hook, which wraps the File System Access API to open a directory, persist access via IndexedDB, recursively load markdown files into a Map, and expose typed read/write operations. A useFileWatcher hook polls on a configurable interval (default 4s, paused when hidden) to detect changes and drive the activity feed. The useSearch hook wraps Fuse.js with a memoized index rebuilt on file changes, returning grouped fuzzy matches with contextual lines. Parser modules (parseActiveWork, parseDecisions, parseWorklog, etc.) transform raw markdown into structured data for each view. The dashboard uses Recharts components with derived data from parsed sources. The MCP server is a separate Node.js package using @modelcontextprotocol/sdk over stdio, sharing parser logic as pure functions. All writes are atomic (.tmp → rename), and paths are validated to prevent traversal. Styling uses global CSS with custom properties — no CSS-in-JS or Tailwind — keeping the bundle minimal and theming straightforward.',
 
     lessons:
-      "The most important design decision was making the markdown format the source of truth rather than any internal state. Because parseActiveWork, parseDecisions, and parseWorklog operate on raw file strings, the dashboard degrades gracefully when files are hand-edited, malformed, or missing — it just shows less data rather than breaking. The polling approach for file watching turned out to be the right call over a more complex FileSystemObserver integration: Claude Code sessions write to disk frequently and in bursts, and a 4-second interval catches updates quickly enough to feel live without hammering the API. Building the CLAUDE.md protocol document alongside the code was unexpectedly clarifying — writing down the exact session-start and session-end steps for an AI agent forced precision about which files matter in which order, which fed back directly into the dashboard's information hierarchy.",
+      'The key decision was making markdown the source of truth instead of internal state. Because all parsing operates on raw file strings, the system degrades gracefully when files are malformed or edited manually. Polling proved more reliable than filesystem observers for bursty agent writes. Writing the CLAUDE.md protocol alongside the app clarified system design and improved the dashboard’s information hierarchy. The MCP server was the most impactful addition post-MVP — replacing raw markdown writes with schema-enforced tools eliminated formatting bugs and made the system interoperable with any MCP-compatible agent. Keeping the MCP server as a separate package preserved a clean frontend bundle while reusing shared parsing logic.',
 
     screenshots: [
       {
