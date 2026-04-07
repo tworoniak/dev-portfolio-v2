@@ -7,7 +7,7 @@ const IntroSection = () => {
           <br /> React builder.
         </h1>
 
-        <p className='mt-6 max-w-3xl text-lg leading-8 text-zinc-400'>
+        <p className='mt-6 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-400'>
           I’m a Front-End Developer specializing in building fast, accessible,
           and visually polished web applications using React and TypeScript. I
           enjoy creating clean UI systems, performance-optimized experiences,

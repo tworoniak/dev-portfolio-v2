@@ -1,15 +1,16 @@
 import StackIcon from 'tech-stack-icons';
+import { useTheme } from '../../../context/ThemeContext';
 
 type TechItem = {
   name: string;
   label: string;
-  variant?: 'dark';
+  variant?: 'light' | 'dark';
 };
 
 const techStack: TechItem[] = [
   { name: 'react', label: 'React' },
   { name: 'reactquery', label: 'React Query' },
-  { name: 'reactrouter', label: 'React Router', variant: 'dark' },
+  { name: 'reactrouter', label: 'React Router' },
   { name: 'tanstack', label: 'TanStack' },
   { name: 'docker', label: 'Docker' },
   { name: 'typescript', label: 'TypeScript' },
@@ -18,26 +19,28 @@ const techStack: TechItem[] = [
   { name: 'html5', label: 'HTML5' },
   { name: 'css3', label: 'CSS3' },
   { name: 'json', label: 'JSON' },
-  { name: 'railway', label: 'Railway', variant: 'dark' },
+  { name: 'railway', label: 'Railway' },
   { name: 'go', label: 'Go' },
   { name: 'supabase', label: 'Supabase' },
-  { name: 'clerk', label: 'Clerk', variant: 'dark' },
-  { name: 'nextjs', label: 'Next.js', variant: 'dark' },
-  { name: 'graphql', label: 'GraphQL', variant: 'dark' },
+  { name: 'clerk', label: 'Clerk' },
+  { name: 'nextjs', label: 'Next.js' },
+  { name: 'graphql', label: 'GraphQL' },
   { name: 'nodejs', label: 'Node.js' },
   { name: 'vitejs', label: 'Vite' },
-  { name: 'vercel', label: 'Vercel', variant: 'dark' },
+  { name: 'vercel', label: 'Vercel' },
   { name: 'materialui', label: 'Material UI' },
-  { name: 'radixui', label: 'Radix UI', variant: 'dark' },
+  { name: 'radixui', label: 'Radix UI' },
   { name: 'vscode', label: 'VS Code' },
   { name: 'figma', label: 'Figma' },
   { name: 'claude', label: 'Claude AI' },
-  { name: 'cursor', label: 'Cursor AI', variant: 'dark' },
-  { name: 'copilotgithub', label: 'GitHub Copilot', variant: 'dark' },
-  { name: 'copilotms', label: 'Microsoft Copilot', variant: 'dark' },
+  { name: 'cursor', label: 'Cursor AI' },
+  { name: 'copilotgithub', label: 'GitHub Copilot' },
+  { name: 'copilotms', label: 'Microsoft Copilot' },
 ] as const;
 
 const TechStackSection = () => {
+  const { theme } = useTheme(); // 'light' | 'dark'
+
   return (
     <section className='mx-auto flex max-w-7xl flex-col gap-2 px-2 sm:px-6 py-12'>
       <p className='text-xs uppercase tracking-[0.3em] text-zinc-500'>
@@ -55,7 +58,8 @@ const TechStackSection = () => {
             <div className='transition-transform duration-200 group-hover:scale-110'>
               <StackIcon
                 name={tech.name}
-                variant={tech.variant}
+                variant={theme}
+                // variant={tech.variant}
                 aria-hidden='true'
               />
             </div>
