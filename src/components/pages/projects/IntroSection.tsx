@@ -7,7 +7,7 @@ const IntroSection = () => {
         Things I've Built. Lessons Learned.
       </h1>
 
-      <p className='mt-6 max-w-3xl text-lg leading-8 text-zinc-400'>
+      <p className='mt-6 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-400'>
         A collection of front-end applications and experiments exploring modern
         React architecture, interactive UI patterns, and thoughtful engineering
         decisions behind each build.

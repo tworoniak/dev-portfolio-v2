@@ -13,8 +13,8 @@ const AmbientBackground = () => {
   }, [xPc, yPc, time, isDark]);
 
   const staticOpacity = isDark
-    ? { o1: 0.12, o2: 0.10, o3: 0.08 }
-    : { o1: 0.30, o2: 0.22, o3: 0.15 };
+    ? { o1: 0.12, o2: 0.1, o3: 0.08 }
+    : { o1: 0.3, o2: 0.42, o3: 0.15 };
 
   return (
     <>
