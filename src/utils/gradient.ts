@@ -4,6 +4,7 @@ export const createAmbientBackground = (
   xPc: number,
   yPc: number,
   t: number,
+  isDark = true,
 ) => {
   const r1 = cv(xPc + Math.sin(t * 0.41) * 20);
   const g1 = cv(yPc + Math.cos(t * 0.33) * 18);
@@ -22,9 +23,15 @@ export const createAmbientBackground = (
   const x3 = (20 + Math.sin(t * 0.13) * 12).toFixed(1);
   const y3 = (78 + Math.cos(t * 0.15) * 8).toFixed(1);
 
+  // Light mode: keep values very low — cv() can produce mid-gray colors that
+  // muddy a white bg. Static gradients carry the visual weight instead.
+  const o1 = isDark ? 0.15 : 0.07;
+  const o2 = isDark ? 0.12 : 0.05;
+  const o3 = isDark ? 0.10 : 0.04;
+
   return `
-    radial-gradient(ellipse at ${x1}% ${y1}%, rgb(${r1} ${g1} ${b1} / 0.15), transparent 65%),
-    radial-gradient(circle at ${x2}% ${y2}%, rgb(${r2} ${g1} ${b2} / 0.12), transparent 55%),
-    radial-gradient(circle at ${x3}% ${y3}%, rgb(${r1} ${g2} ${b1} / 0.10), transparent 60%)
+    radial-gradient(ellipse at ${x1}% ${y1}%, rgb(${r1} ${g1} ${b1} / ${o1}), transparent 65%),
+    radial-gradient(circle at ${x2}% ${y2}%, rgb(${r2} ${g1} ${b2} / ${o2}), transparent 55%),
+    radial-gradient(circle at ${x3}% ${y3}%, rgb(${r1} ${g2} ${b1} / ${o3}), transparent 60%)
   `;
 };

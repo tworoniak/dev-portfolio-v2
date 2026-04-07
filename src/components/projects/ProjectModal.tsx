@@ -99,13 +99,13 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
               stiffness: 260,
               damping: 26,
             }}
-            className='relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl border border-white/10 bg-black/90 shadow-[0_20px_80px_rgba(0,0,0,0.65)]'
+            className='relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/90 shadow-[0_20px_80px_rgba(0,0,0,0.3)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.65)]'
           >
             <button
               ref={closeButtonRef}
               type='button'
               onClick={onClose}
-              className='absolute right-4 top-4 z-20 flex h-8 w-8 items-center justify-center rounded-lg border border-white/20 bg-black/60 text-white transition hover:bg-black/80 hover:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
+              className='absolute right-4 top-4 z-20 flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 dark:border-white/20 bg-zinc-100 dark:bg-black/60 text-zinc-600 dark:text-white transition hover:bg-zinc-200 dark:hover:bg-black/80 hover:border-zinc-300 dark:hover:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
               aria-label='Close modal'
             >
               <X size={22} />
@@ -114,7 +114,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             <div className='max-h-[85vh] overflow-y-auto modal-scroll'>
               <motion.div
                 layoutId={`image-wrap-${project.slug}`}
-                className='overflow-hidden max-h-[40vh] bg-zinc-900'
+                className='overflow-hidden max-h-[40vh] bg-zinc-200 dark:bg-zinc-900'
               >
                 <motion.img
                   src={project.image}
@@ -124,28 +124,28 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
               </motion.div>
 
               <div className='p-6 md:p-8'>
-                <motion.h2 className='text-3xl font-bold text-white'>
+                <motion.h2 className='text-3xl font-bold text-zinc-900 dark:text-white'>
                   {project.title}
                 </motion.h2>
 
                 <motion.p
                   layoutId={`tech-${project.slug}`}
-                  className='mt-3 text-base text-zinc-400'
+                  className='mt-3 text-base text-zinc-500 dark:text-zinc-400'
                 >
                   {project.tech.join(', ')}
                 </motion.p>
 
-                <p className='mt-6 max-w-3xl text-lg leading-8 text-zinc-300'>
+                <p className='mt-6 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-300'>
                   {project.description}
                 </p>
 
                 {project.features && (
-                  <div className='mt-8 border-t border-white/10 pt-6'>
-                    <h3 className='text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500'>
+                  <div className='mt-8 border-t border-zinc-200 dark:border-white/10 pt-6'>
+                    <h3 className='text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-500'>
                       Preview
                     </h3>
 
-                    <ul className='mt-4 space-y-3 text-zinc-300 list-disc list-outside'>
+                    <ul className='mt-4 space-y-3 text-zinc-600 dark:text-zinc-300 list-disc list-outside'>
                       {(project.features ?? [])
                         .slice(0, 3)
                         .map((feature) => (
@@ -160,7 +160,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                 <div className='mt-8 flex flex-wrap gap-3'>
                   <Link
                     to={`/projects/${project.slug}`}
-                    className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10'
+                    className='flex items-center gap-1 rounded-md border border-zinc-200 dark:border-white/10 px-4 py-2 text-sm font-medium transition hover:bg-zinc-100 dark:hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
                   >
                     <BookOpen size={16} strokeWidth={1.5} />
                     Read case study
@@ -171,7 +171,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                       href={project.liveUrl}
                       target='_blank'
                       rel='noreferrer'
-                      className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10'
+                      className='flex items-center gap-1 rounded-md border border-zinc-200 dark:border-white/10 px-4 py-2 text-sm font-medium transition hover:bg-zinc-100 dark:hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
                     >
                       <ExternalLink size={16} strokeWidth={1.5} />
                       Open
@@ -183,7 +183,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                       href={project.codeUrl}
                       target='_blank'
                       rel='noreferrer'
-                      className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10'
+                      className='flex items-center gap-1 rounded-md border border-zinc-200 dark:border-white/10 px-4 py-2 text-sm font-medium transition hover:bg-zinc-100 dark:hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
                     >
                       <CodeXml size={16} strokeWidth={1.5} />
                       View Code

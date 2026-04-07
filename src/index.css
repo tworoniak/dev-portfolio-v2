@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 body {
+  background-color: #fff;
+  transition: background-color 0.2s ease;
+}
+
+.dark body {
   background-color: #000;
 }
 
@@ -24,21 +29,35 @@ a {
   cursor: pointer;
 }
 
+/* ── Project cards ─────────────────────────────────────────────────────────── */
+
 .project-card,
 .project-list-item {
-  border: 1px solid oklch(70% 0.04 var(--hue) / 0.15);
-  /* background: oklch(12% 0.02 var(--hue)); */
+  border: 1px solid oklch(40% 0.06 var(--hue) / 0.18);
+}
+
+.dark .project-card,
+.dark .project-list-item {
+  border-color: oklch(70% 0.04 var(--hue) / 0.15);
 }
 
 .project-card:hover,
 .project-list-item:hover {
+  border-color: oklch(45% 0.15 var(--hue) / 0.45);
+  box-shadow:
+    0 0 0 1px oklch(45% 0.12 var(--hue) / 0.12),
+    0 20px 40px oklch(45% 0.12 var(--hue) / 0.12);
+}
+
+.dark .project-card:hover,
+.dark .project-list-item:hover {
   border-color: oklch(65% 0.15 var(--hue) / 0.5);
   box-shadow:
     0 0 0 1px oklch(65% 0.12 var(--hue) / 0.15),
     0 20px 40px oklch(65% 0.12 var(--hue) / 0.25);
 }
 
-/* Scroll to top */
+/* ── Scroll to top ─────────────────────────────────────────────────────────── */
 
 .scroll-to-top {
   position: fixed;
@@ -47,20 +66,25 @@ a {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid oklch(65% 0.15 var(--hue) / 0.5);
+  border: 1px solid oklch(45% 0.15 var(--hue) / 0.45);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: oklch(65% 0.12 var(--hue) / 0.15);
-  color: white;
+  background-color: oklch(45% 0.12 var(--hue) / 0.1);
+  color: oklch(30% 0.04 var(--hue));
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px) scale(0.95);
-
   transition:
     opacity 0.3s ease,
     transform 0.3s ease;
+}
+
+.dark .scroll-to-top {
+  border-color: oklch(65% 0.15 var(--hue) / 0.5);
+  background-color: oklch(65% 0.12 var(--hue) / 0.15);
+  color: white;
 }
 
 .scroll-to-top.show {
@@ -75,9 +99,14 @@ a {
   }
 }
 
-/* Modal Scrollbar styles */
+/* ── Modal scrollbar ───────────────────────────────────────────────────────── */
+
 .modal-scroll {
   scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+}
+
+.dark .modal-scroll {
   scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
@@ -92,6 +121,17 @@ a {
 .modal-scroll::-webkit-scrollbar-thumb {
   background: linear-gradient(
     180deg,
+    rgba(0, 0, 0, 0.22),
+    rgba(0, 0, 0, 0.13)
+  );
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.dark .modal-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
     rgba(255, 255, 255, 0.35),
     rgba(255, 255, 255, 0.22)
   );
@@ -103,40 +143,15 @@ a {
 .modal-scroll::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.28),
-    rgba(255, 255, 255, 0.14)
+    rgba(0, 0, 0, 0.32),
+    rgba(0, 0, 0, 0.2)
   );
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 
-/* Scrollbar styles */
-/* body::-webkit-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-}
-
-body::-webkit-scrollbar {
-  width: 10px;
-}
-
-body::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-body::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.18),
-    rgba(255, 255, 255, 0.08)
-  );
-  border-radius: 999px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-
-body::-webkit-scrollbar-thumb:hover {
+.dark .modal-scroll::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.28),
@@ -145,4 +160,4 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: padding-box;
-} */
+}

@@ -2,13 +2,13 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className='fixed bottom-0 left-0 right-0 mx-auto w-full z-10 px-6 py-4 text-xs text-zinc-500 flex items-center gap-4 justify-between bg-black/75 backdrop-blur-sm border-t border-white/10'>
+    <footer className='fixed bottom-0 left-0 right-0 mx-auto w-full z-10 px-6 py-4 text-xs text-zinc-500 dark:text-zinc-500 flex items-center gap-4 justify-between bg-white/90 dark:bg-black/75 backdrop-blur-sm border-t border-zinc-200 dark:border-white/10'>
       <div className='flex items-center gap-6'>
         <a
           href='https://github.com/tworoniak'
           target='_blank'
           rel='noreferrer'
-          className='flex items-center gap-2 rounded p-2 hover:text-white/70 duration-300 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
+          className='flex items-center gap-2 rounded p-2 hover:text-zinc-700 dark:hover:text-white/70 duration-300 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
         >
           <Github size={16} strokeWidth={1.5} />
           <span className='hidden lg:block'>GitHub</span>
@@ -17,14 +17,14 @@ const Footer = () => {
           href='https://www.linkedin.com/in/thomasworoniak/'
           target='_blank'
           rel='noreferrer'
-          className='flex items-center gap-2 rounded p-2 hover:text-white/70 duration-300 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
+          className='flex items-center gap-2 rounded p-2 hover:text-zinc-700 dark:hover:text-white/70 duration-300 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
         >
           <Linkedin size={16} strokeWidth={1.5} />
           <span className='hidden lg:block'>LinkedIn</span>
         </a>
         <a
           href={`mailto:${'thomasworoniak'}@${'gmail'}.com`}
-          className='flex items-center gap-2 rounded p-2 hover:text-white/70 duration-300 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
+          className='flex items-center gap-2 rounded p-2 hover:text-zinc-700 dark:hover:text-white/70 duration-300 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
         >
           <Mail size={16} strokeWidth={1.5} />
           <span className='hidden lg:block'>Email</span>

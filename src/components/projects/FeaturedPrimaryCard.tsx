@@ -27,9 +27,9 @@ const FeaturedPrimaryCard = ({ project, onOpen }: FeaturedPrimaryCardProps) => {
       whileHover={{ y: -4 }}
       whileTap={{ scale: 0.99 }}
       transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-      className='group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 bg-black/10 transition-[border-color,box-shadow,background-color] duration-300 hover:bg-black/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
+      className='group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-zinc-200 dark:border-white/10 bg-zinc-50/60 dark:bg-black/10 transition-[border-color,box-shadow,background-color] duration-300 hover:bg-zinc-100/80 dark:hover:bg-black/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
     >
-      <div className='relative aspect-[16/10] overflow-hidden bg-zinc-900'>
+      <div className='relative aspect-[16/10] overflow-hidden bg-zinc-200 dark:bg-zinc-900'>
         <img
           src={project.image}
           alt={project.title}
@@ -40,17 +40,17 @@ const FeaturedPrimaryCard = ({ project, onOpen }: FeaturedPrimaryCardProps) => {
       </div>
 
       <div className='flex flex-1 flex-col p-6 md:p-8'>
-        <p className='text-xs uppercase tracking-[0.28em] text-zinc-500'>
+        <p className='text-xs uppercase tracking-[0.28em] text-zinc-500 dark:text-zinc-500'>
           Featured Project
         </p>
 
-        <h3 className='mt-3 text-3xl font-bold text-white md:text-4xl'>
+        <h3 className='mt-3 text-3xl font-bold text-zinc-900 dark:text-white md:text-4xl'>
           {project.title}
         </h3>
 
-        <p className='mt-3 text-sm text-zinc-400'>{project.tech.join(', ')}</p>
+        <p className='mt-3 text-sm text-zinc-500 dark:text-zinc-400'>{project.tech.join(', ')}</p>
 
-        <p className='mt-6 max-w-2xl text-base leading-8 text-zinc-300'>
+        <p className='mt-6 max-w-2xl text-base leading-8 text-zinc-600 dark:text-zinc-300'>
           {project.description}
         </p>
 
@@ -61,7 +61,7 @@ const FeaturedPrimaryCard = ({ project, onOpen }: FeaturedPrimaryCardProps) => {
               target='_blank'
               rel='noreferrer'
               onClick={(e) => e.stopPropagation()}
-              className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
+              className='flex items-center gap-1 rounded-md border border-zinc-200 dark:border-white/10 px-4 py-2 text-sm font-medium transition hover:bg-zinc-100 dark:hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
             >
               <ExternalLink size={16} strokeWidth={1.5} />
               Open
@@ -74,7 +74,7 @@ const FeaturedPrimaryCard = ({ project, onOpen }: FeaturedPrimaryCardProps) => {
               target='_blank'
               rel='noreferrer'
               onClick={(e) => e.stopPropagation()}
-              className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
+              className='flex items-center gap-1 rounded-md border border-zinc-200 dark:border-white/10 px-4 py-2 text-sm font-medium transition hover:bg-zinc-100 dark:hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
             >
               <CodeXml size={16} strokeWidth={1.5} />
               View Code
