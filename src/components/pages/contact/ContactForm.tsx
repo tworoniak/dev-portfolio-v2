@@ -9,7 +9,7 @@ const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
 
 const inputClass =
-  'w-full rounded-md border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-zinc-500 transition focus:border-white/30 focus:bg-white/8 focus:outline-none';
+  'w-full rounded-md border border-zinc-200 dark:border-white/10 bg-zinc-100 dark:bg-white/5 px-4 py-3 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-500 transition focus:border-zinc-400 dark:focus:border-white/30 focus:bg-zinc-50 dark:focus:bg-white/8 focus:outline-none';
 
 const ContactForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -39,14 +39,14 @@ const ContactForm = () => {
     return (
       <div
         role='status'
-        className='flex flex-col items-center gap-4 rounded-lg border border-white/10 bg-white/5 px-8 py-12 text-center'
+        className='flex flex-col items-center gap-4 rounded-lg border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 px-8 py-12 text-center'
       >
-        <CheckCircle size={40} strokeWidth={1.5} className='text-emerald-400' />
+        <CheckCircle size={40} strokeWidth={1.5} className='text-emerald-500 dark:text-emerald-400' />
         <h2 className='text-xl font-semibold'>Message sent</h2>
-        <p className='text-sm text-zinc-400'>Thanks — I'll get back to you soon.</p>
+        <p className='text-sm text-zinc-500 dark:text-zinc-400'>Thanks — I'll get back to you soon.</p>
         <button
           onClick={() => setFormState('idle')}
-          className='mt-2 text-sm text-zinc-400 underline underline-offset-4 hover:text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
+          className='mt-2 text-sm text-zinc-500 dark:text-zinc-400 underline underline-offset-4 hover:text-zinc-900 dark:hover:text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
         >
           Send another message
         </button>
@@ -57,7 +57,7 @@ const ContactForm = () => {
   return (
     <form ref={formRef} onSubmit={handleSubmit} noValidate className='flex flex-col gap-5'>
       <div className='flex flex-col gap-2'>
-        <label htmlFor='contact-name' className='text-sm text-zinc-400'>
+        <label htmlFor='contact-name' className='text-sm text-zinc-600 dark:text-zinc-400'>
           Name
         </label>
         <input
@@ -73,7 +73,7 @@ const ContactForm = () => {
       </div>
 
       <div className='flex flex-col gap-2'>
-        <label htmlFor='contact-email' className='text-sm text-zinc-400'>
+        <label htmlFor='contact-email' className='text-sm text-zinc-600 dark:text-zinc-400'>
           Email
         </label>
         <input
@@ -88,7 +88,7 @@ const ContactForm = () => {
       </div>
 
       <div className='flex flex-col gap-2'>
-        <label htmlFor='contact-message' className='text-sm text-zinc-400'>
+        <label htmlFor='contact-message' className='text-sm text-zinc-600 dark:text-zinc-400'>
           Message
         </label>
         <textarea
@@ -105,7 +105,7 @@ const ContactForm = () => {
       {formState === 'error' && (
         <div
           role='alert'
-          className='flex items-center gap-2 rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400'
+          className='flex items-center gap-2 rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-400'
         >
           <AlertCircle size={16} strokeWidth={1.5} className='shrink-0' />
           {errorMessage}
@@ -115,7 +115,7 @@ const ContactForm = () => {
       <button
         type='submit'
         disabled={formState === 'submitting'}
-        className='flex items-center justify-center gap-2 rounded-md bg-white px-6 py-3 text-sm font-medium text-black transition hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
+        className='flex items-center justify-center gap-2 rounded-md bg-zinc-900 dark:bg-white px-6 py-3 text-sm font-medium text-white dark:text-black transition hover:bg-zinc-700 dark:hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
       >
         {formState === 'submitting' ? (
           <>

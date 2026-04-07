@@ -27,7 +27,7 @@ const ScreenshotGallery = ({
             type='button'
             onClick={() => onOpen(i)}
             aria-label={`View screenshot: ${shot.alt}`}
-            className='overflow-hidden rounded-lg border border-white/10 bg-zinc-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50'
+            className='overflow-hidden rounded-lg border border-zinc-200 dark:border-white/10 bg-zinc-200 dark:bg-zinc-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
           >
             <motion.img
               layoutId={`screenshot-${shot.src}`}

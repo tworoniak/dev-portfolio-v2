@@ -19,7 +19,7 @@ const FeaturedProjectsSection = ({
         <p className='text-xs uppercase tracking-[0.3em] text-zinc-500'>
           Featured Projects
         </p>
-        <h2 className='mt-2 text-3xl font-bold text-white'>Selected Work</h2>
+        <h2 className='mt-2 text-3xl font-bold text-zinc-900 dark:text-white'>Selected Work</h2>
       </div>
 
       <div className='grid gap-6 lg:grid-cols-[1.4fr_1fr]'>

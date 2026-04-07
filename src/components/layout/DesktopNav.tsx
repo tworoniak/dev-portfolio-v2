@@ -143,8 +143,8 @@ const DesktopNav = ({
           }}
           className={({ isActive }) =>
             [
-              'group relative pb-1 transition-colors duration-300 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/50',
-              isActive ? 'text-white' : 'text-zinc-400 hover:text-white',
+              'group relative pb-1 transition-colors duration-300 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50',
+              isActive ? 'text-zinc-900 dark:text-white' : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white',
             ].join(' ')
           }
         >

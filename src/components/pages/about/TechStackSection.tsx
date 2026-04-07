@@ -18,6 +18,8 @@ const techStack: TechItem[] = [
   { name: 'html5', label: 'HTML5' },
   { name: 'css3', label: 'CSS3' },
   { name: 'json', label: 'JSON' },
+  { name: 'railway', label: 'Railway', variant: 'dark' },
+  { name: 'go', label: 'Go' },
   { name: 'supabase', label: 'Supabase' },
   { name: 'clerk', label: 'Clerk', variant: 'dark' },
   { name: 'nextjs', label: 'Next.js', variant: 'dark' },
@@ -42,7 +44,7 @@ const TechStackSection = () => {
         Tech Stack
       </p>
 
-      <div className='mt-4 grid grid-cols-3 gap-8 rounded-lg border border-white/10 bg-black/15 p-4 md:grid-cols-6 lg:flex lg:flex-wrap'>
+      <div className='mt-4 grid grid-cols-3 gap-8 rounded-lg border border-zinc-500/20 dark:border-white/10 bg-white/10 dark:bg-black/15 p-4 md:grid-cols-6 lg:flex lg:flex-wrap'>
         {techStack.map((tech) => (
           <figure
             key={tech.name}
@@ -58,7 +60,7 @@ const TechStackSection = () => {
               />
             </div>
 
-            <figcaption className='pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-white/10 bg-zinc-950 px-2 py-1 text-xs text-zinc-100 opacity-0 shadow-lg transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100'>
+            <figcaption className='pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-950 px-2 py-1 text-xs text-zinc-900 dark:text-zinc-100 opacity-0 shadow-lg transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100'>
               {tech.label}
             </figcaption>
           </figure>

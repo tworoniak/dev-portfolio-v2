@@ -5,7 +5,7 @@ const IntroSection = () => {
         Senior Front-End Developer. React builder.
       </h1>
 
-      <p className='mt-6 max-w-3xl text-lg leading-8 text-zinc-400'>
+      <p className='mt-6 max-w-3xl text-lg leading-8 text-zinc-700 dark:text-zinc-400'>
         I build polished, scalable web applications with React, TypeScript, and
         modern UI patterns. A mix of product thinking, clean architecture, and
         visual design.

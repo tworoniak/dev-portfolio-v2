@@ -16,7 +16,7 @@ const ProjectDetailPage = () => {
 
   if (!project) {
     return (
-      <div className='mx-auto max-w-4xl px-6 py-20 text-white'>
+      <div className='mx-auto max-w-4xl px-6 py-20'>
         <h1 className='max-w-3xl text-4xl text-center font-bold leading-tight'>
           Project not found.
         </h1>
@@ -25,11 +25,11 @@ const ProjectDetailPage = () => {
   }
 
   return (
-    <main className='mx-auto max-w-6xl px-6 py-20 text-white'>
+    <main className='mx-auto max-w-6xl px-6 py-20'>
       <PageTitle title={project.title} />
       {/* HERO IMAGE */}
 
-      <div className='mb-12 max-h-96 overflow-hidden rounded-xl border border-white/10'>
+      <div className='mb-12 max-h-96 overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-200 dark:border-white/10'>
         <img
           src={project.image}
           alt={project.title}
@@ -41,9 +41,9 @@ const ProjectDetailPage = () => {
 
       <h1 className='text-4xl font-bold'>{project.title}</h1>
 
-      <p className='mt-4 text-zinc-400'>{project.tech.join(' • ')}</p>
+      <p className='mt-4 text-zinc-500 dark:text-zinc-400'>{project.tech.join(' • ')}</p>
 
-      <p className='mt-6 text-lg leading-8 text-zinc-300'>
+      <p className='mt-6 text-lg leading-8 text-zinc-600 dark:text-zinc-300'>
         {project.description}
       </p>
 
@@ -55,7 +55,7 @@ const ProjectDetailPage = () => {
             href={project.liveUrl}
             target='_blank'
             rel='noreferrer'
-            className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm hover:bg-white/10'
+            className='flex items-center gap-1 rounded-md border border-zinc-200 dark:border-zinc-200 dark:border-white/10 px-4 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-white/10'
           >
             <ExternalLink size={16} />
             Live Site
@@ -67,7 +67,7 @@ const ProjectDetailPage = () => {
             href={project.codeUrl}
             target='_blank'
             rel='noreferrer'
-            className='flex items-center gap-1 rounded-md border border-white/10 px-4 py-2 text-sm hover:bg-white/10'
+            className='flex items-center gap-1 rounded-md border border-zinc-200 dark:border-zinc-200 dark:border-white/10 px-4 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-white/10'
           >
             <CodeXml size={16} />
             Source Code
@@ -77,7 +77,7 @@ const ProjectDetailPage = () => {
 
       {/* SECTION DIVIDER */}
 
-      <hr className='my-16 border-white/10' />
+      <hr className='my-16 border-zinc-200 dark:border-white/10' />
 
       {/* SCREENSHOTS GALLERY */}
       {project.screenshots && project.screenshots.length > 0 && (
@@ -87,7 +87,7 @@ const ProjectDetailPage = () => {
             onOpen={(i) => setLightboxIndex(i)}
             thumbnailRefs={thumbnailRefs}
           />
-          <hr className='my-16 border-white/10' />
+          <hr className='my-16 border-zinc-200 dark:border-white/10' />
         </>
       )}
 
@@ -97,10 +97,10 @@ const ProjectDetailPage = () => {
           <section className='space-y-6'>
             <h2 className='text-2xl font-semibold'>The Problem</h2>
 
-            <p className='text-zinc-300 leading-7'>{project.problem}</p>
+            <p className='text-zinc-600 dark:text-zinc-300 leading-7'>{project.problem}</p>
           </section>
 
-          <hr className='my-16 border-white/10' />
+          <hr className='my-16 border-zinc-200 dark:border-white/10' />
         </>
       )}
 
@@ -110,10 +110,10 @@ const ProjectDetailPage = () => {
           <section className='space-y-6'>
             <h2 className='text-2xl font-semibold'>The Solution</h2>
 
-            <p className='text-zinc-300 leading-7'>{project.solution}</p>
+            <p className='text-zinc-600 dark:text-zinc-300 leading-7'>{project.solution}</p>
           </section>
 
-          <hr className='my-16 border-white/10' />
+          <hr className='my-16 border-zinc-200 dark:border-white/10' />
         </>
       )}
 
@@ -123,7 +123,7 @@ const ProjectDetailPage = () => {
           <section className='space-y-6'>
             <h2 className='text-2xl font-semibold'>Key Features</h2>
 
-            <ul className='space-y-3 text-zinc-300 list-disc list-outside'>
+            <ul className='space-y-3 text-zinc-600 dark:text-zinc-300 list-disc list-outside'>
               {(project.features ?? []).map((feature) => (
                 <li key={feature} className='ml-8'>
                   {feature}
@@ -132,7 +132,7 @@ const ProjectDetailPage = () => {
             </ul>
           </section>
 
-          <hr className='my-16 border-white/10' />
+          <hr className='my-16 border-zinc-200 dark:border-white/10' />
         </>
       )}
 
@@ -142,10 +142,10 @@ const ProjectDetailPage = () => {
           <section className='space-y-6'>
             <h2 className='text-2xl font-semibold'>Architecture Decisions</h2>
 
-            <p className='text-zinc-300 leading-7'>{project.architecture}</p>
+            <p className='text-zinc-600 dark:text-zinc-300 leading-7'>{project.architecture}</p>
           </section>
 
-          <hr className='my-16 border-white/10' />
+          <hr className='my-16 border-zinc-200 dark:border-white/10' />
         </>
       )}
 
@@ -155,7 +155,7 @@ const ProjectDetailPage = () => {
           <section className='space-y-6'>
             <h2 className='text-2xl font-semibold'>Lessons Learned</h2>
 
-            <p className='text-zinc-300 leading-7'>{project.lessons}</p>
+            <p className='text-zinc-600 dark:text-zinc-300 leading-7'>{project.lessons}</p>
           </section>
         </>
       )}

@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { cv } from '../../utils/color';
 import { useGradientCoords } from '../../hooks/useGradientCoords';
+import { useTheme } from '../../context/ThemeContext';
 import DesktopNav from './DesktopNav';
 
 const navItems = [
@@ -16,6 +17,7 @@ const navItems = [
 const Header = () => {
   const { xPc, yPc } = useGradientCoords();
   const { pathname } = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -85,8 +87,8 @@ const Header = () => {
       className={[
         'relative sticky top-0 z-50 transition-[background-color,box-shadow,border-color] duration-300',
         isScrolled
-          ? 'border-b border-white/10 bg-black/75 shadow-[0_10px_30px_rgba(0,0,0,0.28)] backdrop-blur-xl'
-          : 'border-b border-white/10 bg-black/45 backdrop-blur',
+          ? 'border-b border-zinc-200 dark:border-white/10 bg-white/60 dark:bg-black/25 shadow-[0_10px_30px_rgba(0,0,0,0.08)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.28)] backdrop-blur-xl'
+          : 'border-b border-zinc-200 dark:border-white/10 bg-white/40 dark:bg-black/45 backdrop-blur',
       ].join(' ')}
     >
       <div
@@ -107,26 +109,39 @@ const Header = () => {
           Woroniak.dev
         </NavLink>
 
-        <DesktopNav
-          navItems={navItems}
-          pathname={pathname}
-          accent={accent}
-          accentSoft={accentSoft}
-        />
+        <div className='flex items-center gap-4'>
+          <DesktopNav
+            navItems={navItems}
+            pathname={pathname}
+            accent={accent}
+            accentSoft={accentSoft}
+          />
 
-        <button
-          ref={buttonRef}
-          type='button'
-          onClick={() => setIsMobileOpen((open) => !open)}
-          className='inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 p-2 text-white transition hover:bg-white/10 md:hidden'
-          style={{
-            boxShadow: isMobileOpen ? `0 0 0 1px ${accentSoft}` : undefined,
-          }}
-          aria-expanded={isMobileOpen}
-          aria-label={isMobileOpen ? 'Close menu' : 'Open menu'}
-        >
-          {isMobileOpen ? <X size={18} /> : <Menu size={18} />}
-        </button>
+          <button
+            type='button'
+            onClick={toggleTheme}
+            className='inline-flex items-center justify-center rounded-md border border-zinc-200 dark:border-white/10 bg-zinc-100 dark:bg-white/5 p-2 text-zinc-600 dark:text-zinc-300 transition hover:bg-zinc-200 dark:hover:bg-white/10'
+            aria-label={
+              theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+            }
+          >
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+
+          <button
+            ref={buttonRef}
+            type='button'
+            onClick={() => setIsMobileOpen((open) => !open)}
+            className='inline-flex items-center justify-center rounded-md border border-zinc-200 dark:border-white/10 bg-zinc-100 dark:bg-white/5 p-2 text-zinc-700 dark:text-white transition hover:bg-zinc-200 dark:hover:bg-white/10 md:hidden'
+            style={{
+              boxShadow: isMobileOpen ? `0 0 0 1px ${accentSoft}` : undefined,
+            }}
+            aria-expanded={isMobileOpen}
+            aria-label={isMobileOpen ? 'Close menu' : 'Open menu'}
+          >
+            {isMobileOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -136,7 +151,7 @@ const Header = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className='fixed inset-0 bg-black/20 md:hidden'
+              className='fixed inset-0 bg-zinc-900/10 dark:bg-black/20 md:hidden'
               aria-hidden='true'
             />
 
@@ -146,7 +161,7 @@ const Header = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className='border-t border-white/10 bg-black/90 backdrop-blur-xl md:hidden'
+              className='border-t border-zinc-200 dark:border-white/10 bg-white/95 dark:bg-black/90 backdrop-blur-xl md:hidden'
             >
               <nav className='mx-auto flex max-w-7xl flex-col px-6 py-4'>
                 {navItems.map((item) => {
@@ -162,8 +177,8 @@ const Header = () => {
                         [
                           'relative rounded-md px-3 py-3 text-sm transition-colors duration-300',
                           isActive
-                            ? 'text-white'
-                            : 'text-zinc-400 hover:bg-white/5 hover:text-white',
+                            ? 'text-zinc-900 dark:text-white'
+                            : 'text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-white',
                         ].join(' ')
                       }
                     >
@@ -176,8 +191,8 @@ const Header = () => {
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
                           style={{
-                            background: `linear-gradient(90deg, rgb(${r} ${g} ${b} / 0.14), transparent 85%)`,
-                            boxShadow: `inset 0 0 0 1px rgb(${r} ${g} ${b} / 0.24)`,
+                            background: `linear-gradient(90deg, rgb(${r} ${g} ${b} / 0.1), transparent 85%)`,
+                            boxShadow: `inset 0 0 0 1px rgb(${r} ${g} ${b} / 0.18)`,
                           }}
                           aria-hidden='true'
                         />

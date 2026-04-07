@@ -194,6 +194,29 @@ export default function GitHubHeatmap({
       {/* ── Scoped styles ─────────────────────────────────────────────────── */}
       <style>{`
         .gh-heatmap-root {
+          --bg:      #f6f8fa;
+          --surface: #ffffff;
+          --border:  #d0d7de;
+          --text:    #1f2328;
+          --muted:   #57606a;
+          --accent:  #2da44e;
+          --accent2: #d1fadb;
+          --cell-0:  #ebedf0;
+          --cell-1:  #9be9a8;
+          --cell-2:  #40c463;
+          --cell-3:  #30a14e;
+          --cell-4:  #216e39;
+          --radius:  10px;
+          font-family: 'Berkeley Mono', monospace;
+          color: var(--text);
+          padding: 28px;
+          max-width: 100%;
+          width: 100%;
+          margin: 0 auto;
+          position: relative;
+        }
+
+        .dark .gh-heatmap-root {
           --bg:      #0d1117;
           --surface: #161b22;
           --border:  #21262d;
@@ -206,17 +229,6 @@ export default function GitHubHeatmap({
           --cell-2:  #006d32;
           --cell-3:  #26a641;
           --cell-4:  #39d353;
-          --radius:  10px;
-          font-family: 'Berkeley Mono', monospace;
-          // background: var(--bg);
-          color: var(--text);
-          padding: 28px;
-          // border-radius: 16px;
-          // border: 1px solid var(--border);
-          max-width: 100%;
-          width: 100%;
-          margin: 0 auto;
-          position: relative;
         }
 
         .gh-header {
@@ -366,7 +378,7 @@ export default function GitHubHeatmap({
 
         .gh-tooltip {
           position: absolute;
-          background: #1c2128;
+          background: var(--surface);
           border: 1px solid var(--border);
           color: var(--text);
           font-family: 'Berkeley Mono', monospace;
@@ -402,7 +414,7 @@ export default function GitHubHeatmap({
 
       <section className='flex flex-col md:flex-row gap-6 md:gap-12 mx-auto max-w-5xl px-6 py-12'>
         <div
-          className='gh-heatmap-root border border-white/10 bg-black/15 rounded-lg'
+          className='gh-heatmap-root border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-black/15 rounded-lg'
           ref={containerRef}
         >
           {/* Header */}
