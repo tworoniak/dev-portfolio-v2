@@ -1,10 +1,8 @@
-import StackIcon from 'tech-stack-icons';
 import { useTheme } from '../../../context/ThemeContext';
 
 type TechItem = {
   name: string;
   label: string;
-  variant?: 'light' | 'dark';
 };
 
 const techStack: TechItem[] = [
@@ -56,11 +54,13 @@ const TechStackSection = () => {
             className='group relative flex h-12 w-12 items-center justify-center'
           >
             <div className='transition-transform duration-200 group-hover:scale-110'>
-              <StackIcon
-                name={tech.name}
-                variant={theme}
-                // variant={tech.variant}
+              <img
+                src={`/icons/${tech.name}-${theme}.svg`}
+                onError={(e) => { (e.currentTarget as HTMLImageElement).src = `/icons/${tech.name}-light.svg`; }}
+                alt=''
                 aria-hidden='true'
+                width={48}
+                height={48}
               />
             </div>
 

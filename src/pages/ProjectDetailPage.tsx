@@ -1,11 +1,12 @@
-import { useRef, useState } from 'react';
+import { lazy, Suspense, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { projects } from '../data/projects';
 import { ExternalLink, CodeXml } from 'lucide-react';
 import PageTitle from '../components/ui/PageTitle';
 import ScreenshotGallery from '../components/projects/ScreenshotGallery';
-import LightboxModal from '../components/projects/LightboxModal';
+
+const LightboxModal = lazy(() => import('../components/projects/LightboxModal'));
 
 const ProjectDetailPage = () => {
   const { slug } = useParams();
@@ -163,13 +164,15 @@ const ProjectDetailPage = () => {
       {/* LIGHTBOX */}
       <AnimatePresence>
         {lightboxIndex !== null && project.screenshots && (
-          <LightboxModal
-            screenshots={project.screenshots}
-            initialIndex={lightboxIndex}
-            onClose={() => setLightboxIndex(null)}
-            thumbnailRefs={thumbnailRefs}
-            triggerIndex={lightboxIndex}
-          />
+          <Suspense>
+            <LightboxModal
+              screenshots={project.screenshots}
+              initialIndex={lightboxIndex}
+              onClose={() => setLightboxIndex(null)}
+              thumbnailRefs={thumbnailRefs}
+              triggerIndex={lightboxIndex}
+            />
+          </Suspense>
         )}
       </AnimatePresence>
     </main>
