@@ -1,29 +1,35 @@
+import type { ReactNode } from 'react';
 import type { Project } from '../../types/project';
 import ProjectListItem from './ProjectListItem';
 
 type ProjectsListProps = {
   projects: Project[];
   onOpenProject: (project: Project) => void;
+  filters?: ReactNode;
 };
 
-const ProjectsList = ({ projects, onOpenProject }: ProjectsListProps) => {
+const ProjectsList = ({ projects, onOpenProject, filters }: ProjectsListProps) => {
   return (
     <section className='mx-auto max-w-7xl px-2 sm:px-6 py-16'>
-      <div className='mb-4'>
+      <div className='mb-6'>
         <p className='text-xs uppercase tracking-[0.3em] text-zinc-500'>
           Projects
         </p>
-        {/* <h2 className='mt-2 text-3xl font-bold text-white'>Selected Work</h2> */}
+        {filters && <div className='mt-4'>{filters}</div>}
       </div>
 
       <div className='grid gap-6 grid-cols-1'>
-        {projects.map((project) => (
-          <ProjectListItem
-            key={project.id}
-            project={project}
-            onOpen={onOpenProject}
-          />
-        ))}
+        {projects.length > 0 ? (
+          projects.map((project) => (
+            <ProjectListItem
+              key={project.id}
+              project={project}
+              onOpen={onOpenProject}
+            />
+          ))
+        ) : (
+          <p className='text-sm text-zinc-500'>No projects match the selected filters.</p>
+        )}
       </div>
     </section>
   );

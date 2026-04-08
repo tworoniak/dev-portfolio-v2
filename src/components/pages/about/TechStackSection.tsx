@@ -45,7 +45,7 @@ const TechStackSection = () => {
         Tech Stack
       </p>
 
-      <div className='mt-4 grid grid-cols-3 gap-8 rounded-lg border border-zinc-500/20 dark:border-white/10 bg-white/10 dark:bg-black/15 p-4 md:grid-cols-6 lg:flex lg:flex-wrap'>
+      <div className='mt-4 grid grid-cols-3 gap-8 rounded-lg border border-zinc-500/20 dark:border-white/10 bg-zinc-50/50 dark:bg-black/15 p-4 md:grid-cols-6 lg:flex lg:flex-wrap'>
         {techStack.map((tech) => (
           <figure
             key={tech.name}
@@ -56,7 +56,10 @@ const TechStackSection = () => {
             <div className='transition-transform duration-200 group-hover:scale-110'>
               <img
                 src={`/icons/${tech.name}-${theme}.svg`}
-                onError={(e) => { (e.currentTarget as HTMLImageElement).src = `/icons/${tech.name}-light.svg`; }}
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src =
+                    `/icons/${tech.name}-light.svg`;
+                }}
                 alt=''
                 aria-hidden='true'
                 width={48}
