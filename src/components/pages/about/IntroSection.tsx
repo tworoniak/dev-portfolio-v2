@@ -4,7 +4,6 @@ const IntroSection = () => {
       <div>
         <h1 className='max-w-3xl text-4xl font-bold leading-tight'>
           Front-End Engineer.
-          <br /> React builder.
         </h1>
 
         <p className='mt-6 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-400'>
@@ -17,9 +16,16 @@ const IntroSection = () => {
           collaborate closely with design and product teams.
         </p>
 
-        <div className='mt-8 flex gap-8 text-sm text-zinc-500'>
+        <div className='mt-8 flex flex-wrap items-center gap-6 text-sm text-zinc-500'>
           <span>12+ years experience</span>
           <span>React + TypeScript</span>
+          <a
+            href='/resume/resume.pdf'
+            download
+            className='inline-flex items-center gap-1.5 rounded-md border border-zinc-300 dark:border-white/15 px-3 py-1.5 text-zinc-700 dark:text-zinc-300 transition-colors hover:border-zinc-400 dark:hover:border-white/30 hover:text-zinc-900 dark:hover:text-white'
+          >
+            Download Resume
+          </a>
         </div>
       </div>
       <div>

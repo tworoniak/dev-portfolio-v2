@@ -1,3 +1,4 @@
+import BackgroundSection from '../components/pages/about/BackgroundSection';
 import IntroSection from '../components/pages/about/IntroSection';
 import TechStackSection from '../components/pages/about/TechStackSection';
 import TestimonialGrid from '../components/pages/about/TestimonialsGrid';
@@ -10,6 +11,7 @@ const AboutPage = () => {
       <PageTitle title='About' />
       <IntroSection />
       <TechStackSection />
+      <BackgroundSection />
       <TestimonialGrid />
       <GitHubHeatmap username='tworoniak' />
     </>
