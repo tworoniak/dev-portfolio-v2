@@ -34,7 +34,6 @@ const ProjectsPage = () => {
       <IntroSection />
       <ProjectsList
         projects={filtered}
-        onOpenProject={() => {}}
         filters={
           <ProjectFilters
             tags={allTags}

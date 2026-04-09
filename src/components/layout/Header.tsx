@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X, Sun, Moon } from 'lucide-react';
-import { cv } from '../../utils/color';
-import { useGradientCoords } from '../../hooks/useGradientCoords';
+import { useAccentColor } from '../../hooks/useAccentColor';
 import { useTheme } from '../../context/ThemeContext';
 import DesktopNav from './DesktopNav';
 
@@ -15,7 +14,7 @@ const navItems = [
 ];
 
 const Header = () => {
-  const { xPc, yPc } = useGradientCoords();
+  const { r, g, b, accent, accentSoft, logoColor } = useAccentColor();
   const { pathname } = useLocation();
   const { theme, toggleTheme } = useTheme();
 
@@ -73,14 +72,6 @@ const Header = () => {
     to === '/'
       ? pathname === '/'
       : pathname === to || pathname.startsWith(`${to}/`);
-
-  const r = cv(xPc);
-  const g = cv(yPc);
-  const b = 255 - r;
-
-  const accent = `rgb(${r} ${g} ${b})`;
-  const accentSoft = `rgb(${r} ${g} ${b} / 0.72)`;
-  const logoColor = `rgb(${r} ${g} ${b} / 0.82)`;
 
   return (
     <header

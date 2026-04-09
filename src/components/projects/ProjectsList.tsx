@@ -4,11 +4,10 @@ import ProjectListItem from './ProjectListItem';
 
 type ProjectsListProps = {
   projects: Project[];
-  onOpenProject: (project: Project) => void;
   filters?: ReactNode;
 };
 
-const ProjectsList = ({ projects, onOpenProject, filters }: ProjectsListProps) => {
+const ProjectsList = ({ projects, filters }: ProjectsListProps) => {
   return (
     <section className='mx-auto max-w-7xl px-2 sm:px-6 py-16'>
       <div className='mb-6'>
@@ -24,7 +23,6 @@ const ProjectsList = ({ projects, onOpenProject, filters }: ProjectsListProps) =
             <ProjectListItem
               key={project.id}
               project={project}
-              onOpen={onOpenProject}
             />
           ))
         ) : (
