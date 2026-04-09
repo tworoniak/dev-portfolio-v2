@@ -498,6 +498,30 @@ export const projects: Project[] = [
 
     lessons:
       'DashTrack reinforced that computed values belong as close to the data source as possible. Early on, KPI calculations were scattered across components; consolidating them into pure utility functions (computeKpis, computeExpenseBreakdown, buildDailySeries) that take raw Supabase rows as input made both testing and reuse across the dashboard and reports views trivial. The mileage entry pattern — storing both the raw miles and the computed deductible_amount at write time rather than deriving it at read time — turned out to be the right call: the IRS rate can change year to year, and historical entries should reflect the rate that was active when they were logged, not the current one. The tax estimate page highlighted a meaningful design constraint: the calculator pulls live YTD net profit from the same useReports hook used by the reports page, which meant its accuracy is directly tied to how diligently the driver logs expenses throughout the year — a useful prompt to surface in the UI.',
+
+    screenshots: [
+      {
+        src: '/images/projects/dashtrack/screen-01.png',
+        alt: 'DashTrack dashboard with KPI overview',
+      },
+      {
+        src: '/images/projects/dashtrack/screen-02.png',
+        alt: 'DashTrack log entry form for gas expenses',
+      },
+
+      {
+        src: '/images/projects/dashtrack/screen-03.png',
+        alt: 'DashTrack earnings breakdown view',
+      },
+      {
+        src: '/images/projects/dashtrack/screen-04.png',
+        alt: 'DashTrack expense breakdown view',
+      },
+      {
+        src: '/images/projects/dashtrack/screen-05.png',
+        alt: 'DashTrack tax estimate calculator',
+      },
+    ],
   },
   {
     id: 'accreditor',
