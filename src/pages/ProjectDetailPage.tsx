@@ -56,7 +56,7 @@ const ProjectDetailPage = () => {
             href={project.liveUrl}
             target='_blank'
             rel='noreferrer'
-            className='flex items-center gap-1 rounded-md border border-zinc-200 dark:border-zinc-200 dark:border-white/10 px-4 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-white/10'
+            className='flex items-center gap-1 rounded-md border border-zinc-200 dark:border-white/10 px-4 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
           >
             <ExternalLink size={16} />
             Live Site
@@ -68,7 +68,7 @@ const ProjectDetailPage = () => {
             href={project.codeUrl}
             target='_blank'
             rel='noreferrer'
-            className='flex items-center gap-1 rounded-md border border-zinc-200 dark:border-zinc-200 dark:border-white/10 px-4 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-white/10'
+            className='flex items-center gap-1 rounded-md border border-zinc-200 dark:border-white/10 px-4 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
           >
             <CodeXml size={16} />
             Source Code

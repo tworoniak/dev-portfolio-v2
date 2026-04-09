@@ -58,39 +58,39 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: '/images/projects/aperture.png',
-        alt: 'Aperture dashboard overview',
+        alt: 'Aperture dashboard showing revenue stats, upcoming bookings, and recent clients',
       },
       {
         src: '/images/projects/apertur/screen-00.png',
-        alt: 'Aperture dashboard overview',
+        alt: 'Aperture sign-in page with Clerk authentication — Google, GitHub, and email options',
       },
       {
         src: '/images/projects/apertur/screen-01.png',
-        alt: 'Aperture dashboard overview',
+        alt: 'Aperture main dashboard with revenue stats, booking activity chart, and recent clients',
       },
       {
         src: '/images/projects/apertur/screen-02.png',
-        alt: 'Aperture dashboard overview',
+        alt: 'Aperture clients list with status badges, invoice counts, and last-contact dates',
       },
       {
         src: '/images/projects/apertur/screen-03.png',
-        alt: 'Aperture dashboard overview',
+        alt: 'Aperture bookings table with session type, date, status, deposit, and total columns',
       },
       {
         src: '/images/projects/apertur/screen-04.png',
-        alt: 'Aperture dashboard overview',
+        alt: 'Aperture shoots page with active shoot cards grouped by status',
       },
       {
         src: '/images/projects/apertur/screen-05.png',
-        alt: 'Aperture dashboard overview',
+        alt: 'Aperture gear inventory categorized by camera bodies, lenses, lighting, and accessories',
       },
       {
         src: '/images/projects/apertur/screen-06.png',
-        alt: 'Aperture dashboard overview',
+        alt: 'Aperture pricing packages grid with quote builder sidebar open',
       },
       {
         src: '/images/projects/apertur/screen-07.png',
-        alt: 'Aperture dashboard overview',
+        alt: 'Aperture client galleries overview with shareable gallery links per shoot',
       },
     ],
   },
@@ -151,27 +151,27 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: '/images/projects/horizons/screen-01.png',
-        alt: 'Horizons dashboard overview',
+        alt: 'Horizons homepage with hero banner and travel itinerary cards grid',
       },
       {
         src: '/images/projects/horizons/screen-02.png',
-        alt: 'Horizons dashboard overview',
+        alt: 'Horizons trip detail page with cost breakdown donut chart and activity category stats',
       },
       {
         src: '/images/projects/horizons/screen-03.png',
-        alt: 'Horizons dashboard overview',
+        alt: 'Horizons day-by-day itinerary with budget tracker and activity timeline',
       },
       {
         src: '/images/projects/horizons/screen-04.png',
-        alt: 'Horizons dashboard overview',
+        alt: 'Horizons AI-powered activity suggestions modal with curated options for a destination',
       },
       {
         src: '/images/projects/horizons/screen-05.png',
-        alt: 'Horizons dashboard overview',
+        alt: 'Horizons edit itinerary form with title, destination, dates, budget, and cover image fields',
       },
       {
         src: '/images/projects/horizons/screen-06.png',
-        alt: 'Horizons dashboard overview',
+        alt: 'Horizons multi-day itinerary with activities listed chronologically per day',
       },
     ],
   },
@@ -238,15 +238,15 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: '/images/projects/setlist/screen-01.png',
-        alt: 'SetList dashboard overview',
+        alt: 'SetList festival discovery homepage with search bar and festival cards',
       },
       {
         src: '/images/projects/setlist/screen-02.png',
-        alt: 'SetList dashboard overview',
+        alt: 'SetList festival detail page with per-stage schedule and day selector tabs',
       },
       {
         src: '/images/projects/setlist/screen-03.png',
-        alt: 'SetList dashboard overview',
+        alt: 'SetList festival schedule with personal plan sidebar open showing saved sets',
       },
     ],
   },
@@ -311,15 +311,15 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: '/images/projects/neurostack/screen-01.png',
-        alt: 'NeuroStack screenshot',
+        alt: 'NeuroStack overview dashboard with file count, active agents, sessions logged, and activity charts',
       },
       {
         src: '/images/projects/neurostack/screen-02.png',
-        alt: 'NeuroStack screenshot',
+        alt: 'NeuroStack file editor showing an MCP server implementation plan with phased checklist',
       },
       {
         src: '/images/projects/neurostack/screen-03.png',
-        alt: 'NeuroStack screenshot',
+        alt: 'NeuroStack decisions log listing architectural decisions with timestamps',
       },
     ],
   },
@@ -376,15 +376,15 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: '/images/projects/job-tracker/screen-01.png',
-        alt: 'Job Tracker screenshot',
+        alt: 'JobTrack dashboard with application stats, conversion funnel, and weekly applications chart',
       },
       {
         src: '/images/projects/job-tracker/screen-02.png',
-        alt: 'Job Tracker screenshot',
+        alt: 'JobTrack edit application form with company, position, location, status, and salary fields',
       },
       {
         src: '/images/projects/job-tracker/screen-03.png',
-        alt: 'Job Tracker screenshot',
+        alt: 'JobTrack applications list with status filters, sort controls, and application rows',
       },
     ],
   },
@@ -446,7 +446,7 @@ export const projects: Project[] = [
       },
       {
         src: '/images/projects/lumina/screen-04.png',
-        alt: 'Lumina story reader with split-sticky chapter layout',
+        alt: 'Lumina homepage with full-bleed concert photo hero and featured stories section',
       },
     ],
   },
@@ -550,15 +550,15 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: '/images/projects/accreditor/screen-01.png',
-        alt: 'Accreditor screenshot',
+        alt: 'Accreditor dashboard with accreditation stats, activity chart, deadlines, and recent activity',
       },
       {
         src: '/images/projects/accreditor/screen-02.png',
-        alt: 'Accreditor screenshot',
+        alt: 'Accreditor shows list with upcoming show card and add-show dialog open',
       },
       {
         src: '/images/projects/accreditor/screen-03.png',
-        alt: 'Accreditor screenshot',
+        alt: 'Accreditor PR contacts list with add-contact dialog open',
       },
     ],
   },
@@ -607,39 +607,39 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: '/images/projects/press-pilot/screen-01.png',
-        alt: 'PressPilot screenshot',
+        alt: 'PressPilot sign-in page with email and password form',
       },
       {
         src: '/images/projects/press-pilot/screen-02.png',
-        alt: 'PressPilot screenshot',
+        alt: 'PressPilot dashboard with follow-up stats, interactions chart, and recently contacted list',
       },
       {
         src: '/images/projects/press-pilot/screen-03.png',
-        alt: 'PressPilot screenshot',
+        alt: 'PressPilot contacts list with search filters and follow-up status badges',
       },
       {
         src: '/images/projects/press-pilot/screen-04.png',
-        alt: 'PressPilot screenshot',
+        alt: 'PressPilot follow-ups list filtered by status with subject and outcome columns',
       },
       {
         src: '/images/projects/press-pilot/screen-05.png',
-        alt: 'PressPilot screenshot',
+        alt: 'PressPilot bands directory with genre, country, and website details',
       },
       {
         src: '/images/projects/press-pilot/screen-06.png',
-        alt: 'PressPilot screenshot',
+        alt: 'PressPilot festivals directory with location and date range entries',
       },
       {
         src: '/images/projects/press-pilot/screen-07.png',
-        alt: 'PressPilot screenshot',
+        alt: 'PressPilot bands page with quick-add band modal open',
       },
       {
         src: '/images/projects/press-pilot/screen-08.png',
-        alt: 'PressPilot screenshot',
+        alt: 'PressPilot dashboard with command palette open showing quick navigation actions',
       },
       {
         src: '/images/projects/press-pilot/screen-09.png',
-        alt: 'PressPilot screenshot',
+        alt: 'PressPilot contact detail page with interaction timeline and band/festival tags',
       },
     ],
   },
@@ -734,19 +734,19 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: '/images/projects/photo-portfolio/screen-01.png',
-        alt: 'Photography Portfolio screenshot',
+        alt: 'Photography portfolio homepage hero with full-bleed concert photo and site title',
       },
       {
         src: '/images/projects/photo-portfolio/screen-02.png',
-        alt: 'Photography Portfolio screenshot',
+        alt: 'Photography portfolio homepage with stats bar and featured work masonry grid',
       },
       {
         src: '/images/projects/photo-portfolio/screen-03.png',
-        alt: 'Photography Portfolio screenshot',
+        alt: 'Photography portfolio published-in section with media outlet logos and services offered',
       },
       {
         src: '/images/projects/photo-portfolio/screen-04.png',
-        alt: 'Photography Portfolio screenshot',
+        alt: 'Photography portfolio gallery page with Suicidal Tendencies concert photo grid',
       },
     ],
   },
@@ -1225,15 +1225,15 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: '/images/projects/react-weather/screen-01.png',
-        alt: 'ReactWeather screenshot',
+        alt: 'ReactWeather local forecast dashboard with 7-day forecast cards and temperature chart',
       },
       {
         src: '/images/projects/react-weather/screen-02.png',
-        alt: 'ReactWeather screenshot',
+        alt: 'ReactWeather city search with autocomplete dropdown showing results',
       },
       {
         src: '/images/projects/react-weather/screen-03.png',
-        alt: 'ReactWeather screenshot',
+        alt: 'ReactWeather saved cities page showing four saved locations with coordinates',
       },
     ],
   },
@@ -1348,15 +1348,15 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: '/images/projects/pocket-watch/screen-01.png',
-        alt: 'PocketWatch screenshot',
+        alt: 'PocketWatch movie search results with poster thumbnails and release years',
       },
       {
         src: '/images/projects/pocket-watch/screen-02.png',
-        alt: 'PocketWatch screenshot',
+        alt: 'PocketWatch movie detail page with plot summary and cast list',
       },
       {
         src: '/images/projects/pocket-watch/screen-03.png',
-        alt: 'PocketWatch screenshot',
+        alt: 'PocketWatch watchlist with saved movies and remove buttons',
       },
     ],
   },
