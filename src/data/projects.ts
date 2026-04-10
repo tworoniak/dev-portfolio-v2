@@ -1109,36 +1109,36 @@ export const projects: Project[] = [
     lessons:
       'The dragConstraints ref bug was the most instructive error — Motion tries to measure the constraint container before it mounts, causing a null getBoundingClientRect. Removing the ref and using onDragEnd to reset motion values to zero was cleaner anyway, because it decouples the drag gesture from the return animation and lets the spring config control the snap-back feel independently. The particle system reinforced why Canvas is the right tool for high-frequency graphics — 80 particles with connection lines at 60fps in React DOM would mean 80+ component re-renders per frame. On Canvas it is a clearRect and a set of draw calls with no component tree involvement. useTransform was the most powerful Framer Motion primitive — mapping drag position to 3D rotation and glare without any render cycle between gesture and visual response made the interactions feel instant in a way that setState-driven animations cannot match.',
   },
-  {
-    id: 'festival-planner',
-    slug: 'festival-planner',
-    title: 'Festival Planner (Deprecated)',
-    description:
-      'A planning tool for comparing set times, building schedules, and managing lineup conflicts.',
-    tech: ['React', 'TypeScript', 'SCSS', 'date-fns'],
-    image: '/images/projects/festival-planner.png',
-    liveUrl: 'https://festival-planner-kappa.vercel.app',
-    codeUrl: 'https://github.com/tworoniak/festival-planner',
-    featured: false,
-    // problem:
-    //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
+  // {
+  //   id: 'festival-planner',
+  //   slug: 'festival-planner',
+  //   title: 'Festival Planner (Deprecated)',
+  //   description:
+  //     'A planning tool for comparing set times, building schedules, and managing lineup conflicts.',
+  //   tech: ['React', 'TypeScript', 'SCSS', 'date-fns'],
+  //   image: '/images/projects/festival-planner.png',
+  //   liveUrl: 'https://festival-planner-kappa.vercel.app',
+  //   codeUrl: 'https://github.com/tworoniak/festival-planner',
+  //   featured: false,
+  //   // problem:
+  //   //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
 
-    // solution:
-    //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
+  //   // solution:
+  //   //   'CryptoDash provides a unified dashboard using the CoinGecko API and optimized client-side data fetching.',
 
-    // features: [
-    //   'Real-time crypto price tracking',
-    //   'Interactive charts',
-    //   'Search and sorting',
-    //   'Responsive dashboard UI',
-    // ],
+  //   // features: [
+  //   //   'Real-time crypto price tracking',
+  //   //   'Interactive charts',
+  //   //   'Search and sorting',
+  //   //   'Responsive dashboard UI',
+  //   // ],
 
-    // architecture:
-    //   'The app is structured around a strict separation between the UI layer and the state layer. All cart components — ProductGrid, ProductCard, CartSidebar, CartItemRow — accept plain props and have no knowledge of any state library. Three implementation files (ZustandCart, JotaiCart, ReduxCart) act as adapters, each connecting its respective store to the shared UI. This makes the comparison genuinely apples-to-apples. The action log is implemented as a tiny pub/sub event bus in src/lib/actionLog.ts that lives entirely outside React — Zustand and Jotai call it directly inside their action functions, while Redux hooks into it via a custom middleware. This neutral observer pattern means none of the three stores know about each other. The store code drawer reads from src/data/storeSource.ts, a static map of library-to-source-string, and applies lightweight regex-based syntax highlighting with no external dependency.',
+  //   // architecture:
+  //   //   'The app is structured around a strict separation between the UI layer and the state layer. All cart components — ProductGrid, ProductCard, CartSidebar, CartItemRow — accept plain props and have no knowledge of any state library. Three implementation files (ZustandCart, JotaiCart, ReduxCart) act as adapters, each connecting its respective store to the shared UI. This makes the comparison genuinely apples-to-apples. The action log is implemented as a tiny pub/sub event bus in src/lib/actionLog.ts that lives entirely outside React — Zustand and Jotai call it directly inside their action functions, while Redux hooks into it via a custom middleware. This neutral observer pattern means none of the three stores know about each other. The store code drawer reads from src/data/storeSource.ts, a static map of library-to-source-string, and applies lightweight regex-based syntax highlighting with no external dependency.',
 
-    // lessons:
-    //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
-  },
+  //   // lessons:
+  //   //   'This project reinforced the importance of caching and data normalization when building UI driven by third-party APIs.',
+  // },
   {
     id: 'use-popcorn',
     slug: 'use-popcorn',
