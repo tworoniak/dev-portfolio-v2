@@ -68,7 +68,7 @@ export const certifications: CertificationItem[] = [
     issuer: 'Anthropic',
     name: 'Claude Code in Action',
     period: '2026',
-    // url: 'https://verify.skilljar.com/c/mx2gmx6zq9k9',
+    url: 'https://verify.skilljar.com/c/ykoos55xfxa9',
   },
   {
     issuer: 'Anthropic',
