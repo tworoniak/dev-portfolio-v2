@@ -98,7 +98,7 @@ export const certifications: CertificationItem[] = [
     issuer: 'Anthropic',
     name: 'Introduction to Claude Cowork',
     period: '2026',
-    // url: 'https://verify.skilljar.com/c/mx2gmx6zq9k9',
+    url: 'https://verify.skilljar.com/c/e8hptyoaa8ge',
   },
   {
     issuer: 'Udemy',
