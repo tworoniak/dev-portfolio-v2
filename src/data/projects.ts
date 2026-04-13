@@ -610,7 +610,7 @@ export const projects: Project[] = [
     slug: 'dev-flow',
     title: 'DevFlow Portal',
     description:
-      'DevFlow is a modern SaaS-style engineering dashboard built with React, TypeScript, and Vite. It is designed for development leads and engineering teams to manage tasks, monitor team workload, visualize sprint-related metrics, and generate skill-based task assignment recommendations. This project showcases a scalable frontend architecture with shared global state, reusable UI components, interactive data visualization, and an AI-style allocation engine.',
+      'DevFlow is a modern SaaS-style engineering dashboard built with React, TypeScript, and Vite. It is designed for development leads and engineering teams to manage tasks, monitor team workload, visualize skill profiles, and generate skill-based task assignment recommendations. The project showcases a scalable frontend architecture with persistent global state, reusable accessible UI components, interactive data visualization, and a weighted scoring allocation engine.',
     tech: [
       'React',
       'TypeScript',
@@ -621,34 +621,41 @@ export const projects: Project[] = [
       'React Hook Form',
       'React Router',
       'Recharts',
+      'Lucide React',
+      'Tailwind Merge',
+      'Vitest',
     ],
     image: '/images/projects/dev-flow.png',
-    // liveUrl: 'https://photo-storytelling.vercel.app',
+    liveUrl: 'https://team-management-seven-blond.vercel.app',
     codeUrl: 'https://github.com/tworoniak/team-management',
     featured: false,
 
     problem:
-      'Development leads need visibility into team workload, task status, and delivery priorities, but that information is often scattered across disconnected tools or buried in ticket lists. It can be difficult to quickly understand who has capacity, which work is blocked or high priority, and who is the best fit to take on backlog tasks.',
+      'Development leads need visibility into team workload, task status, and delivery priorities, but that information is often scattered across disconnected tools or buried in ticket lists. It can be difficult to quickly understand who has capacity, which work is blocked or overdue, and who is the best fit to take on backlog tasks.',
 
     solution:
-      'DevFlow provides a centralized engineering operations dashboard that combines task management, team workload tracking, interactive analytics, and a recommendation engine for skill-based task assignment. By bringing these views together into a single interface, the app helps development leads make faster, more informed decisions about planning, prioritization, and team capacity.',
+      'DevFlow provides a centralized engineering operations dashboard that combines task management, team workload tracking, interactive analytics, and a recommendation engine for skill-based task assignment. Tasks can be searched and filtered by status, and overdue work is surfaced automatically. By bringing these views together into a single persistent interface, the app helps development leads make faster, more informed decisions about planning, prioritization, and team capacity.',
 
     features: [
       'Interactive engineering dashboard with live task and workload metrics',
-      'Task CRUD with priority, status, assignee, tags, and required skills',
-      'Team member CRUD with availability, workload, role, and skill assessments',
+      'Task CRUD with priority, status, assignee, tags, required skills, and overdue detection',
+      'Text search across tasks by title, assignee, or tag, with combined status filter support',
+      'Team member CRUD with availability, workload, role, and full 14-skill assessments',
       'Task status distribution and priority overview charts built with Recharts',
+      'Radar chart visualizing all 14 skills per team member including frontend and backend competencies',
       'AI-style allocation engine that recommends the best assignee based on skill match, availability, workload, and role fit',
-      'Shared global state with Zustand so dashboard, tasks, team, and allocation views stay in sync',
-      'Reusable modal and form system powered by React Hook Form and Zod',
-      'Modern SaaS UI with sidebar navigation, dark theme styling, custom chart legends, and custom tooltips',
+      'Persistent global state with Zustand and localStorage so data survives page reloads',
+      'Accessible modal system with focus trap, Escape key handling, and ARIA attributes',
+      'Empty states and contextual CTAs across task and team views',
+      'Reusable form system powered by React Hook Form and Zod with full type coercion',
+      'Modern SaaS UI with sidebar navigation, dark theme, and a consistent design system',
     ],
 
     architecture:
-      'DevFlow is a frontend-first single-page application built with Vite, React, and TypeScript, using React Router for client-side routing and a feature-based folder structure to keep domains like dashboard, tasks, team, and allocation isolated and scalable. Global application data is managed with Zustand stores so multiple routes can react to shared task and team state without prop drilling. Forms are implemented with React Hook Form and validated with Zod to provide typed, reusable modal workflows for creating and editing tasks and team members. Data visualization is handled with Recharts, with dashboard metrics derived through utility functions rather than hardcoded values. The UI is styled with Tailwind CSS using a dark SaaS-inspired design system, reusable cards, badges, buttons, and modal primitives. The allocation engine is implemented as a scoring utility that evaluates backlog tasks against team members using weighted factors such as skill alignment, availability, workload, and role relevance.',
+      'DevFlow is a frontend-first single-page application built with Vite, React, and TypeScript, using React Router for client-side routing and a feature-based folder structure to keep domains like dashboard, tasks, team, and allocation isolated and scalable. Global application data is managed with Zustand stores wrapped with the persist middleware so task and team state is preserved across sessions. Type safety is enforced from the ground up — TEAM_ROLES and SKILL_KEYS are runtime constants from which all related TypeScript types are derived, ensuring the type system and application logic share a single source of truth. Data mapping between form values and store models is centralized in lib/transforms.ts. Forms use React Hook Form with Zod validation and explicit valueAsNumber coercion for numeric fields. Recharts handles all data visualization with metrics derived through typed utility functions. The UI component library is built on Tailwind CSS with a twMerge-based cn() utility for conflict-safe class composition. The allocation engine is a pure scoring utility that evaluates backlog tasks against team members using weighted factors including skill alignment, availability, workload, and role relevance. The project includes a Vitest test suite covering the allocation engine and analytics utilities.',
 
     lessons:
-      'This project reinforced the value of feature-based architecture and shared global state when building dashboard-style applications with multiple connected views. It also highlighted how much clarity derived analytics can add to a product when charts and KPI cards are driven by the same underlying store data as the rest of the app. Building the allocation engine was a good exercise in translating product thinking into scoring logic, while the chart and modal work strengthened patterns around reusable UI, form validation, and scalable TypeScript types.',
+      'This project reinforced the value of feature-based architecture and shared persistent state when building dashboard-style applications with multiple connected views. Deriving TypeScript types from runtime constants rather than maintaining parallel definitions eliminated an entire class of type drift bugs. Building the allocation engine was a good exercise in translating product thinking into scoring logic. The accessibility work — particularly implementing a proper focus trap and keyboard navigation pattern — highlighted how much functional behavior is missing from visually correct modals. Writing tests for the pure utility functions first made it easier to reason about the scoring logic and catch edge cases in the allocation engine before they appeared in the UI.',
 
     screenshots: [
       {
@@ -657,11 +664,11 @@ export const projects: Project[] = [
       },
       {
         src: '/images/projects/dev-flow/screen-02.png',
-        alt: 'DevFlow task management view with priority and status indicators',
+        alt: 'DevFlow task management view with priority, status, and overdue indicators',
       },
       {
         src: '/images/projects/dev-flow/screen-03.png',
-        alt: 'DevFlow team management view with member profiles and skill assessments',
+        alt: 'DevFlow team management view with member profiles and skill radar charts',
       },
     ],
   },

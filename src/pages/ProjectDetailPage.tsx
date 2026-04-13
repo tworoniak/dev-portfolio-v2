@@ -6,7 +6,9 @@ import { ExternalLink, CodeXml } from 'lucide-react';
 import PageTitle from '../components/ui/PageTitle';
 import ScreenshotGallery from '../components/projects/ScreenshotGallery';
 
-const LightboxModal = lazy(() => import('../components/projects/LightboxModal'));
+const LightboxModal = lazy(
+  () => import('../components/projects/LightboxModal'),
+);
 
 const ProjectDetailPage = () => {
   const { slug } = useParams();
@@ -30,7 +32,7 @@ const ProjectDetailPage = () => {
       <PageTitle title={project.title} />
       {/* HERO IMAGE */}
 
-      <div className='mb-12 max-h-96 overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-200 dark:border-white/10'>
+      <div className='mb-12 max-h-96 overflow-hidden rounded-xl border border-zinc-200 dark:border-white/10'>
         <img
           src={project.image}
           alt={project.title}
@@ -42,7 +44,9 @@ const ProjectDetailPage = () => {
 
       <h1 className='text-4xl font-bold'>{project.title}</h1>
 
-      <p className='mt-4 text-zinc-500 dark:text-zinc-400'>{project.tech.join(' • ')}</p>
+      <p className='mt-4 text-zinc-500 dark:text-zinc-400'>
+        {project.tech.join(' • ')}
+      </p>
 
       <p className='mt-6 text-lg leading-8 text-zinc-600 dark:text-zinc-300'>
         {project.description}
@@ -98,7 +102,9 @@ const ProjectDetailPage = () => {
           <section className='space-y-6'>
             <h2 className='text-2xl font-semibold'>The Problem</h2>
 
-            <p className='text-zinc-600 dark:text-zinc-300 leading-7'>{project.problem}</p>
+            <p className='text-zinc-600 dark:text-zinc-300 leading-7'>
+              {project.problem}
+            </p>
           </section>
 
           <hr className='my-16 border-zinc-200 dark:border-white/10' />
@@ -111,7 +117,9 @@ const ProjectDetailPage = () => {
           <section className='space-y-6'>
             <h2 className='text-2xl font-semibold'>The Solution</h2>
 
-            <p className='text-zinc-600 dark:text-zinc-300 leading-7'>{project.solution}</p>
+            <p className='text-zinc-600 dark:text-zinc-300 leading-7'>
+              {project.solution}
+            </p>
           </section>
 
           <hr className='my-16 border-zinc-200 dark:border-white/10' />
@@ -143,7 +151,9 @@ const ProjectDetailPage = () => {
           <section className='space-y-6'>
             <h2 className='text-2xl font-semibold'>Architecture Decisions</h2>
 
-            <p className='text-zinc-600 dark:text-zinc-300 leading-7'>{project.architecture}</p>
+            <p className='text-zinc-600 dark:text-zinc-300 leading-7'>
+              {project.architecture}
+            </p>
           </section>
 
           <hr className='my-16 border-zinc-200 dark:border-white/10' />
@@ -156,7 +166,9 @@ const ProjectDetailPage = () => {
           <section className='space-y-6'>
             <h2 className='text-2xl font-semibold'>Lessons Learned</h2>
 
-            <p className='text-zinc-600 dark:text-zinc-300 leading-7'>{project.lessons}</p>
+            <p className='text-zinc-600 dark:text-zinc-300 leading-7'>
+              {project.lessons}
+            </p>
           </section>
         </>
       )}
