@@ -608,7 +608,7 @@ export const projects: Project[] = [
   {
     id: 'dev-flow',
     slug: 'dev-flow',
-    title: 'DevFlow Portal',
+    title: 'DevFlow',
     description:
       'DevFlow is a modern SaaS-style engineering dashboard built with React, TypeScript, and Vite. It is designed for development leads and engineering teams to manage tasks, monitor team workload, visualize skill profiles, and generate skill-based task assignment recommendations. The project showcases a scalable frontend architecture with persistent global state, reusable accessible UI components, interactive data visualization, and a weighted scoring allocation engine.',
     tech: [
@@ -626,9 +626,9 @@ export const projects: Project[] = [
       'Vitest',
     ],
     image: '/images/projects/dev-flow.png',
-    liveUrl: 'https://team-management-seven-blond.vercel.app',
+    // liveUrl: 'https://team-management-seven-blond.vercel.app',
     codeUrl: 'https://github.com/tworoniak/team-management',
-    featured: false,
+    featured: true,
 
     problem:
       'Development leads need visibility into team workload, task status, and delivery priorities, but that information is often scattered across disconnected tools or buried in ticket lists. It can be difficult to quickly understand who has capacity, which work is blocked or overdue, and who is the best fit to take on backlog tasks.',
