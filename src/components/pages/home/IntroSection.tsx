@@ -5,6 +5,27 @@ const titles = [
   'React Builder',
   'TypeScript Engineer',
   'UI / UX Enthusiast',
+  //
+  'Frontend Architect',
+  'React & TypeScript Specialist',
+  'Component Library Engineer',
+  'Design Systems Engineer',
+  // 'UI Engineer',
+  'Frontend Performance Engineer',
+  'Accessibility Advocate',
+  'Interaction Designer',
+  'Product-Focused Engineer',
+  // 'Full-Stack JavaScript Developer',
+  'Web App Craftsman',
+  'Modern Web Developer',
+  'DX (Developer Experience) Advocate',
+  'Frontend Platform Engineer',
+  'Creative Technologist',
+  'Interface Engineer',
+  // 'React Native Developer',
+  'State Management Enthusiast',
+  'Animation & Microinteraction Engineer',
+  'Scalable UI Engineer',
 ];
 
 const IntroSection = () => {
@@ -12,7 +33,7 @@ const IntroSection = () => {
 
   return (
     <section className='mx-auto max-w-7xl px-2 sm:px-6 py-12'>
-      <h1 className='max-w-3xl text-4xl font-bold leading-tight'>
+      <h1 className='max-w-3xl text-4xl md:text-5xl font-bold leading-tight'>
         {displayText}
         <span
           aria-hidden='true'

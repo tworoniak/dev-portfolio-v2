@@ -649,6 +649,21 @@ export const projects: Project[] = [
 
     lessons:
       'This project reinforced the value of feature-based architecture and shared global state when building dashboard-style applications with multiple connected views. It also highlighted how much clarity derived analytics can add to a product when charts and KPI cards are driven by the same underlying store data as the rest of the app. Building the allocation engine was a good exercise in translating product thinking into scoring logic, while the chart and modal work strengthened patterns around reusable UI, form validation, and scalable TypeScript types.',
+
+    screenshots: [
+      {
+        src: '/images/projects/dev-flow/screen-01.png',
+        alt: 'DevFlow engineering dashboard with live task and workload metrics',
+      },
+      {
+        src: '/images/projects/dev-flow/screen-02.png',
+        alt: 'DevFlow task management view with priority and status indicators',
+      },
+      {
+        src: '/images/projects/dev-flow/screen-03.png',
+        alt: 'DevFlow team management view with member profiles and skill assessments',
+      },
+    ],
   },
   {
     id: 'photography-portfolio',
