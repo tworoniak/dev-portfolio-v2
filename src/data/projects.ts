@@ -670,6 +670,18 @@ export const projects: Project[] = [
         src: '/images/projects/dev-flow/screen-03.png',
         alt: 'DevFlow team management view with member profiles and skill radar charts',
       },
+      {
+        src: '/images/projects/dev-flow/screen-04.png',
+        alt: 'DevFlow engineering projects view with live task and workload metrics',
+      },
+      {
+        src: '/images/projects/dev-flow/screen-05.png',
+        alt: 'DevFlow task management view with priority, status, and overdue indicators',
+      },
+      {
+        src: '/images/projects/dev-flow/screen-06.png',
+        alt: 'DevFlow team management view with member profiles and skill radar charts',
+      },
     ],
   },
   {
@@ -1248,7 +1260,7 @@ export const projects: Project[] = [
     image: '/images/projects/react-weather.png',
     liveUrl: 'https://weather-app-snowy-phi.vercel.app',
     codeUrl: 'https://github.com/tworoniak/weather-app',
-    featured: true,
+    // featured: true,
     // problem:
     //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
 
