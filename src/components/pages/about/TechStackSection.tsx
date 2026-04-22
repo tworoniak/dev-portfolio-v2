@@ -18,6 +18,7 @@ const techStack: TechItem[] = [
   { name: 'css3', label: 'CSS3' },
   { name: 'json', label: 'JSON' },
   { name: 'railway', label: 'Railway' },
+  // { name: 'neon', label: 'Neon' },
   { name: 'go', label: 'Go' },
   { name: 'supabase', label: 'Supabase' },
   { name: 'clerk', label: 'Clerk' },
