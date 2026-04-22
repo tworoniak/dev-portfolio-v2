@@ -251,6 +251,90 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: 'devstash',
+    slug: 'devstash',
+    title: 'DevStash',
+    description:
+      'DevStash is a full-stack SaaS developer knowledge hub built with Next.js, TypeScript, and PostgreSQL. It gives developers a single searchable home for snippets, prompts, commands, notes, links, and files — replacing the scattered mix of Gists, bookmarks, text files, and chat histories that most developers rely on. The project includes a Monaco-powered code editor, a markdown editor, Cloudflare R2 file storage, AI-assisted features, and a complete authentication and billing system.',
+    tech: [
+      'Next.js 16',
+      'React 19',
+      'TypeScript',
+      'Tailwind CSS v4',
+      'shadcn/ui',
+      'Prisma 7',
+      'Neon PostgreSQL',
+      'NextAuth v5',
+      'Cloudflare R2',
+      'Stripe',
+      'OpenAI',
+      'Upstash Redis',
+      'Resend',
+      'Zod',
+      'Monaco Editor',
+      'Vitest',
+    ],
+    image: '/images/projects/devstash.png',
+    // liveUrl: 'https://devstash.app',
+    codeUrl: 'https://github.com/tworoniak/devstash',
+    featured: true,
+
+    problem:
+      'Developers accumulate knowledge constantly — code snippets, AI prompts, shell commands, useful links, context files — but that knowledge ends up scattered across VS Code, browser bookmarks, Notion, GitHub Gists, and old chat histories. Finding anything requires remembering where you put it, and most of it gets lost entirely.',
+
+    solution:
+      'DevStash is a single, fast, searchable hub for all developer knowledge. Items are typed (snippet, prompt, command, note, file, image, link) and can be organized into collections, tagged, favorited, and pinned. A Cmd+K command palette provides instant search across everything. A Monaco editor handles code with syntax highlighting, a markdown editor handles prose, and Cloudflare R2 backs file and image uploads. AI features (auto-tagging, code explanation, prompt optimization) are available on the Pro tier, along with unlimited items, collections, and data export.',
+
+    features: [
+      'Seven built-in item types — snippet, prompt, command, note, file, image, link — each with type-appropriate editing and display',
+      'Monaco Editor with configurable theme, font size, tab size, word wrap, and minimap saved as user preferences',
+      'Markdown editor with GFM support and live preview for notes and prompts',
+      'Collections with many-to-many item assignment, default type, favorite toggle, and a paginated detail view',
+      'Cmd+K command palette with instant client-side search across all items and collections',
+      'Favorites page with per-section client-side sorting (date, name, type)',
+      'Pinned items surfaced first in list and dashboard views',
+      'File and image uploads to Cloudflare R2 with drag-and-drop, progress tracking, extension validation, and size limits',
+      'Import from JSON with duplicate detection, free-tier limit enforcement, and a preview step',
+      'Export to JSON (all tiers) and ZIP with R2 files (Pro)',
+      'AI auto-tagging, code explanation, and prompt optimization via OpenAI (Pro)',
+      'Email/password and GitHub OAuth authentication via NextAuth v5 with email verification and Resend',
+      'Forgot/reset password flow with time-limited tokens',
+      'Upstash Redis rate limiting on all auth endpoints with fail-closed behavior',
+      'Stripe subscription billing with free and Pro tiers',
+      'Ownership-checked Prisma queries throughout to prevent IDOR vulnerabilities',
+      'Responsive dark-mode-first UI with sidebar navigation, mobile drawer, and collapsible sidebar',
+    ],
+
+    architecture:
+      'DevStash is a Next.js 16 App Router application with server components as the default and client components used only where interactivity is required. Data is fetched directly in server components via Prisma queries and passed as props, with Server Actions handling mutations. API routes are reserved for webhooks (Stripe), file uploads with progress tracking, and download proxies. The database is Neon PostgreSQL managed through Prisma 7 with a migration-first workflow — db push is never used. Authentication is handled by NextAuth v5 with a split auth config for edge compatibility and a JWT strategy with the Prisma adapter. File storage uses Cloudflare R2 via the REST API, with a server-side download proxy that enforces ownership before streaming. Rate limiting uses Upstash Redis with a sliding window algorithm and fails closed on Redis errors. Shared Zod schemas are extracted to a central auth schema file and applied across all auth routes. A sanitizeFilename helper normalizes filenames at upload ingest and in Content-Disposition headers. The editor preference system stores theme, font size, tab size, word wrap, and minimap as a JSON column on the User model, surfaced through a React context that wraps the dashboard shell. Import logic validates payloads against a shared Zod ExportSchema, normalizes duplicates case-insensitively, and wraps all DB writes in a Prisma transaction. Styling uses Tailwind CSS v4 with a CSS-based @theme configuration — no tailwind.config.ts.',
+
+    lessons:
+      'Building a full authentication system from scratch — including email verification, forgot password, rate limiting, and OAuth — revealed how many sharp edges exist between the happy path and production-ready behavior. Splitting the NextAuth config for edge compatibility and wiring the Prisma adapter correctly took more iteration than expected. The security review pass was instructive: every mutation route had ownership checks added to Prisma where clauses, which highlighted how easy it is to introduce IDOR bugs when auth and data access are handled in separate layers without a consistent pattern. Extracting a getAuthUserId helper and applying it uniformly across actions was the right fix. The Monaco Editor integration required building a preference system early — once it was embedded in enough places, retrofitting configurable options would have been painful. Using a React context over the dashboard shell rather than prop-drilling preferences through every layout was the right call.',
+
+    screenshots: [
+      {
+        src: '/images/projects/devstash/screen-01.png',
+        alt: 'DevStash dashboard with stats, pinned items, and recent collections',
+      },
+      {
+        src: '/images/projects/devstash/screen-02.png',
+        alt: 'DevStash snippet view with Monaco code editor and syntax highlighting',
+      },
+      {
+        src: '/images/projects/devstash/screen-03.png',
+        alt: 'DevStash command palette open with search results across items and collections',
+      },
+      {
+        src: '/images/projects/devstash/screen-04.png',
+        alt: 'DevStash collections view with item type indicators and collection grid',
+      },
+      {
+        src: '/images/projects/devstash/screen-05.png',
+        alt: 'DevStash homepage with hero banner and item type cards linking to filtered views',
+      },
+    ],
+  },
+  {
     id: 'neurostack',
     slug: 'neurostack',
     title: 'NeuroStack',
@@ -605,6 +689,7 @@ export const projects: Project[] = [
       },
     ],
   },
+
   {
     id: 'dev-flow',
     slug: 'dev-flow',
@@ -1339,7 +1424,7 @@ export const projects: Project[] = [
     image: '/images/projects/chromatic.png',
     liveUrl: 'https://chromatic-sepia.vercel.app',
     codeUrl: 'https://github.com/tworoniak/chromatic',
-    featured: true,
+    // featured: true,
 
     problem:
       'Most theme builders stop at color pickers and leave developers to manually derive scales, map semantic roles, verify contrast compliance, and maintain separate token sets for light and dark mode. A single semantic color that passes WCAG on a white background will almost always fail on a dark one — and fixing it in one mode breaks the other. Teams either skip accessibility validation entirely or maintain four separate token files by hand.',
