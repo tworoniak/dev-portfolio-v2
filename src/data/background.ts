@@ -104,7 +104,7 @@ export const certifications: CertificationItem[] = [
     issuer: 'Udemy',
     name: 'Coding With AI - Planning To Production',
     period: '2026',
-    // url: 'https://www.udemy.com/certificate/UC-34895766-fa11-4029-9d7c-d0bebf86dfbd/',
+    url: 'https://www.udemy.com/certificate/UC-f90cd785-f137-48c1-8dd3-874504cf9762/',
   },
   {
     issuer: 'Udemy',
