@@ -92,7 +92,7 @@ export const certifications: CertificationItem[] = [
     issuer: 'Anthropic',
     name: 'Model Context Protocol: Advanced Topics',
     period: '2026',
-    // url: 'https://verify.skilljar.com/c/mx2gmx6zq9k9',
+    url: 'https://verify.skilljar.com/c/st9kwcqbg3kj',
   },
   {
     issuer: 'Anthropic',
