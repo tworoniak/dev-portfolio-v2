@@ -96,6 +96,18 @@ export const certifications: CertificationItem[] = [
   },
   {
     issuer: 'Anthropic',
+    name: 'AI Capabilities and Limitations',
+    period: '2026',
+    url: 'https://verify.skilljar.com/c/224aygqqovfr',
+  },
+  {
+    issuer: 'Anthropic',
+    name: 'Building with the Claude API',
+    period: '2026',
+    // url: 'https://verify.skilljar.com/c/st9kwcqbg3kj',
+  },
+  {
+    issuer: 'Anthropic',
     name: 'Introduction to Claude Cowork',
     period: '2026',
     url: 'https://verify.skilljar.com/c/e8hptyoaa8ge',
@@ -133,7 +145,7 @@ export const certifications: CertificationItem[] = [
   {
     issuer: 'Udemy',
     name: 'Creating Accessible Websites',
-    period: '2026',
+    period: '2025',
     url: 'https://www.udemy.com/certificate/UC-a108e7a5-3583-4dfb-975b-a84a968adfd3/',
   },
 ];
