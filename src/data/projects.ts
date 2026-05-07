@@ -3,6 +3,79 @@ import type { Project } from '../types/project';
 export const projects: Project[] = [
   // Featured Projects //
   {
+    id: 'cinevault',
+    slug: 'cinevault',
+    title: 'CineVault',
+    description:
+      'CineVault is a full-stack movie and TV discovery app built with Angular 21, TypeScript, and the TMDB API. It gives users a single place to search, discover, and track films and shows — with curated grids, genre and sort filters, trailer playback, streaming availability, cast and crew breakdowns, actor profiles, and a local watchlist. The project is built entirely with Angular signals, standalone components, and a dark-mode-first SCSS architecture.',
+    tech: [
+      'Angular 21',
+      'TypeScript',
+      'RxJS',
+      'SCSS',
+      'TMDB API',
+      'Angular Signals',
+      'Angular Router',
+      'Vitest',
+    ],
+    image: '/images/projects/cinevault.png',
+    // liveUrl: 'https://cinevault.app',
+    codeUrl: 'https://github.com/tworoniak/cinevault',
+    featured: true,
+
+    problem:
+      'Discovering what to watch is fragmented — streaming platforms surface their own libraries, search is siloed, and there is no single place to browse trending titles, check where something is streaming, watch a trailer, and save it for later without creating accounts on a dozen services.',
+
+    solution:
+      'CineVault pulls everything into one fast, searchable Angular app backed by the TMDB API. A homepage carousel surfaces trending and popular content across movies, TV, and people. The Discover page lets users filter by genre, sort by popularity or rating, and page through results. Every title has a full detail page with a trailer modal, cast grid with actor profile links, streaming provider logos (Canada via JustWatch), and a one-click watchlist button. Watchlist state is persisted to localStorage and surfaced on a stats dashboard.',
+
+    features: [
+      'Homepage with a hero banner (top 5 trending, auto-advance with dot nav) and eight horizontal carousels — Trending, Popular, Watchlist, Now Playing, Coming Soon, Top Rated, Popular TV, and Popular Celebrities',
+      'Multi-search via TMDB /search/multi covering movies and TV titles with poster, year, and type badge',
+      'Discover page with Trending This Week and Popular Right Now grids, multi-select genre pill filters, and a sort dropdown (Most Popular / Highest Rated / Newest First / Highest Grossing)',
+      'Load More pagination that appends results to the existing grid without resetting scroll position',
+      'Movie detail page with full-width backdrop, metadata (genres, runtime, language, status, tagline, TMDB rating), and watchlist CTA',
+      'Trailer modal with YouTube embed, opened via a Watch Trailer button, dismissed via button, backdrop click, or Escape key',
+      'Cast & Crew grid showing top 8 billed cast with profile photos, actor name, character name, and Director / Writer credits',
+      'Actor detail page at /discover/person/:id with profile photo, biography (collapsible), birthdate, birthplace, and Known For filmography grid',
+      'Where to Watch section with streaming and rental provider logos sourced from JustWatch via TMDB, with direct JustWatch attribution link',
+      'Similar Movies (More Like This) row using TMDB recommendations endpoint, horizontal scroll on mobile',
+      'TV show support across Discover, detail pages (/discover/tv/:id), and the watchlist — seasons, episodes, runtime, and TV-specific cast/crew data',
+      'Watchlist persisted to localStorage with duplicate prevention at both service and UI levels; count badge in the nav',
+      'Dashboard with watchlist stats (total, movies, series) and current search results preview',
+      'Responsive dark-mode-first design with a hamburger nav on mobile, CSS custom properties, and component-scoped SCSS throughout',
+    ],
+
+    architecture:
+      'CineVault is an Angular 21 application built exclusively with standalone components — no NgModules anywhere. All dependency injection uses the inject() function rather than constructor injection. Component state is managed entirely through Angular signals (signal, computed, effect), with services acting as the single source of truth by exposing read-only signal surfaces. HTTP calls live exclusively in services; components never touch HttpClient directly. TmdbService is the core data layer, holding signals for every resource (trending, popular, genres, movieDetail, tvDetail, personDetail, watchProviders, trailerKey, similar, etc.) and exposing typed fetch methods that map raw TMDB API shapes to internal app models via private mapper functions. Raw API response shapes are defined separately from app models in tmdb.model.ts, keeping the mapping boundary explicit. The StorageService provides typed get<T>() and set<T>() wrappers around localStorage so no other layer touches it directly. Routing is feature-based, with each feature exporting a ROUTES constant and the app config using lazy-loaded route arrays. The SCSS architecture follows a partials structure (abstracts, base, components, layout) with CSS custom properties (--cv-*) defined in _variables.scss. A SafeUrlPipe handles iframe src sanitization for the trailer modal. The HorizontalCarouselComponent is a reusable shell with scroll-snap, named ng-content slots for tabs, and desktop-only arrow navigation — all eight homepage carousels are instances of it.',
+
+    lessons:
+      'Designing the signal layer before building components paid off — because each service exposes stable read-only signals, components stayed thin and the template logic remained simple even as the feature count grew. The trickiest part was managing signal resets across route navigations: without explicit resets at the start of each fetch, stale data from a previous detail page would flash briefly before new data loaded. Making every fetch method reset its signal to null or [] as its first line eliminated that class of bug entirely. The genre filter system highlighted an important derived-state pattern: storing only the minimal signal state (selectedGenres as a Set, sortBy as a string) and deriving everything else via computed() kept the filter logic easy to reason about and test. Adding TV support late in the build required carefully extending rather than replacing the existing movie-centric models and routes — the mediaType discriminator on shared card components ended up being the cleanest way to route cards to the right detail page without duplicating card components.',
+
+    screenshots: [
+      {
+        src: '/images/projects/cinevault/screen-01.png',
+        alt: 'CineVault homepage with hero banner and trending carousels',
+      },
+      {
+        src: '/images/projects/cinevault/screen-02.png',
+        alt: 'CineVault Discover page with genre filter pills and movie card grid',
+      },
+      {
+        src: '/images/projects/cinevault/screen-03.png',
+        alt: 'CineVault movie detail page with backdrop, trailer button, and cast grid',
+      },
+      {
+        src: '/images/projects/cinevault/screen-04.png',
+        alt: 'CineVault Where to Watch section with streaming provider logos',
+      },
+      {
+        src: '/images/projects/cinevault/screen-05.png',
+        alt: 'CineVault actor detail page with biography and Known For filmography',
+      },
+    ],
+  },
+  {
     id: 'apertur',
     slug: 'apertur',
     title: 'Apertur',
