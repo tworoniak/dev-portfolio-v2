@@ -3,6 +3,7 @@ import { projects } from '../data/projects';
 import type { Project } from '../types/project';
 import HeroSection from '../components/pages/home/HeroSection';
 import NowSnapshot from '../components/pages/home/NowSnapshot';
+import SelectedWork from '../components/pages/home/SelectedWork';
 import ProjectsGrid from '../components/projects/ProjectsGrid';
 import PageTitle from '../components/ui/PageTitle';
 
@@ -25,6 +26,7 @@ const HomePage = () => {
       <PageTitle />
       <HeroSection />
       <NowSnapshot />
+      <SelectedWork />
       <ProjectsGrid
         title='Featured Projects'
         projects={featuredProjects}

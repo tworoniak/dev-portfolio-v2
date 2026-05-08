@@ -12,6 +12,10 @@ export type Project = {
   features?: string[];
   lessons?: string;
   featured?: boolean;
+  selected?: boolean;
+  tagline?: string;
+  year?: string;
+  role?: string;
   architecture?: string;
   experiment?: boolean;
   screenshots?: { src: string; alt: string }[];
