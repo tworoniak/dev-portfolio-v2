@@ -22,6 +22,10 @@ export const projects: Project[] = [
     // liveUrl: 'https://cinevault.app',
     codeUrl: 'https://github.com/tworoniak/cinevault',
     featured: true,
+    selected: true,
+    tagline: 'An Angular SPA for movie and TV discovery — TMDB-powered.',
+    year: '2025',
+    role: 'Solo',
 
     problem:
       'Discovering what to watch is fragmented — streaming platforms surface their own libraries, search is siloed, and there is no single place to browse trending titles, check where something is streaming, watch a trailer, and save it for later without creating accounts on a dozen services.',
@@ -101,6 +105,10 @@ export const projects: Project[] = [
     // liveUrl: 'https://www.apertur.pro',
     codeUrl: 'https://github.com/tworoniak/aperture-photo-os',
     featured: true,
+    selected: true,
+    tagline: 'Photographer business OS — bookings, gear, and client proofing.',
+    year: '2025',
+    role: 'Solo',
 
     problem:
       'Photographers typically juggle four or five disconnected tools to run their business — a spreadsheet for clients, a calendar app for bookings, Google Drive for contracts, a separate invoicing tool, and email chains to share proofing galleries with clients. This fragmentation creates friction at every step of the workflow, makes it easy for things to fall through the cracks, and presents an unprofessional experience to clients.',
@@ -197,6 +205,10 @@ export const projects: Project[] = [
     // liveUrl: 'https://travel-itinerary-app-alpha.vercel.app',
     codeUrl: 'https://github.com/tworoniak/travel-itinerary-app',
     featured: true,
+    selected: true,
+    tagline: 'AI travel itinerary planner with day-by-day timelines.',
+    year: '2025',
+    role: 'Solo',
 
     problem:
       'Planning a multi-day trip across multiple tools — notes apps, spreadsheets, booking emails — leaves itineraries fragmented and hard to share or update.',
@@ -351,6 +363,10 @@ export const projects: Project[] = [
     // liveUrl: 'https://devstash.app',
     codeUrl: 'https://github.com/tworoniak/devstash',
     featured: true,
+    selected: true,
+    tagline: 'Snippet and prompt vault with Monaco editor, R2 storage, and Stripe billing.',
+    year: '2026',
+    role: 'Solo',
 
     problem:
       'Developers accumulate knowledge constantly — code snippets, AI prompts, shell commands, useful links, context files — but that knowledge ends up scattered across VS Code, browser bookmarks, Notion, GitHub Gists, and old chat histories. Finding anything requires remembering where you put it, and most of it gets lost entirely.',
@@ -433,6 +449,10 @@ export const projects: Project[] = [
     // liveUrl: 'https://neurostack-gamma.vercel.app',
     codeUrl: 'https://github.com/tworoniak/neurostack',
     featured: true,
+    selected: true,
+    tagline: 'Memory dashboard and MCP server for Claude Code agents.',
+    year: '2026',
+    role: 'Solo',
 
     problem:
       'Every Claude Code session starts with zero context. There is no memory of which branches are active, which bugs were solved yesterday, which architecture decisions were already made, or what other agents running in parallel are currently touching. The built-in MEMORY.md system has a 200-line cap, no structure, and no way to coordinate across multiple simultaneous agents — leading to constant re-explaining, re-solving known problems, and occasional silent overwrites between agents. Even with a structured memory directory, agents writing raw markdown frequently break formatting, produce malformed entries, or skip writes when crashing mid-session.',
