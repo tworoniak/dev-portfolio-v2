@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
+import { useAccentColor } from '../../../hooks/useAccentColor';
 import AvatarBlock from './AvatarBlock';
 import TechTicker from './TechTicker';
 
-const HeroSection = () => (
+const HeroSection = () => {
+  const { accent } = useAccentColor();
+
+  return (
   <>
     <section className='relative overflow-hidden'>
       <div className='mx-auto max-w-7xl px-6 pt-20 pb-12 sm:pt-28 sm:pb-16'>
@@ -19,7 +23,7 @@ const HeroSection = () => (
         <h1 className='max-w-4xl text-5xl font-bold leading-tight tracking-tight text-zinc-900 dark:text-white sm:text-6xl lg:text-7xl'>
           Hi, I&rsquo;m Thomas.
           <br />I design and build{' '}
-          <em style={{ color: 'var(--accent)' }}>thoughtful</em> digital
+          <em style={{ color: accent }}>thoughtful</em> digital
           experiences.
         </h1>
 
@@ -30,7 +34,7 @@ const HeroSection = () => (
             12 years
           </span>{' '}
           shipping React, TypeScript, and design-system work. Currently building{' '}
-          <span className='font-semibold' style={{ color: 'var(--accent)' }}>
+          <span className='font-semibold' style={{ color: accent }}>
             NeuroStack
           </span>{' '}
           — a memory dashboard for AI agents.
@@ -63,6 +67,7 @@ const HeroSection = () => (
     </section>
     <TechTicker />
   </>
-);
+  );
+};
 
 export default HeroSection;
