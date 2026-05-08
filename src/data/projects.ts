@@ -7,7 +7,7 @@ export const projects: Project[] = [
     slug: 'cinevault',
     title: 'CineVault',
     description:
-      'CineVault is a full-stack movie and TV discovery app built with Angular 21, TypeScript, and the TMDB API. It gives users a single place to search, discover, and track films and shows — with curated grids, genre and sort filters, trailer playback, streaming availability, cast and crew breakdowns, actor profiles, and a local watchlist. The project is built entirely with Angular signals, standalone components, and a dark-mode-first SCSS architecture.',
+      'CineVault is a frontend Angular 21 SPA for movie and TV discovery. It uses the TMDB API to power curated grids, genre and sort filters, trailer playback, streaming availability, cast and crew breakdowns, actor profiles, and a local watchlist. Built with Angular signals, standalone components, and a dark-mode-first SCSS architecture. No backend — state is persisted to localStorage.',
     tech: [
       'Angular 21',
       'TypeScript',
