@@ -27,3 +27,5 @@ CLAUDE.md
 .claude/*
 
 .mcp.json
+
+context/
