@@ -1,7 +1,7 @@
 import { lazy, Suspense, useState } from 'react';
 import { projects } from '../data/projects';
 import type { Project } from '../types/project';
-import IntroSection from '../components/pages/home/IntroSection';
+import HeroSection from '../components/pages/home/HeroSection';
 import ProjectsGrid from '../components/projects/ProjectsGrid';
 import PageTitle from '../components/ui/PageTitle';
 
@@ -22,7 +22,7 @@ const HomePage = () => {
   return (
     <>
       <PageTitle />
-      <IntroSection />
+      <HeroSection />
       <ProjectsGrid
         title='Featured Projects'
         projects={featuredProjects}

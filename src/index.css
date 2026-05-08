@@ -29,6 +29,26 @@ a {
   cursor: pointer;
 }
 
+/* ── Tech ticker ───────────────────────────────────────────────────────────── */
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: ticker 30s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}
+
 /* ── Project cards ─────────────────────────────────────────────────────────── */
 
 .project-card,
