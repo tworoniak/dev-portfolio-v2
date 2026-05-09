@@ -4,6 +4,7 @@ import type { Project } from '../types/project';
 import HeroSection from '../components/pages/home/HeroSection';
 import NowSnapshot from '../components/pages/home/NowSnapshot';
 import SelectedWork from '../components/pages/home/SelectedWork';
+import ExperimentsIndex from '../components/pages/home/ExperimentsIndex';
 import ProjectsGrid from '../components/projects/ProjectsGrid';
 import PageTitle from '../components/ui/PageTitle';
 
@@ -14,7 +15,6 @@ const HomePage = () => {
   const [hasOpenedModal, setHasOpenedModal] = useState(false);
 
   const featuredProjects = projects.filter((p) => p.featured);
-  const experimentProjects = projects.filter((p) => p.experiment);
 
   const handleOpenProject = (project: Project) => {
     setHasOpenedModal(true);
@@ -32,11 +32,7 @@ const HomePage = () => {
         projects={featuredProjects}
         onOpenProject={handleOpenProject}
       />
-      <ProjectsGrid
-        title='Experiments'
-        projects={experimentProjects}
-        onOpenProject={handleOpenProject}
-      />
+      <ExperimentsIndex onOpenProject={handleOpenProject} />
 
       {/* Modal — chunk loads on first open, stays mounted for exit animations */}
       {hasOpenedModal && (

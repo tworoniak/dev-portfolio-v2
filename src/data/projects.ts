@@ -1009,6 +1009,10 @@ export const projects: Project[] = [
     liveUrl: 'https://ui-design-systems-lab.vercel.app',
     codeUrl: 'https://github.com/tworoniak/ui-design-systems-lab',
     experiment: true,
+    year: '2025',
+    role: 'Solo',
+    tagline: 'Hands-on comparison of Radix, MUI, and shadcn/ui.',
+    category: 'Frontend',
 
     // problem:
     //   'Tracking cryptocurrency market data across multiple sources can be slow and fragmented.',
@@ -1040,6 +1044,10 @@ export const projects: Project[] = [
     liveUrl: 'https://design-token-pipeline.vercel.app',
     codeUrl: 'https://github.com/tworoniak/design-token-pipeline',
     experiment: true,
+    year: '2025',
+    role: 'Solo',
+    tagline: 'W3C DTCG tokens → CSS, SCSS, TS, and Tailwind live.',
+    category: 'Tooling',
 
     problem:
       'Design tokens are the single source of truth for a design system — colours, spacing, typography, shadows — but they only become useful when transformed into formats that code can actually consume. Teams either reach for heavy tools like Style Dictionary without understanding what they do, or maintain four separate token files by hand and watch them drift out of sync.',
@@ -1083,6 +1091,10 @@ export const projects: Project[] = [
     liveUrl: 'https://virtual-list-renderer.vercel.app',
     codeUrl: 'https://github.com/tworoniak/virtual-list-renderer',
     experiment: true,
+    year: '2025',
+    role: 'Solo',
+    tagline: '100k rows at 60fps — built from scratch, no libraries.',
+    category: 'Frontend',
 
     problem:
       'Most React developers reach for react-window or react-virtualized without understanding what virtual rendering actually does or why it matters. Libraries abstract away the core insight — that rendering 100,000 DOM nodes simultaneously is what kills performance, not the data itself — leaving developers unable to debug, extend, or reason about the behaviour when something goes wrong. And without measured evidence, performance claims remain theoretical.',
@@ -1129,6 +1141,10 @@ export const projects: Project[] = [
     liveUrl: 'https://state-management-comparison.vercel.app',
     codeUrl: 'https://github.com/tworoniak/state-management-comparison',
     experiment: true,
+    year: '2025',
+    role: 'Solo',
+    tagline: 'Zustand vs Jotai vs Redux — same UI, three state engines.',
+    category: 'Frontend',
 
     problem:
       "Most state management comparisons live in blog posts — abstract code snippets with no shared context, no measurable output, and no way to feel the difference between libraries. Developers are left making architectural decisions based on other people's opinions rather than direct observation.",
@@ -1173,6 +1189,10 @@ export const projects: Project[] = [
     liveUrl: 'https://cartograph-ten.vercel.app',
     codeUrl: 'https://github.com/tworoniak/cartograph',
     experiment: true,
+    year: '2025',
+    role: 'Solo',
+    tagline: 'US choropleth map in pure SVG — no Mapbox, no Leaflet.',
+    category: 'Frontend',
 
     problem:
       'Most developers treat maps as a black box — drop in a Mapbox token and render tiles. This abstracts away everything interesting: geographic projections, coordinate systems, path generation, and color scales that meaningfully represent data. The result is developers who can use map libraries but cannot reason about what they are doing.',
@@ -1210,6 +1230,10 @@ export const projects: Project[] = [
     liveUrl: 'https://chatgpt-archive-viewer.vercel.app',
     codeUrl: 'https://github.com/tworoniak/chatgpt-archive-viewer',
     experiment: true,
+    year: '2025',
+    role: 'Solo',
+    tagline: 'Browse your ChatGPT history — search, highlight, export.',
+    category: 'Utility',
 
     problem:
       "ChatGPT's data export is a single JSON file — technically complete, but completely unusable. The mapping format stores messages as a non-linear graph of nodes with parent and children references, not a readable array. There is no built-in way to search across conversations, jump to a specific thread, or extract a conversation into a portable format. The data exists but is effectively inaccessible without tooling.",
@@ -1252,6 +1276,10 @@ export const projects: Project[] = [
     // liveUrl: 'https://your-physica.vercel.app',
     codeUrl: 'https://github.com/tworoniak/palette-forge',
     experiment: true,
+    year: '2025',
+    role: 'Solo',
+    tagline: 'Harmony-based palette generator with export and a11y checks.',
+    category: 'Tooling',
 
     // problem:
     //   'Most UI animations use static easing curves — ease-in, ease-out, cubic-bezier — which feel mechanical because they specify duration and shape rather than physical properties. Physics-based animation is fundamentally different: you define mass, stiffness, and damping, and the motion emerges from those values. The difference is immediately perceptible but rarely demonstrated in a way that makes the underlying mechanics tangible.',
@@ -1296,6 +1324,10 @@ export const projects: Project[] = [
     liveUrl: 'https://your-physica.vercel.app',
     codeUrl: 'https://github.com/tworoniak/physica',
     experiment: true,
+    year: '2025',
+    role: 'Solo',
+    tagline: 'Spring physics, particle systems, and magnetic cursor effects.',
+    category: 'Frontend',
 
     problem:
       'Most UI animations use static easing curves — ease-in, ease-out, cubic-bezier — which feel mechanical because they specify duration and shape rather than physical properties. Physics-based animation is fundamentally different: you define mass, stiffness, and damping, and the motion emerges from those values. The difference is immediately perceptible but rarely demonstrated in a way that makes the underlying mechanics tangible.',
@@ -1563,6 +1595,10 @@ export const projects: Project[] = [
     image: '/images/projects/pocket-watch.png',
     codeUrl: 'https://github.com/tworoniak/pocket-watchlist',
     experiment: true,
+    year: '2025',
+    role: 'Solo',
+    tagline: 'Offline-first React Native watchlist powered by OMDb.',
+    category: 'Mobile',
     problem:
       "Keeping track of movies you want to watch — and ones you've already seen — is scattered across streaming apps, notes, and memory. There's no lightweight, offline-first mobile tool that just does the job.",
     solution:
