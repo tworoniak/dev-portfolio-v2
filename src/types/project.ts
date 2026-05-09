@@ -19,5 +19,7 @@ export type Project = {
   architecture?: string;
   experiment?: boolean;
   category?: string;
+  quarter?: string;
+  metrics?: { value: string; label: string }[];
   screenshots?: { src: string; alt: string }[];
 };
