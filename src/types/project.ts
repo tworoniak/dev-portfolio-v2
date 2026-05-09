@@ -18,5 +18,6 @@ export type Project = {
   role?: string;
   architecture?: string;
   experiment?: boolean;
+  category?: string;
   screenshots?: { src: string; alt: string }[];
 };
