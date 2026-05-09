@@ -142,7 +142,7 @@ const SelectedWork = () => {
   if (!spotlight) return null;
 
   return (
-    <section className='mx-auto max-w-7xl px-6 pt-10 pb-16'>
+    <section className='mx-auto max-w-7xl px-2 sm:px-6 pt-10 pb-16'>
       {/* Header row */}
       <div className='mb-4 flex items-center justify-between'>
         <p className='text-xs uppercase tracking-[0.3em] text-zinc-500'>

@@ -9,7 +9,7 @@ const HeroSection = () => {
   return (
     <>
       <section className='relative overflow-hidden'>
-        <div className='mx-auto max-w-7xl px-6 pt-20 pb-12 sm:pt-28 sm:pb-16'>
+        <div className='mx-auto max-w-7xl px-2 sm:px-6 pt-20 pb-12 sm:pt-28 sm:pb-16'>
           {/* Avatar + status pill */}
           <div className='mb-8 flex flex-wrap items-center gap-4'>
             <AvatarBlock />
