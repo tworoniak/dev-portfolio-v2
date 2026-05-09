@@ -4,7 +4,7 @@ import type { Project } from '../../../types/project';
 
 const selected = projects.filter((p) => p.selected);
 const spotlight = selected.find((p) => p.featured) ?? selected[0];
-const secondary = selected.filter((p) => p.id !== spotlight?.id).slice(0, 4);
+const secondary = selected.filter((p) => p.id !== spotlight?.id).slice(0, 8);
 
 const CARD =
   'project-card rounded-lg border border-zinc-200 dark:border-white/10 bg-zinc-50/70 dark:bg-black/15 transition-[border-color,box-shadow] duration-300 hover:bg-zinc-100 dark:hover:bg-black/30';
@@ -66,7 +66,7 @@ const SpotlightCard = ({ project }: { project: Project }) => (
       </div>
 
       {/* CTAs */}
-      <div className='mt-6 flex flex-wrap gap-3'>
+      <div className='mt-auto pt-6 flex flex-wrap gap-3'>
         <Link
           to={`/projects/${project.slug}`}
           className='rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-white dark:text-black dark:hover:bg-zinc-200'

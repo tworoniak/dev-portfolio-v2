@@ -22,13 +22,13 @@ const ExperimentsIndex = ({ onOpenProject }: Props) => {
         </p>
 
         {/* Toggle — hidden on mobile, list view is always active there */}
-        <div className='hidden items-center gap-1 rounded-full border border-white/10 p-1 sm:flex'>
+        <div className='hidden items-center gap-1 rounded-full border border-zinc-200 p-1 dark:border-white/10 sm:flex'>
           <button
             onClick={() => setView('grid')}
             className={`rounded-full px-3 py-1 text-xs transition-colors ${
               view === 'grid'
-                ? 'bg-white text-black'
-                : 'text-white/50 hover:text-white'
+                ? 'bg-zinc-900 text-white dark:bg-white dark:text-black'
+                : 'text-zinc-400 hover:text-zinc-900 dark:text-white/50 dark:hover:text-white'
             }`}
           >
             Grid view
@@ -37,8 +37,8 @@ const ExperimentsIndex = ({ onOpenProject }: Props) => {
             onClick={() => setView('list')}
             className={`rounded-full px-3 py-1 text-xs transition-colors ${
               view === 'list'
-                ? 'bg-white text-black'
-                : 'text-white/50 hover:text-white'
+                ? 'bg-zinc-900 text-white dark:bg-white dark:text-black'
+                : 'text-zinc-400 hover:text-zinc-900 dark:text-white/50 dark:hover:text-white'
             }`}
           >
             List view
@@ -51,7 +51,7 @@ const ExperimentsIndex = ({ onOpenProject }: Props) => {
       </h2>
 
       {view === 'list' ? (
-        <div className='divide-y divide-white/10'>
+        <div className='divide-y divide-zinc-200 dark:divide-white/10'>
           {experiments.map((project, i) => (
             <ExperimentRow key={project.id} project={project} index={i} onOpen={onOpenProject} />
           ))}

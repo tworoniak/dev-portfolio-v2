@@ -21,7 +21,7 @@ export const projects: Project[] = [
     image: '/images/projects/cinevault.png',
     // liveUrl: 'https://cinevault.app',
     codeUrl: 'https://github.com/tworoniak/cinevault',
-    featured: true,
+    // featured: true,
     selected: true,
     tagline: 'An Angular SPA for movie and TV discovery — TMDB-powered.',
     year: '2025',
@@ -104,7 +104,7 @@ export const projects: Project[] = [
     image: '/images/projects/aperture.png',
     // liveUrl: 'https://www.apertur.pro',
     codeUrl: 'https://github.com/tworoniak/aperture-photo-os',
-    featured: true,
+    // featured: true,
     selected: true,
     tagline: 'Photographer business OS — bookings, gear, and client proofing.',
     year: '2025',
@@ -204,7 +204,7 @@ export const projects: Project[] = [
     image: '/images/projects/horizons.png',
     // liveUrl: 'https://travel-itinerary-app-alpha.vercel.app',
     codeUrl: 'https://github.com/tworoniak/travel-itinerary-app',
-    featured: true,
+    // featured: true,
     selected: true,
     tagline: 'AI travel itinerary planner with day-by-day timelines.',
     year: '2025',
@@ -291,8 +291,8 @@ export const projects: Project[] = [
     image: '/images/projects/setlist.png',
     // liveUrl: 'https://setlist.app',
     codeUrl: 'https://github.com/tworoniak/new-festival-planner',
-    featured: true,
-
+    // featured: true,
+    selected: true,
     problem:
       'Festival-goers juggling multi-stage lineups across multiple days have no dedicated tool to browse schedules, track favorite artists, and build a personal plan — leaving them relying on PDFs, screenshots, and memory.',
 
@@ -362,9 +362,10 @@ export const projects: Project[] = [
     image: '/images/projects/devstash.png',
     // liveUrl: 'https://devstash.app',
     codeUrl: 'https://github.com/tworoniak/devstash',
-    featured: true,
+    // featured: true,
     selected: true,
-    tagline: 'Snippet and prompt vault with Monaco editor, R2 storage, and Stripe billing.',
+    tagline:
+      'Snippet and prompt vault with Monaco editor, R2 storage, and Stripe billing.',
     year: '2026',
     role: 'Solo',
 
@@ -448,7 +449,7 @@ export const projects: Project[] = [
     image: '/images/projects/neurostack.png',
     // liveUrl: 'https://neurostack-gamma.vercel.app',
     codeUrl: 'https://github.com/tworoniak/neurostack',
-    featured: true,
+    // featured: true,
     selected: true,
     tagline: 'Memory dashboard and MCP server for Claude Code agents.',
     year: '2026',
@@ -525,8 +526,8 @@ export const projects: Project[] = [
 
     image: '/images/projects/job-tracker.png',
     codeUrl: 'https://github.com/tworoniak/job-application-tracker',
-    featured: true,
-
+    // featured: true,
+    selected: true,
     problem:
       'Tracking a job search across spreadsheets, browser tabs, and memory is fragmented and lossy. There’s no lightweight tool purpose-built for developers that provides structured tracking, filtering, and visibility into your pipeline without requiring a paid subscription or a bloated ATS.',
 
@@ -659,8 +660,8 @@ export const projects: Project[] = [
     image: '/images/projects/accreditor.png',
     // liveUrl: 'https://your-accreditor-deployment.vercel.app',
     codeUrl: 'https://github.com/tworoniak/accreditor',
-    featured: true,
-
+    // featured: true,
+    selected: true,
     problem:
       'Concert photographers at editorial publications manage accreditation entirely through email threads, browser bookmarks, and memory — tracking which shows have been requested, which PR contacts to follow up with, what the pit restrictions are, and whether galleries have been delivered. With multiple photographers working across dozens of shows a month, things get missed: deadlines pass, contacts get duplicated, and there is no shared visibility across the team.',
 
@@ -721,7 +722,8 @@ export const projects: Project[] = [
     image: '/images/projects/press-pilot.png',
     // liveUrl: 'https://press-portal.vercel.app/',
     codeUrl: 'https://github.com/tworoniak/press-portal',
-    featured: true,
+    // featured: true,
+    selected: true,
     problem:
       'Managing press contacts, outreach, and follow-ups across emails, notes, and spreadsheets leads to fragmented workflows and missed opportunities.',
 
