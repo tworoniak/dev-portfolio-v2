@@ -13,7 +13,7 @@ const ExperimentRow = ({ project, index, onOpen }: Props) => {
   return (
     <button
       onClick={() => onOpen(project)}
-      className='group flex w-full items-center gap-4 rounded-md py-4 text-left transition-colors hover:bg-zinc-100 dark:hover:bg-white/[0.03]'
+      className='group flex w-full items-center gap-4 rounded-md p-4 text-left transition-colors hover:bg-zinc-100 dark:hover:bg-white/[0.03]'
     >
       {/* Index */}
       <span className='hidden w-8 shrink-0 font-mono text-xs text-zinc-400 dark:text-white/30 lg:block'>
@@ -31,7 +31,9 @@ const ExperimentRow = ({ project, index, onOpen }: Props) => {
           {project.year} · {project.role}
         </span>
         {project.category && (
-          <span className='text-xs text-zinc-400 dark:text-white/40'>{project.category}</span>
+          <span className='text-xs text-zinc-400 dark:text-white/40'>
+            {project.category}
+          </span>
         )}
       </span>
 

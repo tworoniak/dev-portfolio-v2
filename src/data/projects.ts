@@ -19,7 +19,7 @@ export const projects: Project[] = [
       'Vitest',
     ],
     image: '/images/projects/cinevault.png',
-    // liveUrl: 'https://cinevault.app',
+    liveUrl: 'https://cinevault-jade.vercel.app',
     codeUrl: 'https://github.com/tworoniak/cinevault',
     // featured: true,
     selected: true,
