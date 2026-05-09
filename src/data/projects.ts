@@ -24,7 +24,7 @@ export const projects: Project[] = [
     // featured: true,
     selected: true,
     tagline: 'An Angular SPA for movie and TV discovery — TMDB-powered.',
-    year: '2025',
+    year: '2026',
     role: 'Solo',
 
     problem:
@@ -293,6 +293,9 @@ export const projects: Project[] = [
     codeUrl: 'https://github.com/tworoniak/new-festival-planner',
     // featured: true,
     selected: true,
+    tagline: 'A full-stack music festival planner.',
+    year: '2026',
+    role: 'Solo',
     problem:
       'Festival-goers juggling multi-stage lineups across multiple days have no dedicated tool to browse schedules, track favorite artists, and build a personal plan — leaving them relying on PDFs, screenshots, and memory.',
 
@@ -528,6 +531,10 @@ export const projects: Project[] = [
     codeUrl: 'https://github.com/tworoniak/job-application-tracker',
     // featured: true,
     selected: true,
+    tagline:
+      'Track your job applications, interviews, and follow-ups in one place.',
+    year: '2026',
+    role: 'Solo',
     problem:
       'Tracking a job search across spreadsheets, browser tabs, and memory is fragmented and lossy. There’s no lightweight tool purpose-built for developers that provides structured tracking, filtering, and visibility into your pipeline without requiring a paid subscription or a bloated ATS.',
 
@@ -662,6 +669,9 @@ export const projects: Project[] = [
     codeUrl: 'https://github.com/tworoniak/accreditor',
     // featured: true,
     selected: true,
+    tagline: 'A shared accreditation CRM for concert photographers.',
+    year: '2025',
+    role: 'Solo',
     problem:
       'Concert photographers at editorial publications manage accreditation entirely through email threads, browser bookmarks, and memory — tracking which shows have been requested, which PR contacts to follow up with, what the pit restrictions are, and whether galleries have been delivered. With multiple photographers working across dozens of shows a month, things get missed: deadlines pass, contacts get duplicated, and there is no shared visibility across the team.',
 
@@ -724,6 +734,10 @@ export const projects: Project[] = [
     codeUrl: 'https://github.com/tworoniak/press-portal',
     // featured: true,
     selected: true,
+    tagline:
+      'A CRM for managing press contacts, outreach, and relationships in the music industry.',
+    year: '2025',
+    role: 'Solo',
     problem:
       'Managing press contacts, outreach, and follow-ups across emails, notes, and spreadsheets leads to fragmented workflows and missed opportunities.',
 

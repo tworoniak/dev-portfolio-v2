@@ -13,7 +13,7 @@ const HeroSection = () => {
           {/* Avatar + status pill */}
           <div className='mb-8 flex flex-wrap items-center gap-4'>
             <AvatarBlock />
-            <span className='inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-sm text-emerald-600 dark:text-emerald-400'>
+            <span className='inline-flex items-center gap-2 rounded-full border border-zinc-300 dark:border-zinc-300/10 bg-emerald-500/10 px-3 py-1 text-sm text-emerald-600 dark:text-emerald-400'>
               <span className='h-2 w-2 rounded-full bg-emerald-400/50' />
               Available for senior front-end roles · Kansas City, Missouri
             </span>
@@ -23,7 +23,10 @@ const HeroSection = () => {
           <h1 className='max-w-4xl text-5xl font-bold leading-tight tracking-tight text-zinc-900 dark:text-white sm:text-6xl lg:text-7xl'>
             Hi, I&rsquo;m Thomas.
             <br />I design and build{' '}
-            <em style={{ color: accent }}>thoughtful</em> digital experiences.
+            <em className='font-serif' style={{ color: accent }}>
+              thoughtful
+            </em>{' '}
+            digital experiences.
           </h1>
 
           {/* Sub-copy */}

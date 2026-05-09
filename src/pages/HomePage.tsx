@@ -5,6 +5,7 @@ import HeroSection from '../components/pages/home/HeroSection';
 import NowSnapshot from '../components/pages/home/NowSnapshot';
 import SelectedWork from '../components/pages/home/SelectedWork';
 import ExperimentsIndex from '../components/pages/home/ExperimentsIndex';
+import ContactFooter from '../components/pages/home/ContactFooter';
 import ProjectsGrid from '../components/projects/ProjectsGrid';
 import PageTitle from '../components/ui/PageTitle';
 
@@ -33,6 +34,7 @@ const HomePage = () => {
         onOpenProject={handleOpenProject}
       />
       <ExperimentsIndex onOpenProject={handleOpenProject} />
+      <ContactFooter />
 
       {/* Modal — chunk loads on first open, stays mounted for exit animations */}
       {hasOpenedModal && (
