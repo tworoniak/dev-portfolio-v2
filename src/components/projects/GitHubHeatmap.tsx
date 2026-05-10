@@ -12,7 +12,7 @@ interface ContributionWeek {
   days: ContributionDay[];
 }
 
-interface ContributionData {
+export interface ContributionData {
   totalContributions: number;
   weeks: ContributionWeek[];
 }
@@ -21,6 +21,10 @@ interface GitHubHeatmapProps {
   username: string;
   /** Optional: override the proxy URL if you self-host one */
   proxyUrl?: string;
+  /** Pre-fetched contribution data — skips the internal fetch when provided */
+  data?: ContributionData;
+  /** When false, hides the bottom stats row (default true) */
+  showStats?: boolean;
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -65,10 +69,13 @@ interface TooltipState {
 export default function GitHubHeatmap({
   username,
   proxyUrl,
+  data: externalData,
+  showStats = true,
 }: GitHubHeatmapProps) {
-  const [data, setData] = useState<ContributionData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [internalData, setInternalData] = useState<ContributionData | null>(null);
+  const [loading, setLoading] = useState(!externalData);
   const [error, setError] = useState<string | null>(null);
+  const data = externalData ?? internalData;
   const [tooltip, setTooltip] = useState<TooltipState>({
     visible: false,
     x: 0,
@@ -80,6 +87,8 @@ export default function GitHubHeatmap({
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (externalData) return;
+
     const controller = new AbortController();
     const url =
       proxyUrl ??
@@ -98,7 +107,6 @@ export default function GitHubHeatmap({
         }>;
         if (!contributions) throw new Error('Unexpected API shape');
 
-        // Group into weeks (Sun → Sat)
         const weeks: ContributionWeek[] = [];
         let week: ContributionDay[] = [];
 
@@ -115,23 +123,22 @@ export default function GitHubHeatmap({
         });
 
         const total = contributions.reduce((s, d) => s + d.count, 0);
-        setData({ totalContributions: total, weeks });
+        setInternalData({ totalContributions: total, weeks });
         setLoading(false);
       })
       .catch((e) => {
-        if (e.name === 'AbortError') return; // ignore cleanup cancellations
+        if (e.name === 'AbortError') return;
         setError(e.message);
         setLoading(false);
       });
 
     return () => {
       controller.abort();
-      // Reset for next fetch (e.g. username prop change)
-      setData(null);
+      setInternalData(null);
       setError(null);
       setLoading(true);
     };
-  }, [username, proxyUrl]);
+  }, [username, proxyUrl, externalData]);
 
   // ── Derive month label positions ──────────────────────────────────────────
   const monthPositions: Array<{ label: string; weekIndex: number }> = [];
@@ -521,24 +528,26 @@ export default function GitHubHeatmap({
               </div>
 
               {/* Stats */}
-              <div className='gh-stats'>
-                <div className='gh-stat'>
-                  <span className='gh-stat-value'>
-                    {data.totalContributions.toLocaleString()}
-                  </span>
-                  <span className='gh-stat-label'>Contributions</span>
+              {showStats && (
+                <div className='gh-stats'>
+                  <div className='gh-stat'>
+                    <span className='gh-stat-value'>
+                      {data.totalContributions.toLocaleString()}
+                    </span>
+                    <span className='gh-stat-label'>Contributions</span>
+                  </div>
+                  <div className='gh-divider' />
+                  <div className='gh-stat'>
+                    <span className='gh-stat-value'>{longestStreak}</span>
+                    <span className='gh-stat-label'>Longest Streak</span>
+                  </div>
+                  <div className='gh-divider' />
+                  <div className='gh-stat'>
+                    <span className='gh-stat-value'>{data.weeks.length}</span>
+                    <span className='gh-stat-label'>Weeks Tracked</span>
+                  </div>
                 </div>
-                <div className='gh-divider' />
-                <div className='gh-stat'>
-                  <span className='gh-stat-value'>{longestStreak}</span>
-                  <span className='gh-stat-label'>Longest Streak</span>
-                </div>
-                <div className='gh-divider' />
-                <div className='gh-stat'>
-                  <span className='gh-stat-value'>{data.weeks.length}</span>
-                  <span className='gh-stat-label'>Weeks Tracked</span>
-                </div>
-              </div>
+              )}
             </>
           )}
 
