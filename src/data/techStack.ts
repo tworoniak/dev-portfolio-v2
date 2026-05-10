@@ -36,7 +36,7 @@ export const techStackGroups: TechStackGroup[] = [
       { name: 'Vitest', score: 4, note: 'Unit + component tests' },
       { name: 'Cypress', score: 3, note: 'E2E, custom commands' },
       { name: 'Storybook', score: 4, note: 'Component docs, play fns' },
-      { name: 'Figma', score: 4, note: 'Components, auto-layout' },
+      { name: 'Figma', score: 3, note: 'Components, auto-layout' },
       { name: 'Docker', score: 3, note: 'Dev containers, compose' },
     ],
   },
@@ -44,7 +44,7 @@ export const techStackGroups: TechStackGroup[] = [
     category: 'AI-Augmented Dev',
     items: [
       { name: 'Claude Code', score: 5, note: 'Agent flows, MCP' },
-      { name: 'Cursor', score: 4, note: 'Inline edits, context' },
+      { name: 'Cursor', score: 3, note: 'Inline edits, context' },
       { name: 'GitHub Copilot', score: 3, note: 'Tab complete, chat' },
     ],
   },

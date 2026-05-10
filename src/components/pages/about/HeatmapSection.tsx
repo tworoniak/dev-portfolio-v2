@@ -96,9 +96,9 @@ export default function HeatmapSection({ username }: HeatmapSectionProps) {
       </p>
 
       {/* Two-column content */}
-      <div className='mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start'>
+      <div className='mt-12 grid grid-cols-1 lg:grid-cols-3 gap-12 items-start'>
         {/* Left — stat + narrative */}
-        <div>
+        <div className='lg:col-span-1'>
           {loading && !error && (
             <div className='text-7xl sm:text-8xl font-serif italic leading-none text-zinc-400 dark:text-zinc-600'>
               —
@@ -143,7 +143,7 @@ export default function HeatmapSection({ username }: HeatmapSectionProps) {
         </div>
 
         {/* Right — chart (only rendered once data is ready to avoid a second fetch) */}
-        <div>
+        <div className='lg:col-span-2'>
           {data ? (
             <GitHubHeatmap username={username} data={data} showStats={false} />
           ) : (
