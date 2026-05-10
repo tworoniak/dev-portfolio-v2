@@ -8,7 +8,7 @@ const TestimonialGrid = () => {
       <div className='mx-auto p-2'>
         {/* Heading Container */}
         <p className='text-xs uppercase tracking-[0.3em] text-zinc-500 mb-4'>
-          Testimonials
+          / Testimonials
         </p>
         {/* Grid Container */}
         <div className='grid gap-6 grid-cols-1 md:grid-cols-2 text-zinc-900 dark:text-white'>
@@ -28,7 +28,9 @@ const TestimonialGrid = () => {
                 className='w-10 h-10 rounded-full ring-2 ring-subtle'
               />
               <div className='text-sm'>
-                <h4 className='text-zinc-800 dark:text-zinc-100'>Jessica Ralston, PMP</h4>
+                <h4 className='text-zinc-800 dark:text-zinc-100'>
+                  Jessica Ralston, PMP
+                </h4>
                 <p className='text-zinc-400'>
                   Sr. Director, Development at EVERSANA INTOUCH
                 </p>
@@ -63,7 +65,9 @@ const TestimonialGrid = () => {
                 className='w-10 h-10 rounded-full ring-2 ring-faint'
               />
               <div className='text-sm'>
-                <h4 className='text-zinc-800 dark:text-zinc-100'>Kevin Wagner</h4>
+                <h4 className='text-zinc-800 dark:text-zinc-100'>
+                  Kevin Wagner
+                </h4>
                 <p className='text-zinc-400'>
                   Delivery Manager for Eversana Intouch
                 </p>
@@ -91,7 +95,9 @@ const TestimonialGrid = () => {
                 className='w-10 h-10 rounded-full ring-2 ring-subtle'
               />
               <div className='text-sm'>
-                <h4 className='text-zinc-800 dark:text-zinc-100'>Michael Blake</h4>
+                <h4 className='text-zinc-800 dark:text-zinc-100'>
+                  Michael Blake
+                </h4>
                 <p className='text-zinc-400'>
                   SVP, Development and Quality Services
                 </p>
@@ -138,7 +144,9 @@ const TestimonialGrid = () => {
                 className='w-10 h-10 rounded-full ring-2 ring-subtle'
               />
               <div className='text-sm'>
-                <h4 className='text-zinc-800 dark:text-zinc-100'>Shefali Shrungarpawar</h4>
+                <h4 className='text-zinc-800 dark:text-zinc-100'>
+                  Shefali Shrungarpawar
+                </h4>
                 <p className='text-zinc-400'>
                   Engineering Manager with 10+ years of experience | Experienced
                   in Agile and Scrum Methodologies | Delivering High-Quality
@@ -174,7 +182,9 @@ const TestimonialGrid = () => {
                 className='w-10 h-10 rounded-full ring-2 ring-subtle'
               />
               <div className='text-sm'>
-                <h4 className='text-zinc-800 dark:text-zinc-100'>Owen Oliver</h4>
+                <h4 className='text-zinc-800 dark:text-zinc-100'>
+                  Owen Oliver
+                </h4>
                 <p className='text-zinc-400'>
                   Development Team Lead at EVERSANA INTOUCH
                 </p>

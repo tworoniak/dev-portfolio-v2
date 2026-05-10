@@ -1,77 +1,67 @@
-import { useTheme } from '../../../context/ThemeContext';
+import { useAccentColor } from '../../../hooks/useAccentColor';
+import {
+  techStackGroups,
+  type TechStackGroup,
+  type TechRankItem,
+} from '../../../data/techStack';
 
-type TechItem = {
-  name: string;
-  label: string;
-};
+const TechItem = ({ item, accent }: { item: TechRankItem; accent: string }) => (
+  <div className='py-3 border-b border-zinc-100 dark:border-white/5 last:border-b-0'>
+    <div className='flex items-center justify-between'>
+      <span className='text-sm font-medium text-zinc-900 dark:text-white'>
+        {item.name}
+      </span>
+      <span className='text-xs text-zinc-500'>{item.score}/5</span>
+    </div>
+    <div className='mt-1 flex gap-[3px]'>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <span
+          key={i}
+          className={`h-[3px] w-5 rounded-full${i < item.score ? '' : ' bg-zinc-200 dark:bg-white/10'}`}
+          style={i < item.score ? { backgroundColor: accent } : undefined}
+        />
+      ))}
+    </div>
+    <p className='mt-1 text-xs text-zinc-500 dark:text-zinc-500'>{item.note}</p>
+  </div>
+);
 
-const techStack: TechItem[] = [
-  { name: 'react', label: 'React' },
-  { name: 'reactquery', label: 'React Query' },
-  { name: 'reactrouter', label: 'React Router' },
-  { name: 'tanstack', label: 'TanStack' },
-  { name: 'docker', label: 'Docker' },
-  { name: 'typescript', label: 'TypeScript' },
-  { name: 'tailwindcss', label: 'Tailwind CSS' },
-  { name: 'sass', label: 'Sass (SCSS)' },
-  { name: 'html5', label: 'HTML5' },
-  { name: 'css3', label: 'CSS3' },
-  { name: 'json', label: 'JSON' },
-  { name: 'railway', label: 'Railway' },
-  // { name: 'neon', label: 'Neon' }, <StackIcon name="postman" />
-  { name: 'go', label: 'Go' },
-  { name: 'supabase', label: 'Supabase' },
-  { name: 'clerk', label: 'Clerk' },
-  { name: 'nextjs', label: 'Next.js' },
-  { name: 'graphql', label: 'GraphQL' },
-  { name: 'nodejs', label: 'Node.js' },
-  { name: 'vitejs', label: 'Vite' },
-  { name: 'vercel', label: 'Vercel' },
-  { name: 'materialui', label: 'Material UI' },
-  { name: 'radixui', label: 'Radix UI' },
-  { name: 'vscode', label: 'VS Code' },
-  { name: 'figma', label: 'Figma' },
-  { name: 'claude', label: 'Claude AI' },
-  { name: 'cursor', label: 'Cursor AI' },
-  { name: 'copilotgithub', label: 'GitHub Copilot' },
-  { name: 'copilotms', label: 'Microsoft Copilot' },
-] as const;
+const GroupCard = ({
+  group,
+  accent,
+}: {
+  group: TechStackGroup;
+  accent: string;
+}) => (
+  <div className='card-xl p-5'>
+    <p className='text-xs uppercase tracking-[0.3em] text-zinc-500 mb-4'>
+      {group.category}
+    </p>
+    {group.items.map((item) => (
+      <TechItem key={item.name} item={item} accent={accent} />
+    ))}
+  </div>
+);
 
 const TechStackSection = () => {
-  const { theme } = useTheme(); // 'light' | 'dark'
+  const { accent } = useAccentColor();
 
   return (
-    <section className='mx-auto flex max-w-7xl flex-col gap-2 px-2 sm:px-6 py-12'>
+    <section className='mx-auto max-w-7xl px-2 sm:px-6 py-16 sm:py-24'>
       <p className='text-xs uppercase tracking-[0.3em] text-zinc-500'>
-        Tech Stack
+        / TECH STACK
+      </p>
+      <h2 className='text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white mt-3'>
+        The tools I reach for first.
+      </h2>
+      <p className='text-base leading-7 text-zinc-500 dark:text-zinc-400 mt-3 max-w-2xl'>
+        A smaller set of tools used repeatedly in production, with everything
+        else supporting the work around them.
       </p>
 
-      <div className='mt-4 grid grid-cols-3 gap-8 rounded-lg border border-zinc-500/20 dark:border-white/10 bg-zinc-50/50 dark:bg-black/15 p-4 md:grid-cols-6 lg:flex lg:flex-wrap'>
-        {techStack.map((tech) => (
-          <figure
-            key={tech.name}
-            role='img'
-            aria-label={`${tech.label} logo`}
-            className='group relative flex h-12 w-12 items-center justify-center'
-          >
-            <div className='transition-transform duration-200 group-hover:scale-110'>
-              <img
-                src={`/icons/${tech.name}-${theme}.svg`}
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src =
-                    `/icons/${tech.name}-light.svg`;
-                }}
-                alt=''
-                aria-hidden='true'
-                width={48}
-                height={48}
-              />
-            </div>
-
-            <figcaption className='pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-950 px-2 py-1 text-xs text-zinc-900 dark:text-zinc-100 opacity-0 shadow-lg transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100'>
-              {tech.label}
-            </figcaption>
-          </figure>
+      <div className='mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+        {techStackGroups.map((group) => (
+          <GroupCard key={group.category} group={group} accent={accent} />
         ))}
       </div>
     </section>
