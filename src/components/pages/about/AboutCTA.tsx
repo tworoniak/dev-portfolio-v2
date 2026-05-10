@@ -22,7 +22,7 @@ const AboutCTA = () => {
         {/* Left column */}
         <div>
           <p className='mb-4 text-xs uppercase tracking-[0.3em] text-zinc-500'>
-            / End on Intent
+            / Contact
           </p>
           <h2 className='mb-3 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight text-zinc-900 dark:text-white'>
             Hiring for a senior FE role?
@@ -34,14 +34,13 @@ const AboutCTA = () => {
             Let&rsquo;s talk.
           </p>
           <p className='max-w-md text-base leading-7 text-zinc-600 dark:text-zinc-400'>
-            I reply within 24 hours. Bring a JD, a Loom, or just a vague
-            problem &mdash; I&rsquo;m easy to talk to and quick to send a
-            sample plan.
+            I reply within 24 hours. Bring a JD, a Loom, or just a vague problem
+            &mdash; I&rsquo;m easy to talk to and quick to send a sample plan.
           </p>
         </div>
 
         {/* Right column — action rows */}
-        <div className='overflow-hidden rounded-xl border border-zinc-200 dark:border-white/10'>
+        <div className='card-xl overflow-hidden'>
           {primaryRows.map(({ label, href }) => (
             <a
               key={label}

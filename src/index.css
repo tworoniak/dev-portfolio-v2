@@ -49,6 +49,43 @@ a {
   }
 }
 
+/* ── Global card ──────────────────────────────────────────────────────────── */
+/*
+ * Three radius variants — use whichever fits the context:
+ *   .card      rounded-lg  — standard content cards, list rows, info panels
+ *   .card-xl   rounded-xl  — mid-prominence cards, group containers
+ *   .card-2xl  rounded-2xl — featured/spotlight cards, modals
+ *
+ * All three share the same border and background tokens so they feel
+ * like the same surface at different scales.
+ */
+
+@layer components {
+  .card {
+    @apply rounded-lg bg-zinc-50/70;
+    border: 1px solid oklch(40% 0.06 var(--hue) / 0.18);
+  }
+  .card-xl {
+    @apply rounded-xl bg-zinc-50/70;
+    border: 1px solid oklch(40% 0.06 var(--hue) / 0.18);
+  }
+  .card-2xl {
+    @apply rounded-2xl bg-zinc-50/60;
+    border: 1px solid oklch(40% 0.06 var(--hue) / 0.18);
+  }
+}
+
+.dark .card,
+.dark .card-xl {
+  background-color: oklch(0% 0 0 / 0.15);
+  border-color: oklch(70% 0.04 var(--hue) / 0.15);
+}
+
+.dark .card-2xl {
+  background-color: oklch(0% 0 0 / 0.10);
+  border-color: oklch(70% 0.04 var(--hue) / 0.15);
+}
+
 /* ── Project cards ─────────────────────────────────────────────────────────── */
 
 .project-card,

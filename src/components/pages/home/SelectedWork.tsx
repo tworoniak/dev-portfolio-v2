@@ -7,7 +7,7 @@ const spotlight = selected.find((p) => p.featured) ?? selected[0];
 const secondary = selected.filter((p) => p.id !== spotlight?.id).slice(0, 8);
 
 const CARD =
-  'project-card rounded-lg border border-zinc-200 dark:border-white/10 bg-zinc-50/70 dark:bg-black/15 transition-[border-color,box-shadow] duration-300 hover:bg-zinc-100 dark:hover:bg-black/30';
+  'project-card card transition-[border-color,box-shadow] duration-300 hover:bg-zinc-100 dark:hover:bg-black/30';
 
 const SpotlightCard = ({ project }: { project: Project }) => (
   <article className={`${CARD} flex flex-col overflow-hidden rounded-xl`}>

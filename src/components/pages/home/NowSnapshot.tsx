@@ -21,7 +21,7 @@ const nowData = {
 };
 
 const CARD =
-  'project-card rounded-lg border border-zinc-200 dark:border-white/10 bg-zinc-50/70 dark:bg-black/15 p-4 transition-[border-color,box-shadow] duration-300 hover:bg-zinc-100 dark:hover:bg-black/30';
+  'project-card card p-4 transition-[border-color,box-shadow] duration-300 hover:bg-zinc-100 dark:hover:bg-black/30';
 
 const NowSnapshot = () => (
   <section className='mx-auto max-w-7xl px-2 sm:px-6 pt-10 pb-12'>

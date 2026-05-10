@@ -4,12 +4,12 @@ const BackgroundSection = () => {
   return (
     <section className='mx-auto flex max-w-7xl flex-col gap-2 px-2 sm:px-6 py-12'>
       <p className='text-xs uppercase tracking-[0.3em] text-zinc-500'>
-        Background
+        / Background
       </p>
 
       <div className='mt-4 grid grid-cols-1 gap-6 md:grid-cols-2'>
         {/* Left — Experience */}
-        <div className='flex flex-col gap-4 rounded-lg border border-zinc-500/20 dark:border-white/10 bg-zinc-50/50 dark:bg-black/15 p-6'>
+        <div className='card flex flex-col gap-4 p-6'>
           <h2 className='text-sm font-semibold uppercase tracking-widest text-zinc-500'>
             Experience
           </h2>
@@ -37,7 +37,7 @@ const BackgroundSection = () => {
         </div>
 
         {/* Right — Certifications */}
-        <div className='flex flex-col gap-4 rounded-lg border border-zinc-500/20 dark:border-white/10 bg-zinc-50/50 dark:bg-black/15 p-6'>
+        <div className='card flex flex-col gap-4 p-6'>
           <h2 className='text-sm font-semibold uppercase tracking-widest text-zinc-500'>
             Certifications & Courses
           </h2>

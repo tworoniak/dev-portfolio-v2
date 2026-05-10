@@ -147,7 +147,7 @@ export default function HeatmapSection({ username }: HeatmapSectionProps) {
           {data ? (
             <GitHubHeatmap username={username} data={data} showStats={false} />
           ) : (
-            <div className='h-48 rounded-lg border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-black/15 animate-pulse' />
+            <div className='card h-48 animate-pulse' />
           )}
         </div>
       </div>

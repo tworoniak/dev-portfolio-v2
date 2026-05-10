@@ -421,7 +421,7 @@ export default function GitHubHeatmap({
 
       <section className='flex flex-col md:flex-row gap-6 md:gap-12 mx-auto max-w-5xl px-6 py-12'>
         <div
-          className='gh-heatmap-root border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-black/15 rounded-lg'
+          className='gh-heatmap-root card'
           ref={containerRef}
         >
           {/* Header */}
