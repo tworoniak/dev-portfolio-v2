@@ -9,6 +9,7 @@ const TECHS = [
   'GraphQL',
   'Node.js',
   'PostgreSQL',
+  'Neon',
   'React',
   'Angular',
   'Javascript',
@@ -16,6 +17,12 @@ const TECHS = [
   'Vercel',
   'HTML5',
   'CSS3',
+  'Docker',
+  'Lucide Icons',
+  'Claude Code',
+  'OpenAI',
+  'GitHub Copilot',
+  'Cursor',
 ];
 
 const TechTicker = () => (

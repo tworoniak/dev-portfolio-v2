@@ -1,12 +1,12 @@
 import { lazy, Suspense, useState } from 'react';
-import { projects } from '../data/projects';
+// import { projects } from '../data/projects';
 import type { Project } from '../types/project';
 import HeroSection from '../components/pages/home/HeroSection';
 import NowSnapshot from '../components/pages/home/NowSnapshot';
 import SelectedWork from '../components/pages/home/SelectedWork';
 import ExperimentsIndex from '../components/pages/home/ExperimentsIndex';
 import ContactFooter from '../components/pages/home/ContactFooter';
-import ProjectsGrid from '../components/projects/ProjectsGrid';
+// import ProjectsGrid from '../components/projects/ProjectsGrid';
 import PageTitle from '../components/ui/PageTitle';
 
 const ProjectModal = lazy(() => import('../components/projects/ProjectModal'));
@@ -15,7 +15,7 @@ const HomePage = () => {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [hasOpenedModal, setHasOpenedModal] = useState(false);
 
-  const featuredProjects = projects.filter((p) => p.featured);
+  // const featuredProjects = projects.filter((p) => p.featured);
 
   const handleOpenProject = (project: Project) => {
     setHasOpenedModal(true);
@@ -28,11 +28,11 @@ const HomePage = () => {
       <HeroSection />
       <NowSnapshot />
       <SelectedWork />
-      <ProjectsGrid
+      {/* <ProjectsGrid
         title='Featured Projects'
         projects={featuredProjects}
         onOpenProject={handleOpenProject}
-      />
+      /> */}
       <ExperimentsIndex onOpenProject={handleOpenProject} />
       <ContactFooter />
 
