@@ -1,3 +1,4 @@
+import AboutCTA from '../components/pages/about/AboutCTA';
 import BackgroundSection from '../components/pages/about/BackgroundSection';
 import HeatmapSection from '../components/pages/about/HeatmapSection';
 import IntroSection from '../components/pages/about/IntroSection';
@@ -14,6 +15,7 @@ const AboutPage = () => {
       <BackgroundSection />
       <TestimonialGrid />
       <HeatmapSection username='tworoniak' />
+      <AboutCTA />
     </>
   );
 };
