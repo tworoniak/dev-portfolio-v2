@@ -77,9 +77,9 @@ const ContactHero = () => {
     },
     {
       label: 'SCHEDULE',
-      title: '20-min intro · Cal.com',
+      title: '15-min intro · Cal.com',
       description: 'Best for "let\'s talk"',
-      href: 'https://cal.com/tworoniak',
+      href: 'https://cal.com/woroniak-dev',
       active: false,
       icon: <CalendarIcon />,
     },
