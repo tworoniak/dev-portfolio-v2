@@ -77,7 +77,7 @@ const TestimonialGrid = () => {
             <p className='mt-6 text-zinc-700 dark:text-zinc-300'>
               "Thomas and I worked together as Front-End Developers at Eversana
               Intouch. Thomas brought a calm demeanor along with his dependable
-              and capable skills to our team. By modeling his pressionalism
+              and capable skills to our team. By modeling his professionalism
               Thomas helped build a healthy culture for our group. I would
               recommend Thomas as somebody who can contribute his Front-End
               skills to meet client needs while also being a positive addition

@@ -1,5 +1,6 @@
 import { projects } from '../../../data/projects';
 import type { Project } from '../../../types/project';
+import { useAccentColor } from '../../../hooks/useAccentColor';
 import ProjectIndexRow from './ProjectIndexRow';
 
 type Props = {
@@ -25,6 +26,8 @@ const shipped = projects.filter((p) => !p.experiment);
 const experiments = projects.filter((p) => p.experiment);
 
 const ProjectsIndex = ({ onOpenProject }: Props) => {
+  const { accent } = useAccentColor();
+
   return (
     <section className='mx-auto max-w-7xl px-2 sm:px-6 py-16'>
       {/* Section header */}
@@ -50,6 +53,7 @@ const ProjectsIndex = ({ onOpenProject }: Props) => {
               key={project.id}
               project={project}
               index={i}
+              accent={accent}
               onOpen={onOpenProject}
             />
           ))}
@@ -68,6 +72,7 @@ const ProjectsIndex = ({ onOpenProject }: Props) => {
               key={project.id}
               project={project}
               index={i}
+              accent={accent}
               onOpen={onOpenProject}
             />
           ))}

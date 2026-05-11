@@ -1,16 +1,30 @@
-import { useMemo } from 'react';
-import { useGradientCoords } from '../../hooks/useGradientCoords';
+import { useEffect, useRef } from 'react';
+import { getRawCoords } from '../../context/GradientCoordsContext';
 import { createAmbientBackground } from '../../utils/gradient';
 import { useTheme } from '../../context/ThemeContext';
 
 const AmbientBackground = () => {
-  const { xPc, yPc, time } = useGradientCoords();
   const { theme } = useTheme();
   const isDark = theme === 'dark';
+  const layerRef = useRef<HTMLDivElement>(null);
+  const isDarkRef = useRef(isDark);
 
-  const animatedBackground = useMemo(() => {
-    return createAmbientBackground(xPc, yPc, time, isDark);
-  }, [xPc, yPc, time, isDark]);
+  // Keep the ref in sync without re-running the RAF effect on every theme change
+  useEffect(() => { isDarkRef.current = isDark; }, [isDark]);
+
+  useEffect(() => {
+    let frameId: number;
+    const animate = () => {
+      const { xPc, yPc } = getRawCoords();
+      const t = performance.now() / 1000;
+      if (layerRef.current) {
+        layerRef.current.style.background = createAmbientBackground(xPc, yPc, t, isDarkRef.current);
+      }
+      frameId = requestAnimationFrame(animate);
+    };
+    frameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frameId);
+  }, []);
 
   const staticOpacity = isDark
     ? { o1: 0.12, o2: 0.1, o3: 0.08 }
@@ -32,8 +46,8 @@ const AmbientBackground = () => {
       />
 
       <div
+        ref={layerRef}
         className='pointer-events-none fixed inset-0 -z-10 blur-[120px]'
-        style={{ background: animatedBackground }}
       />
     </>
   );

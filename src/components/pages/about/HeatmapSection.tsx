@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
 import { useAccentColor } from '../../../hooks/useAccentColor';
-import GitHubHeatmap, {
-  type ContributionData,
-} from '../../projects/GitHubHeatmap';
+import { useGitHubContributions } from '../../../hooks/useGitHubContributions';
+import GitHubHeatmap from '../../projects/GitHubHeatmap';
 
 interface HeatmapSectionProps {
   username: string;
@@ -10,64 +8,7 @@ interface HeatmapSectionProps {
 
 export default function HeatmapSection({ username }: HeatmapSectionProps) {
   const { accent } = useAccentColor();
-  const [data, setData] = useState<ContributionData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const url = `https://github-contributions-api.jogruber.de/v4/${username}?y=last`;
-
-    fetch(url, { signal: controller.signal })
-      .then((r) => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        return r.json();
-      })
-      .then((json) => {
-        const contributions = json.contributions as Array<{
-          date: string;
-          count: number;
-          level: number;
-        }>;
-        if (!contributions) throw new Error('Unexpected API shape');
-
-        const weeks: Array<{
-          days: Array<{
-            date: string;
-            count: number;
-            level: 0 | 1 | 2 | 3 | 4;
-          }>;
-        }> = [];
-        let week: Array<{
-          date: string;
-          count: number;
-          level: 0 | 1 | 2 | 3 | 4;
-        }> = [];
-
-        contributions.forEach((d, i) => {
-          week.push({
-            date: d.date,
-            count: d.count,
-            level: d.level as 0 | 1 | 2 | 3 | 4,
-          });
-          if (week.length === 7 || i === contributions.length - 1) {
-            weeks.push({ days: week });
-            week = [];
-          }
-        });
-
-        const total = contributions.reduce((s, d) => s + d.count, 0);
-        setData({ totalContributions: total, weeks });
-        setLoading(false);
-      })
-      .catch((e) => {
-        if (e.name === 'AbortError') return;
-        setError(e.message);
-        setLoading(false);
-      });
-
-    return () => controller.abort();
-  }, [username]);
+  const { data, loading, error } = useGitHubContributions(username);
 
   const longestStreak = (() => {
     if (!data) return 0;
