@@ -1,49 +1,39 @@
-import { useMemo, useState } from 'react';
-import { projects } from '../data/projects';
-import ProjectFilters from '../components/projects/ProjectFilters';
-import ProjectsList from '../components/projects/ProjectsList';
+import { lazy, Suspense, useState } from 'react';
+import type { Project } from '../types/project';
 import IntroSection from '../components/pages/projects/IntroSection';
+import ProjectsIndex from '../components/pages/projects/ProjectsIndex';
 import PageTitle from '../components/ui/PageTitle';
+import AboutCTA from '../components/pages/about/AboutCTA';
 
-const allTags = Array.from(
-  new Set(projects.flatMap((p) => p.tech))
-).sort();
+const ProjectModal = lazy(() => import('../components/projects/ProjectModal'));
 
 const ProjectsPage = () => {
-  const [activeFilters, setActiveFilters] = useState<Set<string>>(new Set());
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [hasOpenedModal, setHasOpenedModal] = useState(false);
 
-  const filtered = useMemo(() => {
-    if (activeFilters.size === 0) return projects;
-    return projects.filter((p) =>
-      [...activeFilters].every((tag) => p.tech.includes(tag))
-    );
-  }, [activeFilters]);
-
-  const toggle = (tag: string) =>
-    setActiveFilters((prev) => {
-      const next = new Set(prev);
-      next.has(tag) ? next.delete(tag) : next.add(tag);
-      return next;
-    });
-
-  const clear = () => setActiveFilters(new Set());
+  const handleOpenProject = (project: Project) => {
+    setHasOpenedModal(true);
+    setActiveProject(project);
+  };
 
   return (
-    <div>
-      <PageTitle title='Projects' />
-      <IntroSection />
-      <ProjectsList
-        projects={filtered}
-        filters={
-          <ProjectFilters
-            tags={allTags}
-            active={activeFilters}
-            onToggle={toggle}
-            onClear={clear}
+    <>
+      <div>
+        <PageTitle title='Projects' />
+        <IntroSection />
+        <ProjectsIndex onOpenProject={handleOpenProject} />
+        <AboutCTA />
+      </div>
+
+      {hasOpenedModal && (
+        <Suspense>
+          <ProjectModal
+            project={activeProject}
+            onClose={() => setActiveProject(null)}
           />
-        }
-      />
-    </div>
+        </Suspense>
+      )}
+    </>
   );
 };
 
