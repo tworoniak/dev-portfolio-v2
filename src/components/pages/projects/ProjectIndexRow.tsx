@@ -1,14 +1,13 @@
-import { useAccentColor } from '../../../hooks/useAccentColor';
 import type { Project } from '../../../types/project';
 
 type Props = {
   project: Project;
   index: number;
+  accent: string;
   onOpen: (project: Project) => void;
 };
 
-const ProjectIndexRow = ({ project, index, onOpen }: Props) => {
-  const { accent } = useAccentColor();
+const ProjectIndexRow = ({ project, index, accent, onOpen }: Props) => {
   const indexLabel = String(index + 1).padStart(2, '0');
   const topTech = project.tech.slice(0, 4);
   const topTechTablet = project.tech.slice(0, 3);

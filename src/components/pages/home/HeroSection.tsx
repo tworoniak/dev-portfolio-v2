@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAccentColor } from '../../../hooks/useAccentColor';
 import AvatarBlock from './AvatarBlock';
-import TechTicker from './TechTicker';
+// import TechTicker from './TechTicker';
 
 const HeroSection = () => {
   const { accent } = useAccentColor();
@@ -68,7 +68,7 @@ const HeroSection = () => {
           </div>
         </div>
       </section>
-      <TechTicker />
+      {/* <TechTicker /> */}
     </>
   );
 };

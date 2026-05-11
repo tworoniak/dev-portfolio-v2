@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { projects } from '../../../data/projects';
 import { useAccentColor } from '../../../hooks/useAccentColor';
+import { useGitHubContributions } from '../../../hooks/useGitHubContributions';
 
 const GITHUB_USERNAME = 'tworoniak';
-const CONTRIBUTIONS_URL = `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`;
-
 const shippedCount = projects.filter((p) => !p.experiment).length;
 
 function formatCommits(n: number): string {
@@ -15,27 +13,8 @@ function formatCommits(n: number): string {
 
 const IntroSection = () => {
   const { accent } = useAccentColor();
-  const [commits, setCommits] = useState<string | null>(null);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    fetch(CONTRIBUTIONS_URL, { signal: controller.signal })
-      .then((r) => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        return r.json();
-      })
-      .then((json) => {
-        const total = (json.contributions as Array<{ count: number }>).reduce(
-          (s, d) => s + d.count,
-          0,
-        );
-        setCommits(formatCommits(total));
-      })
-      .catch((e) => {
-        if (e.name !== 'AbortError') setCommits(null);
-      });
-    return () => controller.abort();
-  }, []);
+  const { data } = useGitHubContributions(GITHUB_USERNAME);
+  const commits = data ? formatCommits(data.totalContributions) : null;
 
   return (
     <section className='mx-auto max-w-7xl px-2 sm:px-6 py-20 sm:py-28'>
@@ -67,9 +46,9 @@ const IntroSection = () => {
           </h1>
 
           <p className='mt-6 max-w-xl text-lg leading-8 text-zinc-600 dark:text-zinc-400'>
-            React + TypeScript specialist. I build fast, accessible UI systems
-            for product teams who care about the details&thinsp;&mdash; and I
-            ship more side-projects than is reasonable.
+            {/* React + TypeScript specialist. */}I build fast, accessible UI
+            systems for product teams who care about the details&thinsp;&mdash;
+            and I ship more side-projects than is reasonable.
           </p>
 
           <div className='mt-10 flex flex-wrap items-center gap-4'>

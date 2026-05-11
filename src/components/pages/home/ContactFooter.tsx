@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAccentColor } from '../../../hooks/useAccentColor';
 
 const contactRows: { label: string; value: string; href: string | null }[] = [
@@ -23,11 +23,15 @@ const contactRows: { label: string; value: string; href: string | null }[] = [
 const ContactFooter = () => {
   const [copied, setCopied] = useState(false);
   const { accent } = useAccentColor();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); }, []);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText('thomas@woroniak.dev');
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => setCopied(false), 2000);
   };
 
   return (

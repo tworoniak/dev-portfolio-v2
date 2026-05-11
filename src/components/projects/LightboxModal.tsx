@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -31,17 +31,17 @@ const LightboxModal = ({
   const hasPrev = index > 0;
   const hasNext = index < screenshots.length - 1;
 
-  const goNext = () => {
+  const goNext = useCallback(() => {
     if (!hasNext) return;
     setDirection(1);
     setIndex((i) => i + 1);
-  };
+  }, [hasNext]);
 
-  const goPrev = () => {
+  const goPrev = useCallback(() => {
     if (!hasPrev) return;
     setDirection(-1);
     setIndex((i) => i - 1);
-  };
+  }, [hasPrev]);
 
   // Focus close button on open; return focus to trigger on close
   useEffect(() => {
@@ -62,7 +62,7 @@ const LightboxModal = ({
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  });
+  }, [onClose, goNext, goPrev]);
 
   // Focus trap
   useEffect(() => {
