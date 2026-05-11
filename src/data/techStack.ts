@@ -27,7 +27,7 @@ export const techStackGroups: TechStackGroup[] = [
       { name: 'PostgreSQL', score: 4, note: 'Schemas, indexes' },
       { name: 'Prisma', score: 4, note: 'Migrations, relations' },
       { name: 'GraphQL', score: 3, note: 'Apollo, federation' },
-      { name: 'Hono', score: 3, note: 'Edge-first APIs' },
+      { name: 'Hono', score: 2, note: 'Edge-first APIs' },
     ],
   },
   {
@@ -44,7 +44,7 @@ export const techStackGroups: TechStackGroup[] = [
     category: 'AI-Augmented Dev',
     items: [
       { name: 'Claude Code', score: 5, note: 'Agent flows, MCP' },
-      { name: 'Cursor', score: 3, note: 'Inline edits, context' },
+      { name: 'Cursor', score: 2, note: 'Inline edits, context' },
       { name: 'GitHub Copilot', score: 3, note: 'Tab complete, chat' },
     ],
   },
