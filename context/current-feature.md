@@ -1,26 +1,41 @@
-# Current Feature: Code Split `projects.ts`
+# Current Feature:
 
 ## Status
 
-In Progress
+Not Started
 
 ## Goals
 
-- Create `src/data/projects-index.ts` containing only the fields needed for cards, tables, and the index — no `features`, `problem`, `solution`, `architecture`, `lessons`, or `screenshots`
-- Define `ProjectIndex` as `Pick<Project, ...>` in `types/project.ts` to avoid a parallel interface
-- Switch `SelectedWork`, `ExperimentsIndex`, `ExperimentRow`, `ProjectsIndex`, `ProjectIndexRow`, `ProjectCard`, `projects/IntroSection`, and `about/IntroSection` to import from `projects-index.ts`
-- Update `ProjectModal` to accept `ProjectIndex | null` (features section removed — modal is a preview; full detail is on the case study page)
-- Update `HomePage` and `ProjectsPage` state types to `ProjectIndex | null`
-- Keep `ProjectDetailPage` importing from `projects.ts` unchanged
-- Run `npm run build` and compare gzip sizes — target: `projects.ts` moves out of shared initial-load chunks into `ProjectDetailPage` chunk only
-
 ## Notes
 
-- `projects-index.ts` is independently defined (does NOT import from `projects.ts`) — this is the only way to achieve true bundle separation with Vite
-- `ProjectModal` currently shows `project.features` (optional "Preview" section showing 3 items). After this change it won't render since `ProjectIndex` excludes `features`. Acceptable — the modal links to the full case study.
-- Detail-only fields that leave the initial bundle: `features`, `problem`, `solution`, `architecture`, `lessons`, `screenshots`, `highlights`
-
 ## History
+
+### Code Split `projects.ts` (feature/projects-data-split)
+
+Created `src/data/projects-index.ts` as a standalone, lightweight data
+file with all 27 projects but only the fields needed by listing views —
+`id`, `slug`, `title`, `description`, `tech`, `image`, `liveUrl`,
+`codeUrl`, `featured`, `selected`, `tagline`, `year`, `role`,
+`experiment`, `category`, `quarter`, `metrics`. Detail-only fields
+(`features`, `problem`, `solution`, `architecture`, `lessons`,
+`screenshots`) are excluded.
+
+Added `ProjectIndex` as `Pick<Project, ...>` to `src/types/project.ts`.
+
+Switched all listing components to import from `projects-index.ts`:
+`SelectedWork`, `ExperimentsIndex`, `ExperimentRow`, `ProjectsIndex`,
+`ProjectIndexRow`, `ProjectCard`, `projects/IntroSection`,
+`about/IntroSection`. Updated `ProjectModal` to accept `ProjectIndex |
+null` and removed the optional features "Preview" section (modal is a
+preview; full detail is on the case study page). Updated `HomePage` and
+`ProjectsPage` state types to `ProjectIndex | null`.
+
+`ProjectDetailPage` is unchanged — it continues to import from
+`projects.ts` (already its own lazy route chunk).
+
+Bundle result: full `projects.ts` dataset (37.40 kB gzip) now bundled
+only into the `ProjectDetailPage` lazy chunk. The shared initial-load
+data chunk drops to `projects-index` at 5.74 kB gzip.
 
 ### Code Scan Fixes — All 19 Issues (fix/code-scan-priority)
 
@@ -86,8 +101,6 @@ remain in the file but are currently commented out.
 New files:
 - `src/components/pages/projects/ProjectsIndex.tsx`
 - `src/components/pages/projects/ProjectIndexRow.tsx`
-
-## History
 
 ### Contact Page Intro Section (feature/contact-page-intro)
 
