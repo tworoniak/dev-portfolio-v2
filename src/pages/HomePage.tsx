@@ -24,11 +24,6 @@ const HomePage = () => {
       <HeroSection />
       <NowSnapshot />
       <SelectedWork />
-      {/* <ProjectsGrid
-        title='Featured Projects'
-        projects={featuredProjects}
-        onOpenProject={handleOpenProject}
-      /> */}
       <ExperimentsIndex onOpenProject={handleOpenProject} />
       <ContactFooter />
 

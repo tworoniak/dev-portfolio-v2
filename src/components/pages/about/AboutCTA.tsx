@@ -1,11 +1,8 @@
 import { useAccentColor } from '../../../hooks/useAccentColor';
 
 const primaryRows = [
-  { label: 'thomas@woroniak.dev', href: 'mailto:thomas@woroniak.dev' },
-  {
-    label: 'Schedule a 20-min intro',
-    href: 'mailto:thomas@woroniak.dev',
-  },
+  { label: 'thomas@woroniak.dev', href: 'mailto:thomas@woroniak.dev', external: false },
+  { label: 'Schedule a 20-min intro', href: 'https://cal.com/woroniak-dev', external: true },
 ];
 
 const secondaryRows = [
@@ -41,10 +38,12 @@ const AboutCTA = () => {
 
         {/* Right column — action rows */}
         <div className='card-xl overflow-hidden'>
-          {primaryRows.map(({ label, href }) => (
+          {primaryRows.map(({ label, href, external }) => (
             <a
               key={label}
               href={href}
+              target={external ? '_blank' : undefined}
+              rel={external ? 'noopener noreferrer' : undefined}
               className='group flex items-center justify-between border-b border-zinc-200 px-6 py-5 transition-colors hover:bg-zinc-100 dark:border-white/10 dark:hover:bg-white/5'
             >
               <span className='text-sm font-medium text-zinc-800 dark:text-white/80'>

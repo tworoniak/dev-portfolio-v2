@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { getLongestStreak } from '../../utils/contributions';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -182,18 +183,7 @@ export default function GitHubHeatmap({
   };
 
   // ── Streak calculation ────────────────────────────────────────────────────
-  const longestStreak = (() => {
-    if (!data) return 0;
-    let max = 0,
-      cur = 0;
-    data.weeks
-      .flatMap((w) => w.days)
-      .forEach((d) => {
-        cur = d.count > 0 ? cur + 1 : 0;
-        if (cur > max) max = cur;
-      });
-    return max;
-  })();
+  const longestStreak = data ? getLongestStreak(data) : 0;
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
@@ -419,7 +409,7 @@ export default function GitHubHeatmap({
         }
       `}</style>
 
-      <section className='flex flex-col md:flex-row gap-6 md:gap-12 mx-auto max-w-5xl px-6 py-12'>
+      <div className='flex flex-col md:flex-row gap-6 md:gap-12 mx-auto max-w-5xl px-6 py-12'>
         <div
           className='gh-heatmap-root card'
           ref={containerRef}
@@ -570,7 +560,7 @@ export default function GitHubHeatmap({
             </div>
           )}
         </div>
-      </section>
+      </div>
     </>
   );
 }

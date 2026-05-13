@@ -128,6 +128,7 @@ const Header = () => {
               boxShadow: isMobileOpen ? `0 0 0 1px ${accentSoft}` : undefined,
             }}
             aria-expanded={isMobileOpen}
+            aria-controls='mobile-nav'
             aria-label={isMobileOpen ? 'Close menu' : 'Open menu'}
           >
             {isMobileOpen ? <X size={18} /> : <Menu size={18} />}
@@ -148,6 +149,7 @@ const Header = () => {
 
             <motion.div
               ref={panelRef}
+              id='mobile-nav'
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
