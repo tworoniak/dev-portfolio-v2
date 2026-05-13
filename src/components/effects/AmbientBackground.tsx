@@ -13,8 +13,13 @@ const AmbientBackground = () => {
   useEffect(() => { isDarkRef.current = isDark; }, [isDark]);
 
   useEffect(() => {
-    let frameId: number;
+    let frameId: number | null = null;
+
     const animate = () => {
+      if (document.hidden) {
+        frameId = null;
+        return;
+      }
       const { xPc, yPc } = getRawCoords();
       const t = performance.now() / 1000;
       if (layerRef.current) {
@@ -22,8 +27,20 @@ const AmbientBackground = () => {
       }
       frameId = requestAnimationFrame(animate);
     };
+
+    const handleVisibilityChange = () => {
+      if (!document.hidden && frameId === null) {
+        frameId = requestAnimationFrame(animate);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     frameId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frameId);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      if (frameId !== null) cancelAnimationFrame(frameId);
+    };
   }, []);
 
   const staticOpacity = isDark

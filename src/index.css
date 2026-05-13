@@ -73,17 +73,17 @@ a {
     @apply rounded-2xl bg-zinc-50/60;
     border: 1px solid oklch(40% 0.06 var(--hue) / 0.18);
   }
-}
 
-.dark .card,
-.dark .card-xl {
-  background-color: oklch(0% 0 0 / 0.15);
-  border-color: oklch(70% 0.04 var(--hue) / 0.15);
-}
+  .dark .card,
+  .dark .card-xl {
+    background-color: oklch(0% 0 0 / 0.15);
+    border-color: oklch(70% 0.04 var(--hue) / 0.15);
+  }
 
-.dark .card-2xl {
-  background-color: oklch(0% 0 0 / 0.10);
-  border-color: oklch(70% 0.04 var(--hue) / 0.15);
+  .dark .card-2xl {
+    background-color: oklch(0% 0 0 / 0.10);
+    border-color: oklch(70% 0.04 var(--hue) / 0.15);
+  }
 }
 
 /* ── Project cards ─────────────────────────────────────────────────────────── */
