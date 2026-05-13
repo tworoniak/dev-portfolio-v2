@@ -82,6 +82,7 @@ const IntroSection = () => {
             src='/images/profile.jpg'
             alt='Profile picture of Thomas Woroniak'
             className='h-full w-full object-cover'
+            fetchPriority='high'
           />
 
           {/* Projects shipped — top right */}

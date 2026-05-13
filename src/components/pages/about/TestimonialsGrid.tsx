@@ -24,6 +24,7 @@ const TestimonialGrid = () => {
             <div className='flex z-10 space-x-4'>
               <img
                 src='images/testimonials/image-jessica.jpg'
+                loading='lazy'
                 alt='Jessica Ralston'
                 className='w-10 h-10 rounded-full ring-2 ring-subtle'
               />
@@ -63,6 +64,7 @@ const TestimonialGrid = () => {
                 src='images/testimonials/image-kevin.jpg'
                 alt='Kevin Wagner'
                 className='w-10 h-10 rounded-full ring-2 ring-faint'
+                loading='lazy'
               />
               <div className='text-sm'>
                 <h4 className='text-zinc-800 dark:text-zinc-100'>
@@ -93,6 +95,7 @@ const TestimonialGrid = () => {
                 src='images/testimonials/image-michael.jpg'
                 alt='Michael Blake'
                 className='w-10 h-10 rounded-full ring-2 ring-subtle'
+                loading='lazy'
               />
               <div className='text-sm'>
                 <h4 className='text-zinc-800 dark:text-zinc-100'>
@@ -142,6 +145,7 @@ const TestimonialGrid = () => {
                 src='images/testimonials/image-shefali.jpg'
                 alt='Shefali Shrungarpawar'
                 className='w-10 h-10 rounded-full ring-2 ring-subtle'
+                loading='lazy'
               />
               <div className='text-sm'>
                 <h4 className='text-zinc-800 dark:text-zinc-100'>
@@ -180,6 +184,7 @@ const TestimonialGrid = () => {
                 src='images/testimonials/image-owen.jpg'
                 alt='Owen Oliver'
                 className='w-10 h-10 rounded-full ring-2 ring-subtle'
+                loading='lazy'
               />
               <div className='text-sm'>
                 <h4 className='text-zinc-800 dark:text-zinc-100'>

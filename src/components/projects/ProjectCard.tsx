@@ -40,7 +40,6 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       tabIndex={0}
-      role='button'
       aria-label={`View details for ${project.title}`}
       className='project-card group cursor-pointer overflow-hidden rounded-lg border border-zinc-200 dark:border-white/10 bg-zinc-50/70 dark:bg-black/15 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-3 hover:bg-zinc-100 dark:hover:bg-black/30 flex flex-col h-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
     >
@@ -66,6 +65,7 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
           src={project.image}
           alt={project.title}
           className='h-full w-full object-cover transition duration-500 group-hover:scale-[1.05]'
+          loading='lazy'
         />
         {(project.liveUrl || project.codeUrl) && (
           <div

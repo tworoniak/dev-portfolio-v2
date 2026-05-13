@@ -1,6 +1,6 @@
 const Main = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main id='main-content' className='relative mx-auto w-full px-6 py-20 text-zinc-900 dark:text-white'>
+    <main id='main-content' className='relative w-full text-zinc-900 dark:text-white'>
       {children}
     </main>
   );

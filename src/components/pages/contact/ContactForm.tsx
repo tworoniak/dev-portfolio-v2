@@ -20,6 +20,12 @@ const ContactForm = () => {
     e.preventDefault();
     if (!formRef.current) return;
 
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      setFormState('error');
+      setErrorMessage('Email service is not configured. Please email me directly at thomas@woroniak.dev.');
+      return;
+    }
+
     setFormState('submitting');
     setErrorMessage('');
 

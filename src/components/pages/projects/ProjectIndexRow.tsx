@@ -19,6 +19,7 @@ const ProjectIndexRow = ({ project, index, accent, onOpen }: Props) => {
 
   return (
     <button
+      type='button'
       onClick={() => onOpen(project)}
       className='group flex w-full items-center gap-4 rounded-md p-4 text-left transition-colors hover:bg-zinc-100 dark:hover:bg-white/[0.03]'
     >

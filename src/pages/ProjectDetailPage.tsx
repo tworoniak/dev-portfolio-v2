@@ -37,6 +37,7 @@ const ProjectDetailPage = () => {
           src={project.image}
           alt={project.title}
           className='h-full w-full object-cover object-center'
+          fetchPriority='high'
         />
       </div>
 
