@@ -32,7 +32,7 @@ const TechTicker = () => (
   >
     <div className='ticker-track text-sm text-zinc-500'>
       {[...TECHS, ...TECHS].map((tech, i) => (
-        <span key={i} className='flex items-center'>
+        <span key={`${tech}-${i}`} className='flex items-center'>
           <span className='px-4'>{tech}</span>
           <span className='text-zinc-700'>/</span>
         </span>

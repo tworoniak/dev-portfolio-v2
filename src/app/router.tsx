@@ -13,12 +13,12 @@ export const router = createBrowserRouter([
   {
     element: <AppLayout />,
     children: [
-      { path: '/', element: <Suspense><HomePage /></Suspense> },
-      { path: '/projects', element: <Suspense><ProjectsPage /></Suspense> },
-      { path: '/projects/:slug', element: <Suspense><ProjectDetailPage /></Suspense> },
-      { path: '/about', element: <Suspense><AboutPage /></Suspense> },
-      { path: '/contact', element: <Suspense><ContactPage /></Suspense> },
-      { path: '*', element: <Suspense><NotFoundPage /></Suspense> },
+      { path: '/', element: <Suspense fallback={<div className='min-h-screen' />}><HomePage /></Suspense> },
+      { path: '/projects', element: <Suspense fallback={<div className='min-h-screen' />}><ProjectsPage /></Suspense> },
+      { path: '/projects/:slug', element: <Suspense fallback={<div className='min-h-screen' />}><ProjectDetailPage /></Suspense> },
+      { path: '/about', element: <Suspense fallback={<div className='min-h-screen' />}><AboutPage /></Suspense> },
+      { path: '/contact', element: <Suspense fallback={<div className='min-h-screen' />}><ContactPage /></Suspense> },
+      { path: '*', element: <Suspense fallback={<div className='min-h-screen' />}><NotFoundPage /></Suspense> },
     ],
   },
 ]);

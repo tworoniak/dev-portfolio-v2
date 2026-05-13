@@ -26,7 +26,7 @@ const ProjectsPage = () => {
       </div>
 
       {hasOpenedModal && (
-        <Suspense>
+        <Suspense fallback={null}>
           <ProjectModal
             project={activeProject}
             onClose={() => setActiveProject(null)}

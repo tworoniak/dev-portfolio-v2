@@ -77,11 +77,11 @@ const IntroSection = () => {
         </div>
 
         {/* Right column — photo with floating chips */}
-        <div className='relative'>
+        <div className='relative aspect-[3/2] overflow-hidden rounded-2xl'>
           <img
             src='/images/profile.jpg'
             alt='Profile picture of Thomas Woroniak'
-            className='w-full rounded-2xl object-cover'
+            className='h-full w-full object-cover'
           />
 
           {/* Projects shipped — top right */}

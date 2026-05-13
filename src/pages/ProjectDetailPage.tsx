@@ -32,11 +32,11 @@ const ProjectDetailPage = () => {
       <PageTitle title={project.title} />
       {/* HERO IMAGE */}
 
-      <div className='mb-12 max-h-96 overflow-hidden rounded-xl border border-zinc-200 dark:border-white/10'>
+      <div className='mb-12 aspect-video max-h-96 overflow-hidden rounded-xl border border-zinc-200 dark:border-white/10'>
         <img
           src={project.image}
           alt={project.title}
-          className='w-full object-cover object-center'
+          className='h-full w-full object-cover object-center'
         />
       </div>
 

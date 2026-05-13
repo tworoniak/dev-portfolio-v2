@@ -9,7 +9,8 @@ type ProjectModalProps = {
   onClose: () => void;
 };
 
-const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+const FOCUSABLE =
+  'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -42,7 +43,8 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
     if (!project) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return;
-      const focusables = modalRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE);
+      const focusables =
+        modalRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE);
       if (!focusables?.length) return;
       const first = focusables[0];
       const last = focusables[focusables.length - 1];
@@ -90,7 +92,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             ref={modalRef}
             role='dialog'
             aria-modal='true'
-            aria-label={project.title}
+            aria-labelledby='modal-title'
             initial={{ opacity: 0, scale: 0.96, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: 10 }}
@@ -124,7 +126,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
               </motion.div>
 
               <div className='p-6 md:p-8'>
-                <motion.h2 className='text-3xl font-bold text-zinc-900 dark:text-white'>
+                <motion.h2 id='modal-title' className='text-3xl font-bold text-zinc-900 dark:text-white'>
                   {project.title}
                 </motion.h2>
 
@@ -146,13 +148,11 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                     </h3>
 
                     <ul className='mt-4 space-y-3 text-zinc-600 dark:text-zinc-300 list-disc list-outside'>
-                      {(project.features ?? [])
-                        .slice(0, 3)
-                        .map((feature) => (
-                          <li key={feature} className='ml-8'>
-                            {feature}
-                          </li>
-                        ))}
+                      {(project.features ?? []).slice(0, 3).map((feature) => (
+                        <li key={feature} className='ml-8'>
+                          {feature}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 )}
@@ -171,6 +171,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                       href={project.liveUrl}
                       target='_blank'
                       rel='noreferrer'
+                      onClick={onClose}
                       className='flex items-center gap-1 rounded-md border border-zinc-200 dark:border-white/10 px-4 py-2 text-sm font-medium transition hover:bg-zinc-100 dark:hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
                     >
                       <ExternalLink size={16} strokeWidth={1.5} />
@@ -183,6 +184,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                       href={project.codeUrl}
                       target='_blank'
                       rel='noreferrer'
+                      onClick={onClose}
                       className='flex items-center gap-1 rounded-md border border-zinc-200 dark:border-white/10 px-4 py-2 text-sm font-medium transition hover:bg-zinc-100 dark:hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
                     >
                       <CodeXml size={16} strokeWidth={1.5} />

@@ -64,7 +64,6 @@ export default function HeatmapSection({ username }: HeatmapSectionProps) {
           </p>
 
           <p className='mt-6 text-base leading-7 text-zinc-600 dark:text-zinc-400'>
-            Across <span style={{ color: accent }}>73 repositories</span>.
             Longest streak{' '}
             <span style={{ color: accent }}>
               {loading ? '—' : longestStreak} days

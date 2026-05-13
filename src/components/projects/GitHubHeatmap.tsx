@@ -100,12 +100,12 @@ export default function GitHubHeatmap({
         return r.json();
       })
       .then((json) => {
+        if (!json || !Array.isArray(json.contributions)) throw new Error('Unexpected API shape');
         const contributions = json.contributions as Array<{
           date: string;
           count: number;
           level: number;
         }>;
-        if (!contributions) throw new Error('Unexpected API shape');
 
         const weeks: ContributionWeek[] = [];
         let week: ContributionDay[] = [];

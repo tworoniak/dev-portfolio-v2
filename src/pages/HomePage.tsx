@@ -34,7 +34,7 @@ const HomePage = () => {
 
       {/* Modal — chunk loads on first open, stays mounted for exit animations */}
       {hasOpenedModal && (
-        <Suspense>
+        <Suspense fallback={null}>
           <ProjectModal
             project={activeProject}
             onClose={() => setActiveProject(null)}
