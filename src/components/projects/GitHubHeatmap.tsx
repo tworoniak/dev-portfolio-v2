@@ -429,7 +429,8 @@ export default function GitHubHeatmap({
             <img
               className='gh-avatar'
               src={`https://github.com/${username}.png?size=88`}
-              alt={username}
+              alt={`${username}'s GitHub avatar`}
+              loading='lazy'
             />
             <div>
               <div className='gh-username'>

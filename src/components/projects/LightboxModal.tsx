@@ -180,6 +180,7 @@ const LightboxModal = ({
                   src={current.src}
                   alt={current.alt}
                   className='h-auto max-h-[75vh] w-full object-contain bg-zinc-900'
+                  loading='lazy'
                 />
                 <figcaption
                   aria-live='polite'

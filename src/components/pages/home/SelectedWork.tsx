@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { projectsIndex } from '../../../data/projects-index';
+import { useAccentColor } from '../../../hooks/useAccentColor';
 import type { ProjectIndex } from '../../../types/project';
 
 const selected = projectsIndex.filter((p) => p.selected);
@@ -9,7 +10,9 @@ const secondary = selected.filter((p) => p.id !== spotlight?.id).slice(0, 8);
 const CARD =
   'project-card card transition-[border-color,box-shadow] duration-300 hover:bg-zinc-100 dark:hover:bg-black/30';
 
-const SpotlightCard = ({ project }: { project: ProjectIndex }) => (
+const SpotlightCard = ({ project }: { project: ProjectIndex }) => {
+  const { accent } = useAccentColor();
+  return (
   <article className={`${CARD} flex flex-col overflow-hidden rounded-xl`}>
     {/* Image */}
     <div className='relative aspect-[16/10] overflow-hidden bg-zinc-200 dark:bg-zinc-900'>
@@ -21,7 +24,7 @@ const SpotlightCard = ({ project }: { project: ProjectIndex }) => (
       <div className='pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent' />
       <span
         className='absolute left-4 top-4 rounded-full px-2.5 py-1 text-xs font-semibold text-black'
-        style={{ backgroundColor: 'var(--accent)' }}
+        style={{ backgroundColor: accent }}
       >
         Featured · 01
       </span>
@@ -98,7 +101,8 @@ const SpotlightCard = ({ project }: { project: ProjectIndex }) => (
       </div>
     </div>
   </article>
-);
+  );
+};
 
 const SecondaryCard = ({ project }: { project: ProjectIndex }) => (
   <Link
@@ -111,6 +115,7 @@ const SecondaryCard = ({ project }: { project: ProjectIndex }) => (
         src={project.image}
         alt={project.title}
         className='h-full w-full object-cover'
+        loading='lazy'
       />
     </div>
 

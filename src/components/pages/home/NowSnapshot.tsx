@@ -1,3 +1,5 @@
+import { useAccentColor } from '../../../hooks/useAccentColor';
+
 const nowData = {
   updatedAt: 'May 7, 2026',
   building: {
@@ -23,7 +25,9 @@ const nowData = {
 const CARD =
   'project-card card p-4 transition-[border-color,box-shadow] duration-300 hover:bg-zinc-100 dark:hover:bg-black/30';
 
-const NowSnapshot = () => (
+const NowSnapshot = () => {
+  const { accent } = useAccentColor();
+  return (
   <section className='mx-auto max-w-7xl px-2 sm:px-6 pt-10 pb-12'>
     {/* Header row */}
     <div className='mb-4 flex items-center justify-between'>
@@ -44,7 +48,7 @@ const NowSnapshot = () => (
         <div className='mb-3 flex items-center gap-2'>
           <span
             className='h-2 w-2 animate-pulse rounded-full'
-            style={{ backgroundColor: 'var(--accent)' }}
+            style={{ backgroundColor: accent }}
             aria-hidden='true'
           />
           <p className='text-xs font-semibold uppercase tracking-[0.3em] text-zinc-500'>
@@ -102,6 +106,7 @@ const NowSnapshot = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default NowSnapshot;

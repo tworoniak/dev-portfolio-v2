@@ -24,6 +24,7 @@ const ExperimentsIndex = ({ onOpenProject }: Props) => {
         {/* Toggle — hidden on mobile, list view is always active there */}
         <div className='hidden items-center gap-1 rounded-full border border-zinc-200 p-1 dark:border-white/10 sm:flex'>
           <button
+            type='button'
             onClick={() => setView('grid')}
             className={`rounded-full px-3 py-1 text-xs transition-colors ${
               view === 'grid'
@@ -34,6 +35,7 @@ const ExperimentsIndex = ({ onOpenProject }: Props) => {
             Grid view
           </button>
           <button
+            type='button'
             onClick={() => setView('list')}
             className={`rounded-full px-3 py-1 text-xs transition-colors ${
               view === 'list'
