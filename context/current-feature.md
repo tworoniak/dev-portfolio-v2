@@ -1,0 +1,232 @@
+# Current Feature:
+
+## Status
+
+Not Started
+
+## Goals
+
+## Notes
+
+## History
+
+### Code Scan Fixes — All 19 Issues (fix/code-scan-priority)
+
+Applied all 19 fixable items from the 2026-05-10 code scan (issue #19 — `projects.ts`
+bundle split — deferred to `FEATURE_CODE_SPLITTING.md`). Fixes span performance,
+correctness, accessibility, and code quality:
+
+**Performance:** Replaced `useState` + `setCoords` in `GradientCoordsContext` with a
+module-level ref store + `useSyncExternalStore` (rounded 1% snapshot) — eliminates 60fps
+React re-renders across all consumers. `AmbientBackground` now writes `style.background`
+directly via a DOM ref (zero React re-renders for animation). `useCardGlow` RAF loop moved
+from mount to `mouseenter`/`mouseleave` — idle cards cost nothing. `useGitHubContributions`
+hook with module-level promise cache deduplicates the GitHub API fetch on the About page.
+`useAccentColor` hoisted from 27 `ProjectIndexRow` instances to the parent `ProjectsIndex`.
+
+**Correctness:** `LightboxModal` keydown handler stale closure fixed (`goNext`/`goPrev`
+wrapped in `useCallback`, dependency array added). `ContactFooter` `setTimeout` stored in
+a ref and cleared on unmount. `GitHubHeatmap` API response guarded with `Array.isArray`
+before cast. `ThemeContext` `getInitialTheme` guarded with `typeof window !== 'undefined'`.
+
+**Accessibility:** `ProjectModal` switched from `aria-label` to `aria-labelledby` pointing
+to the `h2#modal-title`. `TestimonialCard` fake `cursor-pointer` and hover styles removed.
+
+**CLS / images:** `IntroSection` profile photo wrapper gained `aspect-[3/2] overflow-hidden
+rounded-2xl`. `ProjectDetailPage` hero container gained `aspect-video`.
+
+**Code quality:** Typo "pressionalism" fixed. Dead commented-out code removed from
+`HomePage.tsx`. Four dead component files deleted (`FeaturedPrimaryCard`, `ProjectFilters`,
+`ProjectsList`, `ProjectListItem`). `TechTicker` keys changed to `${tech}-${i}`.
+`Suspense` boundaries given `fallback` props. Hardcoded "73 repositories" string removed.
+
+New files: `src/hooks/useGitHubContributions.ts`
+
+### Projects Page Hero Refactor (feature/projects-hero-refactor)
+
+Replaced the minimal `IntroSection.tsx` on the Projects page with an editorial
+two-column hero. Left column: monospace eyebrow (`/ SELECTED WORK · {minYear} —
+{maxYear}` derived from `projects.ts`), three-line stacked headline at `5xl–7xl`
+— bold white "Eighteen projects.", muted "One obsession —" with "obsession" in
+`font-serif italic` live accent color from `useAccentColor`, and muted "shipping
+good UI." Right column: 2×2 grid of four bordered stat cards (SHIPPED — `18
+projects` / non-experiment count; SPANNING — `2 years · 2025–2026`; PRIMARY
+STACK — hardcoded "React + TS"; LIVE — `14/27` with deployed previews). All
+values derived at module level from `projects.ts` — no hooks, no async. The
+LIVE card replaces the originally-specced OPEN SOURCE card because all 27
+projects have public `codeUrl` entries, making that fraction meaningless.
+`ProjectsPage.tsx` import unchanged. `npm run build` passes.
+
+### Projects Page — Archive Index Table (feature/projects-index-table)
+
+Added `ProjectsIndex` section to the Projects page after `IntroSection`. Two
+groups — `/ Projects` (non-experiment entries) and `/ Experiments` — each with
+its own sub-label, column header row (`# · PROJECT · YEAR · TYPE · ONE-LINER ·
+STACK`), and numbered rows. Each row is a `<button>` that opens the project
+modal; hover applies a background shift and arrow nudge. Experiment project
+names render in the live accent color from `useAccentColor`. Columns collapse
+responsively: mobile shows PROJECT + ONE-LINER + arrow; tablet adds YEAR and
+top-3 STACK; desktop shows all columns. `ProjectsPage.tsx` gained modal state
+(`activeProject`, `hasOpenedModal`) and a lazy-loaded `ProjectModal` instance,
+matching the pattern in `HomePage.tsx`. `ProjectFilters` and `ProjectsList`
+remain in the file but are currently commented out.
+
+New files:
+- `src/components/pages/projects/ProjectsIndex.tsx`
+- `src/components/pages/projects/ProjectIndexRow.tsx`
+
+## History
+
+### Contact Page Intro Section (feature/contact-page-intro)
+
+Replaced the bare `h1`/`p` intro in `ContactPage.tsx` with a new `ContactHero`
+component (`src/components/pages/contact/ContactHero.tsx`). Eyebrow `/ PICK YOUR
+CHANNEL`, large bold headline with the word `email` rendered in `font-serif italic`
+using live accent color from `useAccentColor`, and a sub-copy paragraph. Four channel
+cards in a responsive grid (1-col mobile → 2-col tablet → 4-col desktop): EMAIL
+(active state — accent border and accent "Open" text), SCHEDULE (Cal.com placeholder),
+LINKEDIN, and ANYWHERE ELSE. Cards use `bg-zinc-50/70 dark:bg-black/15` surface and
+`group-hover:translate-x-0.5` arrow nudge. Form nudge row below cards ("Open the
+form ↓") anchor-scrolls to `#contact-form`, which required adding `id="contact-form"`
+to the `ContactForm` wrapper in `ContactPage.tsx`. No section background.
+
+### Gradient & Accent Color Smooth Transition (feature/gradient-smooth-transition)
+
+Replaced the binary `isScrollActive ? scrollCoords : cursorCoords` switch in
+`useGradientCoords` with a `blendFactor` ref (0 = scroll-driven, 1 = cursor-driven)
+that lerps toward its target each RAF frame (rate 0.06 toward scroll, 0.10 toward
+cursor). Output coordinates are always `lerp(scrollCurrent, cursor, blendFactor)`,
+producing a smooth ~400–600ms crossfade on both the scroll→cursor and cursor→scroll
+handoffs. No visible snap or jump.
+
+Moved the RAF loop and all event listeners into a new `GradientCoordsProvider`
+(`src/context/GradientCoordsContext.tsx`) so all 9 consumers share one loop and
+2 event listeners instead of 9 independent loops and 18 listeners. `useGradientCoords`
+is now a thin `useContext` wrapper. `App.tsx` wraps the tree in
+`<GradientCoordsProvider>` alongside `<ThemeProvider>`. No consumer changes.
+
+Deleted `CursorColorBackground.tsx` and `useCursorGlow.ts` (dead code, not imported
+anywhere). Fixed `.gitignore` to anchor the `context/` rule to the project root
+(`/context/`) so it no longer incorrectly blocks `src/context/`.
+
+### Tech Stack Ranking Section (feature/tech-stack-ranking)
+
+Replaced the icon-grid `TechStackSection` on the About page with an editorial
+ranked layout. New `src/data/techStack.ts` defines `TechRankItem`, `TechStackGroup`,
+and `techStackGroups` — four groups (Daily Drivers, Backend & Data, Tooling & QA,
+AI-Augmented Dev) with 18 techs total. Each item renders a name, `N/5` score, a
+5-segment proficiency bar whose filled segments use the live accent color from
+`useAccentColor`, and a one-liner note. `GroupCard` and `TechItem` are inlined
+into `TechStackSection.tsx`; `AboutPage.tsx` import unchanged. Grid: 1-col mobile
+→ 2-col md → 4-col lg+. No section background, no icons, no animations.
+
+Also added global `.card`, `.card-xl`, and `.card-2xl` classes to `index.css`
+using oklch hue-aware borders (matching `.project-card`) and standardized
+`bg-zinc-50/70 dark:bg-black/15` surfaces. Retrofitted `NowSnapshot`,
+`SelectedWork`, `TestimonialCard`, `AboutCTA`, `BackgroundSection`,
+`HeatmapSection`, and `GitHubHeatmap` to use the new classes. Added Figma,
+Cypress to `apertur`; Claude Code, Cursor, GitHub Copilot to `neurostack`;
+Storybook to `ui-design-systems` in `projects.ts`.
+
+### About Page End-of-Page CTA (feature/about-cta)
+
+Added `AboutCTA` closing section to the About page after `HeatmapSection`. Two-column
+layout on `lg+` (single-column stacked on mobile): left column has eyebrow `/ END ON INTENT`,
+bold headline "Hiring for a senior FE role?", a `font-serif italic` accent line "Let's talk."
+driven by `useAccentColor`, and sub-copy; right column has four action rows in a single
+rounded bordered card — two primary rows (email and "Schedule a 20-min intro", both
+`mailto:thomas@woroniak.dev` as placeholder) with `→` arrow nudge on hover, and two
+secondary rows (LinkedIn and GitHub) as external links with `↗` indicator. No section
+background; inherits page background consistent with all other About sections.
+
+### About Page Heatmap Refactor (feature/about-heatmap-refactor)
+
+Replaced standalone `<GitHubHeatmap>` on the About page with a new `HeatmapSection`
+that frames the chart editorially. Full-width section header with `/ GitHub` eyebrow,
+bold headline, and sub-copy. Two-column layout on `lg+`: left column has a large
+`font-serif italic` contribution count in live accent color from `useAccentColor`,
+`CONTRIBUTIONS · LAST 12 MO` label, narrative paragraph with live `longestStreak`
+and accent-colored highlights, and a GitHub link; right column shows the heatmap
+chart without its stats row (stats moved left). `GitHubHeatmap` updated to export
+`ContributionData`, accept an optional `data` prop (skips internal fetch when
+provided), and a `showStats` prop (default `true`). Single API call — data fetched
+once in `HeatmapSection` and passed down to the chart. No section background on the
+outer wrapper.
+
+### About Page Hero Refactor (feature/about-hero-refactor)
+
+Replaced `IntroSection.tsx` on the About page with an identity-forward two-column
+hero. Left column: emerald status pill ("Open to senior FE roles · Remote / Kansas
+City") + timestamp badge, stacked headline ("Thomas Woroniak —" / italic `font-serif`
+accent line "twelve years" driven by `useAccentColor` / muted "of front-end craft."),
+sub-copy paragraph, and three CTAs (Download résumé PDF, Get in touch → `/contact`,
+View LinkedIn ↗). Right column: profile photo (`/images/profile.jpg`) with three
+`backdrop-blur-sm` floating stat chips — projects shipped count derived dynamically
+from `projects.ts` (`projects.filter(p => !p.experiment).length`), commits/yr fetched
+from the GitHub contributions API (`github-contributions-api.jogruber.de/v4/tworoniak?y=last`,
+same endpoint as `GitHubHeatmap`), and "Kansas City, MO" location. `AboutPage.tsx`
+import unchanged.
+
+### Project Card Refactor (feature/project-card-refactor)
+
+Refactored `ProjectCard.tsx` in-place with a new layout. Tech stack now
+renders as pill badges (first 5 shown, `+N` overflow badge for the rest).
+Description replaced with a single `tagline` line (falls back to
+`description`). Added a header bar above the image with `role` + `year`
+pills. `Live` / `Code` links moved to a frosted-glass overlay pinned to
+the top-right corner of the image (`bg-black/50 backdrop-blur-sm`).
+Title row shows `quarter · category` metadata on the right. An optional
+stats rail at the bottom renders up to 3 `{ value, label }` metrics when
+`project.metrics` is set. Added `quarter?: string` and
+`metrics?: { value: string; label: string }[]` to the `Project` type;
+populated both fields (plus `category`) on all 9 `selected` projects in
+`projects.ts`. No changes to grids, modal, or other homepage sections.
+
+### Contact Footer Section (feature/contact-footer)
+
+Added `ContactFooter` closing section to the homepage after `ExperimentsIndex`.
+Two-column layout on `lg+` (single-column stacked on mobile): left column has
+eyebrow label, bold headline with `font-serif` italic accent word using
+`useAccentColor`, sub-copy, and three CTAs (mailto link, clipboard copy with
+"Copied!" feedback, résumé PDF link); right column has four contact rows
+(EMAIL, GITHUB, LINKEDIN, LOCATION) with hover states (background shift + arrow
+nudge). Full light/dark theme via `zinc-` tokens. Also added `font-serif` to
+the HeroSection accent word for consistency, updated the status pill border
+classes, and populated `tagline`/`year`/`role` on five `SelectedWork` projects
+in `projects.ts`.
+
+### Experiments Index (feature/experiments-index)
+
+Replaced the Experiments `ProjectsGrid` on the homepage with a new
+`ExperimentsIndex` section. Editorial table-style list view (default) renders
+all 9 `experiment: true` projects as numbered rows with name,
+`year · role · category` metadata, tagline, top-3 tech, and an arrow that
+opens the project modal. A Grid/List toggle (desktop only) switches to the
+existing card layout using `ProjectCard` directly. Added `category` (optional
+string) to the `Project` type; populated `year`, `role`, `tagline`, and
+`category` on all 9 experiment entries in `projects.ts`. Mobile collapses to
+name + tagline + arrow only.
+
+### Selected Work Section (feature/selected-work)
+
+Added `SelectedWork` homepage section between `NowSnapshot` and `ProjectsGrid`.
+Two-column spotlight layout: large primary card (CineVault) with accent badge,
+image, tagline, tech pills, and three CTAs; four secondary cards (Apertur,
+Horizons, NeuroStack, DevStash) with thumbnail, title, year, and tagline.
+Responsive single-column on mobile. Added `selected`, `tagline`, `year`, `role`
+fields to `Project` type and marked five projects in the data.
+
+### Homepage Hero Refactor (feature/home-hero-refactor)
+
+Replaced the typewriter-based `IntroSection` with an identity-forward hero.
+Delivered: `AvatarBlock` (TW initials + green status dot), status pill, headline
+with italic accent word, sub-copy with highlighted spans, three-CTA row, and a
+full-width CSS-only `TechTicker` marquee. Deleted `IntroSection.tsx`.
+
+### Now Snapshot (feature/now-snapshot)
+
+Added `NowSnapshot` section between hero and Featured Projects grid.
+Four-card responsive layout (Building, Reading, Stack Focus, Open To) with
+project-card-matched border/background/hover styles, pulsing accent dot on
+Building card, emerald availability text on Open To card. All content in a
+single `nowData` const for easy updates.
