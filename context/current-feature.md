@@ -10,6 +10,38 @@ Not Started
 
 ## History
 
+### Site Audit Fixes — High Priority (fix/site-audit-high-priority)
+
+Applied all 7 critical issues from the 2026-05-13 site audit (`context/code/site-audit-2026-05-13.md`).
+
+**Layout:** Removed `px-6 py-20 mx-auto` from `Main.tsx` — every page was stacking 160px of top
+padding because `Main` and each section both applied `py-20`.
+
+**Fonts:** Configured `fontFamily` in `tailwind.config.js` — Space Grotesk mapped to `font-sans`,
+Berkeley Mono mapped to `font-serif` and `font-mono`. Fonts were loaded via Google Fonts but
+never applied; the site was rendering in system-ui.
+
+**Buttons:** Added `type="button"` to 5 action buttons — `ExperimentRow`, `ProjectIndexRow`,
+`ContactFooter` (copy-email), and both view-toggle buttons in `ExperimentsIndex`.
+
+**Images:** Added `loading="lazy"` to 9 below-fold images across `ProjectCard`, `SelectedWork`
+(secondary thumbnails), `LightboxModal`, `TestimonialsGrid` (×5), and `GitHubHeatmap` avatar.
+Added `fetchPriority="high"` to the About page profile photo and `ProjectDetailPage` hero image.
+Also improved `GitHubHeatmap` avatar `alt` text from `username` to `${username}'s GitHub avatar`.
+
+**Accent color:** Replaced `style={{ backgroundColor: 'var(--accent)' }}` (static oklch purple)
+with `useAccentColor()` in `NowSnapshot` (Building card pulse dot) and `SelectedWork` (`SpotlightCard`
+"Featured · 01" badge). Both were diverging from the cursor-driven accent used everywhere else.
+
+**Contact form:** Added env var runtime guard before `emailjs.sendForm` — if any `VITE_EMAILJS_*`
+variable is missing, the form now surfaces an error message instead of throwing silently and
+losing the user's message.
+
+**Accessibility:** Removed `role="button"` from `<motion.article>` in `ProjectCard` — the
+contradictory role on an `<article>` with nested `<a>` links was a WCAG 4.1.2 violation.
+`tabIndex` and `onKeyDown` retained for keyboard interaction; `aria-label` retained for
+accessible naming.
+
 ### Code Split `projects.ts` (feature/projects-data-split)
 
 Created `src/data/projects-index.ts` as a standalone, lightweight data
