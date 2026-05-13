@@ -10,6 +10,41 @@ Not Started
 
 ## History
 
+### Site Audit Fixes — Medium Priority (fix/site-audit-medium-priority)
+
+Applied all 8 medium-priority issues from the 2026-05-13 site audit
+(`context/code/site-audit-2026-05-13.md`).
+
+**Dead code (M1):** Deleted `ProjectsGrid.tsx` and removed all commented-out
+import/usage blocks in `HomePage.tsx`, `AboutPage.tsx`, `HeroSection.tsx`,
+and `ProjectsIndex.tsx`.
+
+**Link fix (M2):** Changed `AboutCTA` "Schedule a 20-min intro" `href` from
+`mailto:thomas@woroniak.dev` to `https://cal.com/woroniak-dev`. Added
+`external: boolean` flag to the `primaryRows` data array so the link opens
+in a new tab with `rel="noopener noreferrer"`.
+
+**Accessibility (M3):** Added `aria-controls="mobile-nav"` to the mobile
+menu toggle button and `id="mobile-nav"` to the `<motion.div>` panel in
+`Header.tsx`.
+
+**Shared utility (M4):** Extracted the duplicate `longestStreak` calculation
+into `src/utils/contributions.ts` as `getLongestStreak(data)`. Imported and
+used in both `HeatmapSection.tsx` and `GitHubHeatmap.tsx`.
+
+**Landmark fix (M5):** Changed `GitHubHeatmap` root wrapper from `<section>`
+to `<div>` — was creating nested section landmarks, violating ARIA best
+practices.
+
+**Redundant listener (M6):** Removed `window.addEventListener('resize', ...)`
+from `DesktopNav` — the existing `ResizeObserver` already handles element
+resize; the window listener was redundant.
+
+**Sitemap (M7):** Added all 27 project slug entries to `public/sitemap.xml`
+at priority 0.6.
+
+**Stale asset (M8):** Deleted `public/resume/resume_OLD.pdf`.
+
 ### Site Audit Fixes — High Priority (fix/site-audit-high-priority)
 
 Applied all 7 critical issues from the 2026-05-13 site audit (`context/code/site-audit-2026-05-13.md`).
