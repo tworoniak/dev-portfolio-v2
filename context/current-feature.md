@@ -10,6 +10,50 @@ Not Started
 
 ## History
 
+### Site Audit Fixes — Low Priority (fix/site-audit-low-priority)
+
+Applied all 8 low-priority suggestions from the 2026-05-13 site audit
+(`context/code/site-audit-2026-05-13.md`).
+
+**RAF visibility guards (L1):** Added `visibilitychange` event listener to
+`GradientCoordsContext.tsx`, `AmbientBackground.tsx`, and `useCardGlow.ts`.
+Each RAF loop now stops scheduling frames when `document.hidden` is true and
+resumes on tab focus — zero animation CPU cost on hidden tabs.
+
+**Vitest baseline (L2):** Installed Vitest + Testing Library + jsdom.
+Configured `vite.config.ts` with `test: { environment: 'jsdom', globals: true,
+setupFiles: ['./src/test/setup.ts'] }`. Added `test` / `test:watch` npm scripts.
+15 passing tests across 3 files: `color.test.ts` (7 tests — `clampPercent`,
+`cursorToRgb`, `cursorToPastelRgb`), `contributions.test.ts` (5 tests —
+`getLongestStreak` edge cases), `useGitHubContributions.test.ts` (3 tests —
+success state, HTTP error state, fetch deduplication via unique usernames per
+test to avoid module-level cache collisions).
+
+**OG dimensions (L3):** Added `og:image:width` (1200) and `og:image:height`
+(630) meta tags to `index.html`.
+
+**CSS layer (L4):** Moved `.dark .card`, `.dark .card-xl`, and `.dark .card-2xl`
+overrides from global scope into the `@layer components` block in `index.css` —
+prevents specificity conflicts with Tailwind utilities.
+
+**Font preload (L5):** Added `<link rel="preload" as="style">` hint for the
+Google Fonts stylesheet URL in `index.html`, ahead of the blocking
+`<link rel="stylesheet">` — allows the browser to begin fetching the font CSS
+before the parser reaches the stylesheet link.
+
+**Badge number derived (L6):** Replaced hardcoded `"Featured · 01"` in
+`SelectedWork.tsx` `SpotlightCard` with
+`` `Featured · ${badgeNum}` `` where `badgeNum` is derived from
+`selected.findIndex(p => p.id === project.id) + 1` padded to 2 digits.
+
+**Focus-visible on SpotlightCard links (L7):** Added
+`focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+focus-visible:outline-zinc-900 dark:focus-visible:outline-white` to the
+"Live ↗" and "Code ↗" anchor tags in `SpotlightCard`.
+
+**Sitemap lastmod (L8):** Added `<lastmod>2026-05-13</lastmod>` to all 31
+entries in `public/sitemap.xml`.
+
 ### Site Audit Fixes — Medium Priority (fix/site-audit-medium-priority)
 
 Applied all 8 medium-priority issues from the 2026-05-13 site audit
