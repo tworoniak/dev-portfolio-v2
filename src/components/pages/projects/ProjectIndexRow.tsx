@@ -1,10 +1,10 @@
-import type { Project } from '../../../types/project';
+import type { ProjectIndex } from '../../../types/project';
 
 type Props = {
-  project: Project;
+  project: ProjectIndex;
   index: number;
   accent: string;
-  onOpen: (project: Project) => void;
+  onOpen: (project: ProjectIndex) => void;
 };
 
 const ProjectIndexRow = ({ project, index, accent, onOpen }: Props) => {

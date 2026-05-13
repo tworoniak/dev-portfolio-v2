@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
-import { projects } from '../../../data/projects';
-import type { Project } from '../../../types/project';
+import { projectsIndex } from '../../../data/projects-index';
+import type { ProjectIndex } from '../../../types/project';
 
-const selected = projects.filter((p) => p.selected);
+const selected = projectsIndex.filter((p) => p.selected);
 const spotlight = selected.find((p) => p.featured) ?? selected[0];
 const secondary = selected.filter((p) => p.id !== spotlight?.id).slice(0, 8);
 
 const CARD =
   'project-card card transition-[border-color,box-shadow] duration-300 hover:bg-zinc-100 dark:hover:bg-black/30';
 
-const SpotlightCard = ({ project }: { project: Project }) => (
+const SpotlightCard = ({ project }: { project: ProjectIndex }) => (
   <article className={`${CARD} flex flex-col overflow-hidden rounded-xl`}>
     {/* Image */}
     <div className='relative aspect-[16/10] overflow-hidden bg-zinc-200 dark:bg-zinc-900'>
@@ -100,7 +100,7 @@ const SpotlightCard = ({ project }: { project: Project }) => (
   </article>
 );
 
-const SecondaryCard = ({ project }: { project: Project }) => (
+const SecondaryCard = ({ project }: { project: ProjectIndex }) => (
   <Link
     to={`/projects/${project.slug}`}
     className={`${CARD} flex items-center gap-4 rounded-lg p-3`}
