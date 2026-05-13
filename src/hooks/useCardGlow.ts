@@ -8,9 +8,17 @@ export const useCardGlow = () => {
   const xPcRef = useRef(50);
   const yPcRef = useRef(50);
 
-  // Cancel any in-flight frame on unmount
+  // Cancel in-flight frame on unmount and when tab is hidden
   useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden && frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
     };
   }, []);

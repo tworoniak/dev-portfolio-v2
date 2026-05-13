@@ -78,6 +78,11 @@ export function GradientCoordsProvider({ children }: { children: React.ReactNode
     };
 
     const animate = () => {
+      if (document.hidden) {
+        frameRef.current = null;
+        return;
+      }
+
       scrollCurrentXRef.current = lerp(scrollCurrentXRef.current, scrollTargetXRef.current, SCROLL_LERP);
       scrollCurrentYRef.current = lerp(scrollCurrentYRef.current, scrollTargetYRef.current, SCROLL_LERP);
 
@@ -100,13 +105,21 @@ export function GradientCoordsProvider({ children }: { children: React.ReactNode
       frameRef.current = requestAnimationFrame(animate);
     };
 
+    const handleVisibilityChange = () => {
+      if (!document.hidden && frameRef.current === null) {
+        frameRef.current = requestAnimationFrame(animate);
+      }
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll, { passive: true });
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     frameRef.current = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
     };
   }, []);

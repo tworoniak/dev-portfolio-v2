@@ -12,6 +12,7 @@ const CARD =
 
 const SpotlightCard = ({ project }: { project: ProjectIndex }) => {
   const { accent } = useAccentColor();
+  const badgeNum = String(selected.findIndex((p) => p.id === project.id) + 1).padStart(2, '0');
   return (
   <article className={`${CARD} flex flex-col overflow-hidden rounded-xl`}>
     {/* Image */}
@@ -26,7 +27,7 @@ const SpotlightCard = ({ project }: { project: ProjectIndex }) => {
         className='absolute left-4 top-4 rounded-full px-2.5 py-1 text-xs font-semibold text-black'
         style={{ backgroundColor: accent }}
       >
-        Featured · 01
+        {`Featured · ${badgeNum}`}
       </span>
     </div>
 
@@ -82,7 +83,7 @@ const SpotlightCard = ({ project }: { project: ProjectIndex }) => {
             href={project.liveUrl}
             target='_blank'
             rel='noreferrer'
-            className='rounded-md border border-zinc-200 dark:border-white/10 px-4 py-2 text-sm font-medium transition hover:bg-zinc-100 dark:hover:bg-white/10'
+            className='rounded-md border border-zinc-200 dark:border-white/10 px-4 py-2 text-sm font-medium transition hover:bg-zinc-100 dark:hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:focus-visible:outline-white'
           >
             Live ↗
           </a>
@@ -93,7 +94,7 @@ const SpotlightCard = ({ project }: { project: ProjectIndex }) => {
             href={project.codeUrl}
             target='_blank'
             rel='noreferrer'
-            className='rounded-md border border-zinc-200 dark:border-white/10 px-4 py-2 text-sm font-medium transition hover:bg-zinc-100 dark:hover:bg-white/10'
+            className='rounded-md border border-zinc-200 dark:border-white/10 px-4 py-2 text-sm font-medium transition hover:bg-zinc-100 dark:hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:focus-visible:outline-white'
           >
             Code ↗
           </a>
