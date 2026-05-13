@@ -1,10 +1,10 @@
-import { projects } from '../../../data/projects';
-import type { Project } from '../../../types/project';
+import { projectsIndex } from '../../../data/projects-index';
+import type { ProjectIndex } from '../../../types/project';
 import { useAccentColor } from '../../../hooks/useAccentColor';
 import ProjectIndexRow from './ProjectIndexRow';
 
 type Props = {
-  onOpenProject: (project: Project) => void;
+  onOpenProject: (project: ProjectIndex) => void;
 };
 
 const columnHeaders = (
@@ -22,8 +22,8 @@ const columnHeaders = (
   </div>
 );
 
-const shipped = projects.filter((p) => !p.experiment);
-const experiments = projects.filter((p) => p.experiment);
+const shipped = projectsIndex.filter((p) => !p.experiment);
+const experiments = projectsIndex.filter((p) => p.experiment);
 
 const ProjectsIndex = ({ onOpenProject }: Props) => {
   const { accent } = useAccentColor();

@@ -1,4 +1,4 @@
-import { projects } from '../../../data/projects';
+import { projectsIndex as projects } from '../../../data/projects-index';
 import { useAccentColor } from '../../../hooks/useAccentColor';
 
 const nonExperimentProjects = projects.filter((p) => !p.experiment);

@@ -23,3 +23,24 @@ export type Project = {
   metrics?: { value: string; label: string }[];
   screenshots?: { src: string; alt: string }[];
 };
+
+export type ProjectIndex = Pick<
+  Project,
+  | 'id'
+  | 'slug'
+  | 'title'
+  | 'description'
+  | 'tech'
+  | 'image'
+  | 'liveUrl'
+  | 'codeUrl'
+  | 'featured'
+  | 'selected'
+  | 'tagline'
+  | 'year'
+  | 'role'
+  | 'experiment'
+  | 'category'
+  | 'quarter'
+  | 'metrics'
+>;

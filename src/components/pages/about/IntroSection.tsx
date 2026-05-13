@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { projects } from '../../../data/projects';
+import { projectsIndex as projects } from '../../../data/projects-index';
 import { useAccentColor } from '../../../hooks/useAccentColor';
 import { useGitHubContributions } from '../../../hooks/useGitHubContributions';
 

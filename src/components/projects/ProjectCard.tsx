@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, CodeXml } from 'lucide-react';
 import { useCardGlow } from '../../hooks/useCardGlow';
-import type { Project } from '../../types/project';
+import type { ProjectIndex } from '../../types/project';
 
 type ProjectCardProps = {
-  project: Project;
-  onOpen: (project: Project) => void;
+  project: ProjectIndex;
+  onOpen: (project: ProjectIndex) => void;
 };
 
 const TECH_VISIBLE_COUNT = 5;

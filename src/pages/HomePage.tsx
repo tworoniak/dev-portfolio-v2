@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState } from 'react';
-import type { Project } from '../types/project';
+import type { ProjectIndex } from '../types/project';
 import HeroSection from '../components/pages/home/HeroSection';
 import NowSnapshot from '../components/pages/home/NowSnapshot';
 import SelectedWork from '../components/pages/home/SelectedWork';
@@ -10,10 +10,10 @@ import PageTitle from '../components/ui/PageTitle';
 const ProjectModal = lazy(() => import('../components/projects/ProjectModal'));
 
 const HomePage = () => {
-  const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [activeProject, setActiveProject] = useState<ProjectIndex | null>(null);
   const [hasOpenedModal, setHasOpenedModal] = useState(false);
 
-  const handleOpenProject = (project: Project) => {
+  const handleOpenProject = (project: ProjectIndex) => {
     setHasOpenedModal(true);
     setActiveProject(project);
   };

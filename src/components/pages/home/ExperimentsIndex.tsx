@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { projects } from '../../../data/projects';
-import type { Project } from '../../../types/project';
+import { projectsIndex } from '../../../data/projects-index';
+import type { ProjectIndex } from '../../../types/project';
 import ProjectCard from '../../projects/ProjectCard';
 import ExperimentRow from './ExperimentRow';
 
-const experiments = projects.filter((p) => p.experiment);
+const experiments = projectsIndex.filter((p) => p.experiment);
 
 type Props = {
-  onOpenProject: (project: Project) => void;
+  onOpenProject: (project: ProjectIndex) => void;
 };
 
 const ExperimentsIndex = ({ onOpenProject }: Props) => {

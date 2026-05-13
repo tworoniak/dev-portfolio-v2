@@ -2,10 +2,10 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CodeXml, ExternalLink, BookOpen, X } from 'lucide-react';
-import type { Project } from '../../types/project';
+import type { ProjectIndex } from '../../types/project';
 
 type ProjectModalProps = {
-  project: Project | null;
+  project: ProjectIndex | null;
   onClose: () => void;
 };
 
@@ -140,22 +140,6 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                 <p className='mt-6 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-300'>
                   {project.description}
                 </p>
-
-                {project.features && (
-                  <div className='mt-8 border-t border-zinc-200 dark:border-white/10 pt-6'>
-                    <h3 className='text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-500'>
-                      Preview
-                    </h3>
-
-                    <ul className='mt-4 space-y-3 text-zinc-600 dark:text-zinc-300 list-disc list-outside'>
-                      {(project.features ?? []).slice(0, 3).map((feature) => (
-                        <li key={feature} className='ml-8'>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
 
                 <div className='mt-8 flex flex-wrap gap-3'>
                   <Link
