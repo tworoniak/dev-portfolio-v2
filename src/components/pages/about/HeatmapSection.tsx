@@ -1,6 +1,7 @@
 import { useAccentColor } from '../../../hooks/useAccentColor';
 import { useGitHubContributions } from '../../../hooks/useGitHubContributions';
 import GitHubHeatmap from '../../projects/GitHubHeatmap';
+import { getLongestStreak } from '../../../utils/contributions';
 
 interface HeatmapSectionProps {
   username: string;
@@ -10,18 +11,7 @@ export default function HeatmapSection({ username }: HeatmapSectionProps) {
   const { accent } = useAccentColor();
   const { data, loading, error } = useGitHubContributions(username);
 
-  const longestStreak = (() => {
-    if (!data) return 0;
-    let max = 0,
-      cur = 0;
-    data.weeks
-      .flatMap((w) => w.days)
-      .forEach((d) => {
-        cur = d.count > 0 ? cur + 1 : 0;
-        if (cur > max) max = cur;
-      });
-    return max;
-  })();
+  const longestStreak = data ? getLongestStreak(data) : 0;
 
   return (
     <section className='mx-auto max-w-7xl px-2 sm:px-6 py-16 sm:py-24'>

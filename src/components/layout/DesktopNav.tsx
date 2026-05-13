@@ -118,13 +118,8 @@ const DesktopNav = ({
       if (el) resizeObserver.observe(el);
     });
 
-    const onResize = () => scheduleMeasure();
-
-    window.addEventListener('resize', onResize);
-
     return () => {
       resizeObserver.disconnect();
-      window.removeEventListener('resize', onResize);
     };
   }, [scheduleMeasure, navItems]);
 

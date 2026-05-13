@@ -43,9 +43,6 @@ const ProjectsIndex = ({ onOpenProject }: Props) => {
 
       {/* Projects group */}
       <div className='mt-12'>
-        {/* <p className='mb-3 text-xs uppercase tracking-[0.3em] text-zinc-500'>
-          / Projects
-        </p> */}
         {columnHeaders}
         <div className='mt-1 divide-y divide-zinc-200 dark:divide-white/10'>
           {shipped.map((project, i) => (
