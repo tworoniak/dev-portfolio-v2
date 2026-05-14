@@ -3,19 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
     <link rel="manifest" href="/favicon/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Thomas Woroniak — Senior Front-End Developer specialising in React, TypeScript, and modern UI patterns. Portfolio of projects, case studies, and open source work." />
+    <meta
+      name="description"
+      content="Thomas Woroniak — Senior Front-End Developer specialising in React, TypeScript, and modern UI patterns. Portfolio of projects, case studies, and open source work."
+    />
     <title>Woroniak.dev</title>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://woroniak.dev/" />
     <meta property="og:title" content="Woroniak.dev — Thomas Woroniak" />
-    <meta property="og:description" content="Senior Front-End Developer specialising in React, TypeScript, and modern UI patterns. Portfolio of projects, case studies, and open source work." />
+    <meta
+      property="og:description"
+      content="Senior Front-End Developer specialising in React, TypeScript, and modern UI patterns. Portfolio of projects, case studies, and open source work."
+    />
     <meta property="og:image" content="https://woroniak.dev/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -24,36 +44,57 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://woroniak.dev/" />
     <meta name="twitter:title" content="Woroniak.dev — Thomas Woroniak" />
-    <meta name="twitter:description" content="Senior Front-End Developer specialising in React, TypeScript, and modern UI patterns. Portfolio of projects, case studies, and open source work." />
+    <meta
+      name="twitter:description"
+      content="Senior Front-End Developer specialising in React, TypeScript, and modern UI patterns. Portfolio of projects, case studies, and open source work."
+    />
     <meta name="twitter:image" content="https://woroniak.dev/og-image.png" />
 
     <!-- JSON-LD -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Thomas Woroniak",
-      "url": "https://woroniak.dev",
-      "jobTitle": "Senior Front-End Developer",
-      "sameAs": [
-        "https://github.com/tworoniak",
-        "https://www.linkedin.com/in/thomasworoniak/"
-      ]
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Thomas Woroniak",
+        "url": "https://woroniak.dev",
+        "jobTitle": "Senior Front-End Developer",
+        "sameAs": [
+          "https://github.com/tworoniak",
+          "https://www.linkedin.com/in/thomasworoniak/"
+        ]
+      }
     </script>
     <!-- Prevent flash of wrong theme before React hydrates -->
     <script>
       (function () {
         var stored = localStorage.getItem('theme');
-        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var theme = stored === 'light' ? 'light' : (stored === 'dark' || prefersDark) ? 'dark' : 'light';
+        var prefersDark = window.matchMedia(
+          '(prefers-color-scheme: dark)',
+        ).matches;
+        var theme =
+          stored === 'light'
+            ? 'light'
+            : stored === 'dark' || prefersDark
+              ? 'dark'
+              : 'light';
         if (theme === 'dark') document.documentElement.classList.add('dark');
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Berkeley+Mono:ital,wght@0,100..700;1,100..700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" as="style" />
-    <link href="https://fonts.googleapis.com/css2?family=Berkeley+Mono:ital,wght@0,100..700;1,100..700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Berkeley+Mono:ital,wght@0,100..700;1,100..700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      as="style"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Berkeley+Mono:ital,wght@0,100..700;1,100..700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="root"></div>

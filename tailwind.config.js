@@ -5,9 +5,14 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         serif: ['"Berkeley Mono"', 'ui-serif', 'Georgia', 'serif'],
-        mono: ['"Berkeley Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        mono: [
+          '"Berkeley Mono"',
+          'ui-monospace',
+          'SFMono-Regular',
+          'monospace',
+        ],
       },
     },
   },
