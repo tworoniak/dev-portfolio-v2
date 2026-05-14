@@ -650,6 +650,16 @@ export const projects: Project[] = [
     // liveUrl: 'https://your-dashtrack-deployment.vercel.app',
     codeUrl: 'https://github.com/tworoniak/dashtrack',
     featured: true,
+    tagline: 'Memory dashboard and MCP server for Claude Code agents.',
+    year: '2026',
+    role: 'Solo',
+    quarter: 'Q2',
+    // category: 'AI Tooling',
+    // metrics: [
+    //   { value: '10', label: 'dashboard views' },
+    //   { value: '1', label: 'MCP server' },
+    //   { value: '16', label: 'memory tools' },
+    // ],
 
     problem:
       'Gig economy drivers have no clear picture of what they actually earn after costs. DoorDash surfaces gross pay, but the real number — net profit after gas, mileage, maintenance, and phone expenses — lives across fuel receipts, the Dasher app, and a mental running total. At tax time, drivers scramble to reconstruct months of mileage logs and expense records, often missing deductions they were entitled to.',

@@ -284,6 +284,10 @@ export const projectsIndex: ProjectIndex[] = [
     image: '/images/projects/dashtrack.png',
     codeUrl: 'https://github.com/tworoniak/dashtrack',
     featured: true,
+    year: '2026',
+    role: 'Solo',
+    quarter: 'Q2',
+    category: 'DoorDash Tracker',
   },
   {
     id: 'accreditor',
@@ -372,6 +376,10 @@ export const projectsIndex: ProjectIndex[] = [
     image: '/images/projects/dev-flow.png',
     codeUrl: 'https://github.com/tworoniak/team-management',
     featured: true,
+    year: '2025',
+    role: 'Solo',
+    quarter: 'Q4',
+    category: 'Developer Dashboard',
   },
   {
     id: 'photography-portfolio',
@@ -392,6 +400,10 @@ export const projectsIndex: ProjectIndex[] = [
     liveUrl: 'https://photography-portfolio-iota-eight.vercel.app',
     codeUrl: 'https://github.com/tworoniak/photography-portfolio',
     featured: true,
+    year: '2025',
+    role: 'Solo',
+    quarter: 'Q3',
+    category: 'Photography Portfolio',
   },
   {
     id: 'lumina',
@@ -411,6 +423,10 @@ export const projectsIndex: ProjectIndex[] = [
     image: '/images/projects/lumina.png',
     codeUrl: 'https://github.com/tworoniak/photo-storytelling',
     featured: true,
+    year: '2025',
+    role: 'Solo',
+    quarter: 'Q4',
+    category: 'Photo Storytelling',
   },
   {
     id: 'ui-design-systems',

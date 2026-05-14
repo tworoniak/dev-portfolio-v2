@@ -44,22 +44,6 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
       aria-label={`View details for ${project.title}`}
       className='project-card group cursor-pointer overflow-hidden rounded-lg border border-zinc-200 dark:border-white/10 bg-zinc-50/70 dark:bg-black/15 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-3 hover:bg-zinc-100 dark:hover:bg-black/30 flex flex-col h-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
     >
-      {/* Header bar */}
-      <div className='relative z-10 flex items-center justify-between gap-2 px-4 pt-2 pb-0'>
-        <div className='flex items-center gap-1.5 flex-wrap'>
-          {project.role && (
-            <span className='text-xs font-medium px-2 py-0.5 rounded-full border border-zinc-300 dark:border-white/15 text-zinc-600 dark:text-zinc-400'>
-              {project.role}
-            </span>
-          )}
-          {project.year && (
-            <span className='text-xs font-medium px-2 py-0.5 rounded-full border border-zinc-300 dark:border-white/15 text-zinc-600 dark:text-zinc-400'>
-              {project.year}
-            </span>
-          )}
-        </div>
-      </div>
-
       {/* Image */}
       <motion.div className='relative z-10 m-3 aspect-[16/10] overflow-hidden rounded-md bg-zinc-200 dark:bg-zinc-900'>
         <OptimizedImage
@@ -68,6 +52,13 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
           className='h-full w-full object-cover transition duration-500 group-hover:scale-[1.05]'
           loading='lazy'
         />
+        {(project.role || project.year) && (
+          <div className='absolute top-2 left-2 flex items-center gap-1 px-2 py-1 rounded bg-black/50 backdrop-blur-sm text-xs text-white/80'>
+            {project.role && <span>{project.role}</span>}
+            {project.role && project.year && <span className='text-white/30'>·</span>}
+            {project.year && <span>{project.year}</span>}
+          </div>
+        )}
         {(project.liveUrl || project.codeUrl) && (
           <div
             className='absolute top-2 right-2 flex items-center gap-1 px-2 py-1 rounded bg-black/50 backdrop-blur-sm text-xs text-white/80'
