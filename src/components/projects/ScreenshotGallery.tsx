@@ -1,5 +1,13 @@
 import { motion } from 'framer-motion';
 
+function toWebp(src: string) {
+  return src.replace(/\.(png|jpe?g)$/i, '.webp');
+}
+
+function toAvif(src: string) {
+  return src.replace(/\.(png|jpe?g)$/i, '.avif');
+}
+
 type Screenshot = { src: string; alt: string };
 
 type ScreenshotGalleryProps = {
@@ -29,14 +37,20 @@ const ScreenshotGallery = ({
             aria-label={`View screenshot: ${shot.alt}`}
             className='overflow-hidden rounded-lg border border-zinc-200 dark:border-white/10 bg-zinc-200 dark:bg-zinc-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-white/50'
           >
-            <motion.img
+            <motion.picture
               layoutId={`screenshot-${shot.src}`}
-              src={shot.src}
-              alt={shot.alt}
-              className='h-full w-full object-cover object-center'
               whileHover={{ scale: 1.04 }}
               transition={{ type: 'spring', stiffness: 300, damping: 28 }}
-            />
+              className='block h-full w-full'
+            >
+              <source srcSet={toAvif(shot.src)} type='image/avif' />
+              <source srcSet={toWebp(shot.src)} type='image/webp' />
+              <img
+                src={shot.src}
+                alt={shot.alt}
+                className='h-full w-full object-cover object-center'
+              />
+            </motion.picture>
           </button>
         ))}
       </div>

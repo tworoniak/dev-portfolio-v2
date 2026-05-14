@@ -1,12 +1,22 @@
-# Current Feature:
+# Current Feature: WebP + AVIF Image Conversion (feature/convert-images)
 
 ## Status
 
-Not Started
+Complete — pending browser verification and commit approval
 
 ## Goals
 
+Convert all 114 PNG/JPG images in `public/images/` to WebP and AVIF format to
+reduce image payload and improve LCP, without changing any data paths.
+
 ## Notes
+
+- 228 files generated (114 × webp + avif), ~70 MB saved across format pairs
+- Build passes clean; `OptimizedImage` chunk is 0.48 kB gzip
+- Originals kept as `<img>` fallback inside `<picture>` — no browser breakage
+- `motion.picture` used in `ScreenshotGallery` to preserve layoutId + whileHover
+- Testimonials got a bonus fix: missing `/` prefix on all 5 `src` attributes
+- Script is idempotent — re-running skips already-converted files
 
 ## History
 
