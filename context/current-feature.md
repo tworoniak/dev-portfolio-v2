@@ -1,24 +1,32 @@
-# Current Feature: WebP + AVIF Image Conversion (feature/convert-images)
+# Current Feature:
 
 ## Status
 
-Complete — pending browser verification and commit approval
+Not Started
 
 ## Goals
 
-Convert all 114 PNG/JPG images in `public/images/` to WebP and AVIF format to
-reduce image payload and improve LCP, without changing any data paths.
-
 ## Notes
 
-- 228 files generated (114 × webp + avif), ~70 MB saved across format pairs
-- Build passes clean; `OptimizedImage` chunk is 0.48 kB gzip
-- Originals kept as `<img>` fallback inside `<picture>` — no browser breakage
-- `motion.picture` used in `ScreenshotGallery` to preserve layoutId + whileHover
-- Testimonials got a bonus fix: missing `/` prefix on all 5 `src` attributes
-- Script is idempotent — re-running skips already-converted files
-
 ## History
+
+### WebP + AVIF Image Conversion (feature/convert-images)
+
+Converted all 114 PNG/JPG images in `public/images/` to WebP and AVIF format.
+228 files generated (~70 MB saved across format pairs). Build passes clean.
+
+**Script:** `scripts/convert-images.mjs` — walks `public/images/` recursively,
+generates `.webp` (q80) and `.avif` (q55) alongside originals. Idempotent —
+skips already-converted files. Run via `npm run images:convert`.
+
+**Component:** `src/components/shared/OptimizedImage.tsx` — renders `<picture>`
+with AVIF → WebP → original fallback. External URLs pass through as plain `<img>`.
+
+**Components updated:** `ProjectCard`, `ProjectModal`, `SelectedWork` (both
+`SpotlightCard` and `SecondaryCard`), `IntroSection` (about profile photo),
+`TestimonialsGrid` (all 5 avatars + fixed missing `/` prefix on srcs),
+`LightboxModal` (inline `<picture>`), `ScreenshotGallery` (`motion.picture`
+to preserve `layoutId` + `whileHover`).
 
 ### Site Audit Fixes — Low Priority (fix/site-audit-low-priority)
 
