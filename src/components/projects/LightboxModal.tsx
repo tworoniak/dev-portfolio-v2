@@ -176,12 +176,16 @@ const LightboxModal = ({
                 transition={{ duration: 0.22, ease: 'easeInOut' }}
                 className='m-0'
               >
-                <img
-                  src={current.src}
-                  alt={current.alt}
-                  className='h-auto max-h-[75vh] w-full object-contain bg-zinc-900'
-                  loading='lazy'
-                />
+                <picture>
+                  <source srcSet={current.src.replace(/\.(png|jpe?g)$/i, '.avif')} type='image/avif' />
+                  <source srcSet={current.src.replace(/\.(png|jpe?g)$/i, '.webp')} type='image/webp' />
+                  <img
+                    src={current.src}
+                    alt={current.alt}
+                    className='h-auto max-h-[75vh] w-full object-contain bg-zinc-900'
+                    loading='lazy'
+                  />
+                </picture>
                 <figcaption
                   aria-live='polite'
                   className='sr-only'

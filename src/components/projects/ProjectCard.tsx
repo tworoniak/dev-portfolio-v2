@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, CodeXml } from 'lucide-react';
 import { useCardGlow } from '../../hooks/useCardGlow';
+import OptimizedImage from '../shared/OptimizedImage';
 import type { ProjectIndex } from '../../types/project';
 
 type ProjectCardProps = {
@@ -61,7 +62,7 @@ const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
 
       {/* Image */}
       <motion.div className='relative z-10 m-3 aspect-[16/10] overflow-hidden rounded-md bg-zinc-200 dark:bg-zinc-900'>
-        <img
+        <OptimizedImage
           src={project.image}
           alt={project.title}
           className='h-full w-full object-cover transition duration-500 group-hover:scale-[1.05]'

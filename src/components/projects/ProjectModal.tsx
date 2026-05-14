@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CodeXml, ExternalLink, BookOpen, X } from 'lucide-react';
+import OptimizedImage from '../shared/OptimizedImage';
 import type { ProjectIndex } from '../../types/project';
 
 type ProjectModalProps = {
@@ -118,7 +119,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                 layoutId={`image-wrap-${project.slug}`}
                 className='overflow-hidden max-h-[40vh] bg-zinc-200 dark:bg-zinc-900'
               >
-                <motion.img
+                <OptimizedImage
                   src={project.image}
                   alt={project.title}
                   className='h-auto w-full object-cover'

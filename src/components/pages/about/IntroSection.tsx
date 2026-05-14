@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { projectsIndex as projects } from '../../../data/projects-index';
 import { useAccentColor } from '../../../hooks/useAccentColor';
 import { useGitHubContributions } from '../../../hooks/useGitHubContributions';
+import OptimizedImage from '../../shared/OptimizedImage';
 
 const GITHUB_USERNAME = 'tworoniak';
 const shippedCount = projects.filter((p) => !p.experiment).length;
@@ -78,7 +79,7 @@ const IntroSection = () => {
 
         {/* Right column — photo with floating chips */}
         <div className='relative aspect-[3/2] overflow-hidden rounded-2xl'>
-          <img
+          <OptimizedImage
             src='/images/profile.jpg'
             alt='Profile picture of Thomas Woroniak'
             className='h-full w-full object-cover'

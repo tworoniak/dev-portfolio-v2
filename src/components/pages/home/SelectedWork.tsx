@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { projectsIndex } from '../../../data/projects-index';
 import { useAccentColor } from '../../../hooks/useAccentColor';
+import OptimizedImage from '../../shared/OptimizedImage';
 import type { ProjectIndex } from '../../../types/project';
 
 const selected = projectsIndex.filter((p) => p.selected);
@@ -17,7 +18,7 @@ const SpotlightCard = ({ project }: { project: ProjectIndex }) => {
   <article className={`${CARD} flex flex-col overflow-hidden rounded-xl`}>
     {/* Image */}
     <div className='relative aspect-[16/10] overflow-hidden bg-zinc-200 dark:bg-zinc-900'>
-      <img
+      <OptimizedImage
         src={project.image}
         alt={project.title}
         className='h-full w-full object-cover'
@@ -112,7 +113,7 @@ const SecondaryCard = ({ project }: { project: ProjectIndex }) => (
   >
     {/* Thumbnail */}
     <div className='h-16 w-16 shrink-0 overflow-hidden rounded-md bg-zinc-200 dark:bg-zinc-900'>
-      <img
+      <OptimizedImage
         src={project.image}
         alt={project.title}
         className='h-full w-full object-cover'
