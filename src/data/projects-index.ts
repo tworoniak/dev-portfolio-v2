@@ -2,6 +2,42 @@ import type { ProjectIndex } from '../types/project';
 
 export const projectsIndex: ProjectIndex[] = [
   {
+    id: 'budget-flow',
+    slug: 'budget-flow',
+    title: 'BudgetFlow',
+    description:
+      'BudgetFlow is a full-stack personal finance dashboard built with Next.js 16, Prisma 7, and Neon PostgreSQL. It combines expense CRUD with recurring detection, per-category budget limits, an income tracker, spending forecasts, and multi-chart analytics — all behind OAuth and credentials auth. Data is scoped per user and persisted to a serverless Postgres database. Built with a dark-mode-first SCSS architecture, Zustand stores with optimistic mutations, and Framer Motion micro-animations.',
+    tech: [
+      'Next.js 16',
+      'TypeScript',
+      'React 19',
+      'Prisma 7',
+      'Neon PostgreSQL',
+      'NextAuth v5',
+      'Zustand',
+      'Recharts',
+      'Framer Motion',
+      'React Hook Form',
+      'Zod',
+      'SCSS Modules',
+    ],
+    image: '/images/projects/budget-flow.png',
+    liveUrl: 'https://budget-flow-wheat.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/budget-flow',
+    selected: true,
+    tagline:
+      'A full-stack finance dashboard — expenses, budgets, income, and forecasting.',
+    year: '2026',
+    role: 'Solo',
+    quarter: 'Q2',
+    category: 'Finance Dashboard',
+    metrics: [
+      { value: '5', label: 'route views' },
+      { value: '11', label: 'API routes' },
+      { value: '8', label: 'Recharts panels' },
+    ],
+  },
+  {
     id: 'cinevault',
     slug: 'cinevault',
     title: 'CineVault',

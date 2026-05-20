@@ -3,6 +3,100 @@ import type { Project } from '../types/project';
 export const projects: Project[] = [
   // Featured Projects //
   {
+    id: 'budget-flow',
+    slug: 'budget-flow',
+    title: 'BudgetFlow',
+    description:
+      'BudgetFlow is a full-stack personal finance dashboard built with Next.js 16, Prisma 7, and Neon PostgreSQL. It combines expense CRUD with recurring detection, per-category budget limits, an income tracker, spending forecasts, and multi-chart analytics — all behind OAuth and credentials auth. Data is scoped per user and persisted to a serverless Postgres database. Built with a dark-mode-first SCSS architecture, Zustand stores with optimistic mutations, and Framer Motion micro-animations.',
+    tech: [
+      'Next.js 16',
+      'TypeScript',
+      'React 19',
+      'Prisma 7',
+      'Neon PostgreSQL',
+      'NextAuth v5',
+      'Zustand',
+      'Recharts',
+      'Framer Motion',
+      'React Hook Form',
+      'Zod',
+      'SCSS Modules',
+    ],
+    image: '/images/projects/budget-flow.png',
+    liveUrl: 'https://budget-flow-wheat.vercel.app',
+    codeUrl: 'https://github.com/tworoniak/budget-flow',
+    // featured: true,
+    selected: true,
+    tagline:
+      'A full-stack finance dashboard — expenses, budgets, income, and forecasting.',
+    year: '2026',
+    role: 'Solo',
+    quarter: 'Q2',
+    category: 'Finance Dashboard',
+    metrics: [
+      { value: '5', label: 'route views' },
+      { value: '11', label: 'API routes' },
+      { value: '8', label: 'Recharts panels' },
+    ],
+
+    problem:
+      'Most budgeting tools fall into one of two traps: they are either too simple to provide real financial visibility, or too complex to use consistently. Tracking income separately from expenses, understanding whether a month is on track, and identifying recurring costs typically requires jumping between multiple apps or spreadsheets with no single source of truth.',
+
+    solution:
+      'BudgetFlow consolidates expense tracking, budget management, income logging, and forecasting into one authenticated dashboard backed by a real database. Expenses support categories, tags, recurring detection, and advanced filtering. Budget categories carry per-category spend limits with overspend warnings. The Income page tracks sources by type and cadence with a next-deposit calendar view, income-vs-spending bar chart, and YTD summary. The Dashboard surfaces a cumulative spend chart with a dashed forecast line that projects month-end spend from the current daily average, an "on track / overspend" badge, and a category donut chart. All data is scoped per authenticated user and synced to Neon PostgreSQL via Prisma.',
+
+    features: [
+      'Dashboard with greeting hero, four summary cards (total spent, remaining budget, monthly income, savings rate) with animated sparklines, and a cumulative spend AreaChart with a month-end forecast line',
+      'Forecast badge that computes daily average spend and projects total against income — shows amber "On track" or red "Overspend" pill',
+      'Budget breakdown panel and spending-by-category donut chart using this-month data',
+      'Expenses page with tab filters (All / This Week / Last Month / Recurring), full-text search, category filter, date range, amount range, sort by date/amount/title with direction toggle, and removable ActiveFilterChips',
+      'Right-side Drawer for expense add/edit with large centered amount input, 8-category icon grid, optional tags (Enter/comma to add), and "Save & new" mode',
+      'CSV import with drag-and-drop, 10-row preview table, per-row Zod validation, error reporting, and UTF-8 BOM for Excel compatibility; CSV export with proper field quoting',
+      'Recurring expense engine that auto-generates missing monthly instances once per calendar month, idempotent and deduped by title + category',
+      'Budget page with inline income editing, 4-stat summary row (income, budgeted, unallocated, savings rate), per-category progress bars, and overspend warnings',
+      'Income page with 4 summary cards (This Month, YTD, Avg/Month, Next Deposit with countdown), income-vs-spending grouped bar chart (Monthly / Quarterly toggle), by-source donut chart, sources CRUD table, and recent deposits list',
+      'Cmd+K command palette with keyboard navigation (↑↓ Enter Esc), grouped Navigation and Actions results, and global Cmd+K/Ctrl+K listener',
+      'Framer Motion page transitions (fade + slide, AnimatePresence), staggered expense list entrance, spring-animated stat counters on mount, and progress bar spring animations',
+      'Responsive mobile layout with BottomTabBar (Home / Expenses / FAB / Budgets / More), MobileDashboard, date-grouped ExpenseListGrouped, bottom-sheet filter panel, and Drawer auto-switching to bottom sheet on mobile',
+      'Full auth stack: Google + GitHub OAuth, email/password credentials (bcrypt rounds=12), custom two-panel sign-in / register / forgot-password pages, and protected routes via NextAuth v5 middleware',
+      'Skeleton loading states on all pages — shimmer animation shown until the first fetch resolves, preventing empty-state flash for returning users',
+      'Onboarding checklist on Dashboard for new users (5-step progress bar), skippable and persisted to localStorage; illustrated empty states on Expenses',
+    ],
+
+    architecture:
+      'BudgetFlow is a Next.js 16 App Router application using route groups to isolate the authenticated app layout from the auth pages. All interactive components carry "use client"; server components are used for the root layouts and static auth pages. Authentication follows NextAuth v5\'s split-config pattern: auth.config.ts holds Google, GitHub, and Credentials provider definitions (edge-safe, no Prisma imports) and auth.ts wires in PrismaAdapter and the real bcrypt credential check. The middleware runs from src/proxy.ts, protecting all (app)/ routes while keeping /sign-in, /register, /forgot-password, and /api/auth/* public. Data lives in Neon PostgreSQL accessed via Prisma 7 with the @prisma/adapter-neon serverless driver. The schema models User, Expense, BudgetCategory, IncomeSource, and IncomeEntry, with all rows scoped to userId. API routes follow a requireUserId() guard from src/lib/apiAuth.ts — no handler proceeds without a verified session. Zustand stores (useExpenseStore, useBudgetStore, useIncomeStore) have no persist middleware; they are populated by fetchX() loaders called on AppLayout mount and expose optimistic mutations with rollback on API error. A thin useLocalStore handles the two UI-only preferences that stay in localStorage. The SCSS architecture uses a single _variables.scss partial with design tokens ($bg-card, $accent, $space-*, $radius-*, etc.) imported into every module with @use. Recharts powers all charts; Cell is avoided in favour of passing fill directly on data items.',
+
+    lessons:
+      'The most impactful decision was choosing optimistic mutations from the start rather than refetching after every write. Because every store action updates local state immediately and only rolls back on API failure, the UI feels instant even on slow connections — and the rollback path forced explicit before-state snapshots that made bugs easier to catch. The NextAuth v5 split-config pattern was more involved than expected: edge middleware cannot import Prisma, so the authorized callback and JWT/session callbacks live in the edge-safe config file while the real credential check and PrismaAdapter live in a separate server-only file. Getting that boundary wrong caused subtle silent failures. Migrating from Vite + React Router to Next.js mid-project revealed how much the router shapes component assumptions — every `useNavigate`, `useParams`, and `<Outlet>` had a direct App Router equivalent, but the mental model shift from a client-side router to a server-rendering layout tree required rethinking where state initialisation belongs. The skeleton loading fix (initialising isLoading: true rather than false) was a one-line change that solved a class of UX bugs entirely — the lesson being that initial store state should reflect "data not yet available" rather than "data confirmed empty".',
+
+    screenshots: [
+      {
+        src: '/images/projects/budget-flow/screen-01.png',
+        alt: 'BudgetFlow budget page with category progress bars and overspend warnings',
+      },
+      {
+        src: '/images/projects/budget-flow/screen-02.png',
+        alt: 'BudgetFlow dashboard with summary cards, cumulative spend chart, and forecast badge',
+      },
+      {
+        src: '/images/projects/budget-flow/screen-03.png',
+        alt: 'BudgetFlow expenses page with tab filters, search, and active filter chips',
+      },
+      {
+        src: '/images/projects/budget-flow/screen-04.png',
+        alt: 'BudgetFlow add expense drawer with large amount input, category icon grid, and tag input',
+      },
+      {
+        src: '/images/projects/budget-flow/screen-05.png',
+        alt: 'BudgetFlow budget page with income editing, summary stats, and category breakdown chart',
+      },
+      {
+        src: '/images/projects/budget-flow/screen-06.png',
+        alt: 'BudgetFlow income page with summary cards, income vs spending chart, and sources table',
+      },
+    ],
+  },
+  {
     id: 'cinevault',
     slug: 'cinevault',
     title: 'CineVault',

@@ -36,9 +36,10 @@ const HeroSection = () => {
             with React, TypeScript, and modern design systems. Currently
             building{' '}
             <span className='font-semibold' style={{ color: accent }}>
-              NeuroStack
+              BudgetFlow
             </span>{' '}
-            — a memory dashboard for AI agents.
+            — a full-stack personal finance dashboard with auth, cloud sync, and
+            spending forecasts.
           </p>
 
           {/* CTA row */}
