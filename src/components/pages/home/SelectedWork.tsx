@@ -27,7 +27,7 @@ const SpotlightCard = ({ project }: { project: ProjectIndex }) => {
         />
         <div className='pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent' />
         <span
-          className='absolute left-4 top-4 border rounded-full px-2.5 py-1 text-xs font-semibold text-black'
+          className='absolute left-4 top-4 border rounded-full px-2.5 py-1 text-xs font-semibold text-black bg-black/70'
           style={{ borderColor: accent, color: accent }}
         >
           {`Featured · ${badgeNum}`}
