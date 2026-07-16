@@ -3,10 +3,10 @@ import { useAccentColor } from '../../../hooks/useAccentColor';
 const nowData = {
   updatedAt: 'May 20, 2026',
   building: {
-    name: 'BudgetFlow',
-    version: 'v1.0',
+    name: 'JobTrack',
+    version: 'v1.5.2',
     description:
-      'Full-stack personal finance dashboard. Next.js 16, Neon PostgreSQL, NextAuth, income tracking, spending forecasts.',
+      'A job tracking app built with React, GraphQL, and NestJS. Helps users manage job applications, interviews, and offers in one place.',
   },
 
   reading: {
@@ -19,7 +19,7 @@ const nowData = {
   },
   openTo: {
     role: 'Senior FE roles',
-    availability: 'Available · Q2 2026',
+    availability: 'Available · Q3 2026',
   },
 };
 

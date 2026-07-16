@@ -2,6 +2,43 @@ import type { ProjectIndex } from '../types/project';
 
 export const projectsIndex: ProjectIndex[] = [
   {
+    id: 'job-tracker',
+    slug: 'job-tracker',
+    title: 'JobTrack',
+    description:
+      'A job tracking app built with React, GraphQL, and NestJS. Keep track of your job applications, interviews, and follow-ups in one place.',
+    tech: [
+      'React',
+      'React Hook Form',
+      'TypeScript',
+      'Apollo Client',
+      'Apollo Server',
+      'NestJS',
+      'Prisma',
+      'GraphQL',
+      'Recharts',
+      'Zod',
+      'TanStack Query',
+      'Tailwind CSS',
+      'Jest',
+    ],
+    image: '/images/projects/job-tracker.png',
+    codeUrl: 'https://github.com/tworoniak/job-application-tracker',
+    liveUrl: 'https://job-application-tracker-web-sigma.vercel.app/',
+    selected: true,
+    tagline:
+      'Track your job applications, interviews, and follow-ups in one place.',
+    year: '2026',
+    role: 'Solo',
+    quarter: 'Q1',
+    category: 'Job Tracker',
+    metrics: [
+      { value: '9', label: 'app statuses' },
+      { value: '8', label: 'features shipped' },
+      { value: '1', label: 'GraphQL layer' },
+    ],
+  },
+  {
     id: 'budget-flow',
     slug: 'budget-flow',
     title: 'BudgetFlow',
@@ -263,42 +300,7 @@ export const projectsIndex: ProjectIndex[] = [
       { value: '16', label: 'memory tools' },
     ],
   },
-  {
-    id: 'job-tracker',
-    slug: 'job-tracker',
-    title: 'JobTrack',
-    description:
-      'A job tracking app built with React, GraphQL, and NestJS. Keep track of your job applications, interviews, and follow-ups in one place.',
-    tech: [
-      'React',
-      'React Hook Form',
-      'TypeScript',
-      'Apollo Client',
-      'Apollo Server',
-      'NestJS',
-      'Prisma',
-      'GraphQL',
-      'Recharts',
-      'Zod',
-      'TanStack Query',
-      'Tailwind CSS',
-      'Jest',
-    ],
-    image: '/images/projects/job-tracker.png',
-    codeUrl: 'https://github.com/tworoniak/job-application-tracker',
-    selected: true,
-    tagline:
-      'Track your job applications, interviews, and follow-ups in one place.',
-    year: '2026',
-    role: 'Solo',
-    quarter: 'Q1',
-    category: 'Job Tracker',
-    metrics: [
-      { value: '9', label: 'app statuses' },
-      { value: '8', label: 'features shipped' },
-      { value: '1', label: 'GraphQL layer' },
-    ],
-  },
+
   {
     id: 'dashtrack',
     slug: 'dashtrack',
