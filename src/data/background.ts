@@ -14,6 +14,13 @@ export type CertificationItem = {
 
 export const experience: ExperienceItem[] = [
   {
+    company: 'Third and Grove',
+    role: 'Senior Front-End Engineer',
+    period: '2026 — Present',
+    description:
+      'Agency front-end engineering building and maintaining client sites across Drupal, Shopify, and React/TypeScript stacks, with AI-assisted development using Claude Code.',
+  },
+  {
     company: 'WORONIAK.DEV',
     role: 'Freelance Front-End Engineer',
     period: '2025 — Present',
