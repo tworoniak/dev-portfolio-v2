@@ -19,7 +19,7 @@ const nowData = {
   },
   openTo: {
     role: 'Senior FE roles',
-    availability: 'Available · Q3 2026',
+    availability: 'Open to the right opportunity',
   },
 };
 
