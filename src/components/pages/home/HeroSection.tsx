@@ -13,7 +13,7 @@ const HeroSection = () => {
             <AvatarBlock />
             <span className='inline-flex items-center gap-2 rounded-full border border-zinc-300 dark:border-zinc-300/10 bg-emerald-500/10 px-3 py-1 text-sm text-emerald-600 dark:text-emerald-400'>
               <span className='h-2 w-2 rounded-full bg-emerald-400/50' />
-              Available for senior front-end roles · Kansas City, Missouri
+              Open to the right opportunity · Kansas City, Missouri
             </span>
           </div>
 
